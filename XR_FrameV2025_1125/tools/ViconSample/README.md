@@ -8,6 +8,7 @@ Vicon Shogun Live の DataStream から Transform データを受信してコン
 - Subject (Skeleton) の Segment : グローバル位置 [mm] / オイラー角 [deg]
 - Marker (Labeled / Unlabeled)  : グローバル位置 [mm]
 - `--ez` を付けると `ezTracker_Vicon` 経由で読んだ値も表示
+- `--bones` を付けると Subject の全骨 (Segment) を `ezTracker_Vicon::getSubject()` 経由で表示
 
 ## ビルド
 
@@ -25,7 +26,7 @@ msbuild ViconSample.sln /p:Configuration=Release /p:Platform=Win32
 
 ```
 bin\Release\ViconSample.exe [host:port] [--seconds N] [--rate HZ]
-                            [--all-segments] [--markers] [--ez]
+                            [--all-segments] [--markers] [--ez] [--bones]
                             [--push | --prefetch]
 ```
 
@@ -37,6 +38,7 @@ bin\Release\ViconSample.exe [host:port] [--seconds N] [--rate HZ]
 | `--all-segments` | ルート以外の全セグメントも表示 |
 | `--markers` | Labeled / Unlabeled マーカー位置も表示 |
 | `--ez` | `ezTracker_Vicon` 経由の値も表示 |
+| `--bones` | Subject の全骨 (Segment) を `getSubject()` 経由で表示 (`--ez` を兼ねる) |
 | `--push` | StreamMode を ServerPush にする (既定: ClientPull) |
 | `--prefetch` | StreamMode を ClientPullPreFetch にする |
 
@@ -45,6 +47,7 @@ bin\Release\ViconSample.exe [host:port] [--seconds N] [--rate HZ]
 ```
 bin\Release\ViconSample.exe
 bin\Release\ViconSample.exe --markers --all-segments --seconds 30
+bin\Release\ViconSample.exe --bones --seconds 3
 bin\Release\ViconSample.exe 192.168.0.10:801 --ez
 ```
 
@@ -70,6 +73,22 @@ Shogun Live 側がフレームを配信していません。次を確認して�
 
 `ezTracker_Vicon` に合わせて Z-up (Forward, Left, Up) に設定しています。
 Vicon のグローバル位置は mm、`ezTracker_Vicon` は m に変換して保持します。
+
+## 骨データの利用
+
+```cpp
+ezTracker_Vicon vicon(true);
+vicon.open("127.0.0.1:801", false);
+...
+vicon.read();
+ezTracker* human = vicon.getSubject("Subject1");   // 1 Subject = 1 ezTracker
+for (int i = 0; i < 73; ++i) {
+    ezTrackDataT* bone = human->getTrackData(i);   // bone->parent (-1 = root)
+}
+```
+
+- 従来の `vicon.getTrackData("CAP")` などの Subject 単位の使い方は変更なし
+- 遮蔽フレームでは前回値を保持（NaN 回避）
 
 ## 注意 (実装メモ)
 

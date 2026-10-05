@@ -5,10 +5,11 @@
 //   - Subject (Skeleton) の Segment : グローバル位置 [mm] / オイラー角 [deg]
 //   - Marker (Labeled / Unlabeled)  : グローバル位置 [mm]
 //   - --ez を付けると ezTracker_Vicon 経由で読んだ値も並べて表示
+//   - --bones を付けると Subject の全骨 (Segment) を ezTracker 経由で表示
 //
 // 使い方:
 //   ViconSample.exe [host:port] [--seconds N] [--rate HZ]
-//                   [--all-segments] [--markers] [--ez]
+//                   [--all-segments] [--markers] [--ez] [--bones]
 //
 // 例:
 //   ViconSample.exe                      … 127.0.0.1:801 に 10 秒接続
@@ -45,6 +46,7 @@ struct Options {
     bool allSegments = false;
     bool markers = false;
     bool ez = false;
+    bool bones = false;
     bool serverPush = false;
     bool preFetch = false;
 };
@@ -52,13 +54,14 @@ struct Options {
 void PrintUsage(const char* exe) {
     printf(
         "Usage: %s [host:port] [--seconds N] [--rate HZ] [--all-segments] "
-        "[--markers] [--ez]\n"
+        "[--markers] [--ez] [--bones]\n"
         "  host:port      接続先 (既定: 127.0.0.1:801)\n"
         "  --seconds N    表示時間[秒] (既定: 10)\n"
         "  --rate HZ      表示更新レート[Hz] (既定: 30)\n"
         "  --all-segments ルート以外の全セグメントも表示\n"
         "  --markers      Labeled/Unlabeled マーカー位置も表示\n"
         "  --ez           ezTracker_Vicon 経由の値も表示\n"
+        "  --bones        Subject の全骨 (Segment) を ezTracker 経由で表示 (--ez を兼ねる)\n"
         "  --push         StreamMode を ServerPush にする (既定: ClientPull)\n"
         "  --prefetch     StreamMode を ClientPullPreFetch にする\n",
         exe);
@@ -80,6 +83,8 @@ bool ParseArgs(int argc, char** argv, Options* opt) {
             opt->markers = true;
         } else if (a == "--ez") {
             opt->ez = true;
+        } else if (a == "--bones") {
+            opt->bones = true;
         } else if (a == "--push") {
             opt->serverPush = true;
         } else if (a == "--prefetch") {
@@ -244,15 +249,37 @@ void PrintFrame(Client* client, const Options& opt) {
     }
 }
 
-// ezTracker_Vicon が保持しているトラックを表示
+// ezTracker_Vicon が保持している Subject 単位のトラックを表示 (従来と同じビュー)
 void PrintEzTracks(ezTracker_Vicon* tracker) {
-    tracker->read();
     for (int i = 0; i < _n_tracks; ++i) {
         const ezTrackDataT* d = tracker->getTrackData(i);
         if (d->id == -1) continue;
         printf("    [ez] id=%2d name=%-20s pos=(%8.4f,%8.4f,%8.4f)m  "
                "rot=(%8.3f,%8.3f,%8.3f)deg\n",
                d->id, d->name, d->x, d->y, d->z, d->roll, d->pitch, d->yaw);
+    }
+}
+
+// ezTracker_Vicon の Subject 単位 ezTracker (骨格) を表示
+void PrintEzBones(ezTracker_Vicon* vicon) {
+    const int subjectCount = vicon->getSubjectCount();
+    for (int si = 0; si < subjectCount; ++si) {
+        const char* subjectName = vicon->getSubjectName(si);
+        ezTracker* trk = vicon->getSubject(si);
+        if (trk == NULL) continue;
+        int boneCount = 0;
+        for (int i = 0; i < _n_tracks; ++i) {
+            if (trk->getTrackData(i)->id != -1) ++boneCount;
+        }
+        printf("    [bones] %s : %d bones\n", subjectName, boneCount);
+        for (int i = 0; i < _n_tracks; ++i) {
+            const ezTrackDataT* d = trk->getTrackData(i);
+            if (d->id == -1) continue;
+            printf("      %2d %-20s parent=%3d pos=(%8.4f,%8.4f,%8.4f)m "
+                   "rot=(%8.2f,%8.2f,%8.2f)deg\n",
+                   d->id, d->name, d->parent, d->x, d->y, d->z,
+                   d->roll, d->pitch, d->yaw);
+        }
     }
 }
 }  // namespace
@@ -266,9 +293,9 @@ int main(int argc, char** argv) {
     Client client;
     if (!ConnectClient(&client, opt.hostport, opt.serverPush, opt.preFetch)) return 1;
 
-    // --ez : ezTracker_Vicon でも同じストリームを受信する
+    // --ez / --bones : ezTracker_Vicon でも同じストリームを受信する
     ezTracker_Vicon ezTracker(true);
-    if (opt.ez) {
+    if (opt.ez || opt.bones) {
         ezTracker.init();
         std::string host = opt.hostport;
         if (!ezTracker.open(&host[0], false)) {
@@ -301,13 +328,17 @@ int main(int argc, char** argv) {
         }
 
         PrintFrame(&client, opt);
-        if (opt.ez) PrintEzTracks(&ezTracker);
+        if (opt.ez || opt.bones) {
+            ezTracker.read();
+            if (opt.ez) PrintEzTracks(&ezTracker);
+            if (opt.bones) PrintEzBones(&ezTracker);
+        }
         fflush(stdout);
 
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMs));
     }
 
-    if (opt.ez) ezTracker.close();
+    if (opt.ez || opt.bones) ezTracker.close();
     client.Disconnect();
     printf("\nDone.\n");
     return 0;

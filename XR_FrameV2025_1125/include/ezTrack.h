@@ -12,13 +12,14 @@
 
 #include "platform.h"
 
-const int _n_tracks = 24;
+const int _n_tracks = 128;// for Vicon human bones (max ~73, with margin)
 
 typedef struct{
     int id;
     float x, y, z;
     float roll, pitch, yaw;
-	char name[16];
+	char name[32];// longest shogun human bone name
+	int parent;
 } ezTrackDataT;
 
 typedef struct{
@@ -33,7 +34,7 @@ class ezTracker{
   public:
 	ezTracker( bool use = true );
 	~ezTracker();
-	//- ezTracker_Viconでoverrideする為にvirtualを付与:Crescent
+	//- ezTracker_Vicon??override??????~??virtual???t?^:Crescent
 	virtual void init();
 	virtual bool open( char *key, bool w );
 	virtual void read();
@@ -47,7 +48,7 @@ class ezTracker{
 	ezTrackDataT *getTrackData( const char *name );
 	ezTrackArrayT *getTrackArray();
 	void setTrackData( int i, ezTrackDataT *trackdata );
-  protected: //- アクセス権の変更:Crescent
+  protected: //- ?A?N?Z?X???????X:Crescent
 	ezTrackArrayT trackarray;
 	int n_tracks;
 #ifdef PLATFORM_WINDOWS
