@@ -1,199 +1,199 @@
-//#pragma once
+ï»¿//#pragma once
 #ifndef EZMIDI_H
 #define EZMIDI_H
 #include <windows.h>
-//#include <mmeapi.h> //// 20220925’Ç‰Á
-#include <mmsystem.h> //// 20221114’Ç‰Á
+//#include <mmeapi.h> //// 20220925è¿½åŠ 
+#include <mmsystem.h> //// 20221114è¿½åŠ 
 #include <stdio.h>
 
 /*
 No.HEX
 
-//ƒhƒ‰ƒ€ƒZƒbƒgŠ„‚è“–‚Ä
-35@Acoustic Bass Drum	
-38@Acoustic Snare
-41@Low Floor Tom
-45@Low Tom
-47@Low Mid Tom
-44@Pedal Hi-Hat
-49@Crash Cymbal 1
-51@Ride Cymbal 1
+//ãƒ‰ãƒ©ãƒ ã‚»ãƒƒãƒˆå‰²ã‚Šå½“ã¦
+35ã€€Acoustic Bass Drum	
+38ã€€Acoustic Snare
+41ã€€Low Floor Tom
+45ã€€Low Tom
+47ã€€Low Mid Tom
+44ã€€Pedal Hi-Hat
+49ã€€Crash Cymbal 1
+51ã€€Ride Cymbal 1
 
 // #01 PIANO
 
-1 00 Acoustic Piano ƒAƒR[ƒXƒeƒBƒbƒNƒsƒAƒm 
-2 01 Bright Piano ƒuƒ‰ƒCƒgƒsƒAƒm 
-3 02 Electric Grand Piano ƒGƒŒƒNƒgƒŠƒbƒNƒOƒ‰ƒ“ƒhƒsƒAƒm 
-4 03 Honky-tonk Piano ƒzƒ“ƒL[ƒgƒ“ƒNƒsƒAƒm 
-5 04 Electric Piano ƒGƒŒƒNƒgƒŠƒbƒNƒsƒAƒm 
-6 05 Electric Piano 2 ƒGƒŒƒNƒgƒŠƒbƒNƒsƒAƒm2 
-7 06 Harpsichord ƒn[ƒvƒVƒR[ƒh 
-8 07 Clavi ƒNƒ‰ƒrƒlƒbƒg 
+1 00 Acoustic Piano ã‚¢ã‚³ãƒ¼ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãƒ”ã‚¢ãƒ 
+2 01 Bright Piano ãƒ–ãƒ©ã‚¤ãƒˆãƒ”ã‚¢ãƒ 
+3 02 Electric Grand Piano ã‚¨ãƒ¬ã‚¯ãƒˆãƒªãƒƒã‚¯ã‚°ãƒ©ãƒ³ãƒ‰ãƒ”ã‚¢ãƒ 
+4 03 Honky-tonk Piano ãƒ›ãƒ³ã‚­ãƒ¼ãƒˆãƒ³ã‚¯ãƒ”ã‚¢ãƒ 
+5 04 Electric Piano ã‚¨ãƒ¬ã‚¯ãƒˆãƒªãƒƒã‚¯ãƒ”ã‚¢ãƒ 
+6 05 Electric Piano 2 ã‚¨ãƒ¬ã‚¯ãƒˆãƒªãƒƒã‚¯ãƒ”ã‚¢ãƒ2 
+7 06 Harpsichord ãƒãƒ¼ãƒ—ã‚·ã‚³ãƒ¼ãƒ‰ 
+8 07 Clavi ã‚¯ãƒ©ãƒ“ãƒãƒƒãƒˆ 
 
 // #02 Chromatic Percussion
 
-9 08 Celesta ƒ`ƒFƒŒƒXƒ^ 
-10 09 Glockenspiel ƒOƒƒbƒPƒ“ƒVƒ…ƒs[ƒ‹ 
-11 0A Musical box ƒIƒ‹ƒS[ƒ‹ 
-12 0B Vibraphone ƒ”ƒBƒuƒ‰ƒtƒHƒ“ 
-13 0C Marimba ƒ}ƒŠƒ“ƒo 
-14 0D Xylophone ƒVƒƒtƒHƒ“ 
-15 0E Tubular Bell ƒ`ƒ…[ƒuƒ‰[ƒxƒ‹ 
-16 0F Dulcimer ƒ_ƒ‹ƒVƒ}[ 
+9 08 Celesta ãƒã‚§ãƒ¬ã‚¹ã‚¿ 
+10 09 Glockenspiel ã‚°ãƒ­ãƒƒã‚±ãƒ³ã‚·ãƒ¥ãƒ”ãƒ¼ãƒ« 
+11 0A Musical box ã‚ªãƒ«ã‚´ãƒ¼ãƒ« 
+12 0B Vibraphone ãƒ´ã‚£ãƒ–ãƒ©ãƒ•ã‚©ãƒ³ 
+13 0C Marimba ãƒãƒªãƒ³ãƒ 
+14 0D Xylophone ã‚·ãƒ­ãƒ•ã‚©ãƒ³ 
+15 0E Tubular Bell ãƒãƒ¥ãƒ¼ãƒ–ãƒ©ãƒ¼ãƒ™ãƒ« 
+16 0F Dulcimer ãƒ€ãƒ«ã‚·ãƒãƒ¼ 
 
 // #03 Organ
 
-17 10 Drawbar Organ ƒhƒ[ƒo[ƒIƒ‹ƒKƒ“ 
-18 11 Percussive Organ ƒp[ƒJƒbƒVƒuƒIƒ‹ƒKƒ“ 
-19 12 Rock Organ ƒƒbƒNƒIƒ‹ƒKƒ“ 
-20 13 Church organ ƒ`ƒƒ[ƒ`ƒIƒ‹ƒKƒ“ 
-21 14 Reed organ ƒŠ[ƒhƒIƒ‹ƒKƒ“ 
-22 15 Accordion ƒAƒR[ƒfƒBƒIƒ“ 
-23 16 Harmonica ƒn[ƒ‚ƒjƒJ 
-24 17 Tango Accordion ƒ^ƒ“ƒSƒAƒR[ƒfƒBƒIƒ“ 
+17 10 Drawbar Organ ãƒ‰ãƒ­ãƒ¼ãƒãƒ¼ã‚ªãƒ«ã‚¬ãƒ³ 
+18 11 Percussive Organ ãƒ‘ãƒ¼ã‚«ãƒƒã‚·ãƒ–ã‚ªãƒ«ã‚¬ãƒ³ 
+19 12 Rock Organ ãƒ­ãƒƒã‚¯ã‚ªãƒ«ã‚¬ãƒ³ 
+20 13 Church organ ãƒãƒ£ãƒ¼ãƒã‚ªãƒ«ã‚¬ãƒ³ 
+21 14 Reed organ ãƒªãƒ¼ãƒ‰ã‚ªãƒ«ã‚¬ãƒ³ 
+22 15 Accordion ã‚¢ã‚³ãƒ¼ãƒ‡ã‚£ã‚ªãƒ³ 
+23 16 Harmonica ãƒãƒ¼ãƒ¢ãƒ‹ã‚« 
+24 17 Tango Accordion ã‚¿ãƒ³ã‚´ã‚¢ã‚³ãƒ¼ãƒ‡ã‚£ã‚ªãƒ³ 
 
 // #04 Guitar
 
-25 18 Acoustic Guitar (nylon) ƒAƒR[ƒXƒeƒBƒbƒNƒMƒ^[iƒiƒCƒƒ“Œ·j 
-26 19 Acoustic Guitar (steel) ƒAƒR[ƒXƒeƒBƒbƒNƒMƒ^[iƒXƒ`[ƒ‹Œ·j 
-27 1A Electric Guitar (jazz) ƒWƒƒƒYƒMƒ^[ 
-28 1B Electric Guitar (clean) ƒNƒŠ[ƒ“ƒMƒ^[ 
-29 1C Electric Guitar (muted) ƒ~ƒ…[ƒgƒMƒ^[ 
-30 1D Overdriven Guitar ƒI[ƒo[ƒhƒ‰ƒCƒuƒMƒ^[ 
-31 1E Distortion Guitar ƒfƒBƒXƒg[ƒVƒ‡ƒ“ƒMƒ^[ 
-32 1F Guitar harmonics ƒMƒ^[ƒn[ƒ‚ƒjƒNƒX 
+25 18 Acoustic Guitar (nylon) ã‚¢ã‚³ãƒ¼ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚®ã‚¿ãƒ¼ï¼ˆãƒŠã‚¤ãƒ­ãƒ³å¼¦ï¼‰ 
+26 19 Acoustic Guitar (steel) ã‚¢ã‚³ãƒ¼ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚®ã‚¿ãƒ¼ï¼ˆã‚¹ãƒãƒ¼ãƒ«å¼¦ï¼‰ 
+27 1A Electric Guitar (jazz) ã‚¸ãƒ£ã‚ºã‚®ã‚¿ãƒ¼ 
+28 1B Electric Guitar (clean) ã‚¯ãƒªãƒ¼ãƒ³ã‚®ã‚¿ãƒ¼ 
+29 1C Electric Guitar (muted) ãƒŸãƒ¥ãƒ¼ãƒˆã‚®ã‚¿ãƒ¼ 
+30 1D Overdriven Guitar ã‚ªãƒ¼ãƒãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ–ã‚®ã‚¿ãƒ¼ 
+31 1E Distortion Guitar ãƒ‡ã‚£ã‚¹ãƒˆãƒ¼ã‚·ãƒ§ãƒ³ã‚®ã‚¿ãƒ¼ 
+32 1F Guitar harmonics ã‚®ã‚¿ãƒ¼ãƒãƒ¼ãƒ¢ãƒ‹ã‚¯ã‚¹ 
 
 // #05 Bass
 
-33 20 Acoustic Bass ƒAƒR[ƒXƒeƒBƒbƒNƒx[ƒX 
-34 21 Electric Bass (finger) ƒtƒBƒ“ƒK[Eƒx[ƒX 
-35 22 Electric Bass (pick) ƒsƒbƒNEƒx[ƒX 
-36 23 Fretless Bass ƒtƒŒƒbƒgƒŒƒXƒx[ƒX 
-37 24 Slap Bass 1 ƒXƒ‰ƒbƒvƒx[ƒX 1 
-38 25 Slap Bass 2 ƒXƒ‰ƒbƒvƒx[ƒX 2 
-39 26 Synth Bass 1 ƒVƒ“ƒZƒx[ƒX 1 
-40 27 Synth Bass 2 ƒVƒ“ƒZƒx[ƒX 2 
+33 20 Acoustic Bass ã‚¢ã‚³ãƒ¼ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãƒ™ãƒ¼ã‚¹ 
+34 21 Electric Bass (finger) ãƒ•ã‚£ãƒ³ã‚¬ãƒ¼ãƒ»ãƒ™ãƒ¼ã‚¹ 
+35 22 Electric Bass (pick) ãƒ”ãƒƒã‚¯ãƒ»ãƒ™ãƒ¼ã‚¹ 
+36 23 Fretless Bass ãƒ•ãƒ¬ãƒƒãƒˆãƒ¬ã‚¹ãƒ™ãƒ¼ã‚¹ 
+37 24 Slap Bass 1 ã‚¹ãƒ©ãƒƒãƒ—ãƒ™ãƒ¼ã‚¹ 1 
+38 25 Slap Bass 2 ã‚¹ãƒ©ãƒƒãƒ—ãƒ™ãƒ¼ã‚¹ 2 
+39 26 Synth Bass 1 ã‚·ãƒ³ã‚»ãƒ™ãƒ¼ã‚¹ 1 
+40 27 Synth Bass 2 ã‚·ãƒ³ã‚»ãƒ™ãƒ¼ã‚¹ 2 
 
 // #06 Strings
 
-41 28 Violin ƒ”ƒ@ƒCƒIƒŠƒ“ 
-42 29 Viola ƒ”ƒBƒIƒ‰ 
-43 2A Cello ƒ`ƒFƒ 
-44 2B Double bass ƒRƒ“ƒgƒ‰ƒoƒX 
-45 2C Tremolo Strings ƒgƒŒƒ‚ƒ 
-46 2D Pizzicato Strings ƒsƒbƒ`ƒJ[ƒg 
-47 2E Orchestral Harp ƒn[ƒv 
-48 2F Timpani ƒeƒBƒ“ƒpƒj 
+41 28 Violin ãƒ´ã‚¡ã‚¤ã‚ªãƒªãƒ³ 
+42 29 Viola ãƒ´ã‚£ã‚ªãƒ© 
+43 2A Cello ãƒã‚§ãƒ­ 
+44 2B Double bass ã‚³ãƒ³ãƒˆãƒ©ãƒã‚¹ 
+45 2C Tremolo Strings ãƒˆãƒ¬ãƒ¢ãƒ­ 
+46 2D Pizzicato Strings ãƒ”ãƒƒãƒã‚«ãƒ¼ãƒˆ 
+47 2E Orchestral Harp ãƒãƒ¼ãƒ— 
+48 2F Timpani ãƒ†ã‚£ãƒ³ãƒ‘ãƒ‹ 
 
 // #07 Ensemble
 
-49 30 String Ensemble 1 ƒXƒgƒŠƒ“ƒOƒAƒ“ƒTƒ“ƒuƒ‹ 1 
-50 31 String Ensemble 2 ƒXƒgƒŠƒ“ƒOƒAƒ“ƒTƒ“ƒuƒ‹ 2 
-51 32 Synth Strings 1 ƒVƒ“ƒZƒXƒgƒŠƒ“ƒOƒX 1 
-52 33 Synth Strings 2 ƒVƒ“ƒZƒXƒgƒŠƒ“ƒOƒX 2 
-53 34 Voice Aahs ºu‚ [v 
-54 35 Voice Oohs ºu‚¨[v 
-55 36 Synth Voice ƒVƒ“ƒZƒ”ƒHƒCƒX 
-56 37 Orchestra Hit ƒI[ƒPƒXƒgƒ‰ƒqƒbƒg 
+49 30 String Ensemble 1 ã‚¹ãƒˆãƒªãƒ³ã‚°ã‚¢ãƒ³ã‚µãƒ³ãƒ–ãƒ« 1 
+50 31 String Ensemble 2 ã‚¹ãƒˆãƒªãƒ³ã‚°ã‚¢ãƒ³ã‚µãƒ³ãƒ–ãƒ« 2 
+51 32 Synth Strings 1 ã‚·ãƒ³ã‚»ã‚¹ãƒˆãƒªãƒ³ã‚°ã‚¹ 1 
+52 33 Synth Strings 2 ã‚·ãƒ³ã‚»ã‚¹ãƒˆãƒªãƒ³ã‚°ã‚¹ 2 
+53 34 Voice Aahs å£°ã€Œã‚ãƒ¼ã€ 
+54 35 Voice Oohs å£°ã€ŒãŠãƒ¼ã€ 
+55 36 Synth Voice ã‚·ãƒ³ã‚»ãƒ´ã‚©ã‚¤ã‚¹ 
+56 37 Orchestra Hit ã‚ªãƒ¼ã‚±ã‚¹ãƒˆãƒ©ãƒ’ãƒƒãƒˆ 
 
 // #08 Brass
 
-57 38 Trumpet ƒgƒ‰ƒ“ƒyƒbƒg 
-58 39 Trombone ƒgƒƒ“ƒ{[ƒ“ 
-59 3A Tuba ƒ`ƒ…[ƒo 
-60 3B Muted Trumpet ƒ~ƒ…[ƒgƒgƒ‰ƒ“ƒyƒbƒg 
-61 3C French horn ƒtƒŒƒ“ƒ`Eƒzƒ‹ƒ“ 
-62 3D Brass Section ƒuƒ‰ƒXƒZƒNƒVƒ‡ƒ“ 
-63 3E Synth Brass 1 ƒVƒ“ƒZƒuƒ‰ƒX 1 
-64 3F Synth Brass 2 ƒVƒ“ƒZƒuƒ‰ƒX 2 
+57 38 Trumpet ãƒˆãƒ©ãƒ³ãƒšãƒƒãƒˆ 
+58 39 Trombone ãƒˆãƒ­ãƒ³ãƒœãƒ¼ãƒ³ 
+59 3A Tuba ãƒãƒ¥ãƒ¼ãƒ 
+60 3B Muted Trumpet ãƒŸãƒ¥ãƒ¼ãƒˆãƒˆãƒ©ãƒ³ãƒšãƒƒãƒˆ 
+61 3C French horn ãƒ•ãƒ¬ãƒ³ãƒãƒ»ãƒ›ãƒ«ãƒ³ 
+62 3D Brass Section ãƒ–ãƒ©ã‚¹ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 
+63 3E Synth Brass 1 ã‚·ãƒ³ã‚»ãƒ–ãƒ©ã‚¹ 1 
+64 3F Synth Brass 2 ã‚·ãƒ³ã‚»ãƒ–ãƒ©ã‚¹ 2 
 
 // #09 Reed
 
-65 40 Soprano Sax ƒ\ƒvƒ‰ƒmƒTƒbƒNƒX 
-66 41 Alto Sax ƒAƒ‹ƒgƒTƒbƒNƒX 
-67 42 Tenor Sax ƒeƒi[ƒTƒbƒNƒX 
-68 43 Baritone Sax ƒoƒŠƒgƒ“ƒTƒbƒNƒX 
-69 44 Oboe ƒI[ƒ{ƒG 
-70 45 English Horn ƒCƒ“ƒOƒŠƒbƒVƒ…ƒzƒ‹ƒ“ 
-71 46 Bassoon ƒtƒ@ƒSƒbƒg 
-72 47 Clarinet ƒNƒ‰ƒŠƒlƒbƒg 
+65 40 Soprano Sax ã‚½ãƒ—ãƒ©ãƒã‚µãƒƒã‚¯ã‚¹ 
+66 41 Alto Sax ã‚¢ãƒ«ãƒˆã‚µãƒƒã‚¯ã‚¹ 
+67 42 Tenor Sax ãƒ†ãƒŠãƒ¼ã‚µãƒƒã‚¯ã‚¹ 
+68 43 Baritone Sax ãƒãƒªãƒˆãƒ³ã‚µãƒƒã‚¯ã‚¹ 
+69 44 Oboe ã‚ªãƒ¼ãƒœã‚¨ 
+70 45 English Horn ã‚¤ãƒ³ã‚°ãƒªãƒƒã‚·ãƒ¥ãƒ›ãƒ«ãƒ³ 
+71 46 Bassoon ãƒ•ã‚¡ã‚´ãƒƒãƒˆ 
+72 47 Clarinet ã‚¯ãƒ©ãƒªãƒãƒƒãƒˆ 
 
 // #10 Pipe
 
-73 48 Piccolo ƒsƒbƒRƒ 
-74 49 Flute ƒtƒ‹[ƒg 
-75 4A Recorder ƒŠƒR[ƒ_[ 
-76 4B Pan Flute ƒpƒ“ƒtƒ‹[ƒg 
-77 4C Blown Bottle ’ƒ•r 
-78 4D Shakuhachi Ú”ª 
-79 4E Whistle Œû“J 
-80 4F Ocarina ƒIƒJƒŠƒi 
+73 48 Piccolo ãƒ”ãƒƒã‚³ãƒ­ 
+74 49 Flute ãƒ•ãƒ«ãƒ¼ãƒˆ 
+75 4A Recorder ãƒªã‚³ãƒ¼ãƒ€ãƒ¼ 
+76 4B Pan Flute ãƒ‘ãƒ³ãƒ•ãƒ«ãƒ¼ãƒˆ 
+77 4C Blown Bottle èŒ¶ç“¶ 
+78 4D Shakuhachi å°ºå…« 
+79 4E Whistle å£ç¬› 
+80 4F Ocarina ã‚ªã‚«ãƒªãƒŠ 
 
 // #11 Synth Lead
 
-81 50 Lead 1 (square) ‹éŒ`”g 
-82 51 Lead 2 (sawtooth) ƒmƒRƒMƒŠ”g 
-83 52 Lead 3 (calliope) ƒJƒŠƒIƒy 
-84 53 Lead 4 (chiff) ƒ`ƒt 
-85 54 Lead 5 (charang) ƒ`ƒƒƒ‰ƒ“ƒS 
-86 55 Lead 6 (voice) º 
-87 56 Lead 7 (fifths) ƒtƒBƒtƒXƒY 
-88 57 Lead 8 (bass + lead) ƒoƒX + ƒŠ[ƒh 
+81 50 Lead 1 (square) çŸ©å½¢æ³¢ 
+82 51 Lead 2 (sawtooth) ãƒã‚³ã‚®ãƒªæ³¢ 
+83 52 Lead 3 (calliope) ã‚«ãƒªã‚ªãƒš 
+84 53 Lead 4 (chiff) ãƒãƒ• 
+85 54 Lead 5 (charang) ãƒãƒ£ãƒ©ãƒ³ã‚´ 
+86 55 Lead 6 (voice) å£° 
+87 56 Lead 7 (fifths) ãƒ•ã‚£ãƒ•ã‚¹ã‚º 
+88 57 Lead 8 (bass + lead) ãƒã‚¹ + ãƒªãƒ¼ãƒ‰ 
 
 // #12 Synth Pad
 
-89 58 Pad 1 (Fantasia) ƒtƒ@ƒ“ƒ^ƒWƒA 
-90 59 Pad 2 (warm) ƒEƒH[ƒ€ 
-91 5A Pad 3 (polysynth) ƒ|ƒŠƒVƒ“ƒZ 
-92 5B Pad 4 (choir) ƒNƒƒCƒA 
-93 5C Pad 5 (bowed) ƒ{ƒE 
-94 5D Pad 6 (metallic) ƒƒ^ƒŠƒbƒN 
-95 5E Pad 7 (halo) ƒnƒ[ 
-96 5F Pad 8 (sweep) ƒXƒEƒB[ƒv 
+89 58 Pad 1 (Fantasia) ãƒ•ã‚¡ãƒ³ã‚¿ã‚¸ã‚¢ 
+90 59 Pad 2 (warm) ã‚¦ã‚©ãƒ¼ãƒ  
+91 5A Pad 3 (polysynth) ãƒãƒªã‚·ãƒ³ã‚» 
+92 5B Pad 4 (choir) ã‚¯ãƒ¯ã‚¤ã‚¢ 
+93 5C Pad 5 (bowed) ãƒœã‚¦ 
+94 5D Pad 6 (metallic) ãƒ¡ã‚¿ãƒªãƒƒã‚¯ 
+95 5E Pad 7 (halo) ãƒãƒ­ãƒ¼ 
+96 5F Pad 8 (sweep) ã‚¹ã‚¦ã‚£ãƒ¼ãƒ— 
 
 // #13 Synth Effects
 
-97 60 FX 1 (rain) ‰J 
-98 61 FX 2 (soundtrack) ƒTƒEƒ“ƒhƒgƒ‰ƒbƒN 
-99 62 FX 3 (crystal) ƒNƒŠƒXƒ^ƒ‹ 
-100 63 FX 4 (atmosphere) ƒAƒgƒ‚ƒXƒtƒBƒA 
-101 64 FX 5 (brightness) ƒuƒ‰ƒCƒgƒlƒX 
-102 65 FX 6 (goblins) ƒSƒuƒŠƒ“ 
-103 66 FX 7 (echoes) ƒGƒR[ 
-104 67 FX 8 (sci-fi) ƒTƒCƒtƒ@ƒC 
+97 60 FX 1 (rain) é›¨ 
+98 61 FX 2 (soundtrack) ã‚µã‚¦ãƒ³ãƒ‰ãƒˆãƒ©ãƒƒã‚¯ 
+99 62 FX 3 (crystal) ã‚¯ãƒªã‚¹ã‚¿ãƒ« 
+100 63 FX 4 (atmosphere) ã‚¢ãƒˆãƒ¢ã‚¹ãƒ•ã‚£ã‚¢ 
+101 64 FX 5 (brightness) ãƒ–ãƒ©ã‚¤ãƒˆãƒã‚¹ 
+102 65 FX 6 (goblins) ã‚´ãƒ–ãƒªãƒ³ 
+103 66 FX 7 (echoes) ã‚¨ã‚³ãƒ¼ 
+104 67 FX 8 (sci-fi) ã‚µã‚¤ãƒ•ã‚¡ã‚¤ 
 
 // #14 Ethnic
 
-105 68 Sitar ƒVƒ^[ƒ‹ 
-106 69 Banjo ƒoƒ“ƒWƒ‡[ 
-107 6A Shamisen O–¡ü 
-108 6B Koto ‹Õ 
-109 6C Kalimba ƒJƒŠƒ“ƒo 
-110 6D Bagpipe ƒoƒOƒpƒCƒv 
-111 6E Fiddle ƒtƒBƒhƒ‹ 
-112 6F Shanai ƒVƒƒƒnƒi[ƒC 
+105 68 Sitar ã‚·ã‚¿ãƒ¼ãƒ« 
+106 69 Banjo ãƒãƒ³ã‚¸ãƒ§ãƒ¼ 
+107 6A Shamisen ä¸‰å‘³ç·š 
+108 6B Koto ç´ 
+109 6C Kalimba ã‚«ãƒªãƒ³ãƒ 
+110 6D Bagpipe ãƒã‚°ãƒ‘ã‚¤ãƒ— 
+111 6E Fiddle ãƒ•ã‚£ãƒ‰ãƒ« 
+112 6F Shanai ã‚·ãƒ£ãƒãƒŠãƒ¼ã‚¤ 
 
 // #15 Percussive
 
-113 70 Tinkle Bell ƒeƒBƒ“ƒNƒ‹ƒxƒ‹ 
-114 71 Agogo ƒAƒSƒS 
-115 72 Steel Drums ƒXƒ`[ƒ‹ƒhƒ‰ƒ€ 
-116 73 Woodblock ƒEƒbƒhƒuƒƒbƒN 
-117 74 Taiko Drum ‘¾ŒÛ 
-118 75 Melodic Tom ƒƒƒfƒBƒbƒNƒ^ƒ€ 
-119 76 Synth Drum ƒVƒ“ƒZƒhƒ‰ƒ€ 
-120 77 Reverse Cymbal ‹tƒVƒ“ƒoƒ‹ 
+113 70 Tinkle Bell ãƒ†ã‚£ãƒ³ã‚¯ãƒ«ãƒ™ãƒ« 
+114 71 Agogo ã‚¢ã‚´ã‚´ 
+115 72 Steel Drums ã‚¹ãƒãƒ¼ãƒ«ãƒ‰ãƒ©ãƒ  
+116 73 Woodblock ã‚¦ãƒƒãƒ‰ãƒ–ãƒ­ãƒƒã‚¯ 
+117 74 Taiko Drum å¤ªé¼“ 
+118 75 Melodic Tom ãƒ¡ãƒ­ãƒ‡ã‚£ãƒƒã‚¯ã‚¿ãƒ  
+119 76 Synth Drum ã‚·ãƒ³ã‚»ãƒ‰ãƒ©ãƒ  
+120 77 Reverse Cymbal é€†ã‚·ãƒ³ãƒãƒ« 
 
 // #16 Sound effects
 
-121 78 Guitar Fret Noise ƒMƒ^[ƒtƒŒƒbƒgƒmƒCƒY 
-122 79 Breath Noise ƒuƒŒƒXƒmƒCƒY 
-123 7A Seashore ŠCŠİ 
-124 7B Bird Tweet ’¹‚Ìš“‚è 
-125 7C Telephone Ring “d˜b‚Ìƒxƒ‹ 
-126 7D Helicopter ƒwƒŠƒRƒvƒ^[ 
-127 7E Applause ”è 
-128 7F Gunshot eº 
+121 78 Guitar Fret Noise ã‚®ã‚¿ãƒ¼ãƒ•ãƒ¬ãƒƒãƒˆãƒã‚¤ã‚º 
+122 79 Breath Noise ãƒ–ãƒ¬ã‚¹ãƒã‚¤ã‚º 
+123 7A Seashore æµ·å²¸ 
+124 7B Bird Tweet é³¥ã®å›€ã‚Š 
+125 7C Telephone Ring é›»è©±ã®ãƒ™ãƒ« 
+126 7D Helicopter ãƒ˜ãƒªã‚³ãƒ—ã‚¿ãƒ¼ 
+127 7E Applause æ‹æ‰‹ 
+128 7F Gunshot éŠƒå£° 
 */
 /*-----------------------------------------------------------------*/
 class ezMIDI{
@@ -208,7 +208,7 @@ class ezMIDI{
   ~ezMIDI(){};
 
   /*----------------*/
-  /* midiƒfƒoƒCƒXƒI[ƒvƒ“*/
+  /* midiãƒ‡ãƒã‚¤ã‚¹ã‚ªãƒ¼ãƒ—ãƒ³*/
   static int Open( bool poly = false ){
     int ret;
     ret = midiOutOpen( &_hMidi, MIDIMAPPER, 0, 0, 0 );
@@ -218,7 +218,7 @@ class ezMIDI{
     return ret;
   }
   /*----------------*/
-  /* midiƒfƒoƒCƒXƒNƒ[ƒY*/
+  /* midiãƒ‡ãƒã‚¤ã‚¹ã‚¯ãƒ­ãƒ¼ã‚º*/
   static int Close(){
     int ret;
     ret = midiOutClose( _hMidi);
@@ -226,7 +226,7 @@ class ezMIDI{
     return ret;
   }
   /*----------------*/
-  /* midiƒfƒoƒCƒX‚ÌC—¹ */
+  /* midiãƒ‡ãƒã‚¤ã‚¹ã®ä¿®äº† */
   static int Reset(){
 	  int ret;
 	  ret = midiOutReset( _hMidi );
@@ -234,7 +234,7 @@ class ezMIDI{
 	  return ret;
   }
   /*----------------*/
-  /* ‰¹‚ğ–Â‚ç‚·@midiƒfƒoƒCƒX‚ÉmidiƒR[ƒh‚ğ“]‘— */
+  /* éŸ³ã‚’é³´ã‚‰ã™ã€€midiãƒ‡ãƒã‚¤ã‚¹ã«midiã‚³ãƒ¼ãƒ‰ã‚’è»¢é€ */
   int Send( int stat, int data1, int data2 ){
     midiOutShortMsg( _hMidi, _PackMIDI( stat, data1 ,data2 ));
     return 0;
@@ -262,7 +262,7 @@ class ezMIDI{
   void SetVolume( int vol ){
     _volume = vol;
   }
-  static HMIDIOUT _hMidi;/* midiƒfƒoƒCƒXƒnƒ“ƒhƒ‰*/
+  static HMIDIOUT _hMidi;/* midiãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ©*/
   static bool polyphonic;
 
 

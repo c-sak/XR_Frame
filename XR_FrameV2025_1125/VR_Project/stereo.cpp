@@ -1,4 +1,4 @@
-/******************************************************************************
+ï»¿/******************************************************************************
 * stereo.cpp 
 */
 
@@ -9,7 +9,7 @@
 #include "light.h"
 #include "config.h"
 
-//İ’èƒtƒ‰ƒOQÆ„quadbuffer, swapeyes, cylindrical, parallax
+//è¨­å®šãƒ•ãƒ©ã‚°å‚ç…§ï¼quadbuffer, swapeyes, cylindrical, parallax
 
 extern WindowDataT window;
 extern SimDataT simdata;
@@ -49,7 +49,7 @@ void Stereo( void )
 
 	if( swapeyes ) ipd *= -1.0;
 
-	//¥”wŒiF‚ÆƒtƒHƒOƒJƒ‰[‚ğƒuƒŒƒ“ƒh
+	//â–¼èƒŒæ™¯è‰²ã¨ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼ã‚’ãƒ–ãƒ¬ãƒ³ãƒ‰
 	ezBackground(&simdata);
 
 	//-------- viewport
@@ -60,11 +60,11 @@ void Stereo( void )
 	glEnable(GL_DEPTH_TEST); // ---- begin: 
 	glEnable(GL_LIGHTING);
 
-	//¥¶Šá‰æ‘œ
+	//â–¼å·¦çœ¼ç”»åƒ
 	if( quadbuffer )
 		glDrawBuffer( GL_BACK_LEFT );
 	else
-		glColorMask( GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE ); //ƒJƒ‰[ƒ}ƒXƒNG+B
+		glColorMask( GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE ); //ã‚«ãƒ©ãƒ¼ãƒã‚¹ã‚¯G+B
 
 	glViewport( 0, 0, window.width, window.height );
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -72,13 +72,13 @@ void Stereo( void )
 	if( cylindrical ) cylindricalView( -ipd/2.0 );
 	else singleView( -ipd/2.0 );
 
-	//¥‰EŠá‰æ‘œ
+	//â–¼å³çœ¼ç”»åƒ
 	if( quadbuffer )
 		glDrawBuffer( GL_BACK_RIGHT );
 	else
-		glColorMask( GL_TRUE, GL_FALSE, GL_FALSE, GL_TRUE ); //ƒJƒ‰[ƒ}ƒXƒNR
+		glColorMask( GL_TRUE, GL_FALSE, GL_FALSE, GL_TRUE ); //ã‚«ãƒ©ãƒ¼ãƒã‚¹ã‚¯R
 
-	//¥anaglyph‚Ìê‡‚É‚ÍƒfƒvƒXƒoƒbƒtƒ@‚Ì‚İƒNƒŠƒA
+	//â–¼anaglyphã®å ´åˆã«ã¯ãƒ‡ãƒ—ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ã¿ã‚¯ãƒªã‚¢
 	if( ! quadbuffer ) glClear( GL_DEPTH_BUFFER_BIT );
 	else{
 		glViewport( 0, 0, window.width, window.height );
@@ -88,11 +88,11 @@ void Stereo( void )
 	if( cylindrical ) cylindricalView( ipd/2.0 );
 	else singleView( ipd/2.0 );
 
-	//¥ƒhƒ[ƒoƒbƒtƒ@(quad)/ƒJƒ‰[ƒ}ƒXƒN(anaglyph)‚ğŒ³‚É–ß‚·
+	//â–¼ãƒ‰ãƒ­ãƒ¼ãƒãƒƒãƒ•ã‚¡(quad)/ã‚«ãƒ©ãƒ¼ãƒã‚¹ã‚¯(anaglyph)ã‚’å…ƒã«æˆ»ã™
 	if( quadbuffer )
 		glDrawBuffer( GL_BACK );
 	else
-		glColorMask( GL_TRUE,  GL_TRUE, GL_TRUE, GL_TRUE );//ƒJƒ‰[ƒ}ƒXƒN‚ğ–ß‚·
+		glColorMask( GL_TRUE,  GL_TRUE, GL_TRUE, GL_TRUE );//ã‚«ãƒ©ãƒ¼ãƒã‚¹ã‚¯ã‚’æˆ»ã™
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);

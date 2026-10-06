@@ -1,34 +1,34 @@
-#pragma once
+ï»¿#pragma once
 
-//-------- ƒ}ƒgƒŠƒNƒX src ‚©‚ç dsc ‚ÉƒRƒs[
+//-------- ãƒãƒˆãƒªã‚¯ã‚¹ src ã‹ã‚‰ dsc ã«ã‚³ãƒ”ãƒ¼
 void matrixCopy( matrix_t dst, const matrix_t src );
 
-//-------- ƒ}ƒgƒŠƒNƒX m ‚Ì’l‚ğ•\¦
+//-------- ãƒãƒˆãƒªã‚¯ã‚¹ m ã®å€¤ã‚’è¡¨ç¤º
 void matrixPrint( const char* text, const matrix_t m );
 
-//-------- ƒ}ƒgƒŠƒNƒX m ‚ğ³‹K‰»
+//-------- ãƒãƒˆãƒªã‚¯ã‚¹ m ã‚’æ­£è¦åŒ–
 void matrixIdent( matrix_t m );
 
-//-------- ƒ}ƒgƒŠƒNƒX a ‚Æ b ‚ğ ab ‚É‡¬
+//-------- ãƒãƒˆãƒªã‚¯ã‚¹ a ã¨ b ã‚’ ab ã«åˆæˆ
 void matrixMult(matrix_t ab, const matrix_t a, const matrix_t b);
 
-//-------- •½sˆÚ“®s—ñ‚ğ¶¬
+//-------- å¹³è¡Œç§»å‹•è¡Œåˆ—ã‚’ç”Ÿæˆ
 void matrixTrans( matrix_t m, const vector_t *p );
 void matrixTrans(matrix_t m, float x, float y, float z);
 
-//-------- •½sˆÚ“®‚Ì‹t•ÏŠ·
+//-------- å¹³è¡Œç§»å‹•ã®é€†å¤‰æ›
 void matrixTransInv(matrix_t m, const vector_t* t);
 
-//-------- X ²‚Ì‰ñ“]s—ñ‚ğ¶¬
+//-------- X è»¸ã®å›è»¢è¡Œåˆ—ã‚’ç”Ÿæˆ
 void matrixRotX( matrix_t rx, float pitch );
 
-//-------- Y ²‚Ì‰ñ“]s—ñ‚ğ¶¬
+//-------- Y è»¸ã®å›è»¢è¡Œåˆ—ã‚’ç”Ÿæˆ
 void matrixRotY( matrix_t ry, float yaw );
 
-//-------- Z ²‚Ì‰ñ“]s—ñ‚ğ¶¬
+//-------- Z è»¸ã®å›è»¢è¡Œåˆ—ã‚’ç”Ÿæˆ
 void matrixRotZ( matrix_t rz, float roll );
 
-//-------- ”CˆÓ‚Ì²‚Ì‰ñ“]s—ñ‚ğ¶¬
+//-------- ä»»æ„ã®è»¸ã®å›è»¢è¡Œåˆ—ã‚’ç”Ÿæˆ
 void matrixRot( matrix_t mr, float roll, float pitch, float yaw );
 void matrixRot( matrix_t mr, const euler_t *angle );
 void matrixRot( matrix_t m, float a, float x, float y, float z );
@@ -37,27 +37,27 @@ void matrixRot( matrix_t m, float a, vector_t *v );
 void matrixRotInv(matrix_t mr, const euler_t* rot);
 void matrixRotInv(matrix_t mr, float roll, float pitch, float yaw);
 
-//-------- ƒIƒCƒ‰[Šprot‚Æ•½sˆÚ“®pos‚©‚çƒ}ƒgƒŠƒNƒXm‚ğ¶¬
+//-------- ã‚ªã‚¤ãƒ©ãƒ¼è§’rotã¨å¹³è¡Œç§»å‹•posã‹ã‚‰ãƒãƒˆãƒªã‚¯ã‚¹mã‚’ç”Ÿæˆ
 void matrixMake(matrix_t m, const euler_t* rot, const vector_t* pos);
 
-//-------- ”CˆÓ²‚Ì‰ñ“] a, axis ‚Æ•½sˆÚ“® trans ‚©‚çƒ}ƒgƒŠƒNƒX m ‚ğ¶¬
+//-------- ä»»æ„è»¸ã®å›è»¢ a, axis ã¨å¹³è¡Œç§»å‹• trans ã‹ã‚‰ãƒãƒˆãƒªã‚¯ã‚¹ m ã‚’ç”Ÿæˆ
 void matrixMake(matrix_t m, float a, const vector_t* axis, const vector_t* trans);
 
-//-------- ‹t•ÏŠ·s—ñ inv ‚ğ¶¬
+//-------- é€†å¤‰æ›è¡Œåˆ— inv ã‚’ç”Ÿæˆ
 void matrixMakeInv(matrix_t inv, const euler_t* rot, const vector_t* pos);
 
-//-------- X²‚ğæ“¾
+//-------- Xè»¸ã‚’å–å¾—
 void matrixGetX( const matrix_t m, vector_t *xaxis );
 
-//-------- Y²‚ğæ“¾
+//-------- Yè»¸ã‚’å–å¾—
 void matrixGetY( const matrix_t m, vector_t *yaxis );
 
-//-------- Z²‚ğæ“¾
+//-------- Zè»¸ã‚’å–å¾—
 void matrixGetZ( const matrix_t m, vector_t *zaxis );
 
-//-------- Œ´“_‚ğæ“¾
+//-------- åŸç‚¹ã‚’å–å¾—
 void matrixGetO( const matrix_t m, vector_t *pos );
 
-//-------- ‰ñ“]¬•ª‚ğ’Šo
+//-------- å›è»¢æˆåˆ†ã‚’æŠ½å‡º
 void matrixGetRot( const matrix_t mr, float *roll, float *pitch, float *yaw );
 void matrixGetRot( const matrix_t mr, euler_t *angle );

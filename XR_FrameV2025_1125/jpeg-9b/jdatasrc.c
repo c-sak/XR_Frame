@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  * jdatasrc.c
  *
  * Copyright (C) 1994-1996, Thomas G. Lane.
@@ -31,12 +31,12 @@ typedef struct {
   boolean start_of_file;	/* have we gotten any data yet? */
 
 #ifdef CFILE_MODE
-  //¥
-  //ƒ†[ƒU[’è‹`“Ç‚İ‚İŠÖ”‚Äg—p‚·‚éƒNƒ‰ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^
+  //â–¼
+  //ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©èª­ã¿è¾¼ã¿é–¢æ•°ã¦ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿
   void* io_ptr;
-  //ƒ†[ƒU[’è‹`‚Ì“Ç‚İ‚İŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^	
+  //ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®èª­ã¿è¾¼ã¿é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿	
   jpeg_rw_ptr read_data_fn;
-  //£
+  //â–²
 #endif
 
 } my_source_mgr;
@@ -112,11 +112,11 @@ fill_input_buffer (j_decompress_ptr cinfo)
 #ifndef CFILE_MODE
   nbytes = JFREAD(src->infile, src->buffer, INPUT_BUF_SIZE);
 #else
-  //¥
-  //  infile‚ªNULL‚È‚çƒ†[ƒU[’è‹`ŠÖ”‚©‚ç“Ç‚İ‚Ş
+  //â–¼
+  //  infileãŒNULLãªã‚‰ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©é–¢æ•°ã‹ã‚‰èª­ã¿è¾¼ã‚€
   if (src->infile) nbytes = JFREAD(src->infile, src->buffer, INPUT_BUF_SIZE);
   else nbytes=((*(src->read_data_fn))(src->io_ptr,src->buffer,INPUT_BUF_SIZE));
-  //£
+  //â–²
 #endif
 
   if (nbytes <= 0) {
@@ -292,8 +292,8 @@ jpeg_mem_src (j_decompress_ptr cinfo,
   src->next_input_byte = (const JOCTET *) inbuffer;
 }
 #ifdef CFILE_MODE
-//¥
-//ƒ†[ƒU[’è‹`“Ç‚İ‚İŠÖ”‚Ì“o˜^
+//â–¼
+//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©èª­ã¿è¾¼ã¿é–¢æ•°ã®ç™»éŒ²
 GLOBAL(void)
 jpeg_set_read_fn(j_decompress_ptr cinfo, void* io_ptr, jpeg_rw_ptr read_data_fn)
 {
@@ -325,8 +325,8 @@ jpeg_set_read_fn(j_decompress_ptr cinfo, void* io_ptr, jpeg_rw_ptr read_data_fn)
   src->infile = NULL;//infile;
   src->pub.bytes_in_buffer = 0; /* forces fill_input_buffer on first read */
   src->pub.next_input_byte = NULL; /* until buffer loaded */
-  src->io_ptr=io_ptr;		//ƒ†[ƒU[’è‹`‚ÌƒNƒ‰ƒXƒCƒ“ƒXƒ^ƒ“ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ ‚é‚¢‚Íƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‹
-  src->read_data_fn=read_data_fn;//ƒ†[ƒU[’è‹`‚Ìƒtƒ@ƒCƒ‹“Ç‚İ‚İŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^
+  src->io_ptr=io_ptr;		//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ã‚¯ãƒ©ã‚¹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚ã‚‹ã„ã¯ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+  src->read_data_fn=read_data_fn;//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 }
-//£
+//â–²
 #endif

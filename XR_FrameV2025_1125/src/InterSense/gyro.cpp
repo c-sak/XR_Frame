@@ -1,9 +1,9 @@
-#include "isense.h"
+ï»¿#include "isense.h"
 #include "Gyro.h"
 
-static ISD_TRACKER_HANDLE     g_ISDhandle;		//!< ƒfƒoƒCƒX‚Ìƒnƒ“ƒhƒ‹
-static ISD_TRACKER_INFO_TYPE  g_ISDtracker;	//!< ƒgƒ‰ƒbƒJ[‚ÌŠeŽíî•ñ(ƒo[ƒWƒ‡ƒ“AFPS“™)
-static ISD_TRACKER_DATA_TYPE  g_ISDdata;		//!< ƒgƒ‰ƒbƒJ[‚©‚ç“¾‚ç‚ê‚éŽÀƒf[ƒ^(3Ž²‚ÌŒX‚«)
+static ISD_TRACKER_HANDLE     g_ISDhandle;		//!< ãƒ‡ãƒã‚¤ã‚¹ã®ãƒãƒ³ãƒ‰ãƒ«
+static ISD_TRACKER_INFO_TYPE  g_ISDtracker;	//!< ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã®å„ç¨®æƒ…å ±(ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã€FPSç­‰)
+static ISD_TRACKER_DATA_TYPE  g_ISDdata;		//!< ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰å¾—ã‚‰ã‚Œã‚‹å®Ÿãƒ‡ãƒ¼ã‚¿(3è»¸ã®å‚¾ã)
 static ISD_STATION_INFO_TYPE  g_ISDstation;
 
 static bool active = false;
@@ -14,7 +14,7 @@ void InitGyro(void)
 	g_ISDhandle = ISD_OpenTracker(NULL, 0, FALSE, TRUE);
 
     ISD_GetStationConfig( g_ISDhandle, &g_ISDstation, 1, TRUE );
-	g_ISDstation.Compass = 1; //’nŽ¥‹C‚É‚æ‚é•â³‚ð—LŒø‰»
+	g_ISDstation.Compass = 1; //åœ°ç£æ°—ã«ã‚ˆã‚‹è£œæ­£ã‚’æœ‰åŠ¹åŒ–
 	ISD_SetStationConfig( g_ISDhandle, &g_ISDstation, 1, TRUE );
 
 	active = true;

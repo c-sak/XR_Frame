@@ -1,4 +1,4 @@
-#define N_TARGET 15
+Ôªø#define N_TARGET 15
 #define N_MARKER 2048
 
 #include "calc.h"
@@ -30,9 +30,9 @@ typedef struct{
 typedef struct{
 	TargetT TargetList[N_TARGET];
 	MarkerT MarkerList[N_MARKER];
-	////////Å•ÉÜÅ[ÉUÉfÅ[É^
+	////////‚ñº„É¶„Éº„Ç∂„Éá„Éº„Çø
 
 
 
-	////////Å£
+	////////‚ñ≤
 } SimDataT;

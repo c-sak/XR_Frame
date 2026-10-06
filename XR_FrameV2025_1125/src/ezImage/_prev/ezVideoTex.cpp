@@ -1,4 +1,4 @@
-//#############################################################################
+ï»¿//#############################################################################
 //
 //T. OHSHIMA
 //#############################################################################
@@ -49,7 +49,7 @@ GLuint ezVideoTex_GenMesh()
 //-----------------------------------------------------------------------------
 void ezVideoTex_Draw( GLuint texID, int width, int height, unsigned char *buffer, GLuint meshID )
 {
-	// ƒeƒNƒXƒ`ƒƒƒƒ‚ƒŠ‚É‰æ‘œƒf[ƒ^‚ğƒ[ƒh
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¡ãƒ¢ãƒªã«ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ãƒ¼ãƒ‰
 	glBindTexture( GL_TEXTURE_2D, texID );
 	glTexSubImage2D( GL_TEXTURE_2D, 0, 0, 0, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, buffer );
 	glEnable( GL_TEXTURE_2D );
@@ -64,7 +64,7 @@ void ezVideoTex_Draw( GLuint texID, int width, int height, unsigned char *buffer
 	glCallList( meshID );
     glPopMatrix();
 
-	glBindTexture( GL_TEXTURE_2D, 0 ); //¡ƒeƒNƒXƒ`ƒƒ‚ğ‰ğœ
-	glDisable( GL_TEXTURE_2D ); //¡ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒOOFF
+	glBindTexture( GL_TEXTURE_2D, 0 ); //â– ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è§£é™¤
+	glDisable( GL_TEXTURE_2D ); //â– ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°OFF
 	return;
 }

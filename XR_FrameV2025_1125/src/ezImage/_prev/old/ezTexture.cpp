@@ -1,4 +1,4 @@
-//##############################################################################
+ï»¿//##############################################################################
 /* ezTexture.cpp
  * 
  * SAMPLE CODE FOR INTERACTIVE CG PROGRAMMING COURSES
@@ -44,16 +44,16 @@ void ezTex_disable(){ glDisable( GL_TEXTURE_2D ); }
 //------------------------------------------------------------ loadTexture
 static GLubyte *LoadImage( const char *file, int width, int height, int depth )
 {
-    GLubyte *rawimage; //ƒeƒNƒXƒ`ƒƒ—p‰æ‘œƒf[ƒ^‚Ì”z—ñ
+    GLubyte *rawimage; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”¨ç”»åƒãƒ‡ãƒ¼ã‚¿ã®é…åˆ—
   
     rawimage = (GLubyte *)malloc( width * height * depth );
-    FILE *fptex;              //ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹—pƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^
-    fptex = fopen( file, "rb" ); //ƒoƒCƒiƒŠ“Ç‚İ‚İƒ‚[ƒh‚ÅƒI[ƒvƒ“
-    if( fptex == NULL ){         //ƒtƒ@ƒCƒ‹‚ª“Ç‚ß‚È‚©‚Á‚½‚çƒGƒ‰[
+    FILE *fptex;              //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿
+    fptex = fopen( file, "rb" ); //ãƒã‚¤ãƒŠãƒªèª­ã¿è¾¼ã¿ãƒ¢ãƒ¼ãƒ‰ã§ã‚ªãƒ¼ãƒ—ãƒ³
+    if( fptex == NULL ){         //ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ãªã‹ã£ãŸã‚‰ã‚¨ãƒ©ãƒ¼
         perror( file );
         exit( -1 );
     }
-    //‰æ‘œƒf[ƒ^‚ğ“Ç‚İ‚Ş
+    //ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
     fread( rawimage, width * height * depth, 1, fptex );
     fclose( fptex );
     return rawimage;
@@ -61,21 +61,21 @@ static GLubyte *LoadImage( const char *file, int width, int height, int depth )
 //--------
 GLuint ezTexture_Define( GLubyte *image, int width, int height, int depth )
 {
-    GLuint tex;               //ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹
+    GLuint tex;               //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«
 
-    glGenTextures( 1, &tex );            //V‚µ‚¢ƒeƒNƒXƒ`ƒƒ‚ğ¶¬‚µ
-    glBindTexture( GL_TEXTURE_2D, tex ); //ƒJƒŒƒ“ƒg‚Éİ’è‚·‚é
+    glGenTextures( 1, &tex );            //æ–°ã—ã„ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ç”Ÿæˆã—
+    glBindTexture( GL_TEXTURE_2D, tex ); //ã‚«ãƒ¬ãƒ³ãƒˆã«è¨­å®šã™ã‚‹
 
-    //¥‰æ‘œƒf[ƒ^‚ğƒeƒNƒXƒ`ƒƒƒƒ‚ƒŠ‚É“o˜^‚·‚é
+    //â–¼ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¡ãƒ¢ãƒªã«ç™»éŒ²ã™ã‚‹
     switch( depth ){
-      case 3: //¥RGBƒ‚[ƒh
-        //ƒƒ‚ƒŠ‚ÌƒeƒNƒZƒ‹‹«ŠE‚Ìw’è
+      case 3: //â–¼RGBãƒ¢ãƒ¼ãƒ‰
+        //ãƒ¡ãƒ¢ãƒªã®ãƒ†ã‚¯ã‚»ãƒ«å¢ƒç•Œã®æŒ‡å®š
         glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-        //ƒeƒNƒXƒ`ƒƒƒƒ‚ƒŠ‚É“o˜^
+        //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¡ãƒ¢ãƒªã«ç™»éŒ²
         glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, width, height, 0,
                       GL_RGB, GL_UNSIGNED_BYTE, image );
         break;
-      case 4: //¥RGBAƒ‚[ƒh
+      case 4: //â–¼RGBAãƒ¢ãƒ¼ãƒ‰
         glPixelStorei( GL_UNPACK_ALIGNMENT, 4 );
         glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
                       GL_RGBA, GL_UNSIGNED_BYTE, image );
@@ -83,19 +83,19 @@ GLuint ezTexture_Define( GLubyte *image, int width, int height, int depth )
       default:
         break;
     }
-    //¥ƒeƒNƒXƒ`ƒƒƒtƒBƒ‹ƒ^[‚Ìİ’è
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST ); //¡
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST ); //¡
+    //â–¼ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã®è¨­å®š
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST ); //â– 
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST ); //â– 
 
-    glBindTexture( GL_TEXTURE_2D, 0 ); //¡ƒeƒNƒXƒ`ƒƒ“o˜^Š®—¹
+    glBindTexture( GL_TEXTURE_2D, 0 ); //â– ãƒ†ã‚¯ã‚¹ãƒãƒ£ç™»éŒ²å®Œäº†
 
     return tex;
 }
 //--------
 static GLuint ezTexture_LoadImage( const char *file, int width, int height, int depth )
 {
-    GLuint tex;               //ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹
-    GLubyte *rawimage;         //ƒeƒNƒXƒ`ƒƒ—p‰æ‘œƒf[ƒ^‚Ì”z—ñ
+    GLuint tex;               //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«
+    GLubyte *rawimage;         //ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”¨ç”»åƒãƒ‡ãƒ¼ã‚¿ã®é…åˆ—
   
     rawimage = LoadImage( file, width, height, depth );
     tex = ezTexture_Define( rawimage, width, height, depth );
@@ -125,20 +125,20 @@ void ezTexture_Unbind( void )
 }
 //========================================================================
 //----------------------------------------------------- glTexGen_ObjLinear
-/*ƒeƒNƒXƒ`ƒƒÀ•W©“®¶¬‚Ìİ’è
- *’¸“_‚ÌƒIƒuƒWƒFƒNƒg‹óŠÔ‚É‚¨‚¯‚éÀ•W’l‚ğ—˜—p‚µ‚ÄƒeƒNƒXƒ`ƒƒÀ•W‚ğ¶¬‚·‚é
+/*ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™è‡ªå‹•ç”Ÿæˆã®è¨­å®š
+ *é ‚ç‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç©ºé–“ã«ãŠã‘ã‚‹åº§æ¨™å€¤ã‚’åˆ©ç”¨ã—ã¦ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã‚’ç”Ÿæˆã™ã‚‹
  */
 void ezTexGen_setObjLinear( float roll, float pitch, float yaw,
                             float cx, float cy, float s )
 {
     glTexGeni( GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR );
     glTexGeni( GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR );
-    //ƒeƒNƒXƒ`ƒƒÀ•WŠî€²‚Ìİ’è
+    //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™åŸºæº–è»¸ã®è¨­å®š
     double s_axis[4] = { 1.0, 0.0, 0.0, 0.0 };
     double t_axis[4] = { 0.0, 1.0, 0.0, 0.0 };
     glTexGendv( GL_S, GL_OBJECT_PLANE, s_axis );
     glTexGendv( GL_T, GL_OBJECT_PLANE, t_axis );
-    //ƒeƒNƒXƒ`ƒƒƒ}ƒgƒŠƒNƒX‚Ìİ’è
+    //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒˆãƒªã‚¯ã‚¹ã®è¨­å®š
     glMatrixMode( GL_TEXTURE );
     glLoadIdentity();
     glRotatef( yaw, 0.0, 1.0, 0.0 );

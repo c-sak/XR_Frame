@@ -1,4 +1,4 @@
-#ifndef __TCPFUNC_H__
+ï»¿#ifndef __TCPFUNC_H__
 #define __TCPFUNC_H__
 
 #include <winsock2.h>
@@ -8,21 +8,21 @@
 #define PORTNUM 10001
 
 typedef struct{
-	WSADATA WSAData;//winsock‰Šú‰»
-	SOCKET sock;//ƒ\ƒPƒbƒg
+	WSADATA WSAData;//winsockåˆæœŸåŒ–
+	SOCKET sock;//ã‚½ã‚±ãƒƒãƒˆ
 
-	sockaddr_in addr;//ƒAƒhƒŒƒX‚Æ‚©
+	sockaddr_in addr;//ã‚¢ãƒ‰ãƒ¬ã‚¹ã¨ã‹
 
-	//ƒT[ƒo—pƒf[ƒ^
+	//ã‚µãƒ¼ãƒç”¨ãƒ‡ãƒ¼ã‚¿
 	sockaddr_in client;
 	SOCKET newSock;
 
-	//‹¤’Ê
-	void *data_recv;//óM—p\‘¢‘Ìw’è
-	void *data_send;//‘—M—p\‘¢‘Ìw’è
+	//å…±é€š
+	void *data_recv;//å—ä¿¡ç”¨æ§‹é€ ä½“æŒ‡å®š
+	void *data_send;//é€ä¿¡ç”¨æ§‹é€ ä½“æŒ‡å®š
 
-	int datasize_recv;//óM—p\‘¢‘Ì‚Ìƒf[ƒ^ƒTƒCƒY
-	int datasize_send;//‘—M—p\‘¢‘Ì‚Ìƒf[ƒ^ƒTƒCƒY
+	int datasize_recv;//å—ä¿¡ç”¨æ§‹é€ ä½“ã®ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º
+	int datasize_send;//é€ä¿¡ç”¨æ§‹é€ ä½“ã®ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º
 
 	bool v_flag;
 
@@ -30,17 +30,17 @@ typedef struct{
 
 }TCPDataT;
 
-//‰Šúİ’è
-int initTCPServ(TCPDataT *tcpdata);//ƒT[ƒo[‘¤‰Šú‰»
-int ConnectTCPServ(TCPDataT *tcpdata);//ƒT[ƒo[‘¤Ú‘±‘Ò‚¿
-int initTCPClient(TCPDataT *tcpdata, char *hostname);//ƒNƒ‰ƒCƒAƒ“ƒg‘¤‰Šú‰»
-int ConnectTCPClient(TCPDataT *tcpdata);//ƒNƒ‰ƒCƒAƒ“ƒg‘¤Ú‘±‘Ò‚¿
-//’ÊM
-int TCPSend(TCPDataT *tcpdata);//ƒf[ƒ^‘—M
-int TCPRecv(TCPDataT *tcpdata);//ƒf[ƒ^óM
+//åˆæœŸè¨­å®š
+int initTCPServ(TCPDataT *tcpdata);//ã‚µãƒ¼ãƒãƒ¼å´åˆæœŸåŒ–
+int ConnectTCPServ(TCPDataT *tcpdata);//ã‚µãƒ¼ãƒãƒ¼å´æ¥ç¶šå¾…ã¡
+int initTCPClient(TCPDataT *tcpdata, char *hostname);//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´åˆæœŸåŒ–
+int ConnectTCPClient(TCPDataT *tcpdata);//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´æ¥ç¶šå¾…ã¡
+//é€šä¿¡
+int TCPSend(TCPDataT *tcpdata);//ãƒ‡ãƒ¼ã‚¿é€ä¿¡
+int TCPRecv(TCPDataT *tcpdata);//ãƒ‡ãƒ¼ã‚¿å—ä¿¡
 
 
-//I—¹ˆ— 
+//çµ‚äº†å‡¦ç† 
 void termTCP(SOCKET *sock);
 
 #endif //__TCPFUNC_H__

@@ -1,4 +1,4 @@
-//##############################################################################
+ï»¿//##############################################################################
 /* ezUtil.cpp
  * 
  * SAMPLE CODE FOR INTERACTIVE CG PROGRAMMING COURSES
@@ -23,23 +23,23 @@
 
 /********
 uniformRandom -> calc.cpp
-Ÿ•`‰æŒnŠÖ”‚Ímymodels.cpp‚É‡ŸˆÚsŸ
-EezUtil_makeStars -> makeStars/mymodels.cpp
-EezUtil_drawStars -> drawStars/mymodels.cpp
+â—†æç”»ç³»é–¢æ•°ã¯mymodels.cppã«é †æ¬¡ç§»è¡Œâ—†
+ãƒ»ezUtil_makeStars -> makeStars/mymodels.cpp
+ãƒ»ezUtil_drawStars -> drawStars/mymodels.cpp
 
 
-¥HUD—pî•ñ’ñ¦–ì’†
-EezUtil_drawCircle
-EezUtil_drawScale
+â–¼HUDç”¨æƒ…å ±æç¤ºï¼Šè©¦ä½œä¸­
+ãƒ»ezUtil_drawCircle
+ãƒ»ezUtil_drawScale
 
-¥MREALƒ^[ƒQƒbƒg‘Î‰”Å
-‰ñ“]•ÏŠ·â‰ñ“]Šp“x{‰ñ“]²ƒxƒNƒgƒ‹
-EezUtil_postMultInv2
-EezUtil_postMult2
+â–¼MREALã‚¿ãƒ¼ã‚²ãƒƒãƒˆå¯¾å¿œç‰ˆ
+å›è»¢å¤‰æ›â‰«å›è»¢è§’åº¦ï¼‹å›è»¢è»¸ãƒ™ã‚¯ãƒˆãƒ«
+ãƒ»ezUtil_postMultInv2
+ãƒ»ezUtil_postMult2
 *////////
 
 //--------------------------------------------------------------------- drawGrid
-/* drawGrid: ƒOƒŠƒbƒh‚ğ•`‰æ‚·‚é
+/* drawGrid: ã‚°ãƒªãƒƒãƒ‰ã‚’æç”»ã™ã‚‹
  */
 void ezUtil_drawGrid( int n, float range )
 {
@@ -72,24 +72,24 @@ void ezUtil_drawGrid( int n, float range )
     return;
 }
 //--------------------------------------------------------------------- drawAxes
-/* drawAxes: À•W²‚ğ•`‰æ‚·‚é
+/* drawAxes: åº§æ¨™è»¸ã‚’æç”»ã™ã‚‹
  */  
 void ezUtil_drawAxes( float l )
 {
 	glNormal3f( 0.0, 0.0, 0.0 );
-    /* x²‚ğÔ‚Å•`‰æ‚·‚é */
+    /* xè»¸ã‚’èµ¤ã§æç”»ã™ã‚‹ */
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_LINES);
     glVertex3f(-l, 0.001, 0.0 );
     glVertex3f( l, 0.001, 0.0 );
     glEnd();
-    /* y²‚ğ—Î‚Å•`‰æ‚·‚é */
+    /* yè»¸ã‚’ç·‘ã§æç”»ã™ã‚‹ */
     glColor3f(0.0, 1.0, 0.0); 
     glBegin(GL_LINES);
     glVertex3f( 0.0, l, 0.0 );
     glVertex3f( 0.0,-l, 0.0 );
     glEnd();
-    /* z²‚ğÂ‚Å•`‰æ‚·‚é */
+    /* zè»¸ã‚’é’ã§æç”»ã™ã‚‹ */
     glColor3f(0.0, 0.0, 1.0); 
     glBegin(GL_LINES);
     glVertex3f( 0.0, 0.001, l );
@@ -169,7 +169,7 @@ void ezUtil_drawScale( float r, int n, int axis, float offset, int mode )
 		y = r * cosf( a * EZ_RADIAN );
 		glPushMatrix();
 		switch( axis ){
-		  case 0: //‹ÂŠpƒXƒP[ƒ‹
+		  case 0: //ä»°è§’ã‚¹ã‚±ãƒ¼ãƒ«
             if( i == 3 ){
                 glPushMatrix();
                 glRotatef( - offset, 1.0, 0.0, 0.0 );
@@ -185,7 +185,7 @@ void ezUtil_drawScale( float r, int n, int axis, float offset, int mode )
            	sprintf( angle, "%3d", 90 - (int)a );
 		    ezFont_drawGlutStroke( -0.04, 0.0, 0.0, angle, 0.025, 0.025 );
 			break;
-		  case 1: //•ûˆÊŠpƒXƒP[ƒ‹
+		  case 1: //æ–¹ä½è§’ã‚¹ã‚±ãƒ¼ãƒ«
             if( i == 0 ){
                 glPushMatrix();
                 glRotatef( - offset, 0.0, 1.0, 0.0 );
@@ -369,9 +369,9 @@ void ezUtil_getPos( const float matrix[], float *pos )
 }
 void ezUtil_getPos( const float matrix[], float *x, float *y, float *z )
 {
-    *x = matrix[12];//[3][0]; xÀ•W’l‚ğ’Šo
-    *y = matrix[13];//[3][1]; yÀ•W’l‚ğ’Šo
-    *z = matrix[14];//[3][2]; zÀ•W’l‚ğ’Šo
+    *x = matrix[12];//[3][0]; xåº§æ¨™å€¤ã‚’æŠ½å‡º
+    *y = matrix[13];//[3][1]; yåº§æ¨™å€¤ã‚’æŠ½å‡º
+    *z = matrix[14];//[3][2]; zåº§æ¨™å€¤ã‚’æŠ½å‡º
     return;
 }
 

@@ -1,4 +1,4 @@
-#ifndef __SIM_H__
+ï»¿#ifndef __SIM_H__
 #define __SIM_H__
 
 #include "platform.h"
@@ -17,7 +17,7 @@ void DrawScene( void );
 //void Lighting( void );
 //void HeadLight( void );
 /*
-šObjDataT‚Ì’è‹`‚ÍAobject.h‚ÉˆÚs‚µ‚Ü‚µ‚½
+â˜…ObjDataTã®å®šç¾©ã¯ã€object.hã«ç§»è¡Œã—ã¾ã—ãŸ
 */
 
 //////// MREAL
@@ -32,21 +32,21 @@ typedef struct {
 	float clip_far;
 	float air_color[4];
 	float sky_color[4];
-    //////// ƒ†[ƒU’è‹`‚ÌƒV[ƒ“‚É‚Â‚¢‚Ä‚Ìƒf[ƒ^‚ğ‚±‚±‚É‚Ü‚Æ‚ß‚é
+    //////// ãƒ¦ãƒ¼ã‚¶å®šç¾©ã®ã‚·ãƒ¼ãƒ³ã«ã¤ã„ã¦ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã“ã“ã«ã¾ã¨ã‚ã‚‹
 
-	ObjDataT cube; ///////ŸƒLƒ…[ƒu
-	ObjDataT sphere; /////Ÿ‹…‘Ì
+	ObjDataT cube; ///////â—†ã‚­ãƒ¥ãƒ¼ãƒ–
+	ObjDataT sphere; /////â—†çƒä½“
 
-	ObjDataT player; /////ŸƒvƒŒƒCƒ„i‚Ì‘«Œ³šj‚ğ‚ ‚ç‚í‚·ƒIƒuƒWƒFƒNƒg
+	ObjDataT player; /////â—†ãƒ—ãƒ¬ã‚¤ãƒ¤ï¼ˆã®è¶³å…ƒâ˜…ï¼‰ã‚’ã‚ã‚‰ã‚ã™ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
-	ObjDataT head;//š
+	ObjDataT head;//â˜…
 	ObjDataT body;
-	ObjDataT handL;//š
-	ObjDataT handR;//š
+	ObjDataT handL;//â˜…
+	ObjDataT handR;//â˜…
 	ObjDataT footL;
 	ObjDataT footR;
 
-	ObjDataT *active_camera; //ƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^•Ï”
+	ObjDataT *active_camera; //ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿å¤‰æ•°
 
 	ObjDataT target[N_TARGET]; //////// MREAL
 	

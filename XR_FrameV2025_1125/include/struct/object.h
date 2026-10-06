@@ -1,4 +1,4 @@
-#ifndef __OBJECT_H__
+ï»¿#ifndef __OBJECT_H__
 #define __OBJECT_H__
 
 #include "vector.h"
@@ -8,23 +8,23 @@
 //-------- object data
 typedef struct _objdata_t {
 
-	//float x, y, z; ///// ŸƒŒƒCƒAƒEƒgˆÊ’u
+	//float x, y, z; ///// â—†ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆä½ç½®
 	vector_t pos;
 	vector_t prePos;
-	//float roll, pitch, yaw; /////Ÿp¨
+	//float roll, pitch, yaw; /////â—†å§¿å‹¢
 	euler_t rot;
-	int state; /////Ÿó‘Ô
-	bool visible; ///Ÿ‰Â‹‘®«
+	int state; /////â—†çŠ¶æ…‹
+	bool visible; ///â—†å¯è¦–å±æ€§
 
-	color_t color; ///////ŸF
+	color_t color; ///////â—†è‰²
 
-	float move; //Ÿ‘¬“xkm/ƒtƒŒ[ƒ€l
-	float turn; //Ÿù‰ñ‘¬“xiŠe‘¬“xjk“x/ƒtƒŒ[ƒ€l
+	float move; //â—†é€Ÿåº¦ã€”m/ãƒ•ãƒ¬ãƒ¼ãƒ ã€•
+	float turn; //â—†æ—‹å›é€Ÿåº¦ï¼ˆå„é€Ÿåº¦ï¼‰ã€”åº¦/ãƒ•ãƒ¬ãƒ¼ãƒ ã€•
 
-	float radius; //ŸÕ“Ë”»’è—p‚Ì”¼Œa
-	float xsize, ysize, zsize; //ƒ{ƒbƒNƒXƒTƒCƒY
+	float radius; //â—†è¡çªåˆ¤å®šç”¨ã®åŠå¾„
+	float xsize, ysize, zsize; //ãƒœãƒƒã‚¯ã‚¹ã‚µã‚¤ã‚º
 
-	struct _objdata_t *base; //šeƒm[ƒh
+	struct _objdata_t *base; //â˜…è¦ªãƒãƒ¼ãƒ‰
 
 	_objdata_t() {
 		pos = vector_t(0, 0, 0);

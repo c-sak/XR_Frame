@@ -1,4 +1,4 @@
-// Tracker Utility Functions
+ï»¿// Tracker Utility Functions
 
 /*
  * This code is provided for non-profit and personal learning use
@@ -15,11 +15,11 @@
 //#include "igSharedMemoryT.h"
 #include "ezTrack.h"
 
-using namespace std; //‚¨‚Ü‚¶‚È‚¢
+using namespace std; //ãŠã¾ã˜ãªã„
 
-// ‹¤—Lƒƒ‚ƒŠ‚©‚ç‚Ìƒf[ƒ^‚ğ“ü‚ê‚é•Ï”
+// å…±æœ‰ãƒ¡ãƒ¢ãƒªã‹ã‚‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’å…¥ã‚Œã‚‹å¤‰æ•°
 //static ezTrackArrayT trackarray;
-// ‹¤—Lƒƒ‚ƒŠ
+// å…±æœ‰ãƒ¡ãƒ¢ãƒª
 //static iglib::igSharedMemoryT<ezTrackArrayT> *trackshm;
 
 /*===========================================================================*/
@@ -44,7 +44,7 @@ bool ezTracker::open( char *key, bool w )
 	    return trackshm->open( w );
 	}
 	else{
-		return true; // use‚ªfalse‚Ì‚Æ‚«‚É‚ÍAƒ_ƒ~[‚Åtrue‚ğ•Ô‚·
+		return true; // useãŒfalseã®ã¨ãã«ã¯ã€ãƒ€ãƒŸãƒ¼ã§trueã‚’è¿”ã™
 	}
 }
 void ezTracker::read()

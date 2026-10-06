@@ -1,4 +1,4 @@
-#include "platform.h"
+ï»¿#include "platform.h"
 #include "sim.h"
 /*------------------------------------------------------------ MaterialColor
  * MaterialColor:
@@ -163,7 +163,7 @@ void HeadLight( int light_id, float r, float g, float b, float att_half )
     return;
 }
 /*------------------------------------------------------------------- setFog */
-/* Fog: –¶‚ðÝ’è‚·‚éiŠÈˆÕÝ’èj
+/* Fog: éœ§ã‚’è¨­å®šã™ã‚‹ï¼ˆç°¡æ˜“è¨­å®šï¼‰
  */
 void Fog( int fog_mode, float r, float g, float b, float d, float start, float end )
 {
@@ -175,14 +175,14 @@ void Fog( int fog_mode, float r, float g, float b, float d, float start, float e
 	fog_color[2] = b;
 
 	if( d > 0.0 ) glEnable( GL_FOG );
-	glFogi(GL_FOG_MODE, fog_mode); //Ží—Þ GL_LINEAR, GL_EXP, GL_EXP2
-	glFogfv(GL_FOG_COLOR, fog_color); //F
+	glFogi(GL_FOG_MODE, fog_mode); //ç¨®é¡ž GL_LINEAR, GL_EXP, GL_EXP2
+	glFogfv(GL_FOG_COLOR, fog_color); //è‰²
 
 	switch( fog_mode ){
 	case GL_LINEAR:
 		density = 1.0;
-	    glFogf(GL_FOG_START, start );  //ŠJŽnˆÊ’u
-	    glFogf(GL_FOG_END, end ); //I—¹ˆÊ’u
+	    glFogf(GL_FOG_START, start );  //é–‹å§‹ä½ç½®
+	    glFogf(GL_FOG_END, end ); //çµ‚äº†ä½ç½®
 		break;
 	case GL_EXP:
 		density = 1.0 / end;
@@ -191,12 +191,12 @@ void Fog( int fog_mode, float r, float g, float b, float d, float start, float e
 		density = 1.0 / ( end * end );
 		break;
 	}
-	glFogf(GL_FOG_DENSITY, density * d );  //–§“x
-	//glHint(GL_FOG_HINT, GL_DONT_CARE); //ƒqƒ“ƒg
+	glFogf(GL_FOG_DENSITY, density * d );  //å¯†åº¦
+	//glHint(GL_FOG_HINT, GL_DONT_CARE); //ãƒ’ãƒ³ãƒˆ
 }
 void setFog(SimDataT *simdata)
 {
-	//¥ƒtƒHƒOON: R, G, B, –§“x, ŠJŽn‹——£, I—¹‹——£
+	//â–¼ãƒ•ã‚©ã‚°ON: R, G, B, å¯†åº¦, é–‹å§‹è·é›¢, çµ‚äº†è·é›¢
 	Fog(GL_EXP,
 		simdata->fog.red,
 		simdata->fog.green,

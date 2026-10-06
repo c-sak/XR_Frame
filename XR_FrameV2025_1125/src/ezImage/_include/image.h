@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #define USE_LIBJPEG
 
 #include "ezWebCam.h"
@@ -124,7 +124,7 @@ public:
 	void capture(void) {
 		if (webcam->isLatest()) update();
 	}
-	void copy(unsigned char *srcimage) { //¦–¢ƒeƒXƒg
+	void copy(unsigned char *srcimage) { //â€»æœªãƒ†ã‚¹ãƒˆ
 		memcpy( img->image->pixdata, srcimage, 
 			img->image->width * img->image->height * img->image->pixsize );
 	}

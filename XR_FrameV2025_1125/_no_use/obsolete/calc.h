@@ -1,4 +1,4 @@
-#ifndef __CALC_H__
+ï»¿#ifndef __CALC_H__
 #define __CALC_H__
 
 typedef struct{
@@ -25,7 +25,7 @@ typedef struct {
 typedef struct {
 	vector_t pos;
 	OrientationT ori;
-	int state; //‘OƒtƒŒ[ƒ€‚©‚ç‚Ìdetectedó‘Ô‚Ì•Ï‰»
+	int state; //å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®detectedçŠ¶æ…‹ã®å¤‰åŒ–
 	bool detected;
 	int markerID;
 	int targetID;
@@ -49,31 +49,31 @@ void vector_copyFrom( vector_t *dst, const vector_t *src );
 void vector_Diff( vector_t *out, const vector_t *p0, const vector_t *p1 );
 void vector_Add( vector_t *out, const vector_t *p0, const vector_t *p1 );
 
-//r=ˆÚ“®—Ê pitch.yaw=ˆÚ“®•ûŒü v=floatƒ^ƒCƒv‚Ì”z—ñx,y,z‚ğ‚à‚ç‚¤‚½‚ß
+//r=ç§»å‹•é‡ pitch.yaw=ç§»å‹•æ–¹å‘ v=floatã‚¿ã‚¤ãƒ—ã®é…åˆ—x,y,zã‚’ã‚‚ã‚‰ã†ãŸã‚
 void PolarToVector( float r, float pitch, float yaw, float *v);
 float EulerAtoB( ObjDataT *a, ObjDataT *b, euler_t *angle );
 
-//ˆê—l•ª•z‚Ì—”ŠÖ”
+//ä¸€æ§˜åˆ†å¸ƒã®ä¹±æ•°é–¢æ•°
 float uniformRandom( float rmin, float rmax );
-//³‹K•ª•z‚Ì—”ŠÖ”
+//æ­£è¦åˆ†å¸ƒã®ä¹±æ•°é–¢æ•°
 float gaussianRandom( float rmin, float rmax );
 
 bool HitTest( ObjDataT *a, ObjDataT *b );
-//aF Õ“Ë”»’è‚Ì‘Šè
-//bF Õ“Ë”»’è‚Ìå‘Ì
-//–ß‚è’lF Õ“Ë‚µ‚½ê‡‚Étrue‚ª•Ô‚é
+//aï¼š è¡çªåˆ¤å®šã®ç›¸æ‰‹
+//bï¼š è¡çªåˆ¤å®šã®ä¸»ä½“
+//æˆ»ã‚Šå€¤ï¼š è¡çªã—ãŸå ´åˆã«trueãŒè¿”ã‚‹
 
 float DistanceAtoB( vector_t *a, vector_t *b );
-//–ß‚è’lF ˆø”‚Ìa‚Æb‚Æ‚ÌŠÔ‚Ì‹——£‚ğ•Ô‚·
+//æˆ»ã‚Šå€¤ï¼š å¼•æ•°ã®aã¨bã¨ã®é–“ã®è·é›¢ã‚’è¿”ã™
 
 void MoveObject( ObjDataT *obj );
 
 void TransformLocalToWorld(ObjDataT *base, ObjDataT *local, ObjDataT *world);
 
-//¥g‚¦‚é‚â‚Â
+//â–¼ä½¿ãˆã‚‹ã‚„ã¤
 void TransformLocalToWorldX(TargetT *base, ObjDataT *local, ObjDataT *world);
 
-//¤~‚ ‚©‚ñ‚â‚Â
+//â–½Ã—ã‚ã‹ã‚“ã‚„ã¤
 void TransformLocalToWorld2(TargetT *base, ObjDataT *local, ObjDataT *world);
 
 void TransformWorldToLocal(ObjDataT *base, ObjDataT *world, ObjDataT *local);

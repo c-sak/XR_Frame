@@ -1,4 +1,4 @@
-#ifndef __CObjLoader_h__
+ï»¿#ifndef __CObjLoader_h__
 #define __CObjLoader_h__
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -20,28 +20,28 @@ using namespace std;
 namespace objloader
 {
 
-#define _USE_MATH_DEFINES                        // M_PI—p
-#define SMOOTHING_ANGLE 90.0f                    // ƒXƒ€[ƒWƒ“ƒOŠp“x
+#define _USE_MATH_DEFINES                        // M_PIç”¨
+#define SMOOTHING_ANGLE 90.0f                    // ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°è§’åº¦
 
 /**
  *  @class    CObjLoader
- *  @brief    OBJƒf[ƒ^ƒAƒNƒZƒXƒNƒ‰ƒX@n
+ *  @brief    OBJãƒ‡ãƒ¼ã‚¿ã‚¢ã‚¯ã‚»ã‚¹ã‚¯ãƒ©ã‚¹@n
  <p>
-        –{ƒNƒ‰ƒX‚Å‚ÍOBJƒf[ƒ^‚Ì“Ç‚İA•`‰æ‚ğs‚¤‚±‚Æ‚ª‰Â”\‚Å‚·B@n
+        æœ¬ã‚¯ãƒ©ã‚¹ã§ã¯OBJãƒ‡ãƒ¼ã‚¿ã®èª­è¾¼ã¿ã€æç”»ã‚’è¡Œã†ã“ã¨ãŒå¯èƒ½ã§ã™ã€‚@n
         @n
-        g—p•û–@‚ÍAˆÈ‰º‚Ì’Ê‚è‚Å‚·B@n
-          1.–{ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚Ü‚·B@n
-          2.readŠÖ”‚ğg—p‚µ‚ÄAOBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B@n
+        ä½¿ç”¨æ–¹æ³•ã¯ã€ä»¥ä¸‹ã®é€šã‚Šã§ã™ã€‚@n
+          1.æœ¬ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¾ã™ã€‚@n
+          2.readé–¢æ•°ã‚’ä½¿ç”¨ã—ã¦ã€OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚@n
           @n
-            ˆÈ‰º‚ÌŠÖ”‚ğg—p‚µ‚ÄA“Ç‚ñ‚¾ƒf[ƒ^‚ğ•`‰æ‚µ‚Ü‚·B@n
-            2.1.drawŠÖ”‚Å‚ÍAOBJƒf[ƒ^‚ğ•`‰æ‚µ‚Ü‚·B@n
-            2.2.drawNormalŠÖ”‚Å‚ÍAOBJƒf[ƒ^‚Ì–@ü‚ğ•`‰æ‚µ‚Ü‚·B@n
-            2.3.drawLineŠÖ”‚Å‚ÍAOBJƒf[ƒ^‚ğƒ‰ƒCƒ“•`‰æ‚µ‚Ü‚·B@n
+            ä»¥ä¸‹ã®é–¢æ•°ã‚’ä½¿ç”¨ã—ã¦ã€èª­è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã‚’æç”»ã—ã¾ã™ã€‚@n
+            2.1.drawé–¢æ•°ã§ã¯ã€OBJãƒ‡ãƒ¼ã‚¿ã‚’æç”»ã—ã¾ã™ã€‚@n
+            2.2.drawNormalé–¢æ•°ã§ã¯ã€OBJãƒ‡ãƒ¼ã‚¿ã®æ³•ç·šã‚’æç”»ã—ã¾ã™ã€‚@n
+            2.3.drawLineé–¢æ•°ã§ã¯ã€OBJãƒ‡ãƒ¼ã‚¿ã‚’ãƒ©ã‚¤ãƒ³æç”»ã—ã¾ã™ã€‚@n
           @n
-          3.writeŠÖ”‚ğg—p‚µ‚ÄA–@üî•ñ‚Ì‚È‚¢OBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ@n
-            –@üî•ñ‚ğ•t‰Á‚µ‚½OBJƒtƒ@ƒCƒ‹‚ğo—Í‚µ‚Ü‚·B@n
-            o—Íƒtƒ@ƒCƒ‹‚ÍAuout_ + OBJƒtƒ@ƒCƒ‹–¼v‚Åo—Í‚³‚ê‚Ü‚·B@n
-          ¦ƒeƒNƒXƒ`ƒƒ‚ÌŒ`®‚Ípng‚Ì‚İ‘Î‰‚µ‚Ä‚¢‚Ü‚·B
+          3.writeé–¢æ•°ã‚’ä½¿ç”¨ã—ã¦ã€æ³•ç·šæƒ…å ±ã®ãªã„OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿@n
+            æ³•ç·šæƒ…å ±ã‚’ä»˜åŠ ã—ãŸOBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡ºåŠ›ã—ã¾ã™ã€‚@n
+            å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã¯ã€ã€Œout_ + OBJãƒ•ã‚¡ã‚¤ãƒ«åã€ã§å‡ºåŠ›ã•ã‚Œã¾ã™ã€‚@n
+          â€»ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å½¢å¼ã¯pngã®ã¿å¯¾å¿œã—ã¦ã„ã¾ã™ã€‚
  </p>
  *  @version  1.0
  *  @date    2008/12/1
@@ -51,76 +51,76 @@ namespace objloader
  *  @mainpage
  *  <center>
  *  @n
- *    –{‹@”\‚ÍAƒ‚ƒfƒŠƒ“ƒOƒ\ƒtƒg‚Å‚ ‚éuMetasequoiav‹y‚ÑuMayav‚©‚çOBJŒ`®‚Å@n
- *    ƒGƒNƒXƒ|[ƒg‚³‚ê‚½‚à‚Ì‚ğ“Ç‚İAOpenGL‚É‚Ä•`‰æ‚µ‚Ü‚·B@n
- *    OBJ‚Ìƒ^ƒO‚Íd—l‚ªB–†‚Å‚ ‚é‚½‚ßAÅ’áŒÀ•K—v‚Å‚ ‚éƒ^ƒO‚Ì‚İ‚É‘Î‰‚µ‚Ä‚¢‚Ü‚·B@n
+ *    æœ¬æ©Ÿèƒ½ã¯ã€ãƒ¢ãƒ‡ãƒªãƒ³ã‚°ã‚½ãƒ•ãƒˆã§ã‚ã‚‹ã€ŒMetasequoiaã€åŠã³ã€ŒMayaã€ã‹ã‚‰OBJå½¢å¼ã§@n
+ *    ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã•ã‚ŒãŸã‚‚ã®ã‚’èª­è¾¼ã¿ã€OpenGLã«ã¦æç”»ã—ã¾ã™ã€‚@n
+ *    OBJã®ã‚¿ã‚°ã¯ä»•æ§˜ãŒæ›–æ˜§ã§ã‚ã‚‹ãŸã‚ã€æœ€ä½é™å¿…è¦ã§ã‚ã‚‹ã‚¿ã‚°ã®ã¿ã«å¯¾å¿œã—ã¦ã„ã¾ã™ã€‚@n
  *
- *    ˆÈ‰º‚ÉA–{‹@”\‚Å‘Î‰‚µ‚Ä‚¢‚éƒ^ƒOî•ñ‚Ìˆê——‚ğ¦‚µ‚Ü‚·B@n
+ *    ä»¥ä¸‹ã«ã€æœ¬æ©Ÿèƒ½ã§å¯¾å¿œã—ã¦ã„ã‚‹ã‚¿ã‚°æƒ…å ±ã®ä¸€è¦§ã‚’ç¤ºã—ã¾ã™ã€‚@n
  *
  *  <table border=1 cellspacing=0 cellpadding=4 width=700 align=center>
  *  <tr bgcolor="#dddddd">
- *    <td colspan=2><b>[ MTLƒ^ƒO ]</b></td><td><center><b>Metasequoia</b></center></td><td><center><b>MAYA</b></center></td>
+ *    <td colspan=2><b>[ MTLã‚¿ã‚° ]</b></td><td><center><b>Metasequoia</b></center></td><td><center><b>MAYA</b></center></td>
  *  </tr>
  *  <tr>
- *    <td width=20%><b>newmtl</b></td><td width=60%>ƒ}ƒeƒŠƒAƒ‹’è‹`–¼</td><td width=10%><center>›</center></td><td width=10%><center>›</center></td>
+ *    <td width=20%><b>newmtl</b></td><td width=60%>ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©å</td><td width=10%><center>â—‹</center></td><td width=10%><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>Ka</b></td><td>ŠÂ‹«Œõ(Ambient)ƒJƒ‰[</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>Ka</b></td><td>ç’°å¢ƒå…‰(Ambient)ã‚«ãƒ©ãƒ¼</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>Kd</b></td><td>ŠgUŒõ(Diffuse)ƒJƒ‰[</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>Kd</b></td><td>æ‹¡æ•£å…‰(Diffuse)ã‚«ãƒ©ãƒ¼</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>Ks</b></td><td>‹¾–ÊŒõ(Specular)ƒJƒ‰[</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>Ks</b></td><td>é¡é¢å…‰(Specular)ã‚«ãƒ©ãƒ¼</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>Ns</b></td><td>‹¾–Êw”(Shininness)</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>Ns</b></td><td>é¡é¢æŒ‡æ•°(Shininness)</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>Tf</b></td><td>•s“§–¾“x</td><td><center>~</center></td><td><center>›</center></td>
+ *    <td><b>Tf</b></td><td>ä¸é€æ˜åº¦</td><td><center>Ã—</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>d</b></td><td>“§–¾“x</td><td><center>~</center></td><td><center>~</center></td>
+ *    <td><b>d</b></td><td>é€æ˜åº¦</td><td><center>Ã—</center></td><td><center>Ã—</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>illum</b></td><td>ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“İ’è(1:‹¾–ÊŒõ‚ ‚è, 2:‹¾–ÊŒõ‚È‚µ)</td><td><center>~</center></td><td><center>›</center></td>
+ *    <td><b>illum</b></td><td>ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³è¨­å®š(1:é¡é¢å…‰ã‚ã‚Š, 2:é¡é¢å…‰ãªã—)</td><td><center>Ã—</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  </tr>
  *  <tr>
- *    <td><b>map_Ka</b></td><td>ŠÂ‹«ƒ}ƒbƒv</td><td><center>~</center></td><td><center>›</center></td>
+ *    <td><b>map_Ka</b></td><td>ç’°å¢ƒãƒãƒƒãƒ—</td><td><center>Ã—</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>map_Kd</b></td><td>ƒeƒNƒXƒ`ƒƒƒ}ƒbƒv</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>map_Kd</b></td><td>ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ—</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>refl</b></td><td>ƒŠƒtƒŒƒNƒVƒ‡ƒ“ƒ}ƒbƒv</td><td><center>~</center></td><td><center>›</center></td>
+ *    <td><b>refl</b></td><td>ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ãƒãƒƒãƒ—</td><td><center>Ã—</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  </table>
  *
  *  <table border=1 cellspacing=0 cellpadding=4 width=700 align=center>
  *  <tr bgcolor="#dddddd">
- *    <td colspan=2><b>[ OBJƒ^ƒO ]</b></td><td><center><b>Metasequoia</b></center></td><td><center><b>MAYA</b></center></td>
+ *    <td colspan=2><b>[ OBJã‚¿ã‚° ]</b></td><td><center><b>Metasequoia</b></center></td><td><center><b>MAYA</b></center></td>
  *  </tr>
  *  <tr>
- *    <td width=20%><b>mtlib</b></td><td width=60%>ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼</td><td width=10%><center>›</center></td><td width=10%><center>›</center></td>
+ *    <td width=20%><b>mtlib</b></td><td width=60%>ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å</td><td width=10%><center>â—‹</center></td><td width=10%><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>usemtl</b></td><td>ƒ}ƒeƒŠƒAƒ‹’è‹`–¼</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>usemtl</b></td><td>ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©å</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>v</b></td><td>’¸“_À•W</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>v</b></td><td>é ‚ç‚¹åº§æ¨™</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>vt</b></td><td>’¸“_‚ÌUVÀ•W</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>vt</b></td><td>é ‚ç‚¹ã®UVåº§æ¨™</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>vn</b></td><td>’¸“_‚Ì–@üƒxƒNƒgƒ‹</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>vn</b></td><td>é ‚ç‚¹ã®æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>f</b></td><td>–Ê‚ÌƒCƒ“ƒfƒbƒNƒX</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>f</b></td><td>é¢ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  <tr>
- *    <td><b>g</b></td><td>ƒOƒ‹[ƒv–¼</td><td><center>›</center></td><td><center>›</center></td>
+ *    <td><b>g</b></td><td>ã‚°ãƒ«ãƒ¼ãƒ—å</td><td><center>â—‹</center></td><td><center>â—‹</center></td>
  *  </tr>
  *  </table>
  *  @n
@@ -132,182 +132,182 @@ class CObjLoader
 {
 
   /*--------------*/
-  /* ŒöŠJƒƒ“ƒo   */
+  /* å…¬é–‹ãƒ¡ãƒ³ãƒ   */
   /*--------------*/
   public:
     //*******************************************************************
     /*!
-     *  @brief  ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     CObjLoader(void);
 
     //*******************************************************************
     /*!
-     *  @brief  ƒfƒXƒgƒ‰ƒNƒ^
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     ~CObjLoader(void);
 
     //*******************************************************************
     /*!
-     *  @brief  ˆø”‚Å‚ ‚éOBJƒtƒ@ƒCƒ‹–¼‚ğg—p‚µ‚ÄAOBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B
-     *  @param  objfnm ... [In] OBJƒtƒ@ƒCƒ‹–¼
-     *  @retval  true  ... ³íI—¹
-     *  @retval  false ... ˆÙíI—¹
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  å¼•æ•°ã§ã‚ã‚‹OBJãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½¿ç”¨ã—ã¦ã€OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚
+     *  @param  objfnm ... [In] OBJãƒ•ã‚¡ã‚¤ãƒ«å
+     *  @retval  true  ... æ­£å¸¸çµ‚äº†
+     *  @retval  false ... ç•°å¸¸çµ‚äº†
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     bool read(string objfnm);
 
     //*******************************************************************
     /*!
-     *  @brief  read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚ğ•`‰æ‚µ‚Ü‚·B
-     *  @attention  –‘O‚Éread()‚ğŒÄ‚Ño‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B
-     *  @param  enlarge ... [In] Šg‘å”ä—¦
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’æç”»ã—ã¾ã™ã€‚
+     *  @attention  äº‹å‰ã«read()ã‚’å‘¼ã³å‡ºã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+     *  @param  enlarge ... [In] æ‹¡å¤§æ¯”ç‡
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void draw(double enlarge);
 
     //*******************************************************************
     /*!
-     *  @brief  read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚Ì–@ü‚ğ•`‰æ‚µ‚Ü‚·B
-     *  @attention  –‘O‚Éread()‚ğŒÄ‚Ño‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B
-     *  @param  enlarge ... [In] Šg‘å”ä—¦
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã®æ³•ç·šã‚’æç”»ã—ã¾ã™ã€‚
+     *  @attention  äº‹å‰ã«read()ã‚’å‘¼ã³å‡ºã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+     *  @param  enlarge ... [In] æ‹¡å¤§æ¯”ç‡
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void drawNormal(double enlarge);
 
     //*******************************************************************
     /*!
-     *  @brief  read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚ğƒ‰ƒCƒ“•`‰æ‚µ‚Ü‚·B
-     *  @attention  –‘O‚Éread()‚ğŒÄ‚Ño‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B
-     *  @param  enlarge ... [In] Šg‘å”ä—¦
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’ãƒ©ã‚¤ãƒ³æç”»ã—ã¾ã™ã€‚
+     *  @attention  äº‹å‰ã«read()ã‚’å‘¼ã³å‡ºã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+     *  @param  enlarge ... [In] æ‹¡å¤§æ¯”ç‡
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void drawLine(double enlarge);
 
     //*******************************************************************
     /*!
-     *  @brief  –@ü‚È‚µ‚ÌOBJƒ‚ƒfƒ‹‚ğA–@ü‚ğ•t‰Á‚µ‚ÄOBJƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B@n
-     *          ‚PDˆø”‚Å‚ ‚éOBJƒtƒ@ƒCƒ‹–¼‚ğg—p‚µ‚ÄAOBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B@n
-     *          ‚QD“Ç‚ñ‚¾OBJ‚É–@üî•ñ‚ğ•t‰Á‚µ‚ÄAOBJƒtƒ@ƒCƒ‹‚ğo—Í‚µ‚Ü‚·B
-     *  @attention  ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹‚Ìo—Í‚Ís‚¢‚Ü‚¹‚ñB
-     *  @param  inFileNm  ... [In] “ü—ÍOBJƒtƒ@ƒCƒ‹–¼
-     *  @param  outFileNm  ... [Out] o—ÍOBJƒtƒ@ƒCƒ‹–¼
-     *  @retval true  ... ³íI—¹
-     *  @retval false ... ˆÙíI—¹
-     *  @date 2008/12/1 ... V‹Kì¬
+     *  @brief  æ³•ç·šãªã—ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’ã€æ³•ç·šã‚’ä»˜åŠ ã—ã¦OBJãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚@n
+     *          ï¼‘ï¼å¼•æ•°ã§ã‚ã‚‹OBJãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½¿ç”¨ã—ã¦ã€OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚@n
+     *          ï¼’ï¼èª­è¾¼ã‚“ã OBJã«æ³•ç·šæƒ…å ±ã‚’ä»˜åŠ ã—ã¦ã€OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’å‡ºåŠ›ã—ã¾ã™ã€‚
+     *  @attention  ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›ã¯è¡Œã„ã¾ã›ã‚“ã€‚
+     *  @param  inFileNm  ... [In] å…¥åŠ›OBJãƒ•ã‚¡ã‚¤ãƒ«å
+     *  @param  outFileNm  ... [Out] å‡ºåŠ›OBJãƒ•ã‚¡ã‚¤ãƒ«å
+     *  @retval true  ... æ­£å¸¸çµ‚äº†
+     *  @retval false ... ç•°å¸¸çµ‚äº†
+     *  @date 2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     bool write(string inFileNm, string outFileNm);
 
   /*--------------*/
-  /* ”ñŒöŠJƒƒ“ƒo */
+  /* éå…¬é–‹ãƒ¡ãƒ³ãƒ */
   /*--------------*/
   private:
-    CMtl cmtl;                                     // OBJ—pƒ}ƒeƒŠƒAƒ‹ƒNƒ‰ƒX
-    bool logFlg;                                   // ƒƒOƒtƒ‰ƒO(true:debugo—Í, false:releaseo—Í)
+    CMtl cmtl;                                     // OBJç”¨ãƒãƒ†ãƒªã‚¢ãƒ«ã‚¯ãƒ©ã‚¹
+    bool logFlg;                                   // ãƒ­ã‚°ãƒ•ãƒ©ã‚°(true:debugå‡ºåŠ›, false:releaseå‡ºåŠ›)
 
-    int  debug_cnt;                                // ƒfƒoƒbƒO—pƒJƒEƒ“ƒ^
-    long vf_cnt;                                   // ’¸“_–@ü—pƒCƒ“ƒfƒbƒNƒXƒJƒEƒ“ƒ^
-    string pre_MaterialName;                       // ‘O‰ñ‚Ìƒ}ƒeƒŠƒAƒ‹–¼
-    bool isMakeDispList;                           // OBJ“Ç‚İ‚ÉƒfƒBƒXƒvƒŒƒCƒŠƒXƒgì¬—L–³(true:‚ ‚è, false:‚È‚µ)
+    int  debug_cnt;                                // ãƒ‡ãƒãƒƒã‚°ç”¨ã‚«ã‚¦ãƒ³ã‚¿
+    long vf_cnt;                                   // é ‚ç‚¹æ³•ç·šç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚«ã‚¦ãƒ³ã‚¿
+    string pre_MaterialName;                       // å‰å›ã®ãƒãƒ†ãƒªã‚¢ãƒ«å
+    bool isMakeDispList;                           // OBJèª­è¾¼ã¿æ™‚ã«ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆä½œæˆæœ‰ç„¡(true:ã‚ã‚Š, false:ãªã—)
 
-    vector< CThreedVector > v_v;                   // ’¸“_À•W—p vector
-    vector< CThreedVector > v_vn;                  // –@üÀ•W vector
-    vector< St_TextureCoordinate > v_vt;           // ƒeƒNƒXƒ`ƒƒÀ•W vector
-    vector< St_face_data > v_f;                    // –Ê‚Ìƒf[ƒ^ vector
+    vector< CThreedVector > v_v;                   // é ‚ç‚¹åº§æ¨™ç”¨ vector
+    vector< CThreedVector > v_vn;                  // æ³•ç·šåº§æ¨™ vector
+    vector< St_TextureCoordinate > v_vt;           // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ vector
+    vector< St_face_data > v_f;                    // é¢ã®ãƒ‡ãƒ¼ã‚¿ vector
 
-    vector< CObjData > objData;                    // OBJŠî–{ƒf[ƒ^
+    vector< CObjData > objData;                    // OBJåŸºæœ¬ãƒ‡ãƒ¼ã‚¿
 
-    GLuint displaylistNo;                          // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒgNO
-    GLuint lineDisplaylistNo;                      // –@ü•`‰æ—pƒfƒBƒXƒvƒŒƒCƒŠƒXƒgNO
+    GLuint displaylistNo;                          // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆNO
+    GLuint lineDisplaylistNo;                      // æ³•ç·šæç”»ç”¨ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆNO
 
-    vector< string > v_mtlfn;                      // ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼ vector
+    vector< string > v_mtlfn;                      // ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å vector
 
     //*******************************************************************
     /*!
-     *  @brief  ƒ‚ƒfƒ‹•`‰æ‚ÌƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ğì¬‚µ‚Ü‚·B
-     *  @param  isDelete ... [In] true:ƒƒ‚ƒŠ—ÌˆæŠJ•ú‚ ‚è / false:ƒƒ‚ƒŠ—ÌˆæŠJ•ú‚È‚µ
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  ãƒ¢ãƒ‡ãƒ«æç”»ã®ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ä½œæˆã—ã¾ã™ã€‚
+     *  @param  isDelete ... [In] true:ãƒ¡ãƒ¢ãƒªé ˜åŸŸé–‹æ”¾ã‚ã‚Š / false:ãƒ¡ãƒ¢ãƒªé ˜åŸŸé–‹æ”¾ãªã—
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void makeDisplayList(bool isDelete);
 
     //*******************************************************************
     /*!
-     *  @brief  ƒIƒuƒWƒFƒNƒg‚Ì–Ê‚Ì•`‰æ(1‚Â‚Ì–Êƒf[ƒ^‚ğ•`‰æ)‚ğs‚¢‚Ü‚·B
-     *  @param  val ... [In] –Êƒf[ƒ^\‘¢‘Ì
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é¢ã®æç”»(1ã¤ã®é¢ãƒ‡ãƒ¼ã‚¿ã‚’æç”»)ã‚’è¡Œã„ã¾ã™ã€‚
+     *  @param  val ... [In] é¢ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void draw_face(CObjData &val);
 
     //*******************************************************************
     /*!
-     *  @brief  ƒIƒuƒWƒFƒNƒg‚Ì–Ê‚Ì–@ü•`‰æ(1‚Â‚Ì–Êƒf[ƒ^‚ğ•`‰æ)‚ğs‚¢‚Ü‚·B
-     *  @param  val ... [In] –Êƒf[ƒ^\‘¢‘Ì
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é¢ã®æ³•ç·šæç”»(1ã¤ã®é¢ãƒ‡ãƒ¼ã‚¿ã‚’æç”»)ã‚’è¡Œã„ã¾ã™ã€‚
+     *  @param  val ... [In] é¢ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void draw_normal(CObjData &val);
 
     //*******************************************************************
     /*!
-     *  @brief  –Ê–@ü‚ÌŒvZ‚ğs‚¢‚Ü‚·B
-     *  @param  val ... [In,Out] –Êƒf[ƒ^\‘¢‘Ì
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  é¢æ³•ç·šã®è¨ˆç®—ã‚’è¡Œã„ã¾ã™ã€‚
+     *  @param  val ... [In,Out] é¢ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void culcFaceNormal(CObjData &val);
     
     //*******************************************************************
     /*!
-     *  @brief  ’¸“_–@ü‚ÌŒvZ‚ğs‚¢‚Ü‚·B
-     *  @param  val ... [In, Out] OBJŠî–{ƒf[ƒ^ƒIƒuƒWƒFƒNƒg
-     *  @param  cntval ... [In] Œ»İ‚Ì’¸“_ƒCƒ“ƒfƒbƒNƒX
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  é ‚ç‚¹æ³•ç·šã®è¨ˆç®—ã‚’è¡Œã„ã¾ã™ã€‚
+     *  @param  val ... [In, Out] OBJåŸºæœ¬ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+     *  @param  cntval ... [In] ç¾åœ¨ã®é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void culcVertexNormal(CObjData &val, int cntval);
 
     //*******************************************************************
     /*!
-     *  @brief  “à•”ƒf[ƒ^‰Šú‰»ˆ—‚ğs‚¢‚Ü‚·B
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿åˆæœŸåŒ–å‡¦ç†ã‚’è¡Œã„ã¾ã™ã€‚
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     void clear(void);
 
     //*******************************************************************
     /*!
-     *  @brief  ˆø”‚Å‚ ‚éOBJƒtƒ@ƒCƒ‹–¼‚ğg—p‚µ‚ÄAOBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B
-     *  @attention  public‚Å‚ ‚éread()‚ÍƒCƒ“ƒ^[ƒtƒF[ƒX‚Å‚ ‚èA–{ŠÖ”‚ÅÀˆ—‚ğs‚Á‚Ä‚¢‚Ü‚·B@n
-     *              Eread()Œo—R‚Åˆ—‚ğs‚¤ê‡‚ÍAƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚Ìì¬‚ğs‚¢‚Ü‚·B@n
-     *              Eread()‚ğŒo—R‚µ‚È‚¢‚Åˆ—‚ğs‚¤ê‡‚ÍAƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚Ìì¬‚ğs‚¢‚Ü‚¹‚ñB
-     *  @param  objfnm ... [In] OBJƒtƒ@ƒCƒ‹–¼
-     *  @retval  true  ... ³íI—¹
-     *  @retval  false ... ˆÙíI—¹
-     *  @date  2008/12/1 ... V‹Kì¬
+     *  @brief  å¼•æ•°ã§ã‚ã‚‹OBJãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½¿ç”¨ã—ã¦ã€OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚
+     *  @attention  publicã§ã‚ã‚‹read()ã¯ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã§ã‚ã‚Šã€æœ¬é–¢æ•°ã§å®Ÿå‡¦ç†ã‚’è¡Œã£ã¦ã„ã¾ã™ã€‚@n
+     *              ãƒ»read()çµŒç”±ã§å‡¦ç†ã‚’è¡Œã†å ´åˆã¯ã€ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®ä½œæˆã‚’è¡Œã„ã¾ã™ã€‚@n
+     *              ãƒ»read()ã‚’çµŒç”±ã—ãªã„ã§å‡¦ç†ã‚’è¡Œã†å ´åˆã¯ã€ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®ä½œæˆã‚’è¡Œã„ã¾ã›ã‚“ã€‚
+     *  @param  objfnm ... [In] OBJãƒ•ã‚¡ã‚¤ãƒ«å
+     *  @retval  true  ... æ­£å¸¸çµ‚äº†
+     *  @retval  false ... ç•°å¸¸çµ‚äº†
+     *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     bool readTrans(string objfnm);
 
     //*******************************************************************
     /*!
-     *  @brief  read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚ğOBJƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B
-     *  @attention  ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹‚Ìo—Í‚Ís‚¢‚Ü‚¹‚ñB@n
-     *              ‚Ü‚½A–‘O‚Éread()‚ğŒÄ‚Ño‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B
-     *  @param  filenm  ... [In] o—ÍOBJƒtƒ@ƒCƒ‹–¼
-     *  @retval true  ... ³íI—¹
-     *  @retval false ... ˆÙíI—¹
-     *  @date 2008/12/1 ... V‹Kì¬
+     *  @brief  read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’OBJãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚
+     *  @attention  ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›ã¯è¡Œã„ã¾ã›ã‚“ã€‚@n
+     *              ã¾ãŸã€äº‹å‰ã«read()ã‚’å‘¼ã³å‡ºã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+     *  @param  filenm  ... [In] å‡ºåŠ›OBJãƒ•ã‚¡ã‚¤ãƒ«å
+     *  @retval true  ... æ­£å¸¸çµ‚äº†
+     *  @retval false ... ç•°å¸¸çµ‚äº†
+     *  @date 2008/12/1 ... æ–°è¦ä½œæˆ
      */
     //********************************************************************
     bool writeTrans(string filenm);

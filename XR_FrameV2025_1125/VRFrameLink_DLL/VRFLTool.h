@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <vector>
@@ -26,7 +26,7 @@ namespace VRFL
 		}
 		if ((int)src.length() > offset) res.push_back(src.substr(offset));
 
-		// �󔒍폜
+		// 空白削除
 		for (int i = 0; i < (int)res.size(); i++)
 		{
 			int sp, ep;

@@ -1,4 +1,4 @@
-#ifndef __CALC_H__
+ï»¿#ifndef __CALC_H__
 #define __CALC_H__
 
 #include <math.h>
@@ -10,25 +10,25 @@
 #include "matrix.h"
 #else
 
-//¥ƒxƒNƒgƒ‹
+//â–¼ãƒ™ã‚¯ãƒˆãƒ«
 typedef struct _vector_t{
 	float x, y, z;
 	_vector_t( float _x = 0.0, float _y = 0.0, float _z = 0.0 ) { x = _x; y = _y; z = _z; }
 } vector_t;
 
-//¥ƒIƒCƒ‰[Šp‚É‚æ‚é‰ñ“]‚Ì•\Œ»
+//â–¼ã‚ªã‚¤ãƒ©ãƒ¼è§’ã«ã‚ˆã‚‹å›è»¢ã®è¡¨ç¾
 typedef struct _euler_t{
 	float roll, pitch, yaw;
 	_euler_t() { roll = 0.0; pitch = 0.0; yaw = 0.0; }
 } euler_t;
 
-//¥F
+//â–¼è‰²
 typedef struct _color_t{
 	float red, green, blue, alpha;
 	_color_t() { red = 0.75; green = 0.75; blue = 0.75; alpha = 1.0; }
 } color_t;
 
-//¥ƒ}ƒgƒŠƒNƒX
+//â–¼ãƒãƒˆãƒªã‚¯ã‚¹
 typedef float matrix_t[16];
 
 typedef struct _quat_t {
@@ -43,12 +43,12 @@ typedef struct _quat_t {
 #include "object.h"
 
 ///////////////////////////////
-//¥ƒIƒŠƒGƒ“ƒe[ƒVƒ‡ƒ“\‘¢‘Ì
+//â–¼ã‚ªãƒªã‚¨ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³æ§‹é€ ä½“
 typedef struct {
 	float x, y, z, angle;
 } OrientationT;
 
-//¥MREALƒ^[ƒQƒbƒg\‘¢‘Ì
+//â–¼MREALã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ§‹é€ ä½“
 typedef struct {
 	vector_t pos;
 	OrientationT ori;
@@ -56,23 +56,23 @@ typedef struct {
 	bool detected;
 } TargetT;
 
-//¥MREALƒ}[ƒJ\‘¢‘Ì
+//â–¼MREALãƒãƒ¼ã‚«æ§‹é€ ä½“
 typedef struct {
 	vector_t pos;
 	OrientationT ori;
-	int state; //‘OƒtƒŒ[ƒ€‚©‚ç‚Ìdetectedó‘Ô‚Ì•Ï‰»
+	int state; //å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®detectedçŠ¶æ…‹ã®å¤‰åŒ–
 	bool detected;
 	int markerID;
 	int targetID;
 } MarkerT;
 
-//¥ObjˆÊ’u
+//â–¼Objä½ç½®
 void setObjPos(ObjDataT *obj, float x, float y, float z);
 void setObjPos(ObjDataT *obj, float *pos );
 void getObjPos(ObjDataT *obj, float *pos);
 void setObjPos(ObjDataT *obj, vector_t *pos);
 void getObjPos(ObjDataT *obj, vector_t *pos);
-//¥Objp¨
+//â–¼Objå§¿å‹¢
 void setObjRot(ObjDataT* obj, float roll, float pitch, float yaw);
 void setObjRot( ObjDataT *obj, float *rot );
 void getObjRot( ObjDataT *obj, float *rot );
@@ -88,7 +88,7 @@ void DirectionAtoB( ObjDataT *a, ObjDataT *b, vector_t *dir );
 float DistanceAtoB( ObjDataT *a, ObjDataT *b );
 
 float EulerAtoB( ObjDataT *a, ObjDataT *b, euler_t *angle );
-//¥ƒIƒuƒWƒFƒNƒgŠÔ‚ÌŠp“xia‚©‚çb‚ğŒ©‚Ş•ûˆÊŠp‚Æ‹ÂŠpj
+//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è§’åº¦ï¼ˆaã‹ã‚‰bã‚’è¦‹è¾¼ã‚€æ–¹ä½è§’ã¨ä»°è§’ï¼‰
 float EulerAtoB_Relative( ObjDataT* a, ObjDataT* b, euler_t* angle);
 
 void MoveObject( ObjDataT *obj );
@@ -103,39 +103,39 @@ void moveWorldToLocal( ObjDataT *target, ObjDataT *base );
 
 void getWorld(ObjDataT *target, ObjDataT *world);
 
-//ŸÕ“Ë”»’è
-//--------Šî–{ƒqƒbƒgƒeƒXƒg‹…‘Î‹…iƒ[ƒ‹ƒhÀ•WŒn“¯mj
-//aF Õ“Ë”»’è‚Ì‘Šè
-//bF Õ“Ë”»’è‚Ìå‘Ì
-//–ß‚è’lF Õ“Ë‚µ‚½ê‡‚Étrue‚ª•Ô‚é
+//â—†è¡çªåˆ¤å®š
+//--------åŸºæœ¬ãƒ’ãƒƒãƒˆãƒ†ã‚¹ãƒˆçƒå¯¾çƒï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»åŒå£«ï¼‰
+//aï¼š è¡çªåˆ¤å®šã®ç›¸æ‰‹
+//bï¼š è¡çªåˆ¤å®šã®ä¸»ä½“
+//æˆ»ã‚Šå€¤ï¼š è¡çªã—ãŸå ´åˆã«trueãŒè¿”ã‚‹
 bool HitTest( ObjDataT *a, ObjDataT *b );
-//--------Šî–{ƒqƒbƒgƒeƒXƒg” ‘Î‹…iƒ[ƒ‹ƒhÀ•WŒn“¯mj
+//--------åŸºæœ¬ãƒ’ãƒƒãƒˆãƒ†ã‚¹ãƒˆç®±å¯¾çƒï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»åŒå£«ï¼‰
 bool HitTestBox( ObjDataT *box, ObjDataT *ball );
-//--------ŠK‘w\‘¢‘Î‰ƒqƒbƒgƒeƒXƒg‹…‘Î‹…
+//--------éšå±¤æ§‹é€ å¯¾å¿œãƒ’ãƒƒãƒˆãƒ†ã‚¹ãƒˆçƒå¯¾çƒ
 bool isHit( ObjDataT *a, ObjDataT *b );
-//--------ŠK‘w\‘¢‘Î‰ƒqƒbƒgƒeƒXƒg” ‘Î‹…
+//--------éšå±¤æ§‹é€ å¯¾å¿œãƒ’ãƒƒãƒˆãƒ†ã‚¹ãƒˆç®±å¯¾çƒ
 bool isHitBox(ObjDataT *box, ObjDataT *ball);
 
-//ŸÀ•WŒnŠK‘w\‘¢
-//--------ƒ[ƒJƒ‹À•WŒn‚©‚çƒ[ƒ‹ƒhÀ•WŒn‚Ö‚Ì•ÏŠ·
+//â—†åº§æ¨™ç³»éšå±¤æ§‹é€ 
+//--------ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ã¸ã®å¤‰æ›
 void TransformLocalToWorld( ObjDataT *base, ObjDataT *local, ObjDataT *world );
-//--------ƒ[ƒ‹ƒhÀ•WŒn‚©‚çƒ[ƒJƒ‹À•WŒn‚Ö‚Ì•ÏŠ·
+//--------ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ã‹ã‚‰ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»ã¸ã®å¤‰æ›
 void TransformWorldToLocal( ObjDataT *base, ObjDataT *world, ObjDataT *local );
 
-//---- ƒ^[ƒQƒbƒgˆ——pŠÖ”
+//---- ã‚¿ãƒ¼ã‚²ãƒƒãƒˆå‡¦ç†ç”¨é–¢æ•°
 void TargetToObjData(TargetT *src, ObjDataT *obj);
 void TransformLocalToWorldX(TargetT *base, ObjDataT *local, ObjDataT *world);
 
-//---- ƒxƒNƒgƒ‹ˆ—
+//---- ãƒ™ã‚¯ãƒˆãƒ«å‡¦ç†
 void DirectionLocalToWorld(ObjDataT * target, vector_t * localDir, vector_t * worldDir);
 void LocalForward(ObjDataT *target, vector_t *forward);
 void LocalUP(ObjDataT * target, vector_t *up);
 
-//---- ƒIƒuƒWƒFƒNƒg‚Ì‘®«‚ğİ’èE“K—p‚·‚éŠÖ”
-//¥ƒIƒuƒWƒFƒNƒg‚ÌˆÊ’u‚Æp¨‚ÌŠô‰½•ÏŠ·‚ğs‚¤ŠÖ”
+//---- ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å±æ€§ã‚’è¨­å®šãƒ»é©ç”¨ã™ã‚‹é–¢æ•°
+//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®ã¨å§¿å‹¢ã®å¹¾ä½•å¤‰æ›ã‚’è¡Œã†é–¢æ•°
 void applyObjTransform(ObjDataT *obj);
 void applyObjInverse(ObjDataT *obj);
-//¥ƒIƒuƒWƒFƒNƒg‚ÌƒJƒ‰[‚ğw’è‚·‚éŠÖ”
+//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚«ãƒ©ãƒ¼ã‚’æŒ‡å®šã™ã‚‹é–¢æ•°
 void applyObjColor(ObjDataT *obj);
 void applyMaterialColor(float red, float green, float blue);
 

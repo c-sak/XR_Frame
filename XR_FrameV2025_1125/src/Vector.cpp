@@ -1,4 +1,4 @@
-#include "platform.h"
+ï»¿#include "platform.h"
 
 #include "calc.h"
 //#include "Vector.h"
@@ -158,7 +158,7 @@ void eulerCopy(euler_t* dst, const euler_t* src) {
 	dst->yaw = src->yaw;
 }
 //========
-//¥•ûŒüƒxƒNƒgƒ‹‚©‚ç•ûˆÊŠp‚Æ‹ÂŠp‚ğ‹‚ß‚éŠÖ”D–ß‚è’l‚ÍƒxƒNƒgƒ‹‚Ì‘å‚«‚³
+//â–¼æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰æ–¹ä½è§’ã¨ä»°è§’ã‚’æ±‚ã‚ã‚‹é–¢æ•°ï¼æˆ»ã‚Šå€¤ã¯ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•
 float VectorToPolar(vector_t* v, euler_t* angle)
 {
 	float d = sqrtf(v->x * v->x + v->z * v->z);
@@ -166,7 +166,7 @@ float VectorToPolar(vector_t* v, euler_t* angle)
 	angle->yaw = DEGREE * atan2f(-v->x, -v->z);
 	return vectorNorm(v);
 }
-//¥•ûˆÊŠp‚Æ‹ÂŠp‚©‚ç’PˆÊ•ûŒüƒxƒNƒgƒ‹‚ğ‹‚ß‚éŠÖ”
+//â–¼æ–¹ä½è§’ã¨ä»°è§’ã‹ã‚‰å˜ä½æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹é–¢æ•°
 void PolarToVector(euler_t* angle, vector_t* v)
 {
 	float rad, l;
@@ -183,15 +183,15 @@ void PolarToVector(euler_t* angle, vector_t* v)
 }
 //----------------
 //====================================================================================================
-//¥—”¶¬ŠÖ”
-//Å¬’lmin‚ÆÅ‘å’lmax‚ÌŠÔ‚Ì’l‚ğƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·
+//â–¼ä¹±æ•°ç”Ÿæˆé–¢æ•°
+//æœ€å°å€¤minã¨æœ€å¤§å€¤maxã®é–“ã®å€¤ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™
 float uniformRandom(float min, float max) {
 	double r;
 	r = (double)rand() / (double)RAND_MAX;
 	r = r * (max - min) + min;
 	return r;
 }
-//¥ŠÈˆÕƒKƒEƒXƒmƒCƒYŠÖ”
+//â–¼ç°¡æ˜“ã‚¬ã‚¦ã‚¹ãƒã‚¤ã‚ºé–¢æ•°
 float gaussianRandom(float rmin, float rmax) {
 	int i;
 	float r = 0.0;
@@ -201,7 +201,7 @@ float gaussianRandom(float rmin, float rmax) {
 	}
 	return r / n;
 }
-//¥®”Œ^ƒ‰ƒ“ƒ_ƒ€ŠÖ”
+//â–¼æ•´æ•°å‹ãƒ©ãƒ³ãƒ€ãƒ é–¢æ•°
 int diceRandom(int min, int max)
 {
 	int n;

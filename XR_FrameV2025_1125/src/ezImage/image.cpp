@@ -1,4 +1,4 @@
-#include "platform.h"
+ï»¿#include "platform.h"
 
 #include "image.h"
 #ifdef USE_LIBJPEG
@@ -120,12 +120,12 @@ image_t *newImageJpg( const char *file )
 int loadImageJpg( image_t *image, const char *file )
 {
 	int w, h;
-	//‘O’ñ‚Æ‚µ‚Ä‰æ‘œ—Ìˆæ‚ÍŠm•ÛÏ‚Å‚ ‚é‚±‚Æ
-	//‚à‚µ‚Ü‚¾‰æ‘œ—Ìˆæ‚ªnullptr‚Å‚ ‚ê‚Î—Ìˆæ‚ğŠm•Û‚·‚é
-	//‚Ü‚½AŠm•ÛÏ‚İ‚Ì—Ìˆæ‚ÆƒTƒCƒY‚ªˆÙ‚È‚éê‡‚É‚ÍA
-	//öİ“I‚ÉƒGƒ‰[‚Æ‚È‚éB
-	//ƒGƒ‰[ƒXƒe[ƒ^ƒX‚ğ•Ô‚·‚±‚Æ‚Æ‚·‚é‚ªA
-	//—áŠOˆ—‚Ís‚Á‚Ä‚¢‚È‚¢‚Ì‚Å—‚¿‚é‰Â”\«‚ ‚è
+	//å‰æã¨ã—ã¦ç”»åƒé ˜åŸŸã¯ç¢ºä¿æ¸ˆã§ã‚ã‚‹ã“ã¨
+	//ã‚‚ã—ã¾ã ç”»åƒé ˜åŸŸãŒnullptrã§ã‚ã‚Œã°é ˜åŸŸã‚’ç¢ºä¿ã™ã‚‹
+	//ã¾ãŸã€ç¢ºä¿æ¸ˆã¿ã®é ˜åŸŸã¨ã‚µã‚¤ã‚ºãŒç•°ãªã‚‹å ´åˆã«ã¯ã€
+	//æ½œåœ¨çš„ã«ã‚¨ãƒ©ãƒ¼ã¨ãªã‚‹ã€‚
+	//ã‚¨ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¿”ã™ã“ã¨ã¨ã™ã‚‹ãŒã€
+	//ä¾‹å¤–å‡¦ç†ã¯è¡Œã£ã¦ã„ãªã„ã®ã§è½ã¡ã‚‹å¯èƒ½æ€§ã‚ã‚Š
 	image->pixdata = readImageJPEG( file, &w, &h, (unsigned char*)image->pixdata );
 	image->width = w;
 	image->height = h;
@@ -177,7 +177,7 @@ void drawImage(image_t *image, int x, int y, bool alpha)
 		*/
 			if (alpha) {
 
-				/* ¬‡‚·‚éF‚Ìİ’è */
+				/* æ··åˆã™ã‚‹è‰²ã®è¨­å®š */
 				//static const GLfloat blend[] = { 0.0, 1.0, 0.0, 1.0 };
 				//glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, blend);
 				

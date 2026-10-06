@@ -1,4 +1,4 @@
-#include "platform.h"
+ï»¿#include "platform.h"
 #include "depth.h"
 #include <math.h>
 
@@ -6,13 +6,13 @@ static const int width = 640;
 static const int height = 480;
 
 //---------------------------------------------------------- depthToZ
-//KINECT‚©‚ç‚Ì‹——£ƒf[ƒ^[mm]‚ğOpenGL‚ÌZ’l‚É•ÏŠ·‚·‚é
+//KINECTã‹ã‚‰ã®è·é›¢ãƒ‡ãƒ¼ã‚¿[mm]ã‚’OpenGLã®Zå€¤ã«å¤‰æ›ã™ã‚‹
 float _depthToZ( unsigned short depth, float n, float f )
 {
 	float z;
-	z = - 0.001 * ( depth >> 3 ); //KINECTƒtƒH[ƒ}ƒbƒg‚©‚çZÀ•W’l‚Ö‚Ì•ÏŠ·
-	z = (f+n) / (f-n) + (2.0*n*f) / (f-n) / z; //“Š‰e•ÏŠ·[-1.0,1.0]
-	z = z / 2.0 + 0.5; //³‹K‰»[0.0,1.0]
+	z = - 0.001 * ( depth >> 3 ); //KINECTãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‹ã‚‰Zåº§æ¨™å€¤ã¸ã®å¤‰æ›
+	z = (f+n) / (f-n) + (2.0*n*f) / (f-n) / z; //æŠ•å½±å¤‰æ›[-1.0,1.0]
+	z = z / 2.0 + 0.5; //æ­£è¦åŒ–[0.0,1.0]
 	return z;
 }
 //---------------------------------------------------------------------- depthToZ
@@ -24,7 +24,7 @@ void depthToZ( float *zimage, unsigned short *depth, int width, int height, floa
 	unsigned short *d;
 	float *z;
 
-	const float k = 0.001; //[mm]‚©‚ç[m]’PˆÊ‚Ö•ÏŠ·
+	const float k = 0.001; //[mm]ã‹ã‚‰[m]å˜ä½ã¸å¤‰æ›
 
 	///////////////////////////////////////////
 	float a = ((f+n)/(f-n))       /2.0 + 0.5;
@@ -34,13 +34,13 @@ void depthToZ( float *zimage, unsigned short *depth, int width, int height, floa
 	//z = zimage;
 	d = depth;
 
-	//ã‰º”½“]‚µ‚Â‚Â‹——£‰æ‘œ‚©‚çZ’lƒCƒ[ƒW‚É•ÏŠ·
+	//ä¸Šä¸‹åè»¢ã—ã¤ã¤è·é›¢ç”»åƒã‹ã‚‰Zå€¤ã‚¤ãƒ¡ãƒ¼ã‚¸ã«å¤‰æ›
 	/*
 	for( int i = 0; i < height; i++ ){
 	    z = &zimage[ i * width ];
 	}
 	*/
-	for( int i = height; i > 0; i-- ){ //ã‰º”½“]
+	for( int i = height; i > 0; i-- ){ //ä¸Šä¸‹åè»¢
 		z = &zimage[ ( i - 1) * width ];
 		for( int j = 0; j < width; j++ ){
 			*z = (*d==0) ? 1.0 : a + b / (float)(*d>>3);
@@ -132,8 +132,8 @@ void drawPointCloud( unsigned short *depth, unsigned char *image,
 			//z = - (float)depth[ i * width + j ] * k;
 			//z = - (float)*d * k;
 			z = *d > 0  ? ( - (float)(*d>>3) * k ) : ( - clip_far );
-			////////////////////////ƒfƒvƒX’l‚ÍãˆÊ13ƒrƒbƒg/////////////////
-			////////////////////////‰ºˆÊ3ƒrƒbƒg‚ÍÌ‚Ä‚é   /////////////////
+			////////////////////////ãƒ‡ãƒ—ã‚¹å€¤ã¯ä¸Šä½13ãƒ“ãƒƒãƒˆ/////////////////
+			////////////////////////ä¸‹ä½3ãƒ“ãƒƒãƒˆã¯æ¨ã¦ã‚‹   /////////////////
 			d++;
 			//----
 			//x = (float)j/width - 0.5;

@@ -1,5 +1,5 @@
-#pragma once
-//¥ƒIƒCƒ‰[Šp‚É‚æ‚é‰ñ“]‚Ì•\Œ»
+ï»¿#pragma once
+//â–¼ã‚ªã‚¤ãƒ©ãƒ¼è§’ã«ã‚ˆã‚‹å›è»¢ã®è¡¨ç¾
 typedef struct euler_t{
 	float roll, pitch, yaw;
 

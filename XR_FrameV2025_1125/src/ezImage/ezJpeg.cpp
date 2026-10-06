@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,31 +21,31 @@ unsigned char* readImageJPEG( const char *file, int *w, int *h, unsigned char *i
 
 	FILE *infile;
 
-	// JPEGƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»
+	// JPEGã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–
 	cinfo.err = jpeg_std_error( &jerr );
 	jpeg_create_decompress( &cinfo );
 
-	// ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	infile = fopen( file, "rb" );
 	jpeg_stdio_src( &cinfo, infile );
 
-	// ƒwƒbƒ_‚Ì“Ç‚İ‚İ
+	// ãƒ˜ãƒƒãƒ€ã®èª­ã¿è¾¼ã¿
 	jpeg_read_header( &cinfo, TRUE );
 
-	// “WŠJ‚ÌŠJn
+	// å±•é–‹ã®é–‹å§‹
 	jpeg_start_decompress( &cinfo );
 
-	// •‚Æ‚‚³‚Ìæ“¾
+	// å¹…ã¨é«˜ã•ã®å–å¾—
 	width = cinfo.output_width;
 	height = cinfo.output_height;
 
-	// ƒCƒ[ƒW‚ğ•Û‚·‚éƒƒ‚ƒŠ—Ìˆæ‚ÌŠm•Û‚Æ‰Šú‰»
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿æŒã™ã‚‹ãƒ¡ãƒ¢ãƒªé ˜åŸŸã®ç¢ºä¿ã¨åˆæœŸåŒ–
 	img = (JSAMPARRAY)malloc( sizeof( JSAMPROW ) * height );
 	for ( i = 0; i < height; i++ ) {
 		img[i] = (JSAMPROW)calloc( sizeof( JSAMPLE ), 3 * width );
 	}
 
-	// ‘SƒCƒ[ƒWƒf[ƒ^‚ğæ“¾	
+	// å…¨ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—	
 	while( cinfo.output_scanline < cinfo.output_height ) {
 		jpeg_read_scanlines( &cinfo,
 			img + cinfo.output_scanline,
@@ -53,16 +53,16 @@ unsigned char* readImageJPEG( const char *file, int *w, int *h, unsigned char *i
 		);
 	}
 
-	// “WŠJ‚ÌI—¹
+	// å±•é–‹ã®çµ‚äº†
 	jpeg_finish_decompress( &cinfo );
 
-	// JPEGƒIƒuƒWƒFƒNƒg‚Ì”jŠü
+	// JPEGã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç ´æ£„
 	jpeg_destroy_decompress( &cinfo );
 
-	// ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 	fclose( infile );
 	
-	//ƒCƒ[ƒWƒf[ƒ^‚ğƒRƒs[‚µ•Û‚·‚éƒƒ‚ƒŠ—Ìˆæ‚ğŠJ•ú
+	//ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’ã‚³ãƒ”ãƒ¼ã—ä¿æŒã™ã‚‹ãƒ¡ãƒ¢ãƒªé ˜åŸŸã‚’é–‹æ”¾
 	if( image == NULL ){
 		p = rawimage = (unsigned char*)malloc( width * height * 3 );
 	}
@@ -91,27 +91,27 @@ void writeImageJPEG( const char *file, unsigned char *image, int w, int h )
 	struct jpeg_error_mgr jerr;
 	FILE *outfile;
 
-	// JPEGƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»
+	// JPEGã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–
 	cinfo.err = jpeg_std_error( &jerr );
 	jpeg_create_compress( &cinfo );
 
-	// ƒtƒ@ƒCƒ‹‚ğŠJ‚­
-	outfile = fopen( file, "wb" ); //š
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
+	outfile = fopen( file, "wb" ); //â˜…
 	jpeg_stdio_dest( &cinfo, outfile );
 
-	// ƒpƒ‰ƒ[ƒ^‚Ìİ’è
-	cinfo.image_width = w; //š
-	cinfo.image_height = h; //š
+	// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
+	cinfo.image_width = w; //â˜…
+	cinfo.image_height = h; //â˜…
 	cinfo.input_components = 3;
 	cinfo.in_color_space = JCS_RGB;
 
-	// ƒfƒtƒHƒ‹ƒg’l‚Ìİ’è
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã®è¨­å®š
 	jpeg_set_defaults( &cinfo );
 
-	// ˆ³k‚ÌŠJn
+	// åœ§ç¸®ã®é–‹å§‹
 	jpeg_start_compress( &cinfo, TRUE );
 
-	// ƒCƒ[ƒW‚ğ•Û‚·‚éƒƒ‚ƒŠ—Ìˆæ‚ÌŠm•Û‚Æ‰Šú‰»
+	// ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿æŒã™ã‚‹ãƒ¡ãƒ¢ãƒªé ˜åŸŸã®ç¢ºä¿ã¨åˆæœŸåŒ–
 	JSAMPARRAY img;
 	unsigned char *p = image;
 	img = (JSAMPARRAY)malloc( sizeof( JSAMPROW ) * h );
@@ -124,17 +124,17 @@ void writeImageJPEG( const char *file, unsigned char *image, int w, int h )
 			p++;
 		}
 	}
-	// ‘SƒCƒ[ƒWƒf[ƒ^‚ğo—Í
-	//jpeg_write_scanlines( &cinfo, (JSAMPARRAY)image, cinfo.image_height ); //š
-	jpeg_write_scanlines( &cinfo, img, cinfo.image_height ); //š
+	// å…¨ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’å‡ºåŠ›
+	//jpeg_write_scanlines( &cinfo, (JSAMPARRAY)image, cinfo.image_height ); //â˜…
+	jpeg_write_scanlines( &cinfo, img, cinfo.image_height ); //â˜…
 
-	// ˆ³k‚ÌI—¹
+	// åœ§ç¸®ã®çµ‚äº†
 	jpeg_finish_compress( &cinfo );
 
-	// JPEGƒIƒuƒWƒFƒNƒg‚Ì”jŠü
+	// JPEGã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç ´æ£„
 	jpeg_destroy_compress( &cinfo );
 
-	// ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚é
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‰ã˜ã‚‹
 	fclose( outfile );	
 }
 

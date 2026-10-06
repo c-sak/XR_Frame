@@ -1,13 +1,13 @@
-//#include "ez/platform.h"
+ï»¿//#include "ez/platform.h"
 #include <stdio.h>
 
 #include "ezWebCam.h"
 
 #include "ewclib/ewclib.h"
-//ŠÈˆÕƒJƒƒ‰“ü—Íƒ‰ƒCƒuƒ‰ƒŠEWCLIB‚ÌƒCƒ“ƒNƒ‹[ƒh
+//ç°¡æ˜“ã‚«ãƒ¡ãƒ©å…¥åŠ›ãƒ©ã‚¤ãƒ–ãƒ©ãƒªEWCLIBã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 
 //=============================================================================
-// EWCLIB‚ğƒ‰ƒbƒsƒ“ƒO‚µewclib.h‚ğ‰B‚Ø‚¢‚·‚é
+// EWCLIBã‚’ãƒ©ãƒƒãƒ”ãƒ³ã‚°ã—ewclib.hã‚’éš ãºã„ã™ã‚‹
 //-----------------------------------------------------------------------------
 int ezWebCam_Open( int cam, int wx, int wy, double fps, int device, int mstype )
 {
@@ -19,9 +19,9 @@ int ezWebCam_Open( int cam, int wx, int wy, double fps, int device, int mstype )
 	if( status != 0 ){
 		printf("[ezWebCam] EWC_Open Error 0\n");
 	}
-	EWC_PropertyPage( cam ); // ƒJƒƒ‰ƒvƒƒpƒeƒB‚ğŠJ‚­
+	EWC_PropertyPage( cam ); // ã‚«ãƒ¡ãƒ©ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’é–‹ã
 	printf("[ezWebCam] BufferSize: %d\n", EWC_GetBufferSize( cam )); 
-	// •K—v‚Èƒoƒbƒtƒ@ƒTƒCƒY‚Ìæ“¾
+	// å¿…è¦ãªãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºã®å–å¾—
 
 	return status;
 }

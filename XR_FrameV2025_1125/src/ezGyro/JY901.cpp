@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include "ezGyro/JY901.h"
 #include "string.h"
 #include "stdio.h"
@@ -65,8 +65,8 @@ void CJY901::CopeSerialData(char ucData[], unsigned short usLength)
 #else
 void CJY901::CopeSerialData(char ucData[],unsigned short usLength )
 {
-	//static unsigned char chrTemp[2000]; ////ƒƒ“ƒo•Ï”‚ÉˆÚ“®
-	//static unsigned short usRxLength = 0; ////ƒƒ“ƒo•Ï”‚ÉˆÚ“®
+	//static unsigned char chrTemp[2000]; ////ãƒ¡ãƒ³ãƒå¤‰æ•°ã«ç§»å‹•
+	//static unsigned short usRxLength = 0; ////ãƒ¡ãƒ³ãƒå¤‰æ•°ã«ç§»å‹•
 
 	memcpy(chrTemp,ucData,usLength);
 	usRxLength += usLength;

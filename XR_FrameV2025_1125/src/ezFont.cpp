@@ -1,4 +1,4 @@
-//##############################################################################
+ï»¿//##############################################################################
 /* ezUtil.cpp
  * 
  * SAMPLE CODE FOR INTERACTIVE CG PROGRAMMING COURSES
@@ -18,15 +18,15 @@ static GLuint _base;
 
 //======================================================================= ezFont
 //------------------------------------------------------------------- makeBitmap
-/* makeBitmap: ƒtƒHƒ“ƒgƒIƒuƒWƒFƒNƒg‚ð€”õ‚·‚é
+/* makeBitmap: ãƒ•ã‚©ãƒ³ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æº–å‚™ã™ã‚‹
  */
 GLuint ezFont_makeBitmap( void )
 {
     int i, n;
 
     glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-    _base = glGenLists(0x80);//ƒfƒBƒXƒvƒŒƒCƒŠƒXƒg—Ìˆæ‚ð 128 ŒÂŠl“¾
-    //Še•¶Žš‚Ìƒrƒbƒgƒ}ƒbƒvƒf[ƒ^‚ðŠeƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ÉŠ„‚è“–‚Ä‚é
+    _base = glGenLists(0x80);//ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆé ˜åŸŸã‚’ 128 å€‹ç²å¾—
+    //å„æ–‡å­—ã®ãƒ“ãƒƒãƒˆãƒžãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ã‚’å„ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã«å‰²ã‚Šå½“ã¦ã‚‹
     n = 0;
     for( i = 0x20; i < 0x80; i++ ){
         glNewList( _base + i, GL_COMPILE );
@@ -36,31 +36,31 @@ GLuint ezFont_makeBitmap( void )
     return _base;
 }
 //------------------------------------------------------------------- drawBitmap
-/* drawBitmap: ƒrƒbƒgƒ}ƒbƒvƒtƒHƒ“ƒg‚Å•¶Žš—ñ‚ð•`‰æ‚·‚é
+/* drawBitmap: ãƒ“ãƒƒãƒˆãƒžãƒƒãƒ—ãƒ•ã‚©ãƒ³ãƒˆã§æ–‡å­—åˆ—ã‚’æç”»ã™ã‚‹
  */
 void ezFont_drawBitmap( float x, float y, char *string )
 {
     glPushAttrib( GL_LIST_BIT|GL_CURRENT_BIT );
-    glRasterPos2f( x, y );//•`‰æˆÊ’u‚ÌÝ’è
-    //•¶ŽšƒtƒHƒ“ƒgƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ÌŠJŽnˆÊ’u */
+    glRasterPos2f( x, y );//æç”»ä½ç½®ã®è¨­å®š
+    //æ–‡å­—ãƒ•ã‚©ãƒ³ãƒˆãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã®é–‹å§‹ä½ç½® */
     glListBase( _base );
-    //ƒfƒBƒXƒvƒŒƒCƒŠƒXƒg (•¶Žš—ñ) ‚ð•`‰æ
+    //ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆ (æ–‡å­—åˆ—) ã‚’æç”»
     glCallLists( strlen( string ), GL_UNSIGNED_BYTE, (unsigned char *)string );
     glPopAttrib();
     return;
 }
 //--------------------------------------------------------------- drawGlutBitmap
-/* drawGlutBitmap: glutƒrƒbƒgƒ}ƒbƒvƒtƒHƒ“ƒg‚Å•¶Žš—ñ‚ð•`‰æ‚·‚é
+/* drawGlutBitmap: glutãƒ“ãƒƒãƒˆãƒžãƒƒãƒ—ãƒ•ã‚©ãƒ³ãƒˆã§æ–‡å­—åˆ—ã‚’æç”»ã™ã‚‹
  */
 void ezFont_drawGlutBitmap( float x, float y, char *string, void *font )
 {
-    glPushAttrib( GL_CURRENT_BIT );//Œ»Ý‚Ìƒ‰ƒXƒ^[ƒ|ƒWƒVƒ‡ƒ“‚Ì•Û‘¶
+    glPushAttrib( GL_CURRENT_BIT );//ç¾åœ¨ã®ãƒ©ã‚¹ã‚¿ãƒ¼ãƒã‚¸ã‚·ãƒ§ãƒ³ã®ä¿å­˜
     glRasterPos2f( x, y );
-    //ƒrƒbƒgƒ}ƒbƒv•¶Žš—ñ‚Ì•`‰æ
+    //ãƒ“ãƒƒãƒˆãƒžãƒƒãƒ—æ–‡å­—åˆ—ã®æç”»
     while( *string ){
         glutBitmapCharacter( font, *string++ );
     }
-    glPopAttrib();//•Û‘¶‚µ‚½ƒ‰ƒXƒ^[ƒ|ƒWƒVƒ‡ƒ“‚Ìƒ[ƒh
+    glPopAttrib();//ä¿å­˜ã—ãŸãƒ©ã‚¹ã‚¿ãƒ¼ãƒã‚¸ã‚·ãƒ§ãƒ³ã®ãƒ­ãƒ¼ãƒ‰
     return;
 }
 //--------------------------------------------------------------- drawGlutStroke
@@ -75,7 +75,7 @@ void ezFont_drawGlutStroke( float x, float y, float z,
     {
         glTranslatef( x, y, z );
         glScalef( xscl * 0.005, yscl * 0.005, 1.0 );
-        //ƒXƒgƒ[ƒNƒtƒHƒ“ƒg•¶Žš—ñ‚Ì•`‰æ
+        //ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯ãƒ•ã‚©ãƒ³ãƒˆæ–‡å­—åˆ—ã®æç”»
         while( *string ){
             glutStrokeCharacter( font, *string++ );
         }

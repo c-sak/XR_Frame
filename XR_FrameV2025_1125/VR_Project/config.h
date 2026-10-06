@@ -1,38 +1,38 @@
-#pragma once
+﻿#pragma once
 
-//MREAL�̃v���W�F�N�g�Ŏg��
-//MREAL�ł͂Ȃ��Ƃ��R�����g�ɂ���
+//MREALのプロジェクトで使う
+//MREALではないときコメントにする
 //#define MREALMODE
 
-const bool debug = true;//���f�o�b�O�t���O
-//��debug = true �̂Ƃ��ɂ́A
-// �ȉ��̃t���O�ݒ�ɂ�����炸�A
-// ���̎��E�ǃX�N���[���EVICON���t���Z�b�g�Ŋ��p���܂��B
+const bool debug = true;//◆デバッグフラグ
+//★debug = true のときには、
+// 以下のフラグ設定にかかわらず、
+// 立体視・壁スクリーン・VICONをフルセットで活用します。
 
-//�\�����
-const bool fullscreen = false; //���t���X�N���[���t���O
-//���X�e���I���[�h�̂Ƃ��ɂ͋����I�Ƀt���X�N���[���ɂȂ�܂�
-const bool no_cursor = false;  //���J�[�\����\���t���O
-//�t���X�N���[����Ԃ̂Ƃ��J�[�\���͋����I�ɔ�\���ɂȂ�܂�
+//表示画面
+const bool fullscreen = false; //◆フルスクリーンフラグ
+//※ステレオモードのときには強制的にフルスクリーンになります
+const bool no_cursor = false;  //◆カーソル非表示フラグ
+//フルスクリーン状態のときカーソルは強制的に非表示になります
 
-//HMD���[�h
-const bool hmd = false; //��HMD���[�h�t���O
-const bool distortion = true; //��HMD�c�␳�t���O
-//// hmd���[�h�ŉ��^���o�O����20210819
+//HMDモード
+const bool hmd = false; //◆HMDモードフラグ
+const bool distortion = true; //◆HMD歪補正フラグ
+//// hmdモードで何某かバグあり20210819
 
-//��HMD���[�h���I�t�̂Ƃ����L�ݒ肪�@�\���܂�
-const bool cylindrical = true; //���V�����h���J���t���O
-const bool stereo = false;    //���X�e���I�t���O
-//���X�e���I���[�h�̂Ƃ��ɂ͋����I�Ƀt���X�N���[���ɂȂ�܂�
-const bool swapeyes = false; //�����E�摜�̓���ւ� 
-const float parallax = 0.0625; //�����E���ԋ���
-const bool quadbuffer = false; //���t���V���b�^���K�l�Ή�
-//���O���t�B�b�N�X�J�[�h�ɂ�NVIDIA Quadro/RTX���K�v�ł�
-//�Ή����Ă��Ȃ�PC���ł́A�v���O�����������܂�
+//＊HMDモードがオフのとき下記設定が機能します
+const bool cylindrical = true; //◆シリンドリカルフラグ
+const bool stereo = false;    //◆ステレオフラグ
+//※ステレオモードのときには強制的にフルスクリーンになります
+const bool swapeyes = false; //◆左右画像の入れ替え 
+const float parallax = 0.0625; //◆左右瞳間距離
+const bool quadbuffer = false; //◆液晶シャッタメガネ対応
+//※グラフィックスカードにはNVIDIA Quadro/RTXが必要です
+//対応していないPC環境では、プログラムが落ちます
 
-//�g���b�L���O�f�o�C�X
-const bool use_tracker = false; //���g���b�J�[�t���O
-const bool use_vicon = true; //��true:VICON, false:AR�}�[�J�[
+//トラッキングデバイス
+const bool use_tracker = false; //◆トラッカーフラグ
+const bool use_vicon = true; //◆true:VICON, false:ARマーカー
 
 //#define ZIGSIM
 //#define WITMOTION

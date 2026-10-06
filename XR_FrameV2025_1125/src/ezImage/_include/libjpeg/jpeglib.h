@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  * jpeglib.h
  *
  * Copyright (C) 1991-1998, Thomas G. Lane.
@@ -1180,18 +1180,18 @@ struct jpeg_color_quantizer { long dummy; };
 //#define CFILE_MODE
 
 #ifdef CFILE_MODE
-//¥
-//ƒ†[ƒU[’è‹`‚Ìƒtƒ@ƒCƒ‹“Ç‚İ‚İŠÖ”‚ğŒÄ‚Ño‚·‚½‚ß‚É’Ç‰Á
+//â–¼
+//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿é–¢æ•°ã‚’å‘¼ã³å‡ºã™ãŸã‚ã«è¿½åŠ 
 typedef unsigned int (__cdecl *jpeg_rw_ptr)(void* io_ptr, unsigned char* buf, unsigned int size);
 typedef void (__cdecl *jpeg_flush_ptr)(void* io_ptr);
-//ƒ†[ƒU[’è‹`“Ç‚İ‚İŠÖ”‚Ì’è‹`
+//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©èª­ã¿è¾¼ã¿é–¢æ•°ã®å®šç¾©
 EXTERN(void)
 jpeg_set_read_fn(j_decompress_ptr cinfo, void* io_ptr, jpeg_rw_ptr read_data_fn);
-//ƒ†[ƒU[’è‹`‘‚«‚İŠÖ”‚Ì’è‹`
+//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©æ›¸ãè¾¼ã¿é–¢æ•°ã®å®šç¾©
 EXTERN(void)
 jpeg_set_write_fn(j_compress_ptr cinfo, void* io_ptr, jpeg_rw_ptr write_data_fn,
                   jpeg_flush_ptr flush_data_fn);
-//£
+//â–²
 #endif
 
 #endif /* JPEGLIB_H */

@@ -1,4 +1,4 @@
-/*
+ï»¿/*
  * jdatadst.c
  *
  * Copyright (C) 1994-1996, Thomas G. Lane.
@@ -35,14 +35,14 @@ typedef struct {
   JOCTET * buffer;		/* start of buffer */
 
 #ifdef CFILE_MODE
-  //¥
-  //ƒ†[ƒU[’è‹`‘‚«‚İŠÖ”‚Äg—p‚·‚éƒNƒ‰ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^
+  //â–¼
+  //ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©æ›¸ãè¾¼ã¿é–¢æ•°ã¦ä½¿ç”¨ã™ã‚‹ã‚¯ãƒ©ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿
   void* io_ptr;
-  //ƒ†[ƒU[’è‹`‚Ì‘‚«‚İŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^	
+  //ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®æ›¸ãè¾¼ã¿é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿	
   jpeg_rw_ptr write_data_fn;
-  //ƒ†[ƒU[’è‹`‚Ìƒtƒ‰ƒbƒVƒ…ŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^
+  //ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ãƒ•ãƒ©ãƒƒã‚·ãƒ¥é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿
   jpeg_flush_ptr flush_data_fn;
-  //£
+  //â–²
 #endif
 
 } my_destination_mgr;
@@ -126,8 +126,8 @@ empty_output_buffer (j_compress_ptr cinfo)
       (size_t) OUTPUT_BUF_SIZE)
     ERREXIT(cinfo, JERR_FILE_WRITE);
 #else
-  //¥
-  //outfile‚ªNULL‚È‚çƒ†[ƒU[’è‹`ŠÖ”‚©‚ç‘‚«o‚·
+  //â–¼
+  //outfileãŒNULLãªã‚‰ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©é–¢æ•°ã‹ã‚‰æ›¸ãå‡ºã™
   if (dest->outfile){
     if (JFWRITE(dest->outfile, dest->buffer, OUTPUT_BUF_SIZE)!=(size_t)OUTPUT_BUF_SIZE)
       ERREXIT(cinfo, JERR_FILE_WRITE);
@@ -138,7 +138,7 @@ empty_output_buffer (j_compress_ptr cinfo)
       ERREXIT(cinfo, JERR_FILE_WRITE);
   }
 #endif
-  //£
+  //â–²
 
   dest->pub.next_output_byte = dest->buffer;
   dest->pub.free_in_buffer = OUTPUT_BUF_SIZE;
@@ -200,8 +200,8 @@ term_destination (j_compress_ptr cinfo)
   }
   fflush(dest->outfile);
 #else
-  //¥
-  //outfile‚ªNULL‚È‚çƒ†[ƒU[’è‹`ŠÖ”‚©‚ç‘‚«o‚·
+  //â–¼
+  //outfileãŒNULLãªã‚‰ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©é–¢æ•°ã‹ã‚‰æ›¸ãå‡ºã™
   if (dest->outfile){
     if (JFWRITE(dest->outfile, dest->buffer, datacount)!=datacount)
       ERREXIT(cinfo, JERR_FILE_WRITE);
@@ -213,7 +213,7 @@ term_destination (j_compress_ptr cinfo)
 	(*(dest->flush_data_fn))(dest->io_ptr);
 	return;
   }
-  //£
+  //â–²
 #endif
 
   /* Make sure we wrote the output file OK */
@@ -314,8 +314,8 @@ jpeg_mem_dest (j_compress_ptr cinfo,
   dest->pub.free_in_buffer = dest->bufsize = *outsize;
 }
 #ifdef CFILE_MODE
-//¥
-//ƒ†[ƒU[’è‹`‘‚«‚İŠÖ”‚Æƒtƒ‰ƒbƒVƒ…ŠÖ”‚Ì“o˜^
+//â–¼
+//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©æ›¸ãè¾¼ã¿é–¢æ•°ã¨ãƒ•ãƒ©ãƒƒã‚·ãƒ¥é–¢æ•°ã®ç™»éŒ²
 GLOBAL(void)
 jpeg_set_write_fn(j_compress_ptr cinfo, void* io_ptr, jpeg_rw_ptr write_data_fn,jpeg_flush_ptr flush_data_fn)
 {
@@ -338,9 +338,9 @@ jpeg_set_write_fn(j_compress_ptr cinfo, void* io_ptr, jpeg_rw_ptr write_data_fn,
   dest->pub.empty_output_buffer = empty_output_buffer;
   dest->pub.term_destination = term_destination;
   dest->outfile = NULL;//outfile;
-  dest->io_ptr=io_ptr;		//ƒ†[ƒU[’è‹`‚ÌƒNƒ‰ƒXƒCƒ“ƒXƒ^ƒ“ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ ‚é‚¢‚Íƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‹
-  dest->write_data_fn=write_data_fn;//ƒ†[ƒU[’è‹`‚Ìƒtƒ@ƒCƒ‹“Ç‚İ‚İŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^
-  dest->flush_data_fn=flush_data_fn;//ƒ†[ƒU[’è‹`‚Ìƒtƒ@ƒCƒ‹ƒtƒ‰ƒbƒVƒ…ŠÖ”‚Ö‚Ìƒ|ƒCƒ“ƒ^
+  dest->io_ptr=io_ptr;		//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ã‚¯ãƒ©ã‚¹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚ã‚‹ã„ã¯ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+  dest->write_data_fn=write_data_fn;//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+  dest->flush_data_fn=flush_data_fn;//ãƒ¦ãƒ¼ã‚¶ãƒ¼å®šç¾©ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ãƒ©ãƒƒã‚·ãƒ¥é–¢æ•°ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 }
-//£
+//â–²
 #endif

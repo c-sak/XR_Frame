@@ -1,10 +1,10 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "UnityObjLoader_Seq.h"
 
 using namespace objloader;
 
 //-----------------------------------------------------------------//
-// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^                                        //
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                        //
 //-----------------------------------------------------------------//
 uObjLoader_Seq::uObjLoader_Seq()
 {
@@ -14,18 +14,18 @@ uObjLoader_Seq::uObjLoader_Seq()
 }
 
 //-----------------------------------------------------------------//
-// ƒfƒXƒgƒ‰ƒNƒ^                                                    //
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                    //
 //-----------------------------------------------------------------//
 uObjLoader_Seq::~uObjLoader_Seq()
 {
 }
 
 //-----------------------------------------------------------------//
-// OBJ‚Ì˜A”Ôƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ‚Ü‚·                                 //
+// OBJã®é€£ç•ªãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã¾ã™                                 //
 //-----------------------------------------------------------------//
 bool uObjLoader_Seq::read_sequence(string objfnm, int framenum, double framerate)
 {
-	uObjLoader cobj;                               // ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+	uObjLoader cobj;                               // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
 	char buf[128];
 
 	for (int i = 0; i < framenum; i++)
@@ -34,7 +34,7 @@ bool uObjLoader_Seq::read_sequence(string objfnm, int framenum, double framerate
 		
 		if (!cobj.read(string(buf)))
 		{
-			cout << "OBJ‚Ì“Ç‚İ‚É¸”s‚µ‚Ü‚µ‚½B" << endl;
+			cout << "OBJã®èª­è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸã€‚" << endl;
 			return false;
 		}
 		cout << buf << endl;

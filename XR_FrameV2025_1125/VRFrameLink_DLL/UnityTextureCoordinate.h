@@ -1,15 +1,15 @@
-#ifndef __UnityTextureCoordinate_h__
+ï»¿#ifndef __UnityTextureCoordinate_h__
 #define __UnityTextureCoordinate_h__
 
 /**
  *  @struct  St_uo_TextureCoordinate
- *  @brief  ƒeƒNƒXƒ`ƒƒÀ•W\‘¢‘Ì@n
- *          ƒeƒNƒXƒ`ƒƒUEVÀ•W’l‚ğŠÇ—‚µ‚Ü‚·B
- *  @date  2008/12/1 ... V‹Kì¬
+ *  @brief  ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æ§‹é€ ä½“@n
+ *          ãƒ†ã‚¯ã‚¹ãƒãƒ£Uãƒ»Våº§æ¨™å€¤ã‚’ç®¡ç†ã—ã¾ã™ã€‚
+ *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
  */
 struct St_uo_TextureCoordinate{
-  double u;                                      // ƒeƒNƒXƒ`ƒƒuÀ•W
-  double v;                                      // ƒeƒNƒXƒ`ƒƒvÀ•W
+  double u;                                      // ãƒ†ã‚¯ã‚¹ãƒãƒ£uåº§æ¨™
+  double v;                                      // ãƒ†ã‚¯ã‚¹ãƒãƒ£våº§æ¨™
 };
 
 #endif

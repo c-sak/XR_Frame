@@ -1,4 +1,4 @@
-#include "vrconfig.h"
+﻿#include "vrconfig.h"
 
 #include "VRFLInterface.h"
 
@@ -7,15 +7,15 @@ std::vector<vrconfigdata> vrconfig::m_datalist;
 
 bool vrconfig::LoadConfig(const char* filename)
 {
-	/// �ݒ�t�@�C��(csv)�̓Ǎ�
+	/// 設定ファイル(csv)の読込
 	/// bool VRFL::LoadConfig(const char* filename, const char* relativebase);
-	/// filename     : �ݒ�t�@�C�����A�L�q���@�ɂ���ēǍ��ރt�@�C�����ς��
-	///                - ��΃p�X : ���̂܂ܗ��p
-	///                - ���΃p�X : ��t�H���_����̑��΃p�X
-	///�@�@�@�@�@�@    - NULL or ��̕����� : ��t�H���_�ɂ���"VRConfig.csv"��Ǎ���
-	/// relativebase : ���΃p�X�̊�ƂȂ�t�H���_�̐ݒ�
-	///                - NULL or ��̕����� : ���s�t�@�C��(exe)�Ɠ����t�H���_����ƂȂ�
-	///                - �p�X������ : �����ɐݒ肵���p�X����ƂȂ�
+	/// filename     : 設定ファイル名、記述方法によって読込むファイルが変わる
+	///                - 絶対パス : そのまま利用
+	///                - 相対パス : 基準フォルダからの相対パス
+	///　　　　　　    - NULL or 空の文字列 : 基準フォルダにある"VRConfig.csv"を読込む
+	/// relativebase : 相対パスの基準となるフォルダの設定
+	///                - NULL or 空の文字列 : 実行ファイル(exe)と同じフォルダが基準となる
+	///                - パス文字列 : ここに設定したパスが基準となる
 	if (!VRFL::LoadConfig(filename, NULL)) return false;
 
 	m_datalist.clear();

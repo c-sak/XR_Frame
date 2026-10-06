@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "SendThread.h"
 #include <WinSock2.h>
 #include <ws2ipdef.h>
@@ -184,7 +184,7 @@ namespace VRFL
 					return false;  // fatal error
 				}
 
-				Sleep(0); // WSAEWOULDBLOCK, WSAENOBUFS âè¡ë“Çø
+				Sleep(0); // WSAEWOULDBLOCK, WSAENOBUFS Ëß£Ê∂àÂæÖ„Å°
 			}
 			else
 			{

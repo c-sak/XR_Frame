@@ -1,4 +1,4 @@
-/*###########################################################################*/
+ï»¿/*###########################################################################*/
 /* OpenGL Texture Utility Functions
  * This code is provided for non-profit and personal learning use
  * without any guarantee for results of the use.
@@ -101,17 +101,17 @@ GLubyte *ezTex_load( int width, int height, GLuint pixformat, GLubyte *image, co
 	depth = pixformatToDepth( pixformat );
 	datasize = width * height * depth;
 
-	if( image == NULL ){ //ˆø”‚Ìimage‚ªNULL‚Å‚ ‚ê‚ÎV‚½‚Éƒƒ‚ƒŠ‚ğŠm•Û
+	if( image == NULL ){ //å¼•æ•°ã®imageãŒNULLã§ã‚ã‚Œã°æ–°ãŸã«ãƒ¡ãƒ¢ãƒªã‚’ç¢ºä¿
 		image = (GLubyte *)malloc( datasize );
 	}
 	if( file != NULL ){
-	    FILE *fptex; //ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹—pƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^
-		fptex = fopen( file, "rb" ); //ƒoƒCƒiƒŠ“Ç‚İ‚İƒ‚[ƒh‚ÅƒI[ƒvƒ“
-		if( fptex == NULL ){         //ƒtƒ@ƒCƒ‹‚ª“Ç‚ß‚È‚©‚Á‚½‚çƒGƒ‰[
-			perror( file ); //ƒGƒ‰[ƒƒbƒZ[ƒW‚ğo‚µ‚Ä
-			exit( -1 ); //‹­§I—¹
+	    FILE *fptex; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿
+		fptex = fopen( file, "rb" ); //ãƒã‚¤ãƒŠãƒªèª­ã¿è¾¼ã¿ãƒ¢ãƒ¼ãƒ‰ã§ã‚ªãƒ¼ãƒ—ãƒ³
+		if( fptex == NULL ){         //ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã‚ãªã‹ã£ãŸã‚‰ã‚¨ãƒ©ãƒ¼
+			perror( file ); //ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºã—ã¦
+			exit( -1 ); //å¼·åˆ¶çµ‚äº†
 		}
-		fread( image, datasize, 1, fptex );//ƒeƒNƒXƒ`ƒƒƒf[ƒ^‚ğ“Ç‚İ‚Ş
+		fread( image, datasize, 1, fptex );//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
 		fclose( fptex );
 	}
 	return image;
@@ -165,8 +165,8 @@ GLuint ezTex_makeMesh( void )
 //-----------------------------------------------------------------------------
 void ezTex_drawMesh( GLuint texID, GLuint meshID )
 {
-	// ƒeƒNƒXƒ`ƒƒƒƒ‚ƒŠ‚É‰æ‘œƒf[ƒ^‚ğƒ[ƒh
-	ezTexEnv_Replace(); //ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚Å’u‚«Š·‚¦
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¡ãƒ¢ãƒªã«ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ãƒ¼ãƒ‰
+	ezTexEnv_Replace(); //ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã§ç½®ãæ›ãˆ
 
 	glBindTexture( GL_TEXTURE_2D, texID );
 	glEnable( GL_TEXTURE_2D );

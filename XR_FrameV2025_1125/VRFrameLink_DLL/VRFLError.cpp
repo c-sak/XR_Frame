@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "VRFLError.h"
 
 #include <sstream>
@@ -10,7 +10,7 @@ namespace VRFL
 	SyncInterlock VRFLError::_outlock;
 	std::shared_ptr<std::ostream> VRFLError::_outstream;
 
-	// ‰B•Á
+	// éš è”½
 	VRFLError::VRFLError() {}
 	VRFLError::~VRFLError() {}
 

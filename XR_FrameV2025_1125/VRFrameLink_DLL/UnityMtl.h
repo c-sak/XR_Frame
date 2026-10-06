@@ -1,4 +1,4 @@
-#ifndef __UnityMtl_h__
+ï»¿#ifndef __UnityMtl_h__
 #define __UnityMtl_h__
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -30,95 +30,95 @@ PFNGLACTIVETEXTUREPROC glActiveTexture;
 
 /**
  *  @struct  St_uo_mtl_data
- *  @brief  MTLƒf[ƒ^\‘¢‘Ì
- *  @date  2008/12/1 ... V‹Kì¬
+ *  @brief  MTLãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+ *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
  */
 struct St_uo_mtl_data
 {
-  string mtlnm;                                  // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼
-  string mtlfilenm;                              // ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼
+  string mtlnm;                                  // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©å
+  string mtlfilenm;                              // ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
 
-  bool  isAmbient;                               // ŠÂ‹«Œõİ’è‚Ì—L–³(true=—L, false=–³)
-  float  ambient[3];                             // ŠÂ‹«Œõ
+  bool  isAmbient;                               // ç’°å¢ƒå…‰è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  float  ambient[3];                             // ç’°å¢ƒå…‰
 
-  bool  isDiffuse;                               // ŠgUŒõİ’è‚Ì—L–³(true=—L, false=–³)
-  float  diffuse[3];                             // ŠgUŒõ
+  bool  isDiffuse;                               // æ‹¡æ•£å…‰è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  float  diffuse[3];                             // æ‹¡æ•£å…‰
 
-  bool  isSpecular;                              // ‹¾–Êİ’è‚Ì—L–³(true=—L, false=–³)
-  float  specular[3];                            // ‹¾–ÊŒõ
+  bool  isSpecular;                              // é¡é¢è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  float  specular[3];                            // é¡é¢å…‰
 
-  bool  isTransparency;                          // ƒAƒ‹ƒtƒ@’l‚Ì—L–³(true=—L, false=–³)
-  float  transparency;                           // ƒAƒ‹ƒtƒ@’l
+  bool  isTransparency;                          // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  float  transparency;                           // ã‚¢ãƒ«ãƒ•ã‚¡å€¤
 
-  bool  isShininess;                             // ‹¾–ÊŒW”İ’è‚Ì—L–³(true=—L, false=–³)
-  int    shininess;                              // ‹¾–ÊŒW”
+  bool  isShininess;                             // é¡é¢ä¿‚æ•°è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  int    shininess;                              // é¡é¢ä¿‚æ•°
 
-  bool  isIllumination;                          // ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“İ’è‚Ì—L–³(true=—L, false=–³)
-  int    illumination;                           // ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“(1=‹¾–ÊŒõ–³ŒøA2=‹¾–ÊŒõ—LŒø)
+  bool  isIllumination;                          // ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  int    illumination;                           // ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³(1=é¡é¢å…‰ç„¡åŠ¹ã€2=é¡é¢å…‰æœ‰åŠ¹)
 
-  int    tNo;                                    // ƒeƒNƒXƒ`ƒƒNo
+  int    tNo;                                    // ãƒ†ã‚¯ã‚¹ãƒãƒ£No
 
-  bool  isTexture;                               // ƒeƒNƒXƒ`ƒƒİ’è‚Ì—L–³(true=—L, false=–³)
-  int    textureNo;                              // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒNo
+  bool  isTexture;                               // ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  int    textureNo;                              // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£No
 
-  bool  isSphereTexture;                         // ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒİ’è‚Ì—L–³(true=—L, false=–³)
-  int    sphereTextureNo;                        // ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒNo
-  string  texturefnm;                            // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒOAƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—p)
-  int    textureCnt;                             // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒJƒEƒ“ƒ^
-  int    textureIndex[6];                        // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒCƒ“ƒfƒbƒNƒX
-  int    cubeTextureNo[6];                       // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒNo
+  bool  isSphereTexture;                         // ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
+  int    sphereTextureNo;                        // ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£No
+  string  texturefnm;                            // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ã€ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨)
+  int    textureCnt;                             // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã‚«ã‚¦ãƒ³ã‚¿
+  int    textureIndex[6];                        // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+  int    cubeTextureNo[6];                       // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£No
 
-  vector <string> v_texturefnm;                  // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—p)
-  bool  isCubeTexture;                           // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒİ’è‚Ì—L–³(true=—L, false=–³)
+  vector <string> v_texturefnm;                  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨)
+  bool  isCubeTexture;                           // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šã®æœ‰ç„¡(true=æœ‰, false=ç„¡)
 
   //*******************************************************************
   /*!
-   *  @brief  “à•”ƒf[ƒ^‚Ì‰Šú‰»‚ğs‚¢‚Ü‚·B
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   void init(void)
   {
-    mtlnm.clear();                               // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼
-    mtlfilenm.clear();                           // ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼
+    mtlnm.clear();                               // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©å
+    mtlfilenm.clear();                           // ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
 
-    isAmbient = false;                           // ŠÂ‹«Œõİ’è‚Ì—L–³
-    ambient[0] = 0.0f;                           // ŠÂ‹«Œõ
+    isAmbient = false;                           // ç’°å¢ƒå…‰è¨­å®šã®æœ‰ç„¡
+    ambient[0] = 0.0f;                           // ç’°å¢ƒå…‰
     ambient[1] = 0.0f;
     ambient[2] = 0.0f;
 
-    isDiffuse = false;                           // ŠgUŒõİ’è‚Ì—L–³
-    diffuse[0] = 0.0f;                           // ŠgUŒõ
+    isDiffuse = false;                           // æ‹¡æ•£å…‰è¨­å®šã®æœ‰ç„¡
+    diffuse[0] = 0.0f;                           // æ‹¡æ•£å…‰
     diffuse[1] = 0.0f;
     diffuse[2] = 0.0f;
 
-    isSpecular = false;                          // ‹¾–Êİ’è‚Ì—L–³
-    specular[0] = 0.0f;                          // ‹¾–ÊŒõ
+    isSpecular = false;                          // é¡é¢è¨­å®šã®æœ‰ç„¡
+    specular[0] = 0.0f;                          // é¡é¢å…‰
     specular[1] = 0.0f;
     specular[2] = 0.0f;
 
-    isTransparency = false;                      // ƒAƒ‹ƒtƒ@’l‚Ì—L–³
-    transparency = 1.0f;                         // ƒAƒ‹ƒtƒ@’l‚Ì—L–³
+    isTransparency = false;                      // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ‰ç„¡
+    transparency = 1.0f;                         // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ‰ç„¡
 
-    isShininess = false;                         // ‹¾–ÊŒW”İ’è‚Ì—L–³
+    isShininess = false;                         // é¡é¢ä¿‚æ•°è¨­å®šã®æœ‰ç„¡
 
-    shininess = 0;                               // ‹¾–ÊŒW”
+    shininess = 0;                               // é¡é¢ä¿‚æ•°
 
-    isIllumination = false;                      // ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“İ’è‚Ì—L–³
-    illumination = 1;                            // ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“
+    isIllumination = false;                      // ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³è¨­å®šã®æœ‰ç„¡
+    illumination = 1;                            // ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³
 
-    tNo = 0;                                     // ƒeƒNƒXƒ`ƒƒNo
+    tNo = 0;                                     // ãƒ†ã‚¯ã‚¹ãƒãƒ£No
 
-    isTexture = false;                           // ƒeƒNƒXƒ`ƒƒİ’è‚Ì—L–³
-    textureNo = -1;                              // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒNo
-    isSphereTexture = false;                     // ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒİ’è‚Ì—L–³
-    sphereTextureNo = -1;                        // ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒNo
+    isTexture = false;                           // ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šã®æœ‰ç„¡
+    textureNo = -1;                              // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£No
+    isSphereTexture = false;                     // ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šã®æœ‰ç„¡
+    sphereTextureNo = -1;                        // ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£No
 
-    texturefnm.clear();                          // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒOAƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—p)
+    texturefnm.clear();                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ã€ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨)
 
-    textureCnt = 0;                              // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒJƒEƒ“ƒ^
+    textureCnt = 0;                              // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã‚«ã‚¦ãƒ³ã‚¿
 
-    textureIndex[0] = 1;                         // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒCƒ“ƒfƒbƒNƒX
+    textureIndex[0] = 1;                         // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
     textureIndex[1] = 3;
     textureIndex[2] = 5;
     textureIndex[3] = 2;
@@ -132,20 +132,20 @@ struct St_uo_mtl_data
     cubeTextureNo[4] = -1;
     cubeTextureNo[5] = -1;
 
-    v_texturefnm.clear();                        // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—p)
-    isCubeTexture = false;                       // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒİ’è‚Ì—L–³
+    v_texturefnm.clear();                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨)
+    isCubeTexture = false;                       // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šã®æœ‰ç„¡
   }
 };
 
 struct St_uo_texture_pool_data
 {
-  string texturefnm;                             // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼
-  int width;                                     // ‰¡•
-  int height;                                    // c•
-  int channels;                                     // ƒ`ƒƒƒ“ƒlƒ‹”(3/4)
-  int bits;                                      // 1ƒ`ƒƒƒ“ƒlƒ‹‚ ‚½‚èƒrƒbƒg”(8/16)
-  int imageSize;                                 // ƒoƒbƒtƒ@ƒTƒCƒY(byte)
-  unsigned char* image;                          // ƒeƒNƒXƒ`ƒƒ‰æ‘œƒoƒbƒtƒ@
+  string texturefnm;                             // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å
+  int width;                                     // æ¨ªå¹…
+  int height;                                    // ç¸¦å¹…
+  int channels;                                     // ãƒãƒ£ãƒ³ãƒãƒ«æ•°(3/4)
+  int bits;                                      // 1ãƒãƒ£ãƒ³ãƒãƒ«ã‚ãŸã‚Šãƒ“ãƒƒãƒˆæ•°(8/16)
+  int imageSize;                                 // ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º(byte)
+  unsigned char* image;                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒãƒãƒƒãƒ•ã‚¡
 
   void init(void)
   {
@@ -160,49 +160,49 @@ struct St_uo_texture_pool_data
 };
 
 /** @class  uMtl
-  * @brief  OBJ—pƒ}ƒeƒŠƒAƒ‹ƒNƒ‰ƒX
+  * @brief  OBJç”¨ãƒãƒ†ãƒªã‚¢ãƒ«ã‚¯ãƒ©ã‚¹
   * @author  Masakazu Yoshida(yoshida@iltj.jp)
   * @version  1.0
-  * @date  2008/12/1 ... V‹Kì¬
+  * @date  2008/12/1 ... æ–°è¦ä½œæˆ
   * @attention  Copyright (C) 2008, ILTJ Inc.
-@*/
+ã€€*/
 class uMtl
 {
 /*--------------*/
-/* ŒöŠJƒƒ“ƒo   */
+/* å…¬é–‹ãƒ¡ãƒ³ãƒ   */
 /*--------------*/
 public:
   //*******************************************************************
   /*!
-   *  @brief  ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   uMtl(void);
 
   //*******************************************************************
   /*!
-   *  @brief  ƒfƒXƒgƒ‰ƒNƒ^
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   ~uMtl(void);
 
   //*******************************************************************
   /*!
-   *  @brief  ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B
-   *  @param  mtlfnm ... [In] ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼
-   *  @retval  true  ... ³íI—¹
-   *  @retval  false ... ˆÏ÷I—¹
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @param  mtlfnm ... [In] ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å
+   *  @retval  true  ... æ­£å¸¸çµ‚äº†
+   *  @retval  false ... å§”è­²çµ‚äº†
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   bool loadMtl(string mtlfnm);
 
   //*******************************************************************
   /*!
-   *  @brief  “à•”ƒf[ƒ^‚Ì‰Šú‰»‚ğs‚¢‚Ü‚·B
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   void clear(void);
@@ -229,57 +229,57 @@ public:
   bool getTextureBufferImage(int textureID, unsigned char* image, int bufferSize);
 
 /*--------------*/
-/* ”ñŒöŠJƒƒ“ƒo */
+/* éå…¬é–‹ãƒ¡ãƒ³ãƒ */
 /*--------------*/
 private:
-  bool texturebind_flg;                          // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒOƒoƒCƒ“ƒhƒtƒ‰ƒO
-  bool spherebind_flg;                           // ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒOƒoƒCƒ“ƒhƒtƒ‰ƒO
-  bool cubebind_flg;                             // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒOƒoƒCƒ“ƒhƒtƒ‰ƒO
+  bool texturebind_flg;                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
+  bool spherebind_flg;                           // ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
+  bool cubebind_flg;                             // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°
 
-  // mtl’è‹`•Û—Ìˆæ
+  // mtlå®šç¾©ä¿æŒé ˜åŸŸ
   vector <St_uo_mtl_data> v_mtl;
 
-  // ƒeƒNƒXƒ`ƒƒ–¼(ID)•Û—Ìˆæ
+  // ãƒ†ã‚¯ã‚¹ãƒãƒ£å(ID)ä¿æŒé ˜åŸŸ
   vector <int> v_tNo;
 
-  // ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@•Û—Ìˆæ
+  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ä¿æŒé ˜åŸŸ
   vector <St_uo_texture_pool_data> v_texturePool;
 
   //*******************************************************************
   /*!
-   *  @brief  “à•”ƒf[ƒ^‚Ìo—Í‚ğs‚¢‚Ü‚·B
-   *  @param  val ... [In] mtlƒf[ƒ^\‘¢‘Ì
-   *  @param  os ... [In] ƒAƒEƒgƒvƒbƒgƒXƒgƒŠ[ƒ€
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®å‡ºåŠ›ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @param  val ... [In] mtlãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+   *  @param  os ... [In] ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆã‚¹ãƒˆãƒªãƒ¼ãƒ 
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   void show(const St_uo_mtl_data &val, ostream &os);
   
   //*******************************************************************
   /*!
-   *  @brief  ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B
-   *  @param  pval ... [In] mtlƒf[ƒ^\‘¢‘Ì
-   *  @retval  true  ... ³íI—¹
-   *  @retval  false ... ˆÙíI—¹
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @param  pval ... [In] mtlãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+   *  @retval  true  ... æ­£å¸¸çµ‚äº†
+   *  @retval  false ... ç•°å¸¸çµ‚äº†
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   bool loadTexture(St_uo_mtl_data *pval);
 
   //*******************************************************************
   /*!
-   *  @brief  ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B
-   *  @param  pval ... [In] mtlƒf[ƒ^\‘¢‘Ì
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @param  pval ... [In] mtlãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   bool loadSphereTexture(St_uo_mtl_data *pval);
 
   //*******************************************************************
   /*!
-   *  @brief  ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B
-   *  @param  pval ... [In] mtlƒf[ƒ^\‘¢‘Ì
-   *  @date  2008/12/1 ... V‹Kì¬
+   *  @brief  ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚
+   *  @param  pval ... [In] mtlãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
+   *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
    */
   //********************************************************************
   bool loadCubeTexture(St_uo_mtl_data *pval);

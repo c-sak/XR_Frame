@@ -1,11 +1,11 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include <png.h>
 #include <zlib.h>
 //-----------------------------------------------------------------//
-// PNGƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B                                       //
+// PNGãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚                                       //
 //-----------------------------------------------------------------//
 int readPngImage( const char *fname,
                   int *width,
@@ -15,70 +15,70 @@ int readPngImage( const char *fname,
                   unsigned char **image
                 )
 {
-    FILE            *fp;                         // ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^
-    png_structp     png_ptr;                     // png_structp\‘¢‘Ì
-    png_infop       info_ptr;                    // png_infop\‘¢‘Ì
-    unsigned long   pngWidth;                    // ‰æ‘œƒsƒNƒZƒ‹‚Ì‰¡•
-    unsigned long   pngHeight;                   // ‰æ‘œƒsƒNƒZƒ‹‚Ì‚‚³
-    unsigned long   row;                         // 1ƒ‰ƒCƒ“‚ÌƒTƒCƒY
-    int bit_depth;                               // ƒrƒbƒg[“x
-    int color_type;                              // ƒJƒ‰[/ƒAƒ‹ƒtƒ@ ƒ`ƒƒƒ“ƒlƒ‹‚Ìİ’è
-    int interlace_type;                          // ƒCƒ“ƒ^[ƒŒ[ƒX‚Ìİ’è
-    unsigned char   **pngImage;                  // ƒCƒ[ƒWƒf[ƒ^ƒ|ƒCƒ“ƒ^
-    unsigned long   i;                           // ”Ä—pƒJƒEƒ“ƒ^
+    FILE            *fp;                         // ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿
+    png_structp     png_ptr;                     // png_structpæ§‹é€ ä½“
+    png_infop       info_ptr;                    // png_infopæ§‹é€ ä½“
+    unsigned long   pngWidth;                    // ç”»åƒãƒ”ã‚¯ã‚»ãƒ«ã®æ¨ªå¹…
+    unsigned long   pngHeight;                   // ç”»åƒãƒ”ã‚¯ã‚»ãƒ«ã®é«˜ã•
+    unsigned long   row;                         // 1ãƒ©ã‚¤ãƒ³ã®ã‚µã‚¤ã‚º
+    int bit_depth;                               // ãƒ“ãƒƒãƒˆæ·±åº¦
+    int color_type;                              // ã‚«ãƒ©ãƒ¼/ã‚¢ãƒ«ãƒ•ã‚¡ ãƒãƒ£ãƒ³ãƒãƒ«ã®è¨­å®š
+    int interlace_type;                          // ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ¬ãƒ¼ã‚¹ã®è¨­å®š
+    unsigned char   **pngImage;                  // ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ãƒã‚¤ãƒ³ã‚¿
+    unsigned long   i;                           // æ±ç”¨ã‚«ã‚¦ãƒ³ã‚¿
 
-    // PNGƒtƒ@ƒCƒ‹Œ`®‚Å‚È‚¢ê‡
+    // PNGãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã§ãªã„å ´åˆ
     if(!strstr(fname, ".png") && !strstr(fname, ".PNG"))
     {
       return 1;
     }
 
-    // ƒtƒ@ƒCƒ‹“Ç‚İ
+    // ãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã¿
     if((fp = fopen(fname, "rb")) < 0)
     {
       return 1;
     }
 
-    // png_structp\‘¢‘Ì‚ğŠm•ÛE‰Šú‰»
+    // png_structpæ§‹é€ ä½“ã‚’ç¢ºä¿ãƒ»åˆæœŸåŒ–
     png_ptr = png_create_read_struct( PNG_LIBPNG_VER_STRING, 
                                       NULL, NULL, NULL );
-    // png_infop\‘¢‘Ì‚ğŠm•ÛE‰Šú‰»
+    // png_infopæ§‹é€ ä½“ã‚’ç¢ºä¿ãƒ»åˆæœŸåŒ–
     info_ptr = png_create_info_struct( png_ptr );
 
-    // ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚Ìİ’è
+    // ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã®è¨­å®š
     png_init_io( png_ptr, fp );
 
-    // PNGƒtƒ@ƒCƒ‹‚Ìƒwƒbƒ_“Ç‚İ
+    // PNGãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€èª­è¾¼ã¿
     png_read_info( png_ptr, info_ptr );
 
-    // IHDRƒ`ƒƒƒ“ƒNî•ñ‚ğæ“¾
+    // IHDRãƒãƒ£ãƒ³ã‚¯æƒ…å ±ã‚’å–å¾—
     png_get_IHDR( png_ptr, info_ptr, (png_uint_32 *)&pngWidth, (png_uint_32 *)&pngHeight,
                   &bit_depth, &color_type, &interlace_type,
                   NULL, NULL );
 
-    // 1ƒ‰ƒCƒ“‚É•K—v‚Èƒoƒbƒtƒ@‚ÌƒTƒCƒY‚ğæ“¾
+    // 1ãƒ©ã‚¤ãƒ³ã«å¿…è¦ãªãƒãƒƒãƒ•ã‚¡ã®ã‚µã‚¤ã‚ºã‚’å–å¾—
     row = png_get_rowbytes( png_ptr, info_ptr );
 
-    // PNG—p‰æ‘œƒf[ƒ^—ÌˆæŠm•Û
+    // PNGç”¨ç”»åƒãƒ‡ãƒ¼ã‚¿é ˜åŸŸç¢ºä¿
     pngImage = (png_bytepp)malloc( pngHeight * sizeof(png_bytep) ); 
 
-    // ‰æ‘œ—pƒf[ƒ^—ÌˆæŠm•Û
+    // ç”»åƒç”¨ãƒ‡ãƒ¼ã‚¿é ˜åŸŸç¢ºä¿
     *image = (unsigned char *)malloc( pngHeight * row );
 
     for( i=0; i<pngHeight; i++ ){
       pngImage[i] = (png_bytep)malloc( row );
     }
-    // PNG‰æ‘œƒf[ƒ^“Ç‚İ
+    // PNGç”»åƒãƒ‡ãƒ¼ã‚¿èª­è¾¼ã¿
     png_read_image( png_ptr, pngImage );
     fclose(fp);
 
     for( i=0; i<pngHeight; i++ ){
-      // openglã‚Å‚ÍA‰æ‘œ‚Ìn“_‚ª¶ã‚©‚çn‚Ü‚éˆ×Aƒf[ƒ^‚Ì‡”Ô‚ğ“ü‚ê‘Ö‚¦
+      // openglä¸Šã§ã¯ã€ç”»åƒã®å§‹ç‚¹ãŒå·¦ä¸Šã‹ã‚‰å§‹ã¾ã‚‹ç‚ºã€ãƒ‡ãƒ¼ã‚¿ã®é †ç•ªã‚’å…¥ã‚Œæ›¿ãˆ
       memcpy( *image+(pngHeight-1-i)*row, pngImage[i], row );
       free( pngImage[i] );
     }
     free( pngImage );
-    // ‚Q‚Â‚Ì\‘¢‘Ì‚Ìƒƒ‚ƒŠ‚ğ‰ğ•ú
+    // ï¼’ã¤ã®æ§‹é€ ä½“ã®ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾
     png_destroy_read_struct( &png_ptr, &info_ptr, (png_infopp)NULL );
 
     *width  = pngWidth;
@@ -90,7 +90,7 @@ int readPngImage( const char *fname,
 }
 
 //-----------------------------------------------------------------//
-// PNGƒCƒ[ƒW‚ğƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B                             //
+// PNGã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚                             //
 //-----------------------------------------------------------------//
 int writePngImage( int width
           , int height
@@ -108,73 +108,73 @@ int writePngImage( int width
     png_structp     png_ptr;
     png_infop       info_ptr;
 
-    // o—Íƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
+    // å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
     if((fp = fopen(file_name, "wb")) < 0)
     {
       return 1;
     }
 
-    png_ptr = png_create_write_struct(           // png_structp\‘¢‘Ì‚ÌŠm•ÛE‰Šú‰»
+    png_ptr = png_create_write_struct(           // png_structpæ§‹é€ ä½“ã®ç¢ºä¿ãƒ»åˆæœŸåŒ–
                     PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if( png_ptr == NULL ){
       fclose( fp );
       return 2;
     }
 
-    info_ptr = png_create_info_struct(png_ptr);  // png_infop\‘¢‘Ì‚ÌŠm•ÛE‰Šú‰»
+    info_ptr = png_create_info_struct(png_ptr);  // png_infopæ§‹é€ ä½“ã®ç¢ºä¿ãƒ»åˆæœŸåŒ–
     if( info_ptr == NULL ){
         png_destroy_write_struct( &png_ptr,  (png_infopp)NULL );
         fclose( fp );
         return 3;
     }
 
-    png_init_io(png_ptr, fp);                    // ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚Ìİ’è
-    png_set_filter(png_ptr, 0, PNG_ALL_FILTERS); // ƒtƒBƒ‹ƒ^‚Ìİ’è
-    png_set_compression_level(png_ptr, Z_BEST_COMPRESSION); // ˆ³k‚Ìİ’è
+    png_init_io(png_ptr, fp);                    // ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ã®è¨­å®š
+    png_set_filter(png_ptr, 0, PNG_ALL_FILTERS); // ãƒ•ã‚£ãƒ«ã‚¿ã®è¨­å®š
+    png_set_compression_level(png_ptr, Z_BEST_COMPRESSION); // åœ§ç¸®ã®è¨­å®š
 
     if( depth == 3 ){       // RGB
-      png_set_IHDR( png_ptr, info_ptr, width, height, // RGB—pƒ`ƒƒƒ“ƒNî•ñ‚Ìİ’è
+      png_set_IHDR( png_ptr, info_ptr, width, height, // RGBç”¨ãƒãƒ£ãƒ³ã‚¯æƒ…å ±ã®è¨­å®š
                     bits, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
                     PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT );
     }
     else if( depth == 4 ){  // RGBA
-      png_set_IHDR( png_ptr, info_ptr, width, height, // RGBA—pƒ`ƒƒƒ“ƒNî•ñ‚Ìİ’è
+      png_set_IHDR( png_ptr, info_ptr, width, height, // RGBAç”¨ãƒãƒ£ãƒ³ã‚¯æƒ…å ±ã®è¨­å®š
                     bits, PNG_COLOR_TYPE_RGB_ALPHA, PNG_INTERLACE_NONE,
                     PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT );
     }
-    else{                   // ã‹LˆÈŠO
-      png_set_IHDR( png_ptr, info_ptr, width, height, // ƒOƒŒƒCƒXƒP[ƒ‹—pƒ`ƒƒƒ“ƒNî•ñ‚Ìİ’è
+    else{                   // ä¸Šè¨˜ä»¥å¤–
+      png_set_IHDR( png_ptr, info_ptr, width, height, // ã‚°ãƒ¬ã‚¤ã‚¹ã‚±ãƒ¼ãƒ«ç”¨ãƒãƒ£ãƒ³ã‚¯æƒ…å ±ã®è¨­å®š
                     bits, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE,
                     PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT );
     }
 
-    png_set_gAMA( png_ptr, info_ptr, 1.0 );      // ƒtƒ@ƒCƒ‹EƒKƒ“ƒ}‚Ìİ’è
-    png_write_info( png_ptr, info_ptr );         // PNGƒtƒ@ƒCƒ‹‚Ìƒwƒbƒ_‚ğo—Í
+    png_set_gAMA( png_ptr, info_ptr, 1.0 );      // ãƒ•ã‚¡ã‚¤ãƒ«ãƒ»ã‚¬ãƒ³ãƒã®è¨­å®š
+    png_write_info( png_ptr, info_ptr );         // PNGãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ã‚’å‡ºåŠ›
 
-    // PNG—p‰æ‘œƒf[ƒ^—ÌˆæŠm•Û
+    // PNGç”¨ç”»åƒãƒ‡ãƒ¼ã‚¿é ˜åŸŸç¢ºä¿
     pngImage = (png_bytepp)malloc( height * sizeof(png_bytep) ); 
-    n = ((depth*width + 3) / 4) * 4;             // 4ƒoƒCƒg‚Ì®””{‚Æ‚·‚é
+    n = ((depth*width + 3) / 4) * 4;             // 4ãƒã‚¤ãƒˆã®æ•´æ•°å€ã¨ã™ã‚‹
 
-    // ‚‚³•ªƒ‹[ƒv
+    // é«˜ã•åˆ†ãƒ«ãƒ¼ãƒ—
     for( i=0; i<height; i++ ){
-    // ~‡•`‰æ‚Ìê‡
+    // é™é †æç”»ã®å ´åˆ
     if(reverse == true)
     {
       pngImage[i] = image + ((height-1) - i) * n;
     }
-    // ¸‡•`‰æ‚Ìê‡
+    // æ˜‡é †æç”»ã®å ´åˆ
     else
     {
       pngImage[i] = image + i * n;
     }
   }
 
-    png_write_image( png_ptr, pngImage );        // PNGƒtƒ@ƒCƒ‹‚Ì‰æ‘œƒf[ƒ^‚ğo—Í
+    png_write_image( png_ptr, pngImage );        // PNGãƒ•ã‚¡ã‚¤ãƒ«ã®ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’å‡ºåŠ›
     free( pngImage );
 
-    png_write_end( png_ptr, info_ptr );          // c‚è‚Ìî•ñ‚ğo—Í
-    png_destroy_write_struct( &png_ptr, &info_ptr ); // ‚Q‚Â‚Ì\‘¢‘Ì‚Ìƒƒ‚ƒŠ‚ğ‰ğ•ú
+    png_write_end( png_ptr, info_ptr );          // æ®‹ã‚Šã®æƒ…å ±ã‚’å‡ºåŠ›
+    png_destroy_write_struct( &png_ptr, &info_ptr ); // ï¼’ã¤ã®æ§‹é€ ä½“ã®ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾
 
-    fclose(fp);                                  // o—Íƒtƒ@ƒCƒ‹ƒNƒ[ƒY
+    fclose(fp);                                  // å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
     return 0;
 }

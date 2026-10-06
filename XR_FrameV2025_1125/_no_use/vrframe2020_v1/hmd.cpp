@@ -1,4 +1,4 @@
-/******************************************************************************
+ï»¿/******************************************************************************
 * hmd.cpp
 */
 
@@ -11,7 +11,7 @@
 
 #include "WarpTex.h"
 
- //ƒOƒ[ƒoƒ‹•Ï”
+ //ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
 extern WarpTex g_DC, g_DC_right, g_DC_left;
 extern float g_cx;
 extern float g_cy;
@@ -59,14 +59,14 @@ void HMD_View( void )
 	//float h = 0.072;
 	//float w = 0.065;
 	float h = 0.12;
-	float w = 0.1075; //ƒeƒXƒg
+	float w = 0.1075; //ãƒ†ã‚¹ãƒˆ
 
 	float bottom = - h/2.0;
 	float top = h/2.0;
 	float znear = 0.03;
 	float zfar = 100.0;
 
-	//¥”wŒiF‚ÆƒtƒHƒOƒJƒ‰[‚ğƒuƒŒƒ“ƒh
+	//â–¼èƒŒæ™¯è‰²ã¨ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼ã‚’ãƒ–ãƒ¬ãƒ³ãƒ‰
 	glClearColor(
 		_blend(simdata.sky_color[3], simdata.sky_color[0], simdata.air_color[0]),
 		_blend(simdata.sky_color[3], simdata.sky_color[1], simdata.air_color[1]),
@@ -81,11 +81,11 @@ void HMD_View( void )
 	glEnable(GL_DEPTH_TEST); // ---- begin: 
 	glEnable(GL_LIGHTING);
 
-	//¥¶Šá‰æ‘œ
+	//â–¼å·¦çœ¼ç”»åƒ
 	glViewport( 0, 0, window.width/2.0, window.height );
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	if (distortion) { //š
+	if (distortion) { //â˜…
 		left = -w / 2.0;
 		right = w / 2.0;
 	}
@@ -112,13 +112,13 @@ void HMD_View( void )
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 
-	//š˜c‚İ•â³Às
+	//â˜…æ­ªã¿è£œæ­£å®Ÿè¡Œ
 	if( distortion ){
 		g_DC_left.Update();
 		//g_DC_left.runDC();
 	}
 
-	//¥‰EŠá‰æ‘œ
+	//â–¼å³çœ¼ç”»åƒ
 	glEnable(GL_DEPTH_TEST); // ---- begin: 
 	glEnable(GL_LIGHTING);
 
@@ -132,7 +132,7 @@ void HMD_View( void )
 
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	if (distortion) {//š
+	if (distortion) {//â˜…
 		left = -w / 2.0;
 		right = w / 2.0;
 	}
@@ -160,13 +160,13 @@ void HMD_View( void )
 	glDisable(GL_DEPTH_TEST);
 	//PostDraw();
 
-	//š˜c‚İ•â³Às
+	//â˜…æ­ªã¿è£œæ­£å®Ÿè¡Œ
 	if( distortion ){
 		g_DC_right.Update();
 		//g_DC_right.runDC();
 	}
 
-	//š˜c•â³•`‰æ
+	//â˜…æ­ªè£œæ­£æç”»
 	if (distortion) {
 		glViewport(0, 0, window.width, window.height);
 		glClearColor(0.0, 0.0, 0.0, 1.0);

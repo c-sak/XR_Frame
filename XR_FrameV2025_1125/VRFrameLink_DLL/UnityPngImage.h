@@ -1,8 +1,8 @@
-/** @file  PngImage.h
- *  @brief  PNG“üo—ÍŠÖ”
+ï»¿/** @file  PngImage.h
+ *  @brief  PNGå…¥å‡ºåŠ›é–¢æ•°
  *  @author  Masakazu Yoshida(yoshida@iltj.jp)
  *  @version  1.0
- *  @date  2008/12/1 ... V‹Kì¬
+ *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
  *  @attention  Copyright (C) 2008, ILTJ Inc.
  */
 
@@ -13,16 +13,16 @@
 
 //*******************************************************************
 /*!
- *  @brief  PNGƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B
- *  @param  fname ... [In] PNGƒtƒ@ƒCƒ‹–¼
- *  @param  width ... [In/Out] ƒCƒ[ƒW‚Ì•
- *  @param  height ... [In/Out] ƒCƒ[ƒW‚Ì‚‚³
- *  @param  depth ... [In/Out] ƒCƒ[ƒW‚Ì[“x
- *  @param  bits ... [In/Out] ƒCƒ[ƒW‚Ìƒrƒbƒg[8/16]
- *  @param  image ... [In/Out] “Ç‚ñ‚¾ƒCƒ[ƒWƒf[ƒ^
- *  @return  int ... ƒŠƒ^[ƒ“ƒR[ƒh@n
- *                  [0:³íI—¹ / 1:ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“ƒGƒ‰[ / 2:ƒtƒ@ƒCƒ‹“Ç‚İƒGƒ‰[]
- *  @date  2008/12/1 ... V‹Kì¬
+ *  @brief  PNGãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚
+ *  @param  fname ... [In] PNGãƒ•ã‚¡ã‚¤ãƒ«å
+ *  @param  width ... [In/Out] ã‚¤ãƒ¡ãƒ¼ã‚¸ã®å¹…
+ *  @param  height ... [In/Out] ã‚¤ãƒ¡ãƒ¼ã‚¸ã®é«˜ã•
+ *  @param  depth ... [In/Out] ã‚¤ãƒ¡ãƒ¼ã‚¸ã®æ·±åº¦
+ *  @param  bits ... [In/Out] ã‚¤ãƒ¡ãƒ¼ã‚¸ã®ãƒ“ãƒƒãƒˆ[8/16]
+ *  @param  image ... [In/Out] èª­è¾¼ã‚“ã ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿
+ *  @return  int ... ãƒªã‚¿ãƒ¼ãƒ³ã‚³ãƒ¼ãƒ‰@n
+ *                  [0:æ­£å¸¸çµ‚äº† / 1:ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã‚¨ãƒ©ãƒ¼ / 2:ãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã¿ã‚¨ãƒ©ãƒ¼]
+ *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
  */
 //********************************************************************
 int readPngImage( const char *fname,
@@ -35,16 +35,16 @@ int readPngImage( const char *fname,
 
 //*******************************************************************
 /*!
- *  @brief  ƒCƒ[ƒWƒf[ƒ^‚ğPNGƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B
- *  @param  width ... [In] ƒCƒ[ƒW‚Ì•
- *  @param  height ... [In] ƒCƒ[ƒW‚Ì‚‚³
- *  @param  depth ... [In] [“x[3:RGB / 4:RGBA]
- *  @param  image ... [In] ƒCƒ[ƒWƒf[ƒ^
- *  @param  file_name ... [In] o—Íƒtƒ@ƒCƒ‹–¼
- *  @param  reverse ... [In] o—Í‡˜(true:~‡ / false:¸‡)
- *  @return  int ... ƒŠƒ^[ƒ“ƒR[ƒh@n
- *                   [1:ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“ƒGƒ‰[ / 2:png_structp\‘¢‘ÌŠm•ÛƒGƒ‰[ / 3:png_infop\‘¢‘ÌŠm•ÛƒGƒ‰[]
- *  @date  2008/12/1 ... V‹Kì¬
+ *  @brief  ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’PNGãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚
+ *  @param  width ... [In] ã‚¤ãƒ¡ãƒ¼ã‚¸ã®å¹…
+ *  @param  height ... [In] ã‚¤ãƒ¡ãƒ¼ã‚¸ã®é«˜ã•
+ *  @param  depth ... [In] æ·±åº¦[3:RGB / 4:RGBA]
+ *  @param  image ... [In] ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿
+ *  @param  file_name ... [In] å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å
+ *  @param  reverse ... [In] å‡ºåŠ›é †åº(true:é™é † / false:æ˜‡é †)
+ *  @return  int ... ãƒªã‚¿ãƒ¼ãƒ³ã‚³ãƒ¼ãƒ‰@n
+ *                   [1:ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ã‚¨ãƒ©ãƒ¼ / 2:png_structpæ§‹é€ ä½“ç¢ºä¿ã‚¨ãƒ©ãƒ¼ / 3:png_infopæ§‹é€ ä½“ç¢ºä¿ã‚¨ãƒ©ãƒ¼]
+ *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
  */
 //********************************************************************
 int writePngImage( int width, int height, int depth, 

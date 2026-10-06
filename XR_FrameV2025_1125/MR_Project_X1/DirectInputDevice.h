@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 * Copyright Canon Inc. 2018
 * All Rights Reserved
 */
@@ -10,50 +10,50 @@
 #include <string>
 
 /**
- * @brief MREAL Displayƒ{ƒ^ƒ“—pƒfƒoƒCƒXƒCƒ“ƒvƒbƒgƒNƒ‰ƒX
+ * @brief MREAL Displayãƒœã‚¿ãƒ³ç”¨ãƒ‡ãƒã‚¤ã‚¹ã‚¤ãƒ³ãƒ—ãƒƒãƒˆã‚¯ãƒ©ã‚¹
  */
 class DirectInputDevice
 {
 private:
 	HWND window_handle;
 
-	//DirectInputƒIƒuƒWƒFƒNƒg
+	//DirectInputã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	LPDIRECTINPUT8			direct_input;
 	LPDIRECTINPUTDEVICE8	joystick;
 
-	// ƒ{ƒ^ƒ“ŠÄ‹ƒXƒŒƒbƒh
+	// ãƒœã‚¿ãƒ³ç›£è¦–ã‚¹ãƒ¬ãƒƒãƒ‰
 	HANDLE update_event;
 
 public:
 	/**
-	 * @brief ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
-	 * @param hWnd ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
+	 * @brief ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
+	 * @param hWnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 	 */
 	explicit DirectInputDevice(HWND hWnd);
 
 	/**
-	 * @brief ƒfƒXƒgƒ‰ƒNƒ^B
+	 * @brief ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
 	 */
 	~DirectInputDevice(void);
 
 	/**
-	 * @brief ƒfƒoƒCƒX‚ğ‰Šú‰»‚·‚éB
-	 * @retval true ¬Œ÷B
-	 * @retval false ¸”sB
+	 * @brief ãƒ‡ãƒã‚¤ã‚¹ã‚’åˆæœŸåŒ–ã™ã‚‹ã€‚
+	 * @retval true æˆåŠŸã€‚
+	 * @retval false å¤±æ•—ã€‚
 	 */
 	bool Initialize();
 
 	/**
-	 * @brief ƒfƒoƒCƒX‚Ö‚ÌÚ‘±‚ğÀs‚·‚éB
-	 * @retval true ¬Œ÷B
-	 * @retval false ¸”sB
+	 * @brief ãƒ‡ãƒã‚¤ã‚¹ã¸ã®æ¥ç¶šã‚’å®Ÿè¡Œã™ã‚‹ã€‚
+	 * @retval true æˆåŠŸã€‚
+	 * @retval false å¤±æ•—ã€‚
 	 */
 	bool Connect();
 
 	/**
-	* @brief MREAL Display‚Ìƒ{ƒ^ƒ“ó‘Ô‚ğæ“¾‚·‚éB
-	* @param[out] joystick_state ƒ{ƒ^ƒ“ó‘Ô
-	* @return æ“¾‚Ì¬”ÛB
+	* @brief MREAL Displayã®ãƒœã‚¿ãƒ³çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹ã€‚
+	* @param[out] joystick_state ãƒœã‚¿ãƒ³çŠ¶æ…‹
+	* @return å–å¾—ã®æˆå¦ã€‚
 	*/
 	HRESULT GetJoysticState(DIJOYSTATE * joystick_state);
 private:

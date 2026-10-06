@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
-//PNG‰æ‘œ‚ğƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
-//w, h: ‰æ‘œƒTƒCƒY
-//image: ‰æ‘œƒoƒbƒtƒ@‚ğw’è‚µ‚È‚¢ê‡‚É‚ÍAV‚µ‚­—Ìˆæ‚ğŠm•Û‚µ•Ô‚·
+//PNGç”»åƒã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã‚€
+//w, h: ç”»åƒã‚µã‚¤ã‚º
+//image: ç”»åƒãƒãƒƒãƒ•ã‚¡ã‚’æŒ‡å®šã—ãªã„å ´åˆã«ã¯ã€æ–°ã—ãé ˜åŸŸã‚’ç¢ºä¿ã—è¿”ã™
 unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *image = nullptr);
 void writeImagePNG(const char *file, unsigned char *image, int w, int h);
 

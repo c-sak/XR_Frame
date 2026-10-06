@@ -1,4 +1,4 @@
-// UsersGuideSample-6.cpp
+ï»¿// UsersGuideSample-6.cpp
 
 
 #include "stdafx.h"
@@ -7,7 +7,7 @@
 #include <MrHarmonizer.h>
 #include <map>
 
-////////////////š
+////////////////â˜…
 #include "sim.h"
 #include "light.h"
 extern SimDataT simdata;
@@ -19,89 +19,89 @@ void copyCamera(IMrhCamera60* camera, TargetT* target, bool detected);
 
 DWORD* availableTargetIDs = NULL;
 
-IMrhMarker** vpMarkers; //šƒ}[ƒJ
-////////////////š
+IMrhMarker** vpMarkers; //â˜…ãƒãƒ¼ã‚«
+////////////////â˜…
 
-// ’è”E•Ï”’è‹`
+// å®šæ•°ãƒ»å¤‰æ•°å®šç¾©
 DWORD winX = 0;
 DWORD winY = 0;
-DWORD winW = 1280;								// ƒEƒBƒ“ƒhƒE‚Ì•
-DWORD winH = 960;								// ƒEƒBƒ“ƒhƒE‚Ì‚‚³
+DWORD winW = 1280;								// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…
+DWORD winH = 960;								// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
 
 struct {
 	DWORD x;
 	DWORD y;
-}dispOrigin[2];									// ‚P‰æ–Ê‚ğ•\¦‚·‚éŒ´“_
+}dispOrigin[2];									// ï¼‘ç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹åŸç‚¹
 
 struct {
 	DWORD width;
 	DWORD height;
-}dispSize[2];									// ‚P‰æ–Ê‚ğ•\¦‚·‚éƒTƒCƒY
+}dispSize[2];									// ï¼‘ç”»é¢ã‚’è¡¨ç¤ºã™ã‚‹ã‚µã‚¤ã‚º
 
-// MREAL PlatformŠÖ˜A•Ï”
-IMrhEngine70			*pEngine;				// ƒGƒ“ƒWƒ“
-IMrhCamera60			*pCamera[2];			// ƒJƒƒ‰
-IMrhDisplayInfo			*pDispInfo;				// •\¦İ’è
-IMrhRenderer60			*pRender[2];			// •`‰æAPI
-IMrhDepth70* depth = 0;							// ‰œs‚«Œv‘ªŒ‹‰ÊƒCƒ“ƒ^[ƒtƒFƒCƒX
-IMrhPolygon70* polygon[2] = {};					// è‚Ì‰œs‚«Œv‘ªŒ‹‰Ê‚Ìƒ|ƒŠƒSƒ“
-static std::map<DWORD, IMrhTarget61*>	mpTargets;	// —LŒø‚Èƒ^[ƒQƒbƒgƒ}ƒbƒv(MRH_TARGET_X ‚Æ IMrhTarget)
+// MREAL Platformé–¢é€£å¤‰æ•°
+IMrhEngine70			*pEngine;				// ã‚¨ãƒ³ã‚¸ãƒ³
+IMrhCamera60			*pCamera[2];			// ã‚«ãƒ¡ãƒ©
+IMrhDisplayInfo			*pDispInfo;				// è¡¨ç¤ºè¨­å®š
+IMrhRenderer60			*pRender[2];			// æç”»API
+IMrhDepth70* depth = 0;							// å¥¥è¡Œãè¨ˆæ¸¬çµæœã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹
+IMrhPolygon70* polygon[2] = {};					// æ‰‹ã®å¥¥è¡Œãè¨ˆæ¸¬çµæœã®ãƒãƒªã‚´ãƒ³
+static std::map<DWORD, IMrhTarget61*>	mpTargets;	// æœ‰åŠ¹ãªã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒãƒƒãƒ—(MRH_TARGET_X ã¨ IMrhTarget)
 
-HANDLE					hEvent			= NULL; // ƒGƒ“ƒWƒ“XVƒCƒxƒ“ƒg
-static DWORD			dwNumOfCameras	= 0;	// ƒJƒƒ‰‚Ì”
-static DWORD			dwNumOfTarget	= 0;	// ƒ^[ƒQƒbƒg‚Ì”
-static DWORD			dwNumOfMarker = 0;		//šƒ}[ƒJ‚Ì”
+HANDLE					hEvent			= NULL; // ã‚¨ãƒ³ã‚¸ãƒ³æ›´æ–°ã‚¤ãƒ™ãƒ³ãƒˆ
+static DWORD			dwNumOfCameras	= 0;	// ã‚«ãƒ¡ãƒ©ã®æ•°
+static DWORD			dwNumOfTarget	= 0;	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ•°
+static DWORD			dwNumOfMarker = 0;		//â˜…ãƒãƒ¼ã‚«ã®æ•°
 
-GLUquadricObj			*pFillObj		= NULL; // ‰¼‘z•¨‘Ì•`‰æ‚Ég—p
-static HDC				hDC				= NULL;	// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
-static HGLRC			hRC				= NULL;	// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg
-static GLuint			bmpListID		= 0;	// ƒfƒBƒXƒvƒŒƒCEƒŠƒXƒgID
+GLUquadricObj			*pFillObj		= NULL; // ä»®æƒ³ç‰©ä½“æç”»ã«ä½¿ç”¨
+static HDC				hDC				= NULL;	// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+static HGLRC			hRC				= NULL;	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+static GLuint			bmpListID		= 0;	// ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ»ãƒªã‚¹ãƒˆID
 
-static tagMrhColorRegionMaskMethod maskMethod = MRH_COLOR_REGION_METHOD_NONE; // ƒ}ƒXƒN‰æ‘œ•`‰æ•û–@
+static tagMrhColorRegionMaskMethod maskMethod = MRH_COLOR_REGION_METHOD_NONE; // ãƒã‚¹ã‚¯ç”»åƒæç”»æ–¹æ³•
 
-// MREAL Displayƒ{ƒ^ƒ“ˆ—‚Ég—p‚·‚é•Ï”
-DirectInputDevice		*pMREALButtonInput = NULL;	// MREAL Displayƒ{ƒ^ƒ“§ŒäƒIƒuƒWƒFƒNƒg
-HANDLE					hRegistrationUtilityEnd;	// ˆÊ’u‡‚í‚¹ƒ†[ƒeƒBƒŠƒeƒB‚ÌI—¹‚ğŒŸ’m‚·‚éƒCƒxƒ“ƒg
+// MREAL Displayãƒœã‚¿ãƒ³å‡¦ç†ã«ä½¿ç”¨ã™ã‚‹å¤‰æ•°
+DirectInputDevice		*pMREALButtonInput = NULL;	// MREAL Displayãƒœã‚¿ãƒ³åˆ¶å¾¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+HANDLE					hRegistrationUtilityEnd;	// ä½ç½®åˆã‚ã›ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã®çµ‚äº†ã‚’æ¤œçŸ¥ã™ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
 
-const std::string		DEVICE_NAME = "Canon MREAL S1 Button"; // MREAL S1‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
-//const std::string		DEVICE_NAME = "Canon MREAL Display Button MD-20 Series"; // MREAL Display MD-20‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
-//const std::string		DEVICE_NAME = "Canon MREAL Display Button MD-10 Series"; // MREAL Display MD-10‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
+const std::string		DEVICE_NAME = "Canon MREAL S1 Button"; // MREAL S1ã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
+//const std::string		DEVICE_NAME = "Canon MREAL Display Button MD-20 Series"; // MREAL Display MD-20ã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
+//const std::string		DEVICE_NAME = "Canon MREAL Display Button MD-10 Series"; // MREAL Display MD-10ã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
 
 static DWORD regStatus;
-//IMrhTarget‚ª•K—v‚È‚½‚ß‚±‚ÌêŠ‚Å’è‹`
+//IMrhTargetãŒå¿…è¦ãªãŸã‚ã“ã®å ´æ‰€ã§å®šç¾©
 void renderTarget( IMrhTarget61 *_pTarget );
 
 //===========================================================================//
-// WinMainŠÖ”
+// WinMainé–¢æ•°
 //===========================================================================//
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPreInst,
 	LPSTR lpszCmdLine, int nCmdShow) {
 
-	////////////////š
+	////////////////â˜…
 	AllocConsole();
 	freopen("CONOUT$", "w", stdout);
 	printf("START MR PROJECT\n");
 	//getchar();
-	////////////////š
+	////////////////â˜…
 
-	// MREAL PlatformŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‰Šúİ’è
+	// MREAL Platformé–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®åˆæœŸè¨­å®š
 	if ( !initMrPlatform() ) 
 		return 0;
 
-	// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²
 	char className[] = "UsersGuideSample"; 
 	if ( !InitApp( hInstance, className ) ) {
 		MessageBox( NULL, "Cannot Register WNDCLASSEX\n", "ERROR", MB_ICONERROR );
 		return 0;
 	}
-	// ƒEƒBƒ“ƒhƒE‚Ìì¬
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 	HWND hWnd = NULL;
 	if ( ( hWnd = InitInstance( hInstance, className, nCmdShow ) ) == NULL ) {
 		MessageBox( NULL, "Cannot Create Window\n", "ERROR", MB_ICONERROR );
 		return 0;
 	}
 
-	// MREAL Displayƒ{ƒ^ƒ“ŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‰Šú‰»
+	// MREAL Displayãƒœã‚¿ãƒ³é–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®åˆæœŸåŒ–
 	initMREALButton(hWnd);
 
 	MSG msg;
@@ -113,28 +113,28 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPreInst,
 		DWORD dwRet = ::MsgWaitForMultipleObjects( dwNumOfSignals, signals, FALSE, INFINITE, QS_ALLINPUT );
 		if( dwNumOfSignals <= dwRet )
 		{
-			// ƒƒbƒZ[ƒWƒLƒ…[‚©‚çƒL[ƒCƒxƒ“ƒg‚ğæ“¾
+			// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚­ãƒ¥ãƒ¼ã‹ã‚‰ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—
 			while ( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) ) {
 				if ( msg.message == WM_QUIT ) {
 					bEndFlg = TRUE;
 					break;
 				}
-				// ƒL[ƒCƒxƒ“ƒg‚ğ•¶šƒƒbƒZ[ƒW‚Ö•ÏŠ·
+				// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’æ–‡å­—ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¸å¤‰æ›
 				TranslateMessage( &msg );
-				// •¶šƒƒbƒZ[ƒW‚ğ“KØ‚ÈƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚É“]‘—
+				// æ–‡å­—ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é©åˆ‡ãªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã«è»¢é€
 				DispatchMessage( &msg );
 			}
 		}
 
-		// ˆÊ’u‡‚í‚¹ƒ†[ƒeƒBƒŠƒeƒB‚ÌI—¹ƒCƒxƒ“ƒg‚Ì”­¶‚ğŠm”F‚·‚éB
+		// ä½ç½®åˆã‚ã›ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã®çµ‚äº†ã‚¤ãƒ™ãƒ³ãƒˆã®ç™ºç”Ÿã‚’ç¢ºèªã™ã‚‹ã€‚
 		else if( signals[dwRet] == hRegistrationUtilityEnd )
 			SetForegroundWindow( hWnd );
 
-		// ƒGƒ“ƒWƒ“‚Ìó‘Ô•Ï‰»ƒCƒxƒ“ƒg‚©ƒL[ƒCƒxƒ“ƒg‚ğæ“¾‚·‚é‚Ü‚Å‘Ò‹@
+		// ã‚¨ãƒ³ã‚¸ãƒ³ã®çŠ¶æ…‹å¤‰åŒ–ã‚¤ãƒ™ãƒ³ãƒˆã‹ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—ã™ã‚‹ã¾ã§å¾…æ©Ÿ
 		else if( signals[dwRet] == hEvent ) {
 			HRESULT hr;
 
-			// ƒGƒ“ƒWƒ“‚Ìƒpƒ‰ƒ[ƒ^[‚ğXV
+			// ã‚¨ãƒ³ã‚¸ãƒ³ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’æ›´æ–°
 			hr = pEngine->Update();
 			if ( FAILED( hr ) ) {
 				MessageBox( NULL, "IMrhEngine70::Update() FAILED.", "ERROR", MB_ICONERROR );
@@ -142,58 +142,58 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPreInst,
 				break;
 			}
 
-			//•\¦‰æ–Ê‚ÌƒEƒBƒ“ƒhƒE‹éŒ`‚ğæ“¾‚·‚éB
+			//è¡¨ç¤ºç”»é¢ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦çŸ©å½¢ã‚’å–å¾—ã™ã‚‹ã€‚
 			pDispInfo->GetWindowRect( &winX, &winY, &winW, &winH );
 			
 			RECT rc = { winX, winY, winX + winW, winY + winH };
 			::AdjustWindowRectEx( &rc, ::GetWindowLong( hWnd, GWL_STYLE ), ::GetMenu( hWnd ) != NULL, ::GetWindowLong( hWnd, GWL_EXSTYLE ) );
 			::SetWindowPos( hWnd, NULL, winX, winY, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER );
 
-			// ƒ}ƒXƒ^[ƒJƒƒ‰‚ª‚ ‚é‚©‚Ç‚¤‚©Šm”F
+			// ãƒã‚¹ã‚¿ãƒ¼ã‚«ãƒ¡ãƒ©ãŒã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèª
 			BOOL isExist = FALSE;
 			pEngine->QueryCamera( MRH_CAMERA_MASTER, &isExist );
 			if ( isExist ) {
-				//ƒJƒƒ‰‚²‚Æ‚ÉŒÂX‚Ìƒrƒ…[ƒ|[ƒg‹éŒ`‚ğæ“¾‚·‚é
+				//ã‚«ãƒ¡ãƒ©ã”ã¨ã«å€‹ã€…ã®ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆçŸ©å½¢ã‚’å–å¾—ã™ã‚‹
 				pDispInfo->GetViewportRect( MRH_CAMERA_MASTER, &dispOrigin[0].x, &dispOrigin[0].y, &dispSize[0].width, &dispSize[0].height );
 			}
-			// ƒXƒŒ[ƒuƒJƒƒ‰‚ª‚ ‚é‚©‚Ç‚¤‚©Šm”F
-			// Configuration Tool‚Å’PŠá‚Éİ’è‚µ‚½Û‚É‚à“®ì‚·‚é‚æ‚¤‚É
-			// –ˆƒtƒŒ[ƒ€–â‚¢‡‚í‚¹‚é
+			// ã‚¹ãƒ¬ãƒ¼ãƒ–ã‚«ãƒ¡ãƒ©ãŒã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèª
+			// Configuration Toolã§å˜çœ¼ã«è¨­å®šã—ãŸéš›ã«ã‚‚å‹•ä½œã™ã‚‹ã‚ˆã†ã«
+			// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å•ã„åˆã‚ã›ã‚‹
 			pEngine->QueryCamera( MRH_CAMERA_SLAVE, &isExist );
 			if ( isExist ) {
-				//ƒJƒƒ‰‚²‚Æ‚ÉŒÂX‚Ìƒrƒ…[ƒ|[ƒg‹éŒ`‚ğæ“¾‚·‚é
+				//ã‚«ãƒ¡ãƒ©ã”ã¨ã«å€‹ã€…ã®ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆçŸ©å½¢ã‚’å–å¾—ã™ã‚‹
 				pDispInfo->GetViewportRect( MRH_CAMERA_SLAVE, &dispOrigin[1].x, &dispOrigin[1].y, &dispSize[1].width, &dispSize[1].height );
 			}
 
-			// ÀÊ‰æ‘œ‹y‚Ñ‰¼‘z•¨‘Ì‚Ì•`‰æ
+			// å®Ÿå†™ç”»åƒåŠã³ä»®æƒ³ç‰©ä½“ã®æç”»
 			dispFunc();
 
-			//ƒtƒŒ[ƒ€•`‰æ‚ÌI—¹ˆ—‚ğs‚¤
+			//ãƒ•ãƒ¬ãƒ¼ãƒ æç”»ã®çµ‚äº†å‡¦ç†ã‚’è¡Œã†
 			pEngine->EndFrame();
 
 			SwapBuffers( hDC );
 
-			// MREAL Displayƒ{ƒ^ƒ“‚ğŠm”F‚·‚éB
+			// MREAL Displayãƒœã‚¿ãƒ³ã‚’ç¢ºèªã™ã‚‹ã€‚
 			execMREALButtonCommand();
 		}
 	}
-	// MREAL Displayƒ{ƒ^ƒ“ŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒX‚ÌI—¹ˆ—
+	// MREAL Displayãƒœã‚¿ãƒ³é–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®çµ‚äº†å‡¦ç†
 	releaseMREALButton();
-	// MREAL PlatformŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒX‚ÌI—¹ˆ—
+	// MREAL Platformé–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®çµ‚äº†å‡¦ç†
 	releaseMrPlatform();
 	return (int)msg.wParam;
 }
 
 //===========================================================================//
-// MREAL PlatformŠÖ˜A‰Šúİ’è
+// MREAL Platformé–¢é€£åˆæœŸè¨­å®š
 //===========================================================================//
 BOOL initMrPlatform() {
-	// COM‰Šú‰»
-	// MREAL Platform API‚Íƒ}ƒ‹ƒ`ƒXƒŒƒbƒhƒAƒp[ƒgƒƒ“ƒgiMTA)‚É‚Í”ñ‘Î‰
-	// ‚È‚Ì‚ÅCoInitializeEx()‚Íg—p‚µ‚È‚¢‚±‚Æ
+	// COMåˆæœŸåŒ–
+	// MREAL Platform APIã¯ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã‚¢ãƒ‘ãƒ¼ãƒˆãƒ¡ãƒ³ãƒˆï¼ˆMTA)ã«ã¯éå¯¾å¿œ
+	// ãªã®ã§CoInitializeEx()ã¯ä½¿ç”¨ã—ãªã„ã“ã¨
 	::CoInitialize( NULL );
 
-	// ƒGƒ“ƒWƒ“ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+	// ã‚¨ãƒ³ã‚¸ãƒ³ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 	HRESULT hr = CoCreateInstance( CLSID_CMrhEngine62, NULL, CLSCTX_INPROC, IID_IMrhEngine62, (LPVOID*)&pEngine );
 	
 	if ( FAILED( hr ) ) {
@@ -201,53 +201,53 @@ BOOL initMrPlatform() {
 		return FALSE;
 	}
 
-	// ƒGƒ“ƒWƒ“‰Šú‰»
+	// ã‚¨ãƒ³ã‚¸ãƒ³åˆæœŸåŒ–
 	hr = pEngine->Initialize();
 	if ( FAILED( hr ) ) {
 		MessageBox( NULL, "Failed in initializing a instance of the MREAL Engine.", "Failed in initializing an MREAL Engine", MB_OK|MB_ICONERROR );
 		return FALSE;
 	}
-	// XVƒCƒxƒ“ƒg‚Ì¶¬
+	// æ›´æ–°ã‚¤ãƒ™ãƒ³ãƒˆã®ç”Ÿæˆ
 	hEvent = ::CreateEvent( NULL, FALSE, FALSE, NULL );
-	// ƒGƒ“ƒWƒ“‚Ìó‘Ô‚ª•Ï‰»‚µ‚½‚Æ‚«‚ÌƒCƒxƒ“ƒg‚ğw’è
+	// ã‚¨ãƒ³ã‚¸ãƒ³ã®çŠ¶æ…‹ãŒå¤‰åŒ–ã—ãŸã¨ãã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’æŒ‡å®š
 	pEngine->SetEventNotification( hEvent );
 
-	// •\¦İ’è‚Ìî•ñ‚ğ–â‚¢‡‚í‚¹‚éƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+	// è¡¨ç¤ºè¨­å®šã®æƒ…å ±ã‚’å•ã„åˆã‚ã›ã‚‹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 	if ( FAILED( pEngine->QueryInterface( IID_IMrhDisplayInfo, (void **)&pDispInfo ) ) ){
 		MessageBox( NULL, "Failed in creating a instance of the DisplayInfo.", "Failed in getting a DisplayInfo", MB_OK|MB_ICONERROR );
 		return FALSE;
 	}
 
-	// ƒ}ƒXƒ^[ƒJƒƒ‰‚ª‚ ‚é‚©‚Ç‚¤‚©Šm”F
+	// ãƒã‚¹ã‚¿ãƒ¼ã‚«ãƒ¡ãƒ©ãŒã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèª
 	dwNumOfCameras = 0;
 	BOOL isExist = FALSE;
 	pEngine->QueryCamera( MRH_CAMERA_MASTER, &isExist );
 	if ( isExist ) {
-		// ƒ}ƒXƒ^[ƒJƒƒ‰ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+		// ãƒã‚¹ã‚¿ãƒ¼ã‚«ãƒ¡ãƒ©ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 		pEngine->GetCamera60( MRH_CAMERA_MASTER, &pCamera[dwNumOfCameras] );		
 		pEngine->GetRenderer60( MRH_CAMERA_MASTER, &pRender[dwNumOfCameras] );
 		dwNumOfCameras++;
 	}
-	// ƒXƒŒ[ƒuƒJƒƒ‰‚ª‚ ‚é‚©‚Ç‚¤‚©Šm”F
+	// ã‚¹ãƒ¬ãƒ¼ãƒ–ã‚«ãƒ¡ãƒ©ãŒã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèª
 	pEngine->QueryCamera( MRH_CAMERA_SLAVE, &isExist );
 	if ( isExist ) {
-		// ƒXƒŒ[ƒuƒJƒƒ‰ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+		// ã‚¹ãƒ¬ãƒ¼ãƒ–ã‚«ãƒ¡ãƒ©ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 		pEngine->GetCamera60( MRH_CAMERA_SLAVE, &pCamera[dwNumOfCameras] );
 		pEngine->GetRenderer60( MRH_CAMERA_SLAVE, &pRender[dwNumOfCameras] );
 		dwNumOfCameras++;
 	}
 
-	// ƒXƒŒ[ƒuƒJƒƒ‰‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX‚ª‘¶İ‚·‚éê‡‚ÉƒXƒeƒŒƒIŒv‘ª‚ğs‚¢
-	//ŒŸo‚µ‚½F—Ìˆæ‚Ìƒ|ƒŠƒSƒ“‚ğì¬‚·‚éD‚±‚Ì‚Æ‚«C¶‰E‚ÅƒXƒeƒŒƒIŒv‘ª‘ÎÛ‚Ì
-	//Œ`ó‚ªˆÙ‚È‚é‚½‚ßC‰EŠáC¶Šá—p‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX‚ğ‚»‚ê‚¼‚êæ“¾‚·‚éD
+	// ã‚¹ãƒ¬ãƒ¼ãƒ–ã‚«ãƒ¡ãƒ©ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ãŒå­˜åœ¨ã™ã‚‹å ´åˆã«ã‚¹ãƒ†ãƒ¬ã‚ªè¨ˆæ¸¬ã‚’è¡Œã„
+	//æ¤œå‡ºã—ãŸè‰²é ˜åŸŸã®ãƒãƒªã‚´ãƒ³ã‚’ä½œæˆã™ã‚‹ï¼ã“ã®ã¨ãï¼Œå·¦å³ã§ã‚¹ãƒ†ãƒ¬ã‚ªè¨ˆæ¸¬å¯¾è±¡ã®
+	//å½¢çŠ¶ãŒç•°ãªã‚‹ãŸã‚ï¼Œå³çœ¼ï¼Œå·¦çœ¼ç”¨ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’ãã‚Œãã‚Œå–å¾—ã™ã‚‹ï¼
 	if(dwNumOfCameras == 2) { 
 		maskMethod = MRH_COLOR_REGION_METHOD_MASK_IMAGE;
 		//maskMethod = MRH_COLOR_REGION_METHOD_POLYGON;
 
-		// F—Ìˆæ‚ÌƒXƒeƒŒƒIŒv‘ª‚ÉŠÖ‚·‚éİ’è
+		// è‰²é ˜åŸŸã®ã‚¹ãƒ†ãƒ¬ã‚ªè¨ˆæ¸¬ã«é–¢ã™ã‚‹è¨­å®š
 		BOOL exist = FALSE;
 		HRESULT res;
-		// F—Ìˆæ‚ÌƒXƒeƒŒƒIŒv‘ª‚ÌŒ‹‰Ê‚ğæ“¾‚·‚éƒCƒ“ƒ^[ƒtƒFƒCƒX‚ğæ“¾
+		// è‰²é ˜åŸŸã®ã‚¹ãƒ†ãƒ¬ã‚ªè¨ˆæ¸¬ã®çµæœã‚’å–å¾—ã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’å–å¾—
 		res = pEngine->QueryDepth61(MRH_DEPTH_COLOR_REGION, &exist);
 		assert(res == S_OK && exist);
 		res = pEngine->GetDepth70(MRH_DEPTH_COLOR_REGION, &depth);
@@ -255,7 +255,7 @@ BOOL initMrPlatform() {
 
 		const DWORD camera[] = { MRH_CAMERA_MASTER, MRH_CAMERA_SLAVE};
 		for(DWORD i=0; i<dwNumOfCameras; ++i) {
-			// ƒ|ƒŠƒSƒ“ƒCƒ“ƒ^[ƒtƒFƒCƒX‚ğæ“¾
+			// ãƒãƒªã‚´ãƒ³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’å–å¾—
 			res = depth->QueryPolygon(camera[i], &exist);
 			assert(res == S_OK && exist);
 			res = depth->GetPolygon70(camera[i], &polygon[i]);
@@ -264,13 +264,13 @@ BOOL initMrPlatform() {
 	} 
 
 	for(DWORD i=0; i<dwNumOfCameras; ++i) {
-		// ƒ}[ƒJ[ƒLƒƒƒ“ƒZƒ‰[‚Ì‰Šúİ’è
+		// ãƒãƒ¼ã‚«ãƒ¼ã‚­ãƒ£ãƒ³ã‚»ãƒ©ãƒ¼ã®åˆæœŸè¨­å®š
 		pRender[i]->SetMarkerCancelObject(MRH_MARKER_CANCEL_OBJECT_PROJECTION);
-		// ƒ}ƒXƒN‰æ‘œ•`‰æ•û–@‚Ì‰Šúİ’è
+		// ãƒã‚¹ã‚¯ç”»åƒæç”»æ–¹æ³•ã®åˆæœŸè¨­å®š
 		pRender[i]->SetColorRegionMaskMethod(maskMethod);
 	}
 
-	// ƒ^[ƒQƒbƒg‚Ì”‚ğæ“¾
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®æ•°ã‚’å–å¾—
 	//DWORD *availableTargetIDs = NULL;
 	pEngine->GetAvailableTargetIDs(&dwNumOfTarget, nullptr);
 	if (dwNumOfTarget != 0)
@@ -279,13 +279,13 @@ BOOL initMrPlatform() {
 		pEngine->GetAvailableTargetIDs(&dwNumOfTarget, availableTargetIDs);
 	}
 
-	// ƒ^[ƒQƒbƒgƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆ
 	for (DWORD i = 0; i < dwNumOfTarget; ++i) {
 		hr = pEngine->GetTarget61(availableTargetIDs[i], &mpTargets[availableTargetIDs[i]]);
 		assert(hr == S_OK);
 	}
 
-	////////////////š
+	////////////////â˜…
 	pEngine->GetNumOfMarker(&dwNumOfMarker);
 	vpMarkers = new IMrhMarker*[dwNumOfMarker];
 	for (DWORD i = 0; i < dwNumOfMarker; i++) {
@@ -293,29 +293,29 @@ BOOL initMrPlatform() {
 		HRESULT res = pEngine->GetMarker(i, &cpMarker);
 		vpMarkers[i] = cpMarker;
 	}
-	////////////////š
+	////////////////â˜…
 
 	return TRUE;
 }
 
 //===========================================================================//
-// ƒEƒBƒ“ƒhƒEƒNƒ‰ƒX‚Ì“o˜^
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã®ç™»éŒ²
 //===========================================================================//
 BOOL InitApp( HINSTANCE hInstance, LPSTR className ) {
 	WNDCLASSEX wndclsex;
 
 	wndclsex.cbSize = sizeof(WNDCLASSEX);
 
-	wndclsex.style			= CS_HREDRAW | CS_VREDRAW ;					// ƒXƒ^ƒCƒ‹
-	wndclsex.lpfnWndProc	= WndProc;									// ƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚Ì–¼‘O
-	wndclsex.cbClsExtra		= 0;										// ƒƒ‚ƒŠ—Ìˆæ‚Ì’Ç‰Áİ’è
-	wndclsex.cbWndExtra		= 0;										// ƒƒ‚ƒŠ—Ìˆæ‚Ì’Ç‰Áİ’è
-	wndclsex.hInstance		= hInstance;								// ƒvƒƒOƒ‰ƒ€ƒnƒ“ƒhƒ‹
-	wndclsex.hIcon			= LoadIcon( hInstance, 						// ƒAƒCƒRƒ“
+	wndclsex.style			= CS_HREDRAW | CS_VREDRAW ;					// ã‚¹ã‚¿ã‚¤ãƒ«
+	wndclsex.lpfnWndProc	= WndProc;									// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã®åå‰
+	wndclsex.cbClsExtra		= 0;										// ãƒ¡ãƒ¢ãƒªé ˜åŸŸã®è¿½åŠ è¨­å®š
+	wndclsex.cbWndExtra		= 0;										// ãƒ¡ãƒ¢ãƒªé ˜åŸŸã®è¿½åŠ è¨­å®š
+	wndclsex.hInstance		= hInstance;								// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãƒãƒ³ãƒ‰ãƒ«
+	wndclsex.hIcon			= LoadIcon( hInstance, 						// ã‚¢ã‚¤ã‚³ãƒ³
 		MAKEINTRESOURCE(IDI_GUIDESAMPLE1) );
-	wndclsex.hCursor		= LoadCursor( NULL, IDC_ARROW );			// ƒJ[ƒ\ƒ‹
-	wndclsex.hbrBackground	= (HBRUSH)GetStockObject( WHITE_BRUSH );	// ƒuƒ‰ƒV
-	wndclsex.lpszMenuName	= NULL;										// ƒƒjƒ…[
+	wndclsex.hCursor		= LoadCursor( NULL, IDC_ARROW );			// ã‚«ãƒ¼ã‚½ãƒ«
+	wndclsex.hbrBackground	= (HBRUSH)GetStockObject( WHITE_BRUSH );	// ãƒ–ãƒ©ã‚·
+	wndclsex.lpszMenuName	= NULL;										// ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	wndclsex.lpszClassName	= className;
 	wndclsex.hIconSm		= LoadIcon(wndclsex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -323,31 +323,31 @@ BOOL InitApp( HINSTANCE hInstance, LPSTR className ) {
 }
 
 //===========================================================================//
-// ƒEƒBƒ“ƒhƒEƒvƒƒV[ƒWƒƒ
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£
 //===========================================================================//
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch ( msg ) {
-		// ƒEƒBƒ“ƒhƒE¶¬ƒƒbƒZ[ƒW -------------------------------------------
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç”Ÿæˆãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ -------------------------------------------
 	case WM_CREATE :
-		// OpenGL‚Ì‰Šúİ’è
+		// OpenGLã®åˆæœŸè¨­å®š
 		initOpenGL(hWnd);
 		break;
-		// ƒEƒBƒ“ƒhƒE”jŠüƒƒbƒZ[ƒW -------------------------------------------
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç ´æ£„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ -------------------------------------------
 	case WM_DESTROY : 
-		// OpenGLŠÖ˜A‚ÌI—¹ˆ—
+		// OpenGLé–¢é€£ã®çµ‚äº†å‡¦ç†
 		finalizeOpenGL( hWnd );
-		// ƒƒbƒZ[ƒWƒLƒ…[‚ÉI—¹ƒƒbƒZ[ƒW‚ğ‘—•t
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚­ãƒ¥ãƒ¼ã«çµ‚äº†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä»˜
 		PostQuitMessage(0);
 		break;
-		// •`‰æƒƒbƒZ[ƒW -----------------------------------------------------
+		// æç”»ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ -----------------------------------------------------
 	case WM_PAINT:
 		dispFunc();
 		return DefWindowProc( hWnd, msg, wParam, lParam );
-		// ƒL[ƒCƒxƒ“ƒg -------------------------------------------------------
+		// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆ -------------------------------------------------------
 	case WM_CHAR :
 		keyPress( hWnd, wParam );
 		break;
-		// ƒƒbƒZ[ƒW‚ÌƒfƒtƒHƒ‹ƒgˆ— -----------------------------------------
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå‡¦ç† -----------------------------------------
 	default:
 		return DefWindowProc( hWnd, msg, wParam, lParam );
 	}
@@ -355,11 +355,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 }
 
 //===========================================================================//
-// ƒL[ƒCƒxƒ“ƒg
+// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆ
 //===========================================================================//
 void keyPress( HWND hWnd, WPARAM wParam ) {
 	switch ( wParam ) {
-	case 27	 :	// ƒvƒƒOƒ‰ƒ€I—¹(EscƒL[)
+	case 27	 :	// ãƒ—ãƒ­ã‚°ãƒ©ãƒ çµ‚äº†(Escã‚­ãƒ¼)
 	case 'q' :
 		DestroyWindow( hWnd );
 		break;
@@ -367,69 +367,69 @@ void keyPress( HWND hWnd, WPARAM wParam ) {
 }
 
 //===========================================================================//
-// ƒEƒBƒ“ƒhƒE‚Ìì¬
+// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 //===========================================================================//
 HWND InitInstance ( HINSTANCE hInstance, LPSTR className ,int nCmdShow ) {
 
-	// ƒEƒBƒ“ƒhƒE‚Ìì¬
-	HWND hWnd = CreateWindow( className,	// ƒNƒ‰ƒX–¼
-		"UsersGuideSample",						// ƒEƒBƒ“ƒhƒE‚Ì–¼‘O
-		WS_POPUP,							// ˜g‚È‚µ‚ÌƒEƒCƒ“ƒhƒE	
-		0,				 					// XÀ•W
-		0,				 					// YÀ•W
-		winW,								// •
-		winH,								// ‚‚³
-		NULL,								// eƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
-		NULL,								// ƒƒjƒ…[ƒnƒ“ƒhƒ‹
-		hInstance,							// ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
-		NULL 								// ƒEƒBƒ“ƒhƒEì¬ƒf[ƒ^
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
+	HWND hWnd = CreateWindow( className,	// ã‚¯ãƒ©ã‚¹å
+		"UsersGuideSample",						// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åå‰
+		WS_POPUP,							// æ ãªã—ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦	
+		0,				 					// Xåº§æ¨™
+		0,				 					// Yåº§æ¨™
+		winW,								// å¹…
+		winH,								// é«˜ã•
+		NULL,								// è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+		NULL,								// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
+		hInstance,							// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		NULL 								// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½œæˆãƒ‡ãƒ¼ã‚¿
 		);
 	if ( !hWnd  ) return NULL;
-	// ƒEƒBƒ“ƒhƒE‚Ì•\¦
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤º
 	ShowWindow( hWnd, nCmdShow );
-	// Ä•`‰æ‚ğw¦
+	// å†æç”»ã‚’æŒ‡ç¤º
 	UpdateWindow( hWnd );
 	return hWnd;
 }
 
 //===========================================================================//
-// OpenGLŠÖ˜A‰Šúİ’è
+// OpenGLé–¢é€£åˆæœŸè¨­å®š
 //===========================================================================//
 void initOpenGL( HWND hWnd ) {
-	// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚Ìæ“¾
+	// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã®å–å¾—
 	hDC = GetDC( hWnd );
-	// ƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚Ìİ’è
+	// ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®š
 	if ( !setPixelFormat( hDC ) ) {
 		MessageBox( hWnd, "Cannot set PixelFormat", "ERROR", MB_ICONERROR );
 		finalizeOpenGL( hWnd );
 		DestroyWindow( hWnd );
 	}
-	// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg‚ğì¬
+	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ä½œæˆ
 	hRC = wglCreateContext( hDC );
-	// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg‚ğƒJƒŒƒ“ƒg‚Éİ’è
+	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚«ãƒ¬ãƒ³ãƒˆã«è¨­å®š
 	wglMakeCurrent( hDC, hRC );
 
-	// ƒEƒBƒ“ƒhƒEƒNƒŠƒA‚ÌFw’è
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¯ãƒªã‚¢æ™‚ã®è‰²æŒ‡å®š
 	glClearColor(0, 0, 0, 1);
 
-	// 2Ÿ‹È–ÊƒIƒuƒWƒFƒNƒg‚ğ¶¬
+	// 2æ¬¡æ›²é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
 	pFillObj = gluNewQuadric();
 	gluQuadricDrawStyle(pFillObj, GLU_FILL);
 
-	// ŒõŒ¹‚ğİ’è
-	//setLight();//™
+	// å…‰æºã‚’è¨­å®š
+	//setLight();//â˜†
 
-	////////////////š
-	InitScene();//š
-	////////////////š
+	////////////////â˜…
+	InitScene();//â˜…
+	////////////////â˜…
 }
 
 //===========================================================================//
-// MREAL Displayƒ{ƒ^ƒ“ó‘ÔXV‚Ìˆ—
+// MREAL Displayãƒœã‚¿ãƒ³çŠ¶æ…‹æ›´æ–°æ™‚ã®å‡¦ç†
 //===========================================================================//
 void execMREALButtonCommand()
 {
-	// MREAL Displayƒ{ƒ^ƒ“‚Ì[A]ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğæ“¾B
+	// MREAL Displayãƒœã‚¿ãƒ³ã®[A]ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’å–å¾—ã€‚
 	DIJOYSTATE btnState{};
 	static BYTE lastState = 0;
 
@@ -440,7 +440,7 @@ void execMREALButtonCommand()
 	}
 	BYTE currentState = btnState.rgbButtons[0];
 
-	// ƒ{ƒ^ƒ“ó‘Ô‚ª‰Ÿ‰ºó‘Ô‚É•Ï‰»‚µ‚½‚Æ‚«‚ÉA‹óŠÔ“Á’¥ƒc[ƒ‹‚ğ‹N“®‚·‚éB
+	// ãƒœã‚¿ãƒ³çŠ¶æ…‹ãŒæŠ¼ä¸‹çŠ¶æ…‹ã«å¤‰åŒ–ã—ãŸã¨ãã«ã€ç©ºé–“ç‰¹å¾´ãƒ„ãƒ¼ãƒ«ã‚’èµ·å‹•ã™ã‚‹ã€‚
 	if (lastState == 0 && currentState != 0)
 	{
 		if (pEngine->IsRegistrationUtilityAvailable(nullptr) == S_OK)
@@ -452,43 +452,43 @@ void execMREALButtonCommand()
 }
 
 //===========================================================================//
-// MREAL Displayƒ{ƒ^ƒ“ŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒX‚Ì‰Šú‰»
+// MREAL Displayãƒœã‚¿ãƒ³é–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®åˆæœŸåŒ–
 //===========================================================================//
 void initMREALButton(HWND window_handle)
 {
-	// MREAL Displayƒ{ƒ^ƒ“‚Ì‰Šú‰»
+	// MREAL Displayãƒœã‚¿ãƒ³ã®åˆæœŸåŒ–
 	pMREALButtonInput = new DirectInputDevice(window_handle);
 	if (pMREALButtonInput->Initialize())
 		pMREALButtonInput->Connect();
 	
-	// ˆÊ’u‡‚í‚¹ƒ†[ƒeƒBƒŠƒeƒB‚ÌI—¹‚ğ’m‚éƒCƒxƒ“ƒg‚ğæ“¾
+	// ä½ç½®åˆã‚ã›ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã®çµ‚äº†ã‚’çŸ¥ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—
 	pEngine->GetRegistrationUtilityEventNotification( &hRegistrationUtilityEnd );
 }
 
 //===========================================================================//
-// MREAL Displayƒ{ƒ^ƒ“ŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒXI—¹ˆ—
+// MREAL Displayãƒœã‚¿ãƒ³é–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹çµ‚äº†å‡¦ç†
 //===========================================================================//
 void releaseMREALButton()
 {
 	delete pMREALButtonInput;
 	pMREALButtonInput = nullptr;
-	// ˆÊ’u‡‚í‚¹ƒ†[ƒeƒBƒŠƒeƒBI—¹—pEvent‚Ì”jŠü
+	// ä½ç½®åˆã‚ã›ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£çµ‚äº†ç”¨Eventã®ç ´æ£„
 	CloseHandle( hRegistrationUtilityEnd );
 }
 
 //===========================================================================//
-// ‰¼‘z•¨‘Ì•`‰æ‚Ì‚½‚ß‚ÌŒõŒ¹‚Ìİ’è
+// ä»®æƒ³ç‰©ä½“æç”»ã®ãŸã‚ã®å…‰æºã®è¨­å®š
 //===========================================================================//
 void setLight( void ) {
-	// ƒ‰ƒCƒg‚Ìİ’è
-	// ƒ‰ƒCƒg‚O”Ô‚ÌŒõŒ¹İ’è
+	// ãƒ©ã‚¤ãƒˆã®è¨­å®š
+	// ãƒ©ã‚¤ãƒˆï¼ç•ªã®å…‰æºè¨­å®š
 	static GLfloat lightAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 	static GLfloat lightDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
 	static GLfloat lightPosition[] = { 0.0f, 1.0f, 0.0f, 0.0f };
 	glLightfv( GL_LIGHT0, GL_AMBIENT, lightAmbient );
 	glLightfv( GL_LIGHT0, GL_DIFFUSE, lightDiffuse );
 	glLightfv( GL_LIGHT0, GL_POSITION, lightPosition );
-	// ŒõŒ¹ƒ‚ƒfƒ‹‚Ìİ’è
+	// å…‰æºãƒ¢ãƒ‡ãƒ«ã®è¨­å®š
 	static float lmodelAmbient[] = {0.4f, 0.4f, 0.4f, 1.0f};
 	static float lmodelLocalviewer[] = {0.0f};
 	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, lmodelAmbient );
@@ -496,10 +496,10 @@ void setLight( void ) {
 }
 
 //===========================================================================//
-//  ƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚ğİ’è
+//  ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’è¨­å®š
 //===========================================================================//
 BOOL setPixelFormat( HDC hdc ) {
-	// ƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚Ìİ’è
+	// ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®š
 	PIXELFORMATDESCRIPTOR pfd ;
 	memset(&pfd,0, sizeof(PIXELFORMATDESCRIPTOR)) ;
 
@@ -515,27 +515,27 @@ BOOL setPixelFormat( HDC hdc ) {
 	pfd.cDepthBits	= 32;
 	pfd.iLayerType	= PFD_MAIN_PLANE ;            // Layer type
 
-	// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚ÉƒsƒNƒZƒ‹ƒtƒH[ƒ}ƒbƒg‚ğİ’è
+	// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã«ãƒ”ã‚¯ã‚»ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’è¨­å®š
 	int pixelFormat = ChoosePixelFormat( hdc, &pfd );
 	if ( pixelFormat == 0 ) return FALSE;
 	return SetPixelFormat(hdc, pixelFormat, &pfd );
 }
 
 //===========================================================================//
-//  •`‰æŠÖ”
+//  æç”»é–¢æ•°
 //===========================================================================//
 void dispFunc() {
-	// ‰æ–ÊƒNƒŠƒA
+	// ç”»é¢ã‚¯ãƒªã‚¢
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
 	glEnable( GL_DEPTH_TEST );
-	//ƒtƒ‰ƒXƒ^ƒ€ƒpƒ‰ƒ[ƒ^[æ“¾•Ï”
-	//double l,r,b,t,n=10,f=3000; //™
-	double l, r, b, t, n = 0.1, f = 10000.0; //š
-	////////////////š
-	// ƒ^[ƒQƒbƒgî•ñ‚Ìæ“¾
-	// ƒJƒƒ‰‚ÌˆÊ’up¨‚ª‚í‚©‚ç‚È‚¢ê‡‚Å‚à
-	// ƒ^[ƒQƒbƒg‚Ìƒf[ƒ^‚ğsimdata‚ÌƒIƒuƒWƒFƒNƒgƒf[ƒ^‚ÉƒRƒs[
-	// ‹ŒpTarget -> VmpTargets
+	//ãƒ•ãƒ©ã‚¹ã‚¿ãƒ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼å–å¾—å¤‰æ•°
+	//double l,r,b,t,n=10,f=3000; //â˜†
+	double l, r, b, t, n = 0.1, f = 10000.0; //â˜…
+	////////////////â˜…
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæƒ…å ±ã®å–å¾—
+	// ã‚«ãƒ¡ãƒ©ã®ä½ç½®å§¿å‹¢ãŒã‚ã‹ã‚‰ãªã„å ´åˆã§ã‚‚
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ‡ãƒ¼ã‚¿ã‚’simdataã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ‡ãƒ¼ã‚¿ã«ã‚³ãƒ”ãƒ¼
+	// æ—§pTarget -> æ–°mpTargets
 #if 1
 	for (unsigned int j = 0; j < dwNumOfTarget; j++) {
 		if (mpTargets[availableTargetIDs[j]]->GetRegistrationStatus(&regStatus) == S_OK
@@ -549,31 +549,31 @@ void dispFunc() {
 #endif
 	UpdateScene();
 	glEnable(GL_NORMALIZE);
-	////////////////š
+	////////////////â˜…
 	for ( unsigned int i = 0; i < dwNumOfCameras; i++ ) {
-		// ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+		// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®è¨­å®š
 		glViewport( dispOrigin[i].x, dispOrigin[i].y, dispSize[i].width, dispSize[i].height );
 
-		// ÀÊ‰æ‘œ‚Ì•\¦
+		// å®Ÿå†™ç”»åƒã®è¡¨ç¤º
 		pRender[i]->SetDispPosition( dispOrigin[i].x, dispOrigin[i].y );
 		pRender[i]->SetDispSize( dispSize[i].width, dispSize[i].height );
 		pRender[i]->SetNearFar(n, f);
 		pRender[i]->Render();
 
-		// “§‹“Š‰es—ñ‚Ìİ’è
+		// é€è¦–æŠ•å½±è¡Œåˆ—ã®è¨­å®š
 		glMatrixMode( GL_PROJECTION );
-		// IMrhCamera‚©‚çƒtƒ‰ƒXƒ^ƒ€ƒpƒ‰ƒ[ƒ^[‚ğæ“¾
+		// IMrhCameraã‹ã‚‰ãƒ•ãƒ©ã‚¹ã‚¿ãƒ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’å–å¾—
 		pCamera[i]->GetFrustum( &l, &r, &b, &t, n );
-		// æ“¾‚µ‚½ƒtƒ‰ƒXƒ^ƒ€ƒpƒ‰ƒ[ƒ^[‚ğglFrustum‚Öİ’è‚·‚é‚±‚Æ‚Å, Œ»İ•\¦‚µ‚Ä‚¢‚é
-		// ƒLƒƒƒvƒ`ƒƒ[‰æ‘œ‚É“K‡‚µ‚½“§‹“Š‰eİ’è‚Å‰¼‘z•¨‘Ì‚ğ•`‰æ‚·‚é‚±‚Æ‚ª
-		// ‰Â”\‚É‚È‚éD
+		// å–å¾—ã—ãŸãƒ•ãƒ©ã‚¹ã‚¿ãƒ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’glFrustumã¸è¨­å®šã™ã‚‹ã“ã¨ã§, ç¾åœ¨è¡¨ç¤ºã—ã¦ã„ã‚‹
+		// ã‚­ãƒ£ãƒ—ãƒãƒ£ãƒ¼ç”»åƒã«é©åˆã—ãŸé€è¦–æŠ•å½±è¨­å®šã§ä»®æƒ³ç‰©ä½“ã‚’æç”»ã™ã‚‹ã“ã¨ãŒ
+		// å¯èƒ½ã«ãªã‚‹ï¼
 		glLoadIdentity();
 		glFrustum( l, r, b, t, n, f );
 
-		// ƒ‚ƒfƒ‹ƒrƒ…[•ÏŠ·s—ñ‚Ìİ’è
+		// ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—ã®è¨­å®š
 		glMatrixMode( GL_MODELVIEW );
 
-		// IMrhCamera‚©‚çƒJƒƒ‰‚Ì¢ŠEÀ•WŒnã‚Å‚ÌˆÊ’up¨‚ğæ“¾
+		// IMrhCameraã‹ã‚‰ã‚«ãƒ¡ãƒ©ã®ä¸–ç•Œåº§æ¨™ç³»ä¸Šã§ã®ä½ç½®å§¿å‹¢ã‚’å–å¾—
 		GLfloat position[3] = { 0.0, 0.0, 0.0 };
 		GLfloat axis[3] = { 0.0, 0.0, 0.0 };
 		GLfloat angle = 0.0;
@@ -581,45 +581,45 @@ void dispFunc() {
 		pCamera[i]->GetPosition( &position[0], &position[1], &position[2] );
 		pCamera[i]->GetOrientation( &axis[0], &axis[1], &axis[2], 
 			&angle );
-		// æ“¾‚µ‚½ˆÊ’up¨‚ğİ’è‚·‚é‚±‚Æ‚Å, Œ»İ•\¦‚µ‚Ä‚¢‚éŒ»À‹óŠÔ‚É
-		// “K‡‚µ‚½ˆÊ’u‚É, ‰¼‘z•¨‘Ì‚ğ•`‰æ‚·‚é‚±‚Æ‚ª‰Â”\‚É‚È‚éD
+		// å–å¾—ã—ãŸä½ç½®å§¿å‹¢ã‚’è¨­å®šã™ã‚‹ã“ã¨ã§, ç¾åœ¨è¡¨ç¤ºã—ã¦ã„ã‚‹ç¾å®Ÿç©ºé–“ã«
+		// é©åˆã—ãŸä½ç½®ã«, ä»®æƒ³ç‰©ä½“ã‚’æç”»ã™ã‚‹ã“ã¨ãŒå¯èƒ½ã«ãªã‚‹ï¼
 		glLoadIdentity();
 		glRotatef( (GLfloat)(-angle * 180./M_PI), 
 			(GLfloat)axis[0], (GLfloat)axis[1], (GLfloat)axis[2] );
-		//glTranslatef( -position[0], -position[1], -position[2] ); ////š
+		//glTranslatef( -position[0], -position[1], -position[2] ); ////â˜…
 
-		//ƒJƒƒ‰ˆÊ’up¨‚Ìæ“¾ƒtƒ‰ƒO
+		//ã‚«ãƒ¡ãƒ©ä½ç½®å§¿å‹¢ã®å–å¾—ãƒ•ãƒ©ã‚°
 		DWORD regResult;
-		//ƒ}ƒXƒ^[ƒJƒƒ‰‚ÌˆÊ’up¨‚ªæ“¾‚Å‚«‚Ä‚¢‚é‚©Šm”F
+		//ãƒã‚¹ã‚¿ãƒ¼ã‚«ãƒ¡ãƒ©ã®ä½ç½®å§¿å‹¢ãŒå–å¾—ã§ãã¦ã„ã‚‹ã‹ç¢ºèª
 		pCamera[0]->GetRegistrationStatus(&regResult);
 
-		//ƒJƒƒ‰‚ÌˆÊ’up¨‚ª‰ŠúˆÊ’uiŒ´“_j‚Ì‚Ü‚Ü‚¾‚ÆCG‚ªŒ»À‰f‘œ‚ğ•¢‚Á‚Ä‚µ‚Ü‚¢C
-		//Œ»À‰f‘œ‚ª‰f‚Á‚Ä‚¢‚È‚¢‚ÆŠÔˆá‚¦‚é‰Â”\«‚ª‚ ‚éD‚»‚Ì‚½‚ßCƒJƒƒ‰‚Ì
-		//ˆÊ’up¨‚ªæ“¾‚Å‚«‚Ä‚©‚çCG‚ğ•`‰æ‚·‚éD
+		//ã‚«ãƒ¡ãƒ©ã®ä½ç½®å§¿å‹¢ãŒåˆæœŸä½ç½®ï¼ˆåŸç‚¹ï¼‰ã®ã¾ã¾ã ã¨CGãŒç¾å®Ÿæ˜ åƒã‚’è¦†ã£ã¦ã—ã¾ã„ï¼Œ
+		//ç¾å®Ÿæ˜ åƒãŒæ˜ ã£ã¦ã„ãªã„ã¨é–“é•ãˆã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹ï¼ãã®ãŸã‚ï¼Œã‚«ãƒ¡ãƒ©ã®
+		//ä½ç½®å§¿å‹¢ãŒå–å¾—ã§ãã¦ã‹ã‚‰CGã‚’æç”»ã™ã‚‹ï¼
 		if( regResult == MRH_REGISTRATION_RESULT_OK ) {
 			/*
-			// ‰~‚Ì•\¦
+			// å††éŒã®è¡¨ç¤º
 			glPushMatrix();
 			glRotatef( -90.0f, 1.0f, 0.0f, 0.0f );
 			dispCone( pFillObj, 50, 100, 1.0, 1.0, 0.0 );
 			glPopMatrix();
 			*/
-			copyCamera(pCamera[i], &simdata.mrealCamera[i], true); //š
+			copyCamera(pCamera[i], &simdata.mrealCamera[i], true); //â˜…
 		}
 		else {
-			copyCamera(pCamera[i], &simdata.mrealCamera[i], false); //š
+			copyCamera(pCamera[i], &simdata.mrealCamera[i], false); //â˜…
 		}
 #if 0
-		//ƒ^[ƒQƒbƒg‚ğ•\¦‚·‚éD‚±‚Ì‚Æ‚«CƒJƒƒ‰‚ÌˆÊ’up¨‚ª•ª‚©‚ç‚È‚¢ê‡‚Å‚àC
-		//ƒ^[ƒQƒbƒg‚ªŒ©‚¦‚Ä‚¢‚éê‡‚Íƒ^[ƒQƒbƒg‚ğ•\¦‚·‚éD
-		glTranslatef( -position[0], -position[1], -position[2] ); ////š
+		//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¡¨ç¤ºã™ã‚‹ï¼ã“ã®ã¨ãï¼Œã‚«ãƒ¡ãƒ©ã®ä½ç½®å§¿å‹¢ãŒåˆ†ã‹ã‚‰ãªã„å ´åˆã§ã‚‚ï¼Œ
+		//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒè¦‹ãˆã¦ã„ã‚‹å ´åˆã¯ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¡¨ç¤ºã™ã‚‹ï¼
+		glTranslatef( -position[0], -position[1], -position[2] ); ////â˜…
 		for (const std::pair<DWORD, IMrhTarget61*>& target : mpTargets) {
 			DWORD regStatus;
 			if (target.second->GetRegistrationStatus(&regStatus) == S_OK) {
 				renderTarget(target.second); // Display the cube indicating the target position
 			}
 		}
-#else ////////////////š
+#else ////////////////â˜…
 		glTranslatef( -position[0]*0.001, -position[1]*0.001, -position[2]*0.001);
 		glEnable(GL_LIGHTING);
 		HeadLight();
@@ -675,28 +675,28 @@ void copyTarget(IMrhTarget61* _pTarget, int id, bool detected)
 	if (!detected) {
 		if (simdata.TargetList[id].detected)
 		{
-			//‘O‰ñŒ©‚¦‚Ä‚¢‚½‚ªŒ©‚¦‚È‚­‚È‚Á‚½
+			//å‰å›è¦‹ãˆã¦ã„ãŸãŒè¦‹ãˆãªããªã£ãŸ
 			simdata.TargetList[id].state = -1;
 		}
 		else
 		{
-			//Œ©‚¦‚Ä‚¢‚È‚¢‚Ü‚Ü
+			//è¦‹ãˆã¦ã„ãªã„ã¾ã¾
 			simdata.TargetList[id].state = 0;
 		}
 
 		simdata.TargetList[id].detected = false;
-		//Œ©‚¦‚Ä‚¢‚È‚¢ê‡‚É‚Í‘O‰ñ‚Ì’l‚ğ•Û‚µ‚½‚Ü‚Ü–ß‚é
+		//è¦‹ãˆã¦ã„ãªã„å ´åˆã«ã¯å‰å›ã®å€¤ã‚’ä¿æŒã—ãŸã¾ã¾æˆ»ã‚‹
 		return;
 	}
 	else {
 		if (simdata.TargetList[id].detected)
 		{
-			//Œ©‚¦‚½‚Ü‚Ü
+			//è¦‹ãˆãŸã¾ã¾
 			simdata.TargetList[id].state = 0;
 		}
 		else
 		{
-			//‘O‰ñŒ©‚¦‚Ä‚¢‚È‚©‚Á‚½‚ªŒ©‚Â‚©‚Á‚½
+			//å‰å›è¦‹ãˆã¦ã„ãªã‹ã£ãŸãŒè¦‹ã¤ã‹ã£ãŸ
 			simdata.TargetList[id].state = 1;
 		}
 		simdata.TargetList[id].detected = true;
@@ -761,13 +761,13 @@ void copyMarker(IMrhMarker* _pMarker, int id, bool detected, int targetID)
 }
 
 //===========================================================================//
-// ƒ^[ƒQƒbƒgƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 //===========================================================================//
 void renderTarget( IMrhTarget61 *_pTarget ) {
-	// ƒ^[ƒQƒbƒgˆÊ’u‚É‰¼‘z•¨‘Ì‚ğ•\¦
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆä½ç½®ã«ä»®æƒ³ç‰©ä½“ã‚’è¡¨ç¤º
 	glPushMatrix();
 
-	// ƒ^[ƒQƒbƒg‚ÌˆÊ’up¨‚ğæ“¾
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä½ç½®å§¿å‹¢ã‚’å–å¾—
 	GLfloat position[3] = { 0.0, 0.0, 0.0 };
 	GLfloat axis[3] = { 0.0, 0.0, 0.0 };
 	GLfloat angle = 0.0;
@@ -775,27 +775,27 @@ void renderTarget( IMrhTarget61 *_pTarget ) {
 	_pTarget->GetPosition( &position[0], &position[1], &position[2] );
 	_pTarget->GetOrientation( &axis[0], &axis[1], &axis[2], &angle );
 
-	// æ“¾‚µ‚½ƒ^[ƒQƒbƒg‚ÌˆÊ’up¨‚ğİ’è‚·‚é‚±‚Æ‚ÅCƒ^[ƒQƒbƒg‚ÌˆÊ’u‚É
-	// ‰¼‘z•¨‘Ì‚ğ•`‰æ‚·‚é‚±‚Æ‚ªo—ˆ‚é.
+	// å–å¾—ã—ãŸã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä½ç½®å§¿å‹¢ã‚’è¨­å®šã™ã‚‹ã“ã¨ã§ï¼Œã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä½ç½®ã«
+	// ä»®æƒ³ç‰©ä½“ã‚’æç”»ã™ã‚‹ã“ã¨ãŒå‡ºæ¥ã‚‹.
 	glTranslatef( position[0], position[1], position[2] );
 	glRotatef( (GLfloat)(angle * 180./M_PI), 
 		(GLfloat)axis[0], (GLfloat)axis[1], (GLfloat)axis[2] );
 
-	// ‰~’Œ‚ğ•`‰æ
+	// å††æŸ±ã‚’æç”»
 	glRotatef( -90.0f, 1.0f, 0.0f, 0.0f );
 	dispCylinder( pFillObj, 30, 80, 0.0, 0.0, 1.0 );
 	glPopMatrix();
 }
 
 //===========================================================================//
-// ‰~‚ğ•\¦‚·‚éŠÖ”
+// å††éŒã‚’è¡¨ç¤ºã™ã‚‹é–¢æ•°
 //===========================================================================//
 void dispCone( GLUquadric* Cylinder, GLdouble radius, GLdouble height, 
 	GLfloat r, GLfloat g, GLfloat b ) {
 		glEnable( GL_LIGHTING );
 		glEnable( GL_LIGHT0 );
 
-		// ƒ}ƒeƒŠƒAƒ‹‚Ìİ’è
+		// ãƒãƒ†ãƒªã‚¢ãƒ«ã®è¨­å®š
 		GLfloat matDiff[] = { r, g, b, 1.0f };
 		GLfloat matSpec[] = { 0.6f, 0.6f, 1.0f, 1.0f };
 		GLfloat matAmbient[] = { 0.6f, 0.6f, 0.7f, 1.0f };
@@ -809,14 +809,14 @@ void dispCone( GLUquadric* Cylinder, GLdouble radius, GLdouble height,
 }
 
 //===========================================================================//
-// ‰~’Œ‚ğ•\¦‚·‚éŠÖ”
+// å††æŸ±ã‚’è¡¨ç¤ºã™ã‚‹é–¢æ•°
 //===========================================================================//
 void dispCylinder ( GLUquadric* Cylinder, GLdouble radius, GLdouble height, 
 	GLfloat r, GLfloat g, GLfloat b ) {
 		glEnable( GL_LIGHTING );
 		glEnable( GL_LIGHT0 );
 
-		// ƒ}ƒeƒŠƒAƒ‹‚Ìİ’è
+		// ãƒãƒ†ãƒªã‚¢ãƒ«ã®è¨­å®š
 		GLfloat matDiff[] = { r, g, b, 1.0f };
 		GLfloat matSpec[] = { 0.6f, 0.6f, 1.0f, 1.0f };
 		GLfloat matAmbient[] = { 0.6f, 0.6f, 0.7f, 1.0f };
@@ -830,24 +830,24 @@ void dispCylinder ( GLUquadric* Cylinder, GLdouble radius, GLdouble height,
 
 }
 //===========================================================================//
-// OpenGLŠÖ˜AI—¹ˆ—
+// OpenGLé–¢é€£çµ‚äº†å‡¦ç†
 //===========================================================================//
 void finalizeOpenGL( HWND hWnd ) {
-	// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg‚ğ‰ğœ
+	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’è§£é™¤
 	wglMakeCurrent( NULL, NULL );
-	// ƒŒƒ“ƒ_ƒŠƒ“ƒOƒRƒ“ƒeƒLƒXƒg‚ğíœ
+	// ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤
 	wglDeleteContext( hRC );
-	// ƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚ğ‰ğœ
+	// ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’è§£é™¤
 	ReleaseDC( hWnd, hDC );
-	// 2Ÿ‹È–ÊƒIƒuƒWƒFƒNƒg‚Ì”jŠü
+	// 2æ¬¡æ›²é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç ´æ£„
 	gluDeleteQuadric( pFillObj );
 }
 
 //===========================================================================//
-// MREAL PlatformŠÖ˜AƒCƒ“ƒXƒ^ƒ“ƒXI—¹ˆ—
+// MREAL Platformé–¢é€£ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹çµ‚äº†å‡¦ç†
 //===========================================================================//
 void releaseMrPlatform() {
-	//ƒ^[ƒQƒbƒg‚ÌƒŠƒŠ[ƒX
+	//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒªãƒªãƒ¼ã‚¹
 	for (std::pair<const DWORD, IMrhTarget61*>& target : mpTargets) {
 		target.second->Release();
 	}
@@ -856,7 +856,7 @@ void releaseMrPlatform() {
 		pRender[i]->Release();
 	}
 
-	// F—Ìˆæ‚ÌƒXƒeƒŒƒIŒv‘ªŠÖ˜A‚ÌƒCƒ“ƒ^[ƒtƒFƒCƒX‚ğ‰ğ•ú
+	// è‰²é ˜åŸŸã®ã‚¹ãƒ†ãƒ¬ã‚ªè¨ˆæ¸¬é–¢é€£ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ã‚¤ã‚¹ã‚’è§£æ”¾
 	if(polygon[0])
 		polygon[0]->Release();
 	if(polygon[1])
@@ -866,6 +866,6 @@ void releaseMrPlatform() {
 
 	pDispInfo->Release();
 	pEngine->Release();
-	// COMƒ‰ƒCƒuƒ‰ƒŠ[‚ğ•Â‚¶‚é
+	// COMãƒ©ã‚¤ãƒ–ãƒ©ãƒªãƒ¼ã‚’é–‰ã˜ã‚‹
 	::CoUninitialize();
 }

@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 * Copyright Canon Inc. 2018
 * All Rights Reserved
 */
@@ -13,21 +13,21 @@ namespace
 {
 	const std::string HMD_INPUT_DEVICE_NAME_LIST[] =
 	{
-		"Canon MREAL X1 Button", // MREAL X1 Button‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
-		"Canon MREAL S1 Button", // MREAL S1 Button‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
-		"Canon MREAL Display Button MD-20 Series", // MREAL Display MD-20 Button‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
-		"Canon MREAL Display Button MD-10 Series", // MREAL Display MD-10 Button‚Ìƒ{ƒ^ƒ“ƒfƒoƒCƒX–¼
+		"Canon MREAL X1 Button", // MREAL X1 Buttonã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
+		"Canon MREAL S1 Button", // MREAL S1 Buttonã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
+		"Canon MREAL Display Button MD-20 Series", // MREAL Display MD-20 Buttonã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
+		"Canon MREAL Display Button MD-10 Series", // MREAL Display MD-10 Buttonã®ãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹å
 	};
 }
 
 /**
-* @brief ƒfƒoƒCƒXŒŸoƒƒ\ƒbƒh‚ÌƒR[ƒ‹ƒoƒbƒN—p\‘¢‘ÌB
+* @brief ãƒ‡ãƒã‚¤ã‚¹æ¤œå‡ºãƒ¡ã‚½ãƒƒãƒ‰ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç”¨æ§‹é€ ä½“ã€‚
 */
 struct DIDeviceEnumPrm
 {
-	char devName[256]; ///< ŒŸõ‘ÎÛ‚ÌƒfƒoƒCƒX–¼
-	BOOL bFound;	///< Œ©‚Â‚©‚Á‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-	GUID guid;		///< Œ©‚Â‚©‚Á‚½ƒfƒoƒCƒX‚ÌGUID
+	char devName[256]; ///< æ¤œç´¢å¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹å
+	BOOL bFound;	///< è¦‹ã¤ã‹ã£ãŸã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+	GUID guid;		///< è¦‹ã¤ã‹ã£ãŸãƒ‡ãƒã‚¤ã‚¹ã®GUID
 };
 
 DirectInputDevice::DirectInputDevice(HWND hwnd)
@@ -35,7 +35,7 @@ DirectInputDevice::DirectInputDevice(HWND hwnd)
 	, joystick(nullptr)
 	, direct_input(nullptr)
 {
-	/// DirectInputƒIƒuƒWƒFƒNƒg‚Ì¶¬
+	/// DirectInputã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆ
 	DirectInput8Create(
 		::GetModuleHandle(nullptr),
 		DIRECTINPUT_VERSION,
@@ -60,14 +60,14 @@ bool DirectInputDevice::Initialize()
 	DIDeviceEnumPrm prm;
 	prm.bFound = false;
 
-	/// MREAL Displayƒ{ƒ^ƒ“ƒfƒoƒCƒX‚ğ—ñ‹“‚µ‚ÄŒ©‚Â‚©‚Á‚½‚çGUID‚ğæ“¾
+	/// MREAL Displayãƒœã‚¿ãƒ³ãƒ‡ãƒã‚¤ã‚¹ã‚’åˆ—æŒ™ã—ã¦è¦‹ã¤ã‹ã£ãŸã‚‰GUIDã‚’å–å¾—
 	direct_input->EnumDevices(
 		DI8DEVCLASS_GAMECTRL,
 		EnumJoysticksCallback,
 		(LPVOID)&prm,
 		DIEDFL_ATTACHEDONLY);
 
-	// MREAL Displaƒ{ƒ^ƒ“‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡
+	// MREAL Displaãƒœã‚¿ãƒ³ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆ
 	if (!prm.bFound)
 	{
 		return false;
@@ -75,7 +75,7 @@ bool DirectInputDevice::Initialize()
 
 	Shutdown();
 
-	/// MRAEL Displayƒ{ƒ^ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒXì¬
+	/// MRAEL Displayãƒœã‚¿ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ä½œæˆ
 	HRESULT hr = direct_input->CreateDevice(prm.guid, &joystick, NULL);
 	if (FAILED(hr))
 	{
@@ -87,30 +87,30 @@ bool DirectInputDevice::Initialize()
 
 bool DirectInputDevice::Connect()
 {
-	//  MREAL Displaƒ{ƒ^ƒ“‚Ì‰Šú‰»
+	//  MREAL Displaãƒœã‚¿ãƒ³ã®åˆæœŸåŒ–
 	if (joystick == nullptr)
 	{
 		return false;
 	}
 
-	//  MREAL Displaƒ{ƒ^ƒ“‚Ìƒf[ƒ^Œ`®‚ğİ’è
+	//  MREAL Displaãƒœã‚¿ãƒ³ã®ãƒ‡ãƒ¼ã‚¿å½¢å¼ã‚’è¨­å®š
 	HRESULT hr = joystick->SetDataFormat(&c_dfDIJoystick);
 
-	//  MREAL Displaƒ{ƒ^ƒ“‚Ì“®ì‚Ìİ’è
+	//  MREAL Displaãƒœã‚¿ãƒ³ã®å‹•ä½œã®è¨­å®š
 	if (SUCCEEDED(hr))
 	{
-		/// - ƒtƒHƒAƒOƒ‰ƒEƒ“ƒh•”ñ”r‘¼ƒ‚[ƒh
-		// ƒAƒvƒŠ‚ªƒtƒHƒAƒOƒ‰ƒEƒ“ƒh‚Ìê‡‚É“ü—Í‚ğó‚¯•t‚¯A“ü—Í‚Í“Æè‚µ‚È‚¢
+		/// - ãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ï¼†éæ’ä»–ãƒ¢ãƒ¼ãƒ‰
+		// ã‚¢ãƒ—ãƒªãŒãƒ•ã‚©ã‚¢ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã®å ´åˆã«å…¥åŠ›ã‚’å—ã‘ä»˜ã‘ã€å…¥åŠ›ã¯ç‹¬å ã—ãªã„
 		hr = joystick->SetCooperativeLevel(window_handle, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	}
 
-	// “ü—Í§ŒäŠJn
+	// å…¥åŠ›åˆ¶å¾¡é–‹å§‹
 	if (SUCCEEDED(hr))
 	{
 		hr = joystick->Acquire();
 	}
 
-	// ‚±‚±‚Ü‚Å‚Ìˆ—‚Å¸”s‚µ‚½ê‡‚ÍAŒãn––‚ğ‚µ‚ÄAFALSE‚ğ•Ô‚·
+	// ã“ã“ã¾ã§ã®å‡¦ç†ã§å¤±æ•—ã—ãŸå ´åˆã¯ã€å¾Œå§‹æœ«ã‚’ã—ã¦ã€FALSEã‚’è¿”ã™
 	if (FAILED(hr))
 	{
 		Stop();
@@ -127,7 +127,7 @@ BOOL CALLBACK DirectInputDevice::EnumJoysticksCallback(LPCDIDEVICEINSTANCE ipddi
 		return DIENUM_CONTINUE;
 	}
 
-	// MREAL Display ƒ{ƒ^ƒ“‚Ìê‡
+	// MREAL Display ãƒœã‚¿ãƒ³ã®å ´åˆ
 	DIDeviceEnumPrm *prm = static_cast<DIDeviceEnumPrm *>(pvRef);
 	for (const std::string& devName : HMD_INPUT_DEVICE_NAME_LIST)
 	{
@@ -140,7 +140,7 @@ BOOL CALLBACK DirectInputDevice::EnumJoysticksCallback(LPCDIDEVICEINSTANCE ipddi
 		}
 	}
 
-	// Direct InputƒfƒoƒCƒX‚ÌŒŸõ‚ğŒp‘±
+	// Direct Inputãƒ‡ãƒã‚¤ã‚¹ã®æ¤œç´¢ã‚’ç¶™ç¶š
 	return DIENUM_CONTINUE;
 }
 
@@ -189,7 +189,7 @@ HRESULT DirectInputDevice::GetJoysticState(DIJOYSTATE * joystick_state)
 		return hr;
 	};
 
-	// MRAEL Display‚Ìƒ{ƒ^ƒ“ó‘Ô‚ğæ“¾‚·‚éB
+	// MRAEL Displayã®ãƒœã‚¿ãƒ³çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹ã€‚
 	hr = joystick->GetDeviceState(sizeof(DIJOYSTATE), joystick_state);
 	return hr;
 }

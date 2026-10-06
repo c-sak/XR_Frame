@@ -1,15 +1,15 @@
-void CreateMyModels(); //‹¤’ÊŠÖ”iƒ‚ƒfƒ‹ƒ[ƒhj
-void DeleteMyModels(); //‹¤’ÊŠÖ”iƒ‚ƒfƒ‹ƒf[ƒ^j
+ï»¿void CreateMyModels(); //å…±é€šé–¢æ•°ï¼ˆãƒ¢ãƒ‡ãƒ«ãƒ­ãƒ¼ãƒ‰ï¼‰
+void DeleteMyModels(); //å…±é€šé–¢æ•°ï¼ˆãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ï¼‰
 
-//V‚µ‚­ì‚é•`‰æŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾‚ğ’Ç‰Á
+//æ–°ã—ãä½œã‚‹æç”»é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ã‚’è¿½åŠ 
 void drawChicken();
 
 void drawHandRmodel();
 void drawHandLmodel();
 void Drawkingyo();
 
-void DrawMymodel1(); //ŒÂ•Ê‚Ìƒ‚ƒfƒ‹•`‰æ
-void DrawMymodel2(); //ŒÂ•Ê‚Ìƒ‚ƒfƒ‹•`‰æ
+void DrawMymodel1(); //å€‹åˆ¥ã®ãƒ¢ãƒ‡ãƒ«æç”»
+void DrawMymodel2(); //å€‹åˆ¥ã®ãƒ¢ãƒ‡ãƒ«æç”»
 
 void makeStars( int n, float range );
 void makeStars( int n, float x, float y, float z );
@@ -18,12 +18,12 @@ void drawStars();
 void Drawshell();
 
 void Drawkumanomi();
-void Drawkumanomi_02();///‚±‚ê‚Ğ‚Æ‚Â‚ÅƒNƒ}ƒmƒ~‚Æ‚µ‚Äg‚¤‚±‚Æ‚ª‚Å‚«‚é
+void Drawkumanomi_02();///ã“ã‚Œã²ã¨ã¤ã§ã‚¯ãƒãƒãƒŸã¨ã—ã¦ä½¿ã†ã“ã¨ãŒã§ãã‚‹
 
 void Drawgrande();
-void Drawstar_take1();//ˆÊ’u‚ ‚í‚¹‚ª‚Å‚«‚Ä‚¢‚È‚¢
-void Drawstar_take2();//ˆÊ’u‚ ‚í‚¹‚ª‚Å‚«‚Ä‚¢‚È‚¢
-void Drawstar_take3();//ˆÊ’u‚ ‚í‚¹‚ª‚Å‚«‚Ä‚¢‚È‚¢
-void Drawstar_take4();//ˆÊ’u‚ ‚í‚¹‚ª‚Å‚«‚Ä‚¢‚È‚¢
+void Drawstar_take1();//ä½ç½®ã‚ã‚ã›ãŒã§ãã¦ã„ãªã„
+void Drawstar_take2();//ä½ç½®ã‚ã‚ã›ãŒã§ãã¦ã„ãªã„
+void Drawstar_take3();//ä½ç½®ã‚ã‚ã›ãŒã§ãã¦ã„ãªã„
+void Drawstar_take4();//ä½ç½®ã‚ã‚ã›ãŒã§ãã¦ã„ãªã„
 
 void Drawstarfish();

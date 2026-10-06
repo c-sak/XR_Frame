@@ -1,4 +1,4 @@
-/******************************************************************************
+Ôªø/******************************************************************************
  * glut_mouse.cpp 
  */
 
@@ -27,8 +27,8 @@ static void _mouse( int x, int y )
 /*------------------------------------------------------------- mouseClick
  * mouseClick - GLUT mouse callback function
  * button: mouse button
- * stateÅFpress or release
- * x, yÅFmouse position
+ * stateÔºöpress or release
+ * x, yÔºömouse position
  *--------*/
 void mouseClick( int button , int state, int x, int y )
 {

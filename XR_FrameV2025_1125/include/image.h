@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #define USE_LIBJPEG
 #define USE_LIBPNG
 
@@ -50,7 +50,7 @@ private:
 
 public:
 	enum class Format{
-		AUTO = 0, //Šg’£Žq‚ÅƒtƒH[ƒ}ƒbƒg‚ð”»’f‚·‚é
+		AUTO = 0, //æ‹¡å¼µå­ã§ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆã‚’åˆ¤æ–­ã™ã‚‹
 		RAW = 1,
 		JPG = 2,
 		PNG = 3,
@@ -158,7 +158,7 @@ public:
 	void capture(void) {
 		if (webcam->isLatest()) update();
 	}
-	void copy(unsigned char *srcimage) { //¦–¢ƒeƒXƒg
+	void copy(unsigned char *srcimage) { //â€»æœªãƒ†ã‚¹ãƒˆ
 		memcpy( img->image->pixdata, srcimage, 
 			img->image->width * img->image->height * img->image->pixsize );
 	}
