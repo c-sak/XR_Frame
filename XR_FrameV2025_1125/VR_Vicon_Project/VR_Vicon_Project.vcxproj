@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5595B078-C83E-4B68-AC17-FA3B4A22A44F}</ProjectGuid>
+    <RootNamespace>VR_Vicon_Project</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>.\;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
+    <ExecutablePath>..\bin;..\bin\Debug;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>..\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\include\64;.\;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
+    <ExecutablePath>..\bin\x64;..\bin\;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>..\lib\x64;..\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>$(ProjectName)_64</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>..\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>.\;..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
+    <LibraryPath>..\lib\x64;..\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>.\;..\bin\x64;..\bin;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlib.lib;libpng16.lib;libjpeg.lib;freeglutd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>zlib.lib;libpng16.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>zlib.lib;libpng16.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>zlib.lib;libpng16.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\lib_ObjLoader\Material.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\Mtl.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\ObjData.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\ObjDetailData.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\ObjLoader.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\ObjLoader_Seq.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\PngImage.cpp" />
+    <ClCompile Include="..\lib_ObjLoader\ThreedVector.cpp" />
+    <ClCompile Include="..\src\calc.cpp" />
+    <ClCompile Include="..\src\depth.cpp" />
+    <ClCompile Include="draw.cpp" />
+    <ClCompile Include="..\src\ezFont.cpp" />
+    <ClCompile Include="..\src\ezGyro\Com.cpp" />
+    <ClCompile Include="..\src\ezGyro\ezGyro.cpp" />
+    <ClCompile Include="..\src\ezGyro\JY901.cpp" />
+    <ClCompile Include="..\src\ezGyro\MPU6050.cpp" />
+    <ClCompile Include="..\src\ezImage\ezJpeg.cpp" />
+    <ClCompile Include="..\src\ezImage\ezPNG.cpp" />
+    <ClCompile Include="..\src\ezImage\ezWebCam.cpp" />
+    <ClCompile Include="..\src\ezImage\image.cpp" />
+    <ClCompile Include="..\src\ezMIDI.cpp" />
+    <ClCompile Include="..\src\ezUtil.cpp" />
+    <ClCompile Include="..\src\ezZigSim.cpp" />
+    <ClCompile Include="..\src\GLMetaseq.c" />
+    <ClCompile Include="..\src\InterSense\gyro.cpp" />
+    <ClCompile Include="..\src\InterSense\isense.c" />
+    <ClCompile Include="..\src\light.cpp" />
+    <ClCompile Include="..\src\Matrix.cpp" />
+    <ClCompile Include="..\src\mymodel.cpp" />
+    <ClCompile Include="..\src\myShape.cpp" />
+    <ClCompile Include="..\src\perlinNoise.cpp" />
+    <ClCompile Include="..\src\SerialIO.cpp" />
+    <ClCompile Include="..\src\Shapes.cpp" />
+    <ClCompile Include="sim.cpp" />
+    <ClCompile Include="..\src\tcpFunc.cpp" />
+    <ClCompile Include="..\src\Vector.cpp" />
+    <ClCompile Include="cylindrical.cpp" />
+    <ClCompile Include="ezTrack_Vicon.cpp" />
+    <ClCompile Include="warptex.cpp" />
+    <ClCompile Include="ezTrack.cpp" />
+    <ClCompile Include="hmd.cpp" />
+    <ClCompile Include="keyboard.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="projview.cpp" />
+    <ClCompile Include="stereo.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\calc.h" />
+    <ClInclude Include="..\include\common.h" />
+    <ClInclude Include="..\include\depth.h" />
+    <ClInclude Include="..\include\ezFont.h" />
+    <ClInclude Include="..\include\ezGyro\Com.h" />
+    <ClInclude Include="..\include\ezGyro\ezGyro.h" />
+    <ClInclude Include="..\include\ezGyro\JY901.h" />
+    <ClInclude Include="..\include\ezGyro\MPU6050.h" />
+    <ClInclude Include="..\include\ezJpeg.h" />
+    <ClInclude Include="..\include\ezMIDI.h" />
+    <ClInclude Include="..\include\ezMovie.h" />
+    <ClInclude Include="..\include\ezTrack.h" />
+    <ClInclude Include="..\include\ezTrack_Vicon.h" />
+    <ClInclude Include="..\include\ezUtil.h" />
+    <ClInclude Include="..\include\ezWebCam.h" />
+    <ClInclude Include="..\include\ezZigSim.h" />
+    <ClInclude Include="..\include\font.h" />
+    <ClInclude Include="..\include\GLMetaseq.h" />
+    <ClInclude Include="..\include\gyro.h" />
+    <ClInclude Include="..\include\igSharedMemoryT.h" />
+    <ClInclude Include="..\include\image.h" />
+    <ClInclude Include="..\include\light.h" />
+    <ClInclude Include="..\include\Matrix.h" />
+    <ClInclude Include="..\include\mymodel.h" />
+    <ClInclude Include="..\include\myShape.h" />
+    <ClInclude Include="..\include\object.h" />
+    <ClInclude Include="..\include\perlinNoise.h" />
+    <ClInclude Include="..\include\platform.h" />
+    <ClInclude Include="..\include\SerialIO.h" />
+    <ClInclude Include="..\include\Shapes.h" />
+    <ClInclude Include="..\include\sim.h" />
+    <ClInclude Include="..\include\tcpData.h" />
+    <ClInclude Include="..\include\tcpFunc.h" />
+    <ClInclude Include="..\include\Vector.h" />
+    <ClInclude Include="..\include\Vicon\DataStreamClient.h" />
+    <ClInclude Include="..\include\Vicon\DataStreamRetimingClient.h" />
+    <ClInclude Include="..\include\Vicon\IDataStreamClientBase.h" />
+    <ClInclude Include="..\include\warptex.h" />
+    <ClInclude Include="..\lib_ObjLoader\Material.h" />
+    <ClInclude Include="..\lib_ObjLoader\Mtl.h" />
+    <ClInclude Include="..\lib_ObjLoader\ObjData.h" />
+    <ClInclude Include="..\lib_ObjLoader\ObjDetailData.h" />
+    <ClInclude Include="..\lib_ObjLoader\ObjLoader.h" />
+    <ClInclude Include="..\lib_ObjLoader\ObjLoader_Seq.h" />
+    <ClInclude Include="..\lib_ObjLoader\PngImage.h" />
+    <ClInclude Include="..\lib_ObjLoader\TextureCoordinate.h" />
+    <ClInclude Include="..\lib_ObjLoader\ThreedVector.h" />
+    <ClInclude Include="config.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

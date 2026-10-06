@@ -1,0 +1,1 @@
+g++ GLMetaseq.c calc.cpp cylindrical.cpp ezTrack.cpp ezUtil.cpp draw.cpp keyboard.cpp mouse.cpp light.cpp main.cpp projview.cpp sim.cpp stereo.cpp mymodels.cpp -framework GLUT -framework OpenGL -mmacosx-version-min=10.8
