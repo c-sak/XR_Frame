@@ -1,6 +1,10 @@
 # ViconSample
 
-Vicon Shogun Live の DataStream から Transform データを受信してコンソールに表示する確認用サンプルです。
+Vicon Shogun Live の DataStream から Transform データを受信するサンプルです。
+2 つのプロジェクトが入っています。
+
+- **ViconSample** : コンソールで Subject / Segment / マーカーを表示する確認用ツール
+- **BoneView** : 受信中の Subject の骨格を GLUT で可視化する学生向けサンプル
 
 クライアント環境に合わせて **32bit (Win32) / DataStream SDK 1.11** でビルドします。
 （リポジトリ同梱の `include/Vicon`・`lib`・`Debug`/`Release` の一式を使用）
@@ -19,8 +23,13 @@ Vicon Shogun Live の DataStream から Transform データを受信してコン
 msbuild ViconSample.sln /p:Configuration=Release /p:Platform=Win32
 ```
 
-ビルド後、`bin\<Configuration>\` に `ViconDataStreamSDK_CPP.dll` と
-`boost_*-vc140-mt-x32-1_68.dll` が自動コピーされます。
+ビルド後、以下の DLL が実行ファイルの隣に自動コピーされます。
+
+- `bin\<Configuration>\` (ViconSample)
+- `bin\BoneView\<Configuration>\` (BoneView)
+
+コピーされる DLL: `ViconDataStreamSDK_CPP.dll`、`boost_*-vc140-mt-x32-1_68.dll`、
+`freeglut.dll`、`glut32.dll`
 
 ## 実行
 
@@ -71,8 +80,11 @@ Shogun Live 側がフレームを配信していません。次を確認して�
 
 ## 座標系
 
-`ezTracker_Vicon` に合わせて Z-up (Forward, Left, Up) に設定しています。
-Vicon のグローバル位置は mm、`ezTracker_Vicon` は m に変換して保持します。
+- Vicon SDK: `SetAxisMapping(Forward, Left, Up)` で Vicon データを Z-up で受け取る
+- `ezTracker_Vicon`: `x = -Left`, `y = Up`, `z = -Forward` に変換して `ezTrackDataT` に格納
+  → VR_Project と同じ **Y-up** (x=右, y=上, z=後ろ)・単位 m
+  - 例: 人が Vicon の X- 方向に歩くと `ezTrackDataT` では +Z 方向になる
+- BoneView も Y-up で描画 (床グリッドは XZ 平面、カメラの up は +Y)
 
 ## 骨データの利用
 
@@ -89,6 +101,39 @@ for (int i = 0; i < 73; ++i) {
 
 - 従来の `vicon.getTrackData("CAP")` などの Subject 単位の使い方は変更なし
 - 遮蔽フレームでは前回値を保持（NaN 回避）
+
+## BoneView (骨格の可視化)
+
+受信中の Subject の骨格を描画します。描画は VR_Project と同じ
+GLUT + `Shapes.cpp` の図形 (`ezSolidSphere` / `ezSolidCylinder`) を使い、
+`src/sim.cpp` の `copyTrackToObj()` と `src/calc.cpp` の `applyObjTransform()`
+と同じ流れで `ezTrackDataT` を描画しています。
+
+```
+bin\BoneView\Release\BoneView.exe [host:port] [--subject NAME]
+```
+
+| 引数 | 説明 |
+| --- | --- |
+| `host:port` | 接続先 (既定: `127.0.0.1:801`) |
+| `--subject NAME` | 表示する Subject 名 (既定: 骨格を自動選択) |
+
+- `q` / `ESC` : 終了
+- 矢印キー : 視点回転
+- `+` / `-` : ズーム
+
+骨格データの流れ:
+
+```cpp
+vicon.read();                                  // 1周期に1回 (全Subjectが同一フレーム)
+ezTracker* human = vicon.getSubject("Subject1"); // 1 Subject = 1 ezTracker
+for (int i = 0; i < _n_tracks; ++i) {
+    ezTrackDataT* bone = human->getTrackData(i); // 1 骨 = 1 ezTrackDataT
+    if (bone->id == -1) continue;
+    // bone->parent (-1 = root) で親子をたどれる
+    // bone->x, y, z [m] / roll, pitch, yaw [deg]
+}
+```
 
 ## 注意 (実装メモ)
 

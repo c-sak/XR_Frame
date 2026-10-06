@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ViconSample", "ViconSample.vcxproj", "{DF35904D-88CB-4DFE-96D2-C009D742F5D6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoneView", "BoneView.vcxproj", "{F5045C47-A672-4F8C-8A6C-30B2DBF52F25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -14,6 +16,10 @@ Global
 		{DF35904D-88CB-4DFE-96D2-C009D742F5D6}.Debug|Win32.Build.0 = Debug|Win32
 		{DF35904D-88CB-4DFE-96D2-C009D742F5D6}.Release|Win32.ActiveCfg = Release|Win32
 		{DF35904D-88CB-4DFE-96D2-C009D742F5D6}.Release|Win32.Build.0 = Release|Win32
+		{F5045C47-A672-4F8C-8A6C-30B2DBF52F25}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5045C47-A672-4F8C-8A6C-30B2DBF52F25}.Debug|Win32.Build.0 = Debug|Win32
+		{F5045C47-A672-4F8C-8A6C-30B2DBF52F25}.Release|Win32.ActiveCfg = Release|Win32
+		{F5045C47-A672-4F8C-8A6C-30B2DBF52F25}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
