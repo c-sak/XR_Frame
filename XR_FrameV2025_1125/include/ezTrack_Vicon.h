@@ -8,7 +8,7 @@
 
 #include "ezTrack.h"
 
-#include "Vicon/DataStreamClient.h"
+#include <Vicon/DataStreamClient.h>
 
 #define OUTPUT_FLAG	1/* (1 GroblTranslationとGrobalEulerXYZデータのみ表示) (0 すべて表示)*/
 #define EZ_DEGREE (180.0/3.14159)

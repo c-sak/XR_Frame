@@ -1,200 +1,157 @@
 # VR_Vicon_Project
 
-Vicon Shogun Live の DataStream からボディトラッキング（骨格）を受信し、
-VR_Frame のキャラクタ（腰・胸・頭・手・足）へ反映するクライアント向けサンプルです。
+TODO: x64ビルドで使用する際に"include64"をinclude pathに指定する必要がある旨を記載
+
+ViconDataStreamから、人（Character）のトラッキング結果を受信し、
+VR_Frame のキャラクタ（腰・胸・頭・手・足）へ反映するサンプルです。
 
 `XR_FrameV2025_1125/VR_Project` をコピーして作られています。
-Vicon の組み込み方は **`sim.cpp` を読めば分かる**ように書いてあります。
+Vicon の組み込み方は`sim.cpp`に極力寄せる形で作成しています。
 
-## このサンプルで示していること
+## 用語の整理
 
-- `ezTracker_Vicon` を使った Vicon PC（Shogun Live）への接続
-- Subject（骨格）の一覧取得と、骨（Segment）の名前による取り出し
-- 骨の位置・姿勢を `ObjDataT`（腰・胸・頭・手・足）へ反映
-- 受信した全骨を線で結んだ骨格の可視化（トラッキング確認用）
-- Vicon に接続できないときのフォールバック（マウス操作）
+ドキュメント内で使用する、Vicon関連の用語を整理します。
+
+- Character
+  - Viconシステムで動きをキャプチャ可能な物体の総称です。
+- Prop
+  - Characterのうち、剛体であり、1つの骨から構成されているものの総称です。Propのトラッキングは、以前の`ezTracker_Vicon`でもサポートされていました。
+- Subject
+  - Characterのうち、複数の骨とそれを接続する関節を持つものの総称です。今回の`ezTracker_Vicon`のアップデートによって、Propに加えてSubjectのデータを扱うことができるようになりました。
+- Segment
+  - Subjectを構成するの骨の呼称です。1本の骨 = 1 segmentとなります。
+
+## サンプルで示していること
+
+- バージョンアップされた`ezTracker_Vicon`の使用方法
+- `ezTracker_Vicon`を使った、ViconDataStreamからのデータ取得
+- Characterの一覧取得
+- SubjectのSegmentの、名前による取得
+- Subjectデータの利用方法（骨格の可視化）
+- 骨の位置・姿勢の`ObjDataT`（腰・胸・頭・足）への反映
+- 複数 Subject の同時取得・使用
+- 従来のPropトラッキング機能との共存
 
 ## VR_Project との違い
 
 | ファイル | 内容 |
 | --- | --- |
-| `sim.cpp` | サンプルの本体。Vicon の接続・骨の対応付け・可視化をすべてここに記述 |
-| `draw.cpp` | `VR_Project` のコピー。`DrawScene()` / `PostDraw()` に `DrawTrackedSkeleton()` と `DrawTrackingInfo()` の呼び出しを追加 |
-| `config.h` | `use_tracker = true` に変更（それ以外は `VR_Project` と同じ） |
-| その他のファイル | `VR_Project` と同じコピー |
-
-共有ソース（`..\src`、`..\include`、`..\lib_ObjLoader`）は `VR_Project` と共通です。
-`sim.cpp` と `draw.cpp` だけをこのフォルダ内にコピーしてビルドするため、
-サンプルを変更しても `VR_Project` には影響しません。
-
-## ビルド
-
-`XR_Frame.sln` を Visual Studio で開き、`VR_Vicon_Project` をビルドします。
-構成は `Debug` / `Release` × `Win32` / `x64` の4つです。
-
-コマンドラインの場合:
-
-```
-msbuild XR_Frame.sln /t:VR_Vicon_Project /p:Configuration=Release /p:Platform=Win32
-msbuild XR_Frame.sln /t:VR_Vicon_Project /p:Configuration=Release /p:Platform=x64
-```
-
-出力先（`VR_Project` と同じ場所に出ます）:
-
-| 構成 | 実行ファイル |
-| --- | --- |
-| `Release` / `Win32` | `XR_FrameV2025_1125\Release\VR_Vicon_Project.exe` |
-| `Debug` / `Win32` | `XR_FrameV2025_1125\Debug\VR_Vicon_Project.exe` |
-| `Release` / `x64` | `XR_FrameV2025_1125\x64\Release\VR_Vicon_Project.exe` |
-| `Debug` / `x64` | `XR_FrameV2025_1125\x64\Debug\VR_Vicon_Project_64.exe` |
-
-実行ファイルと同じフォルダに Vicon の DLL が必要です。
-リポジトリ同梱の DLL（`ViconDataStreamSDK_CPP.dll` と `boost_*.dll`）は
-上記の出力先にすでに置かれています。
-
-## 実行前の設定
-
-### 1. `config.h`
-
-```cpp
-const bool use_tracker = true; //◆トラッカーフラグ
-const bool use_vicon   = true; //◆true:VICON, false:ARマーカー
-```
-
-### 2. `sim.cpp` の先頭
-
-```cpp
-// Vicon PC(Shogun Live)の IPアドレス:ポート番号
-static char VICON_HOST[] = "172.23.85.186:801";
-
-// 追跡する Subject 名（Shogun Live の Objects ペインに表示される名前）
-static const char* VICON_SUBJECT_NAME = "Hoge";
-```
-
-- `VICON_HOST` はクライアント環境の Vicon PC に合わせて変更します。
-- `VICON_SUBJECT_NAME` は Shogun Live の Objects ペインに表示される
-  Subject 名に合わせます。空文字 `""` にすると最初の Subject を使います。
-
-### 3. Shogun Live 側
-
-1. Shogun Live を **Live 状態**（再生中）にする
-2. DataStream の配信を有効にする
-3. ポート番号（既定 801）を `VICON_HOST` と合わせる
+| `sim.cpp` | サンプル本体。Vicon の接続・骨の対応付け・可視化。 |
+| `draw.cpp` | `VR_Project` のコピー。`DrawScene()` / `PostDraw()` に `DrawTrackedSubject()` と `DrawTrackingInfo()` の呼び出しを追加。 |
+| `config.h` | `use_tracker = true` に変更（それ以外は `VR_Project` と同じ）。 |
+| その他のファイル | `VR_Project` と同じコピー。 |
 
 ## 起動と確認
 
-起動するとコンソールに Subject と骨の一覧が表示されます。
-画面には受信した骨格（緑の線と黄色い関節）と、左上に接続状態が表示されます。
-カメラは頭に追従しますが、`C` キーで固定カメラに切り替えると骨格全体を
-確認できます（もう一度押すと頭カメラに戻ります）。
+画面の左上に、トラッキング中の Character 名とボーン数が一覧表示されます。骨格は Character ごとに色分けされた線で表示され、関節はオレンジのキューブです。
 
-```
----- Vicon Subjects (1) ----
-  Subject[0] "Hoge" : 24 bones
-    [ 0] Hips                     parent=-1
-    [ 1] Spine                    parent= 0
-    [ 2] Spine1                   parent= 1
-    ...
------------------------------
-[Vicon] 骨の対応付け: hips=Hips head=Head body=Spine2 handR=RightHand handL=LeftHand footR=RightFoot footL=LeftFoot
+カメラは、Subjectが見やすいよう(0, 0, 0)を見渡せる位置に固定されていますが、、`C` キーVR_Projectと同じで頭（head）カメラに切り替えられます。`C`キーを再度押すことで、固定カメラに戻ることができます。
+
+```text
+Character2 : 73 bones
+Character3 : 73 bones
+TREE_A   : 1 bones
+Character1 : 73 bones
 ```
 
-骨の値は2秒ごとにコンソールへ表示されます。
-位置は [m]、姿勢は [deg] です。
+状態の確認用に、特定のSubjectのの骨の一覧と移動・回転情報をログに出力することができます。`sim.cpp` の `printViconCharacter("SubjectName");` を使用してください。
 
-```
----- Vicon bones : subject=Hoge (24 bones) ----
-  [ 0] Hips                     parent=-1 pos=(  0.000,  0.950,  0.000)m rot=(   0.0,   0.0,   0.0)deg
-  [ 1] Spine                    parent= 0 pos=(  0.000,  1.050,  0.000)m rot=(   0.0,   0.0,   0.0)deg
-```
+## アップデート済みezTracking_Viconの利用方法
 
-## コードの読み方（組み込み手順）
+### 1. 共通の手順
 
-`sim.cpp` は次の順に読むと分かりやすいように書いてあります。
-
-### 1. 接続（`InitScene`）
+#### 1-1. 接続
 
 ```cpp
+// sim.cpp@89
+static char VICON_HOST[] = "127.0.0.1:801";
+```
+
+```cpp
+// sim.cpp@152 等
 vicon = new ezTracker_Vicon(true);
 if (vicon->open(VICON_HOST, false)) { ... }
 ```
 
 `ezTracker_Vicon::open()` の引数は
 「Vicon PC の IPアドレス:ポート番号」です。
-接続後、`read()` を1回呼んで最初のフレームを取り込みます。
+接続後、`read()` でViconDataStreamから受信したデータを取り込むことができます。
 
-### 2. 毎フレームの受信（`UpdateScene` → `updateVicon`）
+#### 1-2. 毎フレームの受信（`UpdateScene` → `updateVicon`）
 
 ```cpp
 vicon->read(); // 1フレームに1回だけ呼ぶ
 ```
 
-`read()` は DataStream から最新フレームを取り込み、
-Subject ごとの骨格データを内部に展開します。
+`read()` は ViconDataStream から最新フレームを取り込みます。
 
-### 3. Subject（骨格）の取得
+### 2. Propのトラッキングを行う場合
 
 ```cpp
-ezTracker* body = vicon->getSubject("Hoge"); // Subject 名で取得
+trackHead = tracker->getTrackData("CAP"); // 名前で取得
+copyTrackToObj(trackHead, &simdata.head); // ObjDataT へコピー
+```
+
+Propのトラッキングは従来通りです。
+
+`ezTracker.getTrackData("名前")`で特定のPropを表す`ezTrackDataT`への参照を取得し、`simdata`内のオブジェクトに反映させることができます。既存の`CAP` / `TREE_A` / `TREE_B` / `Chest` / `Candy` /`RightFoot` / `LeftFoot`のPropトラッキングは、本サンプル内で共存しています。
+
+### 3. Subjectのトラッキングを行う場合
+
+#### 3-1. Subjectの取得
+
+```cpp
+// ezTrack_Vicon.cpp@28
+
+class ezTracker_Vicon :
+    public ezTracker{
+      public:
+// 中略
+
+int getSubjectCount() const;                  // トラッキングされているSubjectのトータル数
+const char* getSubjectName(int index) const;  // index（Subject配列内での順番）番目のSubjectの名前
+ezTracker* getSubject(const char* name);      // Subjectの名前で、Subjectを表すezTrackerへの参照を取得
+ezTracker* getSubject(int index);             // Subjectのindexで、Subjectを表すezTrackerへの参照を取得
+
+// 中略
+};
+```
+
+Subjectの一覧取得・参照取得のために、ezTracking_Viconの上記のメソッドが使用できます。
+
+```cpp
+// sim.cpp@338
+
+// UpdateScene()：Character への参照をキャッシュする
+Character_count = 0;
+if (vicon != NULL) {
+    int n = vicon->getCharacterCount();
+    if (n > VICON_MAX_CharacterS) n = VICON_MAX_CharacterS;
+    for (int i = 0; i < n; i++) {
+        Characters[i] = vicon->getCharacter(i);
+    }
+    Character_count = n;
+}
 ```
 
 `ezTracker_Vicon` は **1 Subject = 1 ezTracker** で骨格を保持しています。
-Subject は `getSubjectCount()` / `getSubjectName(i)` で一覧できます。
+サンプル`sim.cpp`では、上記のコードでSubjectを表す`ezTracker`への参照を全Subject分取得しています。
 
-### 4. 骨の取り出しと反映（`applyViconPose`）
+サンプルの`sim.cpp`では、既存のPropのトラッキングと同じように、Subjectを表す`ezTracker`を取得し、そこから骨の動きを取得してで描画しています。
+
+ただし、Propの場合は **1 Prop = 1 ezTrackDataT**、Subjectの場合は **1 Subject = 1 ezTracker**であることに注意してください。これは、Propは関節を持たないため1点の移動・回転を追えば正しく姿勢を再現できる一方、Subjectは複数の関節を持つため、複数の移動・回転を束ねて1つのCharacterとする必要があるためです。
+
+#### 3-2. 骨の取り出し
+
+それぞれの骨の動きの情報は、その骨が属する`ezTracker`に`ezTrackDataT`として格納されています。つまり、[Propのトラッキングと同じアプローチ](#2-propのトラッキングを行う場合)で動きが取得できます。
 
 ```cpp
-ezTrackDataT* head = body->getTrackData("Head"); // 骨の名前で取得
-copyTrackToObj(head, &simdata.head);             // ObjDataT へコピー
+ezTracker* sub1 = vicon->getSubject("Subject1");
+ezTrackDataT* hips = sub1->getTrackData("Hips");
 ```
 
-骨の名前は Shogun Live の Skeleton 設定によって異なります。
-`kHipsNames` などの候補配列に、実際に配信されている名前を
-優先順に並べてください。候補が見つからない場合は `(未検出)` と表示されます。
+### 4. 全骨の可視化（`DrawTrackedSubject`）
 
-| 変数 | 対応する骨（例） |
-| --- | --- |
-| `kHipsNames` | `Hips` / `Hip` / `Pelvis` / `Root` |
-| `kHeadNames` | `Head` / `HeadTop_End` / `Neck` |
-| `kChestNames` | `Spine2` / `Chest` / `Spine3` / `Spine1` / `Spine` |
-| `kHandRNames` | `RightHand` / `RightWrist` / `RightHandIndex1` |
-| `kHandLNames` | `LeftHand` / `LeftWrist` / `LeftHandIndex1` |
-| `kFootRNames` | `RightFoot` / `RightToeBase` / `RightToe` |
-| `kFootLNames` | `LeftFoot` / `LeftToeBase` / `LeftToe` |
+`Characters[]` の各 `ezTracker` が持つ `getTrackArray()` を走査し、`parent` が有効な骨同士を線で結んで可視化します。骨同士の親子関係は、`ezTrackDataT::parent`から取得できます。
 
-### 5. 座標系と親子関係の注意
-
-`ezTracker_Vicon` は Vicon の Z-up 座標を VR_Frame の Y-up 座標
-（x:右, y:上, z:奥）へ変換し、単位を [mm] から [m] にして格納します。
-
-格納される値は **ワールド座標** です。Vicon 接続中に手・頭をプレイヤの
-子座標系にすると親の位置・姿勢が二重に適用されるため、サンプルでは
-Vicon のデータが届いた時点で `applyViconPose()` 内で `setObjWorld()` を
-呼んで子座標系を解除します（マウス操作デモのときだけ `setObjLocal()`
-を使います）。
-
-### 6. 全骨の可視化（`cacheSkeleton` / `DrawTrackedSkeleton`）
-
-全骨を `skeleton[]` にコピーし、`parent` を使って親子を線で結びます。
-`DrawTrackedSkeleton()` は `draw.cpp` の `DrawScene()` から呼ばれます。
-親子関係は `ezTrackDataT::parent`（同じ Subject 内の index）で分かります。
-
-## うまく表示されないとき
-
-| 症状 | 確認すること |
-| --- | --- |
-| `[Vicon] 接続に失敗しました` | Vicon PC の IP・ポート、Shogun Live が起動しているか |
-| 起動時に数十秒止まる | Vicon PC が応答しないときの DataStream SDK のタイムアウト待ちです。Vicon PC を起動するか `use_tracker = false` にしてください |
-| `[Vicon] まだフレームが届いていません` | Shogun Live が Live 状態か、DataStream が有効か |
-| 画面に骨が出ない | コンソールの Subject 一覧に骨格が出ているか。Subject 名は合っているか |
-| 手・足だけ動かない | `(未検出)` と表示された骨の名前を実際の名前に変更する |
-| モデルが表示されない | 実行時の作業フォルダが `VR_Vicon_Project` になっているか（`../models` を参照します） |
-
-## 補足
-
-- Vicon が使えないときは `use_tracker = false`（または接続失敗時）で
-  これまでどおりマウス操作のデモとして動作します。
-- 骨の座標は `ezTrackDataT`（`x, y, z, roll, pitch, yaw, name, parent`）に
-  入っています。`name` と `parent` を使うと独自の骨格表示も作れます。
-- ソースの文字コードは Shift-JIS (CP932) でクライアントへ渡す運用です。
-  開発中に UTF-8 へ変換した場合は `tools/encoding_convert` を参照してください。
+ezTracing_Viconが受信しているすべてのCharacterが画面上で確認できるよう、`DrawTrackedSubject()`が状態を示したテキストを描画します。これは `draw.cpp` の `DrawScene()` から呼ばれます。

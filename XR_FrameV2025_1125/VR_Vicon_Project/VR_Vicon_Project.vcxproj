@@ -72,7 +72,7 @@
     <LibraryPath>..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\include\64;.\;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
+    <IncludePath>..\include64;.\;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
     <ExecutablePath>..\bin\x64;..\bin\;$(ExecutablePath)</ExecutablePath>
     <LibraryPath>..\lib\x64;..\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)_64</TargetName>
@@ -83,7 +83,7 @@
     <ExecutablePath>..\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>.\;..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\include64;..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
     <LibraryPath>..\lib\x64;..\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>.\;..\bin\x64;..\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
@@ -221,6 +221,9 @@
     <ClInclude Include="..\include\Vicon\DataStreamClient.h" />
     <ClInclude Include="..\include\Vicon\DataStreamRetimingClient.h" />
     <ClInclude Include="..\include\Vicon\IDataStreamClientBase.h" />
+    <ClInclude Include="..\include64\Vicon\DataStreamClient.h" />
+    <ClInclude Include="..\include64\Vicon\DataStreamRetimingClient.h" />
+    <ClInclude Include="..\include64\Vicon\IDataStreamClientBase.h" />
     <ClInclude Include="..\include\warptex.h" />
     <ClInclude Include="..\lib_ObjLoader\Material.h" />
     <ClInclude Include="..\lib_ObjLoader\Mtl.h" />

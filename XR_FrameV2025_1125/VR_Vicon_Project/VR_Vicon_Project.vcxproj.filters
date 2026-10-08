@@ -308,6 +308,15 @@
     <ClInclude Include="..\include\Vicon\IDataStreamClientBase.h">
       <Filter>ヘッダー ファイル\common\Vicon</Filter>
     </ClInclude>
+    <ClInclude Include="..\include64\Vicon\DataStreamClient.h">
+      <Filter>ヘッダー ファイル\common\Vicon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include64\Vicon\DataStreamRetimingClient.h">
+      <Filter>ヘッダー ファイル\common\Vicon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include64\Vicon\IDataStreamClientBase.h">
+      <Filter>ヘッダー ファイル\common\Vicon</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\Shapes.h">
       <Filter>ヘッダー ファイル\common</Filter>
     </ClInclude>
