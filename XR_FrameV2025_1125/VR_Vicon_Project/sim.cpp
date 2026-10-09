@@ -1,24 +1,24 @@
-ï»¿/******************************************************************************
+/******************************************************************************
  * VR_Vicon_Project / sim.cpp
  *
- *   Vicon Shogun Live ã® DataStream ã‹ã‚‰éª¨æ ¼ï¼ˆSubjectï¼‰ã‚’å—ä¿¡ã—ã€
- *   éª¨æ ¼ã®å¯è¦–åŒ–ã¨ã€å¾“æ¥ã®ãƒ—ãƒ­ãƒƒãƒ—ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°ã‚’è¡Œã†ã‚µãƒ³ãƒ—ãƒ«ã€‚
+ *   Vicon Shogun Live ‚Ì DataStream ‚©‚çœŠiiSubjectj‚ğóM‚µA
+ *   œŠi‚Ì‰Â‹‰»‚ÆA]—ˆ‚Ìƒvƒƒbƒvƒgƒ‰ƒbƒLƒ“ƒO‚ğs‚¤ƒTƒ“ƒvƒ‹B
  *
- *   â–  è¨­å®š
- *     ãƒ»config.h ã® use_tracker / use_vicon
- *     ãƒ»VICON_HOSTï¼ˆVicon PC ã® IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼šãƒãƒ¼ãƒˆç•ªå·ï¼‰
+ *   ¡ İ’è
+ *     Econfig.h ‚Ì use_tracker / use_vicon
+ *     EVICON_HOSTiVicon PC ‚Ì IPƒAƒhƒŒƒXFƒ|[ƒg”Ô†j
  *
- *   â–  éª¨æ ¼ã®å¯è¦–åŒ–
- *     å—ä¿¡ã—ãŸ Subjectï¼ˆ= ezTrackerï¼‰ã¸ã®å‚ç…§ã‚’ subjects[] ã«ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã—ã€
- *     DrawTrackedSkeleton() ã§ TrackArray ã‚’èµ°æŸ»ã—ã¦ parent é–“ã‚’ç·šã§çµã¶ã€‚
- *     ç·šã®è‰²ã¯ subject_colors[] ã§ Subject ã”ã¨ã«å¤‰ãˆã‚‹ã€‚
+ *   ¡ œŠi‚Ì‰Â‹‰»
+ *     óM‚µ‚½ Subjecti= ezTrackerj‚Ö‚ÌQÆ‚ğ subjects[] ‚ÉƒLƒƒƒbƒVƒ…‚µA
+ *     DrawTrackedSkeleton() ‚Å TrackArray ‚ğ‘–¸‚µ‚Ä parent ŠÔ‚ğü‚ÅŒ‹‚ÔB
+ *     ü‚ÌF‚Í subject_colors[] ‚Å Subject ‚²‚Æ‚É•Ï‚¦‚éB
  *
- *   â–  ãƒ—ãƒ­ãƒƒãƒ—ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°
- *     å¾“æ¥ã©ãŠã‚Š getTrackData("åå‰") ã§ CAP / TREE_A / TREE_B / Chest /
- *     Candy / RightFoot / LeftFoot ã‚’å–å¾—ã—ã€simdata ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¸åæ˜ ã™ã‚‹ã€‚
+ *   ¡ ƒvƒƒbƒvƒgƒ‰ƒbƒLƒ“ƒO
+ *     ]—ˆ‚Ç‚¨‚è getTrackData("–¼‘O") ‚Å CAP / TREE_A / TREE_B / Chest /
+ *     Candy / RightFoot / LeftFoot ‚ğæ“¾‚µAsimdata ‚ÌƒIƒuƒWƒFƒNƒg‚Ö”½‰f‚·‚éB
  *
- *   â–  ã‚«ãƒ¡ãƒ©
- *     åˆæœŸçŠ¶æ…‹ã¯å›ºå®šã‚«ãƒ¡ãƒ©ã€‚C ã‚­ãƒ¼ã§å›ºå®šã‚«ãƒ¡ãƒ© â‡” é ­ï¼ˆheadï¼‰ã‚«ãƒ¡ãƒ©ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã€‚
+ *   ¡ ƒJƒƒ‰
+ *     ‰Šúó‘Ô‚ÍŒÅ’èƒJƒƒ‰BC ƒL[‚ÅŒÅ’èƒJƒƒ‰ Ì “ªiheadjƒJƒƒ‰‚ğØ‚è‘Ö‚¦‚éB
  ******************************************************************************/
 
 #include "platform.h"
@@ -29,35 +29,35 @@
 #include "config.h"
 
 #include "ezTrack.h"
-#include "ezTrack_Vicon.h" // VICONç”¨ã®ez_Tracker : Crescent
+#include "ezTrack_Vicon.h" // VICON—p‚Ìez_Tracker : Crescent
 
 #include "Shapes.h"
-#include "mymodel.h" //â˜…
+#include "mymodel.h" //š
 
 #include <stdio.h>
 
-// draw.cppï¼ˆ2Dæ–‡å­—ï¼‰
+// draw.cppi2D•¶šj
 void drawString(float x, float y, float z, float xscl, float yscl, const char* string);
 
-SimDataT simdata; //SimDataTå‹æ§‹é€ ä½“ã®ãƒ‡ãƒ¼ã‚¿ã‚’å®£è¨€
+SimDataT simdata; //SimDataTŒ^\‘¢‘Ì‚Ìƒf[ƒ^‚ğéŒ¾
 extern MouseDataT mouse;
 extern KeyDataT keydata;
 
-//---- ãƒˆãƒ©ãƒƒã‚«ãƒ¼ ----
-ezTracker *tracker = nullptr; //å…±æœ‰ãƒ¡ãƒ¢ãƒªçµŒç”±ã§ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã®æƒ…å ±ã‚’å¾—ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
-static ezTracker_Vicon *vicon = nullptr; //Viconã®Subjectå–å¾—ç”¨
-static bool vicon_active = false; //Viconã®ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°ãŒæœ‰åŠ¹ã‹
+//---- ƒgƒ‰ƒbƒJ[ ----
+ezTracker *tracker = nullptr; //‹¤—Lƒƒ‚ƒŠŒo—R‚Åƒgƒ‰ƒbƒJ[‚Ìî•ñ‚ğ“¾‚éƒIƒuƒWƒFƒNƒg
+static ezTracker_Vicon *vicon = nullptr; //Vicon‚ÌSubjectæ“¾—p
+static bool vicon_active = false; //Vicon‚Ìƒgƒ‰ƒbƒLƒ“ƒO‚ª—LŒø‚©
 
-//---- å¾“æ¥ã®ãƒ—ãƒ­ãƒƒãƒ—ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°ï¼ˆå…ƒã®sim.cppã¨åŒã˜ï¼‰ ----
-//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰å—ã‘å–ã£ãŸãƒ‡ãƒ¼ã‚¿ã¸ã®ãƒã‚¤ãƒ³ã‚¿
-ezTrackDataT *trackBase = nullptr; //åŸºæº–ãƒãƒ¼ã‚«
+//---- ]—ˆ‚Ìƒvƒƒbƒvƒgƒ‰ƒbƒLƒ“ƒOiŒ³‚Ìsim.cpp‚Æ“¯‚¶j ----
+//ƒgƒ‰ƒbƒJ[‚©‚çó‚¯æ‚Á‚½ƒf[ƒ^‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ezTrackDataT *trackBase = nullptr; //Šî€ƒ}[ƒJ
 ezTrackDataT *trackHead = nullptr;
 ezTrackDataT *trackBody = nullptr;
 ezTrackDataT *trackHandR = nullptr;
 ezTrackDataT *trackHandL = nullptr;
 ezTrackDataT *trackFootR = nullptr;
 ezTrackDataT *trackFootL = nullptr;
-//ãƒãƒ¼ã‚«ãŒè¦‹ãˆãªã„å ´åˆãªã©ã®ãƒ€ãƒŸãƒ¼ãƒ‡ãƒ¼ã‚¿{id,x,y,z,roll,pitch,yaw,name,parent}
+//ƒ}[ƒJ‚ªŒ©‚¦‚È‚¢ê‡‚È‚Ç‚Ìƒ_ƒ~[ƒf[ƒ^{id,x,y,z,roll,pitch,yaw,name,parent}
 ezTrackDataT localBase = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "", -1 };
 ezTrackDataT localHead = { 0, 0.0, 1.5, 0.0, 0.0, 0.0, 0.0, "", -1 };
 ezTrackDataT localBody = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "", -1 };
@@ -66,34 +66,34 @@ ezTrackDataT localHandL = { 0,-0.25, 1.25, -0.5, 0.0, 0.0, 0.0, "", -1 };
 ezTrackDataT localFootR = { 0, 0.25, 0.0, -0.5, 0.0, 0.0, 0.0, "", -1 };
 ezTrackDataT localFootL = { 0,-0.25, 0.0, -0.5, 0.0, 0.0, 0.0, "", -1 };
 
-//---- éª¨æ ¼è¡¨ç¤ºï¼ˆSubjectå˜ä½ï¼‰ ----
+//---- œŠi•\¦iSubject’PˆÊj ----
 #define VICON_MAX_SUBJECTS 8
-static ezTracker *subjects[VICON_MAX_SUBJECTS]; //Subjectï¼ˆ=ezTrackerï¼‰ã¸ã®å‚ç…§
+static ezTracker *subjects[VICON_MAX_SUBJECTS]; //Subjecti=ezTrackerj‚Ö‚ÌQÆ
 static int subject_count = 0;
-//Subjectã”ã¨ã®éª¨æ ¼ç·šã®è‰²
+//Subject‚²‚Æ‚ÌœŠiü‚ÌF
 static const float subject_colors[VICON_MAX_SUBJECTS][3] = {
-	{ 0.00f, 1.00f, 0.25f }, //ç·‘
-	{ 0.20f, 0.60f, 1.00f }, //é’
-	{ 1.00f, 0.20f, 0.20f }, //èµ¤
-	{ 1.00f, 1.00f, 0.00f }, //é»„
-	{ 1.00f, 0.30f, 1.00f }, //ãƒã‚¼ãƒ³ã‚¿
-	{ 0.00f, 1.00f, 1.00f }, //ã‚·ã‚¢ãƒ³
-	{ 1.00f, 0.60f, 0.00f }, //ã‚ªãƒ¬ãƒ³ã‚¸
-	{ 1.00f, 1.00f, 1.00f }, //ç™½
+	{ 0.00f, 1.00f, 0.25f }, //—Î
+	{ 0.20f, 0.60f, 1.00f }, //Â
+	{ 1.00f, 0.20f, 0.20f }, //Ô
+	{ 1.00f, 1.00f, 0.00f }, //‰©
+	{ 1.00f, 0.30f, 1.00f }, //ƒ}ƒ[ƒ“ƒ^
+	{ 0.00f, 1.00f, 1.00f }, //ƒVƒAƒ“
+	{ 1.00f, 0.60f, 0.00f }, //ƒIƒŒƒ“ƒW
+	{ 1.00f, 1.00f, 1.00f }, //”’
 };
 
-//---- ç¢ºèªç”¨ã®å›ºå®šã‚«ãƒ¡ãƒ© ----
+//---- Šm”F—p‚ÌŒÅ’èƒJƒƒ‰ ----
 static ObjDataT fixed_camera;
 
-//Vicon PCã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼šãƒãƒ¼ãƒˆç•ªå·
+//Vicon PC‚ÌIPƒAƒhƒŒƒXFƒ|[ƒg”Ô†
 static char VICON_HOST[] = "127.0.0.1:801";
 //static char VICON_HOST[] = "172.23.85.186:801";
 
 ////////////////////////////////////////////////////////
 
 /*------------------------------------------------------------- copyTrackToObj
- * ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰å—ã‘å–ã£ãŸ1ã¤ã®ãƒ‡ãƒ¼ã‚¿ã‚’ ObjDataT ã¸ã‚³ãƒ”ãƒ¼ã™ã‚‹
- * æˆ»ã‚Šå€¤ï¼šã‚³ãƒ”ãƒ¼ã§ããŸã‚‰ trueï¼ˆNULLãƒ»é®è”½ãªã©ã§ç„¡åŠ¹ãªã¨ãã¯ falseï¼‰
+ * ƒgƒ‰ƒbƒJ[‚©‚çó‚¯æ‚Á‚½1‚Â‚Ìƒf[ƒ^‚ğ ObjDataT ‚ÖƒRƒs[‚·‚é
+ * –ß‚è’lFƒRƒs[‚Å‚«‚½‚ç trueiNULLEÕ•Á‚È‚Ç‚Å–³Œø‚È‚Æ‚«‚Í falsej
  */
 static bool copyTrackToObj( ezTrackDataT *src, ObjDataT *dst )
 {
@@ -101,7 +101,7 @@ static bool copyTrackToObj( ezTrackDataT *src, ObjDataT *dst )
 	if( src == NULL ) return false;
 	ezTrack_getPos( src, pos );
 	ezTrack_getRot( src, rot );
-	//é®è”½ãƒ•ãƒ¬ãƒ¼ãƒ ã¯å›è»¢ãŒNaNã«ãªã‚‹ã“ã¨ãŒã‚ã‚‹ï¼ˆNaNã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ã¨ãƒ©ã‚¤ãƒˆã‚„å¤‰æ›ãŒå£Šã‚Œã‚‹ï¼‰
+	//Õ•ÁƒtƒŒ[ƒ€‚Í‰ñ“]‚ªNaN‚É‚È‚é‚±‚Æ‚ª‚ ‚éiNaN‚ğƒRƒs[‚·‚é‚Æƒ‰ƒCƒg‚â•ÏŠ·‚ª‰ó‚ê‚éj
 	if( pos[0] != pos[0] || pos[1] != pos[1] || pos[2] != pos[2] ||
 	    rot[0] != rot[0] || rot[1] != rot[1] || rot[2] != rot[2] ) return false;
 	setObjPos( dst, pos );
@@ -119,8 +119,8 @@ void setColor(color_t* col, float r, float g, float b, float a)
 	col->alpha = a;
 }
 /*------------------------------------------------------------- printViconSubject
- * æŒ‡å®šã—ãŸSubjectã®éª¨ï¼ˆSegmentï¼‰ä¸€è¦§ã‚’ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã«å‡ºåŠ›ã™ã‚‹
- * ä¾‹ï¼šprintViconSubject("Subject1");
+ * w’è‚µ‚½Subject‚ÌœiSegmentjˆê——‚ğƒRƒ“ƒ\[ƒ‹‚Éo—Í‚·‚é
+ * —áFprintViconSubject("Subject1");
  */
 void printViconSubject( const char *name )
 {
@@ -147,16 +147,16 @@ void InitScene( void )
 	printf(">>InitScene\n");
 
 #ifndef MREALMODE
-	//- Viconã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã€ezTracker_Viconã‚¯ãƒ©ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹:Crescent
+	//- Vicon‚ğg—p‚·‚éê‡AezTracker_ViconƒNƒ‰ƒX‚ğg—p‚·‚é:Crescent
 	if (use_vicon) {
-		vicon = new ezTracker_Vicon(use_tracker); //VICONä½¿ã†ã¨ãã¯true
+		vicon = new ezTracker_Vicon(use_tracker); //VICONg‚¤‚Æ‚«‚Ítrue
 		tracker = vicon;
-		// å¼•æ•°ã®æ–‡å­—åˆ—ã¯ã€"VICON PCã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼šé€šä¿¡ãƒãƒ¼ãƒˆç•ªå·(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼š801)"
+		// ˆø”‚Ì•¶š—ñ‚ÍA"VICON PC‚ÌIPƒAƒhƒŒƒXF’ÊMƒ|[ƒg”Ô†(ƒfƒtƒHƒ‹ƒgF801)"
 		tracker->open(VICON_HOST, false);
 	}
 	else {
-		tracker = new ezTracker(use_tracker); //VICONä½¿ã†ã¨ãã¯true
-		tracker->open("ARTOOLKIT", false); //è­˜åˆ¥å, Wãƒ•ãƒ©ã‚°(false:R/O)
+		tracker = new ezTracker(use_tracker); //VICONg‚¤‚Æ‚«‚Ítrue
+		tracker->open("ARTOOLKIT", false); //¯•Ê–¼, Wƒtƒ‰ƒO(false:R/O)
 	}
 
 	trackHead = &localHead;
@@ -178,19 +178,19 @@ void InitScene( void )
 
 	ezInitShape();
 
-	////// æç”»ç©ºé–“ã®å¥¥è¡Œããƒ»ç©ºæ°—æ„Ÿãƒ»èƒŒæ™¯è‰²è¨­å®š
-	simdata.clip_far = 100.0; //â—†ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—ãƒ—ãƒ¬ãƒ¼ãƒ³
-	simdata.clip_near = 0.1; //â—†ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—ãƒ—ãƒ¬ãƒ¼ãƒ³
-	setColor(&simdata.fog, 1.0, 1.0, 1.0, 1.0);//â—†ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼
-	setColor(&simdata.sky, 0.2, 0.3, 0.4, 0.2);//â—†èƒŒæ™¯ã‚«ãƒ©ãƒ¼
+	////// •`‰æ‹óŠÔ‚Ì‰œs‚«E‹ó‹CŠ´E”wŒiFİ’è
+	simdata.clip_far = 100.0; //Ÿƒtƒ@[ƒNƒŠƒbƒvƒvƒŒ[ƒ“
+	simdata.clip_near = 0.1; //ŸƒjƒAƒNƒŠƒbƒvƒvƒŒ[ƒ“
+	setColor(&simdata.fog, 1.0, 1.0, 1.0, 1.0);//ŸƒtƒHƒOƒJƒ‰[
+	setColor(&simdata.sky, 0.2, 0.3, 0.4, 0.2);//Ÿ”wŒiƒJƒ‰[
 	//////
 
-	///â–¼è¿½åŠ ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–
+	///¥’Ç‰Á‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»
 	setObjPos( &simdata.cube, 0.0, 1.0, -50.0 );
 	setObjRot( &simdata.cube, 0.0, 0.0, 60.0 );
     setObjColor( &simdata.cube, 0.5, 0.3, 0.2 );
 	simdata.cube.visible = true;
-	simdata.cube.state = 0; //////////////â—†
+	simdata.cube.state = 0; //////////////Ÿ
     simdata.cube.radius = 0.2;
 
 	simdata.cube.xsize = 8.0; //0.6
@@ -202,10 +202,10 @@ void InitScene( void )
 	setObjColor( &simdata.sphere, 1.0, 0.5, 0.0 );
 	simdata.sphere.visible = true;
 	simdata.sphere.state = 0;
-	simdata.sphere.radius = 0.25; //â˜…â—†04
+	simdata.sphere.radius = 0.25; //šŸ04
 
-	simdata.handR.radius = 0.125; //â—†04
-	simdata.handL.radius = 0.125; //â—†04
+	simdata.handR.radius = 0.125; //Ÿ04
+	simdata.handL.radius = 0.125; //Ÿ04
 	simdata.handR.state = 0;
 	simdata.handL.state = 0;
 	
@@ -227,32 +227,32 @@ void InitScene( void )
 	simdata.player.move = 0.0;
 	simdata.player.radius = 0.5;
 
-	//å³æ‰‹ï¼ˆãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ï¼‰ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ã®å­åº§æ¨™ç³»ã¨ã™ã‚‹
-	setObjLocal( &simdata.handR, &simdata.player ); //â˜…
+	//‰Eèiƒ[ƒJƒ‹À•Wj‚ğƒvƒŒƒCƒ„‚ÌqÀ•WŒn‚Æ‚·‚é
+	setObjLocal( &simdata.handR, &simdata.player ); //š
 
-	//â˜…å·¦æ‰‹ã‚‚åŒæ§˜
-	setObjLocal( &simdata.handL, &simdata.player ); //â˜…
+	//š¶è‚à“¯—l
+	setObjLocal( &simdata.handL, &simdata.player ); //š
 
-	//é ­ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å­åº§æ¨™ç³»ã«ã™ã‚‹
+	//“ª‚ğƒvƒŒƒCƒ„[‚ÌqÀ•WŒn‚É‚·‚é
 	setObjLocal(&simdata.head, &simdata.player );
 
-	//ç¢ºèªç”¨ã®å›ºå®šã‚«ãƒ¡ãƒ©ï¼ˆCã‚­ãƒ¼ã§é ­ã‚«ãƒ¡ãƒ©ã¨åˆ‡ã‚Šæ›¿ãˆï¼‰
+	//Šm”F—p‚ÌŒÅ’èƒJƒƒ‰iCƒL[‚Å“ªƒJƒƒ‰‚ÆØ‚è‘Ö‚¦j
 	setObjPos( &fixed_camera, 0.0, 1.6, 4.0 );
 	setObjRot( &fixed_camera, 0.0, 0.0, 0.0 );
 
-	//åˆæœŸçŠ¶æ…‹ã¯å›ºå®šã‚«ãƒ¡ãƒ©ï¼ˆCã‚­ãƒ¼ã§é ­ã‚«ãƒ¡ãƒ©ã«åˆ‡ã‚Šæ›¿ãˆï¼‰
+	//‰Šúó‘Ô‚ÍŒÅ’èƒJƒƒ‰iCƒL[‚Å“ªƒJƒƒ‰‚ÉØ‚è‘Ö‚¦j
 	simdata.active_camera = &fixed_camera;
 
 	//simdata.active_camera = NULL;
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿ã«ç´ä»˜ã‘ã‚‹
+	//ƒvƒŒƒCƒ„ƒIƒuƒWƒFƒNƒg‚ÌƒAƒhƒŒƒX‚ğƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^‚É•R•t‚¯‚é
 
-	setObjColor( &simdata.handR, 0.0, 1.0, 0.0 ); //å³æ‰‹ã‚°ãƒªãƒ¼ãƒ³
-	setObjColor( &simdata.handL, 1.0, 0.0, 0.0 ); //å·¦æ‰‹ãƒ¬ãƒƒãƒ‰
+	setObjColor( &simdata.handR, 0.0, 1.0, 0.0 ); //‰EèƒOƒŠ[ƒ“
+	setObjColor( &simdata.handL, 1.0, 0.0, 0.0 ); //¶èƒŒƒbƒh
 
-	CreateMyModels(); //â˜…
+	CreateMyModels(); //š
 
 	simdata.cube.visible = true;
-	simdata.cube.state = 0; //////////////â—†
+	simdata.cube.state = 0; //////////////Ÿ
 	simdata.cube.radius = 0.2;
 
 	simdata.scale = 0;
@@ -306,17 +306,17 @@ void UpdateScene(void)
 	//copyObj( &simdata.target[0], &simdata.handR );
 	//copyObj( &simdata.target[1], &simdata.handL );
 #else
-	//////// ãƒ‡ãƒ¼ã‚¿æ›´æ–°ï¼šæ‰‹ã®å‹•ãã‚„ä½“ã®ä½ç½®ãƒ»å§¿å‹¢ ////////
+	//////// ƒf[ƒ^XVFè‚Ì“®‚«‚â‘Ì‚ÌˆÊ’uEp¨ ////////
 	if (use_tracker) {
-		//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚²ãƒƒãƒˆ
-		tracker->read(); //ï¼ˆå…±æœ‰ãƒ¡ãƒ¢ãƒªï¼‰ãƒãƒƒãƒˆçµŒç”±ã§ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿å‡ºã™
+		//ƒgƒ‰ƒbƒJ[‚©‚ç‚Ìƒf[ƒ^‚ğƒQƒbƒg
+		tracker->read(); //i‹¤—Lƒƒ‚ƒŠjƒlƒbƒgŒo—R‚Åƒf[ƒ^‚ğ“Ç‚İo‚·
 		if (use_vicon) {
-			trackHead = tracker->getTrackData("CAP"); //VICONãƒãƒ¼ã‚«ã®åå‰
+			trackHead = tracker->getTrackData("CAP"); //VICONƒ}[ƒJ‚Ì–¼‘O
 			trackHandR = tracker->getTrackData("TREE_A");
 			trackHandL = tracker->getTrackData("TREE_B");
 		}
 		else {
-			trackHead = tracker->getTrackData(0); //ARTOOLKITãƒãƒ¼ã‚«ã®ç•ªå·
+			trackHead = tracker->getTrackData(0); //ARTOOLKITƒ}[ƒJ‚Ì”Ô†
 			trackHandR = tracker->getTrackData(1);
 			trackHandL = tracker->getTrackData(2);
 		}
@@ -328,14 +328,14 @@ void UpdateScene(void)
 
 		copyTrackToObj(trackHead, &simdata.head);
 		copyTrackToObj(trackBody, &simdata.body);
-		//è§£èª¬ï¼šæ§‹é€ ä½“ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å¼•æ•°ã¨ã™ã‚‹
-		//&: ã‚¢ãƒ‰ãƒ¬ã‚¹ï¼ˆï¼ãƒã‚¤ãƒ³ã‚¿ï¼‰ã‚’æ¸¡ã™ã“ã¨ã‚’æŒ‡å®š
+		//‰ğàF\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^‚ğˆø”‚Æ‚·‚é
+		//&: ƒAƒhƒŒƒXiƒ|ƒCƒ“ƒ^j‚ğ“n‚·‚±‚Æ‚ğw’è
 		if (copyTrackToObj(trackHandL, &simdata.handL)) simdata.handL.pos.z -= 0.5; //########
 		if (copyTrackToObj(trackHandR, &simdata.handR)) simdata.handR.pos.z -= 0.5; //########
 		copyTrackToObj(trackFootL, &simdata.footL);
 		copyTrackToObj(trackFootR, &simdata.footR);
 
-		//Viconã®Subjectï¼ˆéª¨æ ¼ãƒ»ãƒ—ãƒ­ãƒƒãƒ—ï¼‰ã¸ã®å‚ç…§ã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã™ã‚‹
+		//Vicon‚ÌSubjectiœŠiEƒvƒƒbƒvj‚Ö‚ÌQÆ‚ğƒLƒƒƒbƒVƒ…‚·‚é
 		subject_count = 0;
 		if (vicon != NULL) {
 			int n = vicon->getSubjectCount();
@@ -348,47 +348,47 @@ void UpdateScene(void)
 		vicon_active = (subject_count > 0);
 	}
 
-	//ViconãŒä½¿ãˆãªã„ã¨ãã¯ãƒã‚¦ã‚¹ã§æ“ä½œï¼ˆå‹•ä½œç¢ºèªç”¨ï¼‰
+	//Vicon‚ªg‚¦‚È‚¢‚Æ‚«‚Íƒ}ƒEƒX‚Å‘€ìi“®ìŠm”F—pj
 	if (!vicon_active) {
-		//â—†01â—†ã‚³ãƒ¡ãƒ³ãƒˆåŒ–
+		//Ÿ01ŸƒRƒƒ“ƒg‰»
 
 		//copyTrackToObj( trackHandL, &simdata.handL );
 		//copyTrackToObj( trackHandR, &simdata.handR );
 
-		//â—†02â—†ãƒã‚¦ã‚¹ã§å³æ‰‹handRã‚’å‹•ã‹ã™
-		//æ„Ÿåº¦èª¿æ•´ï¼‹åŸºæº–ä½ç½®èª¿æ•´ ########
-		simdata.handR.pos.x = mouse.x * 2.0 + 0.25; // mouse.x: -1.0ï¼ˆå·¦ç«¯ï¼‰ï½1.0ï¼ˆå³ç«¯ï¼‰
-		simdata.handR.pos.y = -mouse.y * 2.0 + 1.2; // mouse.y; -1.0ï¼ˆä¸Šç«¯ï¼‰ï½1.0ï¼ˆä¸‹ç«¯ï¼‰
+		//Ÿ02Ÿƒ}ƒEƒX‚Å‰EèhandR‚ğ“®‚©‚·
+		//Š´“x’²®{Šî€ˆÊ’u’²® ########
+		simdata.handR.pos.x = mouse.x * 2.0 + 0.25; // mouse.x: -1.0i¶’[j`1.0i‰E’[j
+		simdata.handR.pos.y = -mouse.y * 2.0 + 1.2; // mouse.y; -1.0iã’[j`1.0i‰º’[j
 		simdata.handR.rot.pitch = (simdata.handR.pos.y - 1.2) * 100.0;
 		simdata.handR.rot.yaw = (simdata.handR.pos.x - 0.25) * (-100.0);
 		simdata.handR.rot.roll = simdata.handR.rot.yaw - 30.0;
-		//Zåº§æ¨™ã¯localHandRã§åˆæœŸè¨­å®šã®ã¾ã¾
-		//â–²
+		//ZÀ•W‚ÍlocalHandR‚Å‰Šúİ’è‚Ì‚Ü‚Ü
+		//£
 
-		//â—†03â—†ã¤ã„ã§ã«å·¦æ‰‹handLã‚‚å‹•ã‹ã™ï½å³æ‰‹ã¨ä¸Šä¸‹å·¦å³ã‚’é€†ã«ã—ãŸã‚Šã™ã‚‹
-		//æ„Ÿåº¦èª¿æ•´ï¼‹åŸºæº–ä½ç½®èª¿æ•´ ########
-		simdata.handL.pos.x = -mouse.x * 2.0 - 0.25; // mouse.x: -1.0ï¼ˆå·¦ç«¯ï¼‰ï½1.0ï¼ˆå³ç«¯ï¼‰
-		simdata.handL.pos.y = mouse.y * 2.0 + 1.2; // mouse.y; -1.0ï¼ˆä¸Šç«¯ï¼‰ï½1.0ï¼ˆä¸‹ç«¯ï¼‰
+		//Ÿ03Ÿ‚Â‚¢‚Å‚É¶èhandL‚à“®‚©‚·`‰Eè‚Æã‰º¶‰E‚ğ‹t‚É‚µ‚½‚è‚·‚é
+		//Š´“x’²®{Šî€ˆÊ’u’²® ########
+		simdata.handL.pos.x = -mouse.x * 2.0 - 0.25; // mouse.x: -1.0i¶’[j`1.0i‰E’[j
+		simdata.handL.pos.y = mouse.y * 2.0 + 1.2; // mouse.y; -1.0iã’[j`1.0i‰º’[j
 		simdata.handL.rot.pitch = (simdata.handL.pos.y - 1.2) * 100.0;
 		simdata.handL.rot.yaw = (simdata.handL.pos.x + 0.25) * (-100.0);
 		simdata.handL.rot.roll = simdata.handL.rot.yaw + 30.0;
-		//Zåº§æ¨™ã¯localHandRã§åˆæœŸè¨­å®šã®ã¾ã¾
-		//Zåº§æ¨™ã¯localHandLã§åˆæœŸè¨­å®šã®ã¾ã¾
-		//â–²
+		//ZÀ•W‚ÍlocalHandR‚Å‰Šúİ’è‚Ì‚Ü‚Ü
+		//ZÀ•W‚ÍlocalHandL‚Å‰Šúİ’è‚Ì‚Ü‚Ü
+		//£
 
-		////â˜…å‰å¾Œç§»å‹•è¿½åŠ 
+		////š‘OŒãˆÚ“®’Ç‰Á
 		if (keydata.arrowUp) {
 			simdata.handL.pos.z -= 0.01; //###### VECTOR Z
 		}
 		if (keydata.arrowDown) {
 			simdata.handL.pos.z += 0.01; //###### VECTOR Z
 		}
-		//////////â˜…
+		//////////š
 	}
 
 #endif
 	/*
-	//----------------------------------------------- ãƒã‚¦ã‚¹ã§ç§»å‹•ã™ã‚‹
+	//----------------------------------------------- ƒ}ƒEƒX‚ÅˆÚ“®‚·‚é
 	{
 		simdata.player.turn = - 0.5 * mouse.xRel;
 		simdata.player.move = - 0.2 * mouse.yRel;
@@ -396,15 +396,15 @@ void UpdateScene(void)
 	}
 	*/
 
-	//â˜…å®šæ•°ã¨ã—ã¦å¤‰æ•°ã‚’ä½¿ã„ãŸã„ã¨ãã«ã¯ã€Œconstã€ã‚’ã¤ã‘ã‚‹
-	const float yon = 1.25, yoff = 1.15; //å€¤ãŒé•ã†ã“ã¨ã«ã¯æ„å‘³ãŒã‚ã‚‹
+	//š’è”‚Æ‚µ‚Ä•Ï”‚ğg‚¢‚½‚¢‚Æ‚«‚É‚Íuconstv‚ğ‚Â‚¯‚é
+	const float yon = 1.25, yoff = 1.15; //’l‚ªˆá‚¤‚±‚Æ‚É‚ÍˆÓ–¡‚ª‚ ‚é
 
-	//â˜…å‰ã®å€¤ã‚’ä¿æŒã—ãŸã„ã¨ãã«ã¯ã€Œstaticã€ã‚’ã¤ã‘ã‚‹
-	static float xo, zo; //ç§»å‹•ãƒ¢ãƒ¼ãƒ‰ãŒã‚ªãƒ³ã«ãªã£ãŸã¨ãã®æ‰‹ã®ä½ç½®
+	//š‘O‚Ì’l‚ğ•Û‚µ‚½‚¢‚Æ‚«‚É‚Íustaticv‚ğ‚Â‚¯‚é
+	static float xo, zo; //ˆÚ“®ƒ‚[ƒh‚ªƒIƒ“‚É‚È‚Á‚½‚Æ‚«‚Ìè‚ÌˆÊ’u
 
-	//â˜…å·¦æ‰‹ã®å‹•ä½œã§ç§»å‹•ã™ã‚‹æ“ä½œ
+	//š¶è‚Ì“®ì‚ÅˆÚ“®‚·‚é‘€ì
 	switch (simdata.handL.state) {
-	case 0: //â—†éç§»å‹•ãƒ¢ãƒ¼ãƒ‰
+	case 0: //Ÿ”ñˆÚ“®ƒ‚[ƒh
 		if ( simdata.handL.pos.y > yon) {  // simdata.handL.pos.y
 			simdata.handL.state = 1;
 			xo = simdata.handL.pos.x; // simdata.handL.pos.x
@@ -412,12 +412,12 @@ void UpdateScene(void)
 			//setObjColor(&simdata.handL, 1.0, 1.0, 0.0);
 		}
 		break;
-	case 1: //â—†ç§»å‹•ãƒ¢ãƒ¼ãƒ‰
+	case 1: //ŸˆÚ“®ƒ‚[ƒh
 		if ( simdata.handL.pos.y < yoff) { // simdata.handL.pos.y
 			simdata.handL.state = 0;
 			//setObjColor(&simdata.handL, 1.0, 0.0, 0.0);
 		}
-		//ç§»å‹•ã®å‡¦ç†
+		//ˆÚ“®‚Ìˆ—
 		
 		simdata.player.turn = -0.25 * (simdata.handL.pos.x - xo); // simdata.handL.pos.x
 
@@ -428,14 +428,14 @@ void UpdateScene(void)
 
 #ifdef ZIGSIM
 	{
-		//å·¦å³ã«å‚¾ã‘ã‚‹ã¨å·¦å³æ—‹å›
+		//¶‰E‚ÉŒX‚¯‚é‚Æ¶‰Eù‰ñ
 		if (simdata.zigsim->data.angle.roll > 5) {
 			simdata.player.turn = (simdata.zigsim->data.angle.roll - 5) * 0.0125;
 		}
 		if (simdata.zigsim->data.angle.roll < -5) {
 			simdata.player.turn = (simdata.zigsim->data.angle.roll + 5) * 0.0125;
 		}
-		//å‰å¾Œã«å‚¾ã‘ã‚‹ã¨å‰é€²å¾Œé€€
+		//‘OŒã‚ÉŒX‚¯‚é‚Æ‘OiŒã‘Ş
 		if (simdata.zigsim->data.angle.pitch < -5) {
 			simdata.player.move = -(simdata.zigsim->data.angle.pitch + 5) * 0.0025;
 		}
@@ -447,14 +447,14 @@ void UpdateScene(void)
 
 #ifdef WITMOTION
 	{
-		//å·¦å³ã«å‚¾ã‘ã‚‹ã¨å·¦å³æ—‹å›
+		//¶‰E‚ÉŒX‚¯‚é‚Æ¶‰Eù‰ñ
 		if (simdata.gyro->data.angle.roll > 5) {
 			simdata.player.turn = (simdata.gyro->data.angle.roll - 5) * 0.0125;
 		}
 		if (simdata.gyro->data.angle.roll < -5) {
 			simdata.player.turn = (simdata.gyro->data.angle.roll + 5) * 0.0125;
 		}
-		//å‰å¾Œã«å‚¾ã‘ã‚‹ã¨å‰é€²å¾Œé€€
+		//‘OŒã‚ÉŒX‚¯‚é‚Æ‘OiŒã‘Ş
 		if (simdata.gyro->data.angle.pitch < -5) {
 			simdata.player.move = -(simdata.gyro->data.angle.pitch + 5) * 0.0025;
 		}
@@ -469,7 +469,7 @@ void UpdateScene(void)
 	}
 	*/
 
-	//Cã‚­ãƒ¼ã§å›ºå®šã‚«ãƒ¡ãƒ© â‡” é ­ï¼ˆheadï¼‰ã‚«ãƒ¡ãƒ©ã‚’åˆ‡ã‚Šæ›¿ãˆ
+	//CƒL[‚ÅŒÅ’èƒJƒƒ‰ Ì “ªiheadjƒJƒƒ‰‚ğØ‚è‘Ö‚¦
 	static bool prev_c = false;
 	if (keydata.charKey['c'] && !prev_c) {
 		if (simdata.active_camera == &simdata.head) {
@@ -483,16 +483,16 @@ void UpdateScene(void)
 
 	MoveObject(&simdata.player);
 
-	//çŠ¶æ…‹é·ç§»ã®ãƒã‚§ãƒƒã‚¯ã€çŠ¶æ…‹é·ç§»ã€
-	//â—†04
+	//ó‘Ô‘JˆÚ‚Ìƒ`ƒFƒbƒNAó‘Ô‘JˆÚA
+	//Ÿ04
 	bool ishit;
 	switch (simdata.sphere.state) {
-	case 0://â˜…å³æ‰‹ã‹ã‚‰å¤–ã‚Œã€ã‹ã¤å³æ‰‹ã«è§¦ã‚Œã¦ã„ãªã„çŠ¶æ…‹
+	case 0://š‰Eè‚©‚çŠO‚êA‚©‚Â‰Eè‚ÉG‚ê‚Ä‚¢‚È‚¢ó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handR);
 		if (ishit) {
 			setObjColor(&simdata.sphere, 0.0, 1.0, 0.5);
 
-			//â—†05
+			//Ÿ05
 			simdata.sphere.state = 1;
 			moveWorldToLocal( &simdata.sphere, &simdata.handR );
 		}
@@ -501,16 +501,16 @@ void UpdateScene(void)
 		}
 		break;
 		
-	case 1: //â—†06â˜…å³æ‰‹ã«æŠŠæŒã•ã‚Œã¦ã„ã‚‹çŠ¶æ…‹
+	case 1: //Ÿ06š‰Eè‚É”c‚³‚ê‚Ä‚¢‚éó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handL);
 		if (ishit) {
 			setObjColor(&simdata.sphere, 1.0, 0.5, 0.0);
 			moveLocalToWorld(&simdata.sphere);
-			simdata.sphere.state = 2;//â—†07 0 -> 2
+			simdata.sphere.state = 2;//Ÿ07 0 -> 2
 		}
 		break;
 		
-	case 2://â—†08 å³æ‰‹ã®æŠŠæŒã‹ã‚‰å¤–ã‚ŒãŸãŒè§¦ã£ã¦ã„ã‚‹çŠ¶æ…‹
+	case 2://Ÿ08 ‰Eè‚Ì”c‚©‚çŠO‚ê‚½‚ªG‚Á‚Ä‚¢‚éó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handR);
 		if (!ishit) {
 			setObjColor(&simdata.sphere, 0.7, 0.7, 0.7);
@@ -532,18 +532,18 @@ void UpdateScene(void)
 }
 
 /*------------------------------------------------------------- DrawTrackedSkeleton
- * å—ä¿¡ã—ãŸå„Subjectã®éª¨æ ¼ã‚’æç”»ã™ã‚‹
- *   Subjectã®ezTrackerãŒæŒã¤TrackArrayã‚’èµ°æŸ»ã—ã€parentãŒæœ‰åŠ¹ãªéª¨åŒå£«ã‚’ç·šã§çµã¶
- *   draw.cppã®DrawScene()ã‹ã‚‰å‘¼ã°ã‚Œã‚‹
+ * óM‚µ‚½ŠeSubject‚ÌœŠi‚ğ•`‰æ‚·‚é
+ *   Subject‚ÌezTracker‚ª‚ÂTrackArray‚ğ‘–¸‚µAparent‚ª—LŒø‚Èœ“¯m‚ğü‚ÅŒ‹‚Ô
+ *   draw.cpp‚ÌDrawScene()‚©‚çŒÄ‚Î‚ê‚é
  */
 void DrawTrackedSkeleton( void )
 {
 	if( subject_count <= 0 ) return;
 
-	//ã“ã®é–¢æ•°å†…ã§å¤‰æ›´ã—ãŸGLçŠ¶æ…‹ã‚’å…ƒã«æˆ»ã™
+	//‚±‚ÌŠÖ”“à‚Å•ÏX‚µ‚½GLó‘Ô‚ğŒ³‚É–ß‚·
 	glPushAttrib( GL_ENABLE_BIT | GL_LIGHTING_BIT | GL_CURRENT_BIT | GL_LINE_BIT );
 
-	//---- éª¨æ ¼ã®ç·šï¼ˆSubjectã”ã¨ã®è‰²ï¼‰----
+	//---- œŠi‚ÌüiSubject‚²‚Æ‚ÌFj----
 	glDisable( GL_LIGHTING );
 	glLineWidth( 3.0f );
 	for( int s = 0; s < subject_count; s++ ){
@@ -566,7 +566,7 @@ void DrawTrackedSkeleton( void )
 	}
 	glLineWidth( 1.0f );
 
-	//---- é–¢ç¯€ï¼ˆã‚ªãƒ¬ãƒ³ã‚¸ã®ã‚­ãƒ¥ãƒ¼ãƒ–ã€å›è»¢ã‚’é©ç”¨ï¼‰----
+	//---- ŠÖßiƒIƒŒƒ“ƒW‚ÌƒLƒ…[ƒuA‰ñ“]‚ğ“K—pj----
 	glEnable( GL_LIGHTING );
 	glEnable( GL_COLOR_MATERIAL );
 	glColorMaterial( GL_FRONT, GL_AMBIENT_AND_DIFFUSE );
@@ -587,7 +587,7 @@ void DrawTrackedSkeleton( void )
 
 			glColor3f( 1.0f, 0.5f, 0.0f );
 			if( track->parent < 0 ){
-				//ãƒ«ãƒ¼ãƒˆã«ã¯å§¿å‹¢ãŒåˆ†ã‹ã‚‹ã‚ˆã†ã«åº§æ¨™è»¸ã‚‚æã
+				//ƒ‹[ƒg‚É‚Íp¨‚ª•ª‚©‚é‚æ‚¤‚ÉÀ•W²‚à•`‚­
 				glDisable( GL_LIGHTING );
 				glBegin( GL_LINES );
 				glColor3f(1.0f,0.0f,0.0f); glVertex3f(0.0f,0.0f,0.0f); glVertex3f(0.25f,0.0f,0.0f);
@@ -608,8 +608,8 @@ void DrawTrackedSkeleton( void )
 }
 
 /*------------------------------------------------------------- DrawTrackingInfo
- * ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°ä¸­ã®Subjectåã¨ãƒœãƒ¼ãƒ³æ•°ã‚’ç”»é¢ã«è¡¨ç¤ºã™ã‚‹
- *   draw.cppã®PostDraw()ã‹ã‚‰å‘¼ã°ã‚Œã‚‹ï¼ˆ2Dè¡¨ç¤ºã€0.0ï½1.0ã®åº§æ¨™ï¼‰
+ * ƒgƒ‰ƒbƒLƒ“ƒO’†‚ÌSubject–¼‚Æƒ{[ƒ“”‚ğ‰æ–Ê‚É•\¦‚·‚é
+ *   draw.cpp‚ÌPostDraw()‚©‚çŒÄ‚Î‚ê‚éi2D•\¦A0.0`1.0‚ÌÀ•Wj
  */
 void DrawTrackingInfo( void )
 {
@@ -639,7 +639,7 @@ void DrawTrackingInfo( void )
 ////////
 void TermScene(void)
 {
-	//// çµ‚äº†å‡¦ç†
+	//// I—¹ˆ—
 	printf("GOING TO EXIT..\n");
 
 #ifdef ZIGSIM

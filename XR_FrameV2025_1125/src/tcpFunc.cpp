@@ -1,10 +1,10 @@
-ï»¿#include "tcpFunc.h"
+#include "tcpFunc.h"
 #include <stdio.h>
-//åˆæœŸè¨­å®š
+//‰Šúİ’è
 /*------------------------------------------------------
 initTCPServ
 */
-//ã‚µãƒ¼ãƒãƒ¼å´åˆæœŸåŒ–
+//ƒT[ƒo[‘¤‰Šú‰»
 
 int initTCPServ(TCPDataT *tcpdata)
 {
@@ -36,10 +36,10 @@ int initTCPServ(TCPDataT *tcpdata)
 /*------------------------------------------------------
 ConnectTCPServ
 */
-//ã‚µãƒ¼ãƒãƒ¼å´æ¥ç¶šå¾…ã¡
+//ƒT[ƒo[‘¤Ú‘±‘Ò‚¿
 int ConnectTCPServ(TCPDataT *tcpdata)
 {
-	printf("ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®æ¥ç¶šã‚’å¾…ã£ã¦ã„ã¾ã™\n");
+	printf("ƒNƒ‰ƒCƒAƒ“ƒg‚ÌÚ‘±‚ğ‘Ò‚Á‚Ä‚¢‚Ü‚·\n");
 	if(listen(tcpdata->sock, 5) != 0)
 	{
 		printf("listen err\n");
@@ -54,13 +54,13 @@ int ConnectTCPServ(TCPDataT *tcpdata)
 		printf("new socket err\n");
 		return -1;
 	}
-	printf("ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã®æ¥ç¶šãŒå®Œäº†ã—ã¾ã—ãŸ\n");
+	printf("ƒNƒ‰ƒCƒAƒ“ƒg‚Æ‚ÌÚ‘±‚ªŠ®—¹‚µ‚Ü‚µ‚½\n");
 	return 0;
 }
 /*------------------------------------------------------
 initTCPClient
 */
-//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´åˆæœŸåŒ–
+//ƒNƒ‰ƒCƒAƒ“ƒg‘¤‰Šú‰»
 int initTCPClient(TCPDataT *tcpdata, char *hostname)
 {
 	WORD VersionRequired;
@@ -89,18 +89,18 @@ int initTCPClient(TCPDataT *tcpdata, char *hostname)
 /*------------------------------------------------------
 ConnectTCPClient
 */
-//ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´æ¥ç¶šå¾…ã¡
+//ƒNƒ‰ƒCƒAƒ“ƒg‘¤Ú‘±‘Ò‚¿
 int ConnectTCPClient(TCPDataT *tcpdata)
 {
-	printf("ã‚µãƒ¼ãƒãƒ¼ã«æ¥ç¶šã—ã¾ã™\n");
+	printf("ƒT[ƒo[‚ÉÚ‘±‚µ‚Ü‚·\n");
 	int ret;
 	for(int i = 0;i < 10;i++)
 	{
 		ret = connect(tcpdata->sock, (struct sockaddr *)&tcpdata->addr, sizeof(tcpdata->addr));
 		if(ret == 0)
 			break;
-		printf("æ¥ç¶šã§ãã¾ã›ã‚“ã€‚å†æ¥ç¶šã—ã¾ã™\n");
-		Sleep(2000);//2ç§’å¾…ã¤
+		printf("Ú‘±‚Å‚«‚Ü‚¹‚ñBÄÚ‘±‚µ‚Ü‚·\n");
+		Sleep(2000);//2•b‘Ò‚Â
 	}
 	if(ret != 0)
 	{
@@ -109,20 +109,20 @@ int ConnectTCPClient(TCPDataT *tcpdata)
 		WSACleanup();
 		return -1;
 	}
-	printf("ã‚µãƒ¼ãƒãƒ¼ã«æ¥ç¶šã§ãã¾ã—ãŸ\n");
+	printf("ƒT[ƒo[‚ÉÚ‘±‚Å‚«‚Ü‚µ‚½\n");
 	return 0;
 }
 /*------------------------------------------------------
 TCPSend
 */
-//é€ä¿¡ã™ã‚‹
+//‘—M‚·‚é
 
 int TCPSend(TCPDataT *tcpdata)
 {
 	int ret = 0;
 	int total = 0;
 
-	if(tcpdata->v_flag)printf("é€ä¿¡é–‹å§‹\n");
+	if(tcpdata->v_flag)printf("‘—MŠJn\n");
 
 	if( tcpdata->server ){
 		do{
@@ -166,7 +166,7 @@ int TCPSend(TCPDataT *tcpdata)
 /*------------------------------------------------------
 TCPRecv
 */
-//å—ä¿¡ã™ã‚‹
+//óM‚·‚é
 int TCPRecv(TCPDataT *tcpdata)
 {
 	int n = sizeof(tcpdata->addr);
@@ -177,7 +177,7 @@ int TCPRecv(TCPDataT *tcpdata)
 
 	if( tcpdata->v_flag) printf( "LOOP COUNT: %d\n", loop_count ); 
 
-	if(tcpdata->v_flag) printf("å—ä¿¡ã‚’å¾…ã£ã¦ã„ã¾ã™\n");
+	if(tcpdata->v_flag) printf("óM‚ğ‘Ò‚Á‚Ä‚¢‚Ü‚·\n");
 	//
 	if( tcpdata->server ){
 		do{

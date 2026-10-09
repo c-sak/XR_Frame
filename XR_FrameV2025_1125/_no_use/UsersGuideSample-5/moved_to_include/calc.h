@@ -1,31 +1,31 @@
-ï»¿#ifndef __CALC_H__
+#ifndef __CALC_H__
 #define __CALC_H__
 
 #include <math.h>
 
-//â–¼ãƒ™ã‚¯ãƒˆãƒ«
+//¥ƒxƒNƒgƒ‹
 typedef struct {
 	float x, y, z;
 } vector_t;
-//â–¼ã‚ªã‚¤ãƒ©ãƒ¼è§’ã«ã‚ˆã‚‹å›è»¢ã®è¡¨ç¾
+//¥ƒIƒCƒ‰[Šp‚É‚æ‚é‰ñ“]‚Ì•\Œ»
 typedef struct {
 	float roll, pitch, yaw;
 } euler_t;
-//â–¼è‰²
+//¥F
 typedef struct{
 	float red, blue, green, alpha;
 } color_t;
-//â–¼ãƒãƒˆãƒªã‚¯ã‚¹
+//¥ƒ}ƒgƒŠƒNƒX
 typedef float matrix_t[16];
 
 #include "object.h"
 
 ///////////////////////////////
-//â–¼ã‚ªãƒªã‚¨ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³æ§‹é€ ä½“
+//¥ƒIƒŠƒGƒ“ƒe[ƒVƒ‡ƒ“\‘¢‘Ì
 typedef struct {
 	float x, y, z, angle;
 } OrientationT;
-//â–¼MREALã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ§‹é€ ä½“
+//¥MREALƒ^[ƒQƒbƒg\‘¢‘Ì
 typedef struct {
 	vector_t pos;
 	OrientationT ori;
@@ -33,17 +33,17 @@ typedef struct {
 	bool detected;
 } TargetT;
 
-//â–¼MREALãƒãƒ¼ã‚«æ§‹é€ ä½“
+//¥MREALƒ}[ƒJ\‘¢‘Ì
 typedef struct {
 	vector_t pos;
 	OrientationT ori;
-	int state; //å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰ã®detectedçŠ¶æ…‹ã®å¤‰åŒ–
+	int state; //‘OƒtƒŒ[ƒ€‚©‚ç‚Ìdetectedó‘Ô‚Ì•Ï‰»
 	bool detected;
 	int markerID;
 	int targetID;
 } MarkerT;
 
-//---- vectoræ¼”ç®—é–¢æ•°
+//---- vector‰‰ZŠÖ”
 void vector_fromAngle2d(float angle, vector_t *v);
 void vector_add(vector_t *a, vector_t *b, vector_t *out);
 void vector_mult(vector_t *in, float scale, vector_t *out);
@@ -81,18 +81,18 @@ void moveWorldToLocal( ObjDataT *target, ObjDataT *base );
 void getWorld(ObjDataT *target, ObjDataT *world);
 
 bool HitTest( ObjDataT *a, ObjDataT *b );
-//aï¼š è¡çªåˆ¤å®šã®ç›¸æ‰‹
-//bï¼š è¡çªåˆ¤å®šã®ä¸»ä½“
-//æˆ»ã‚Šå€¤ï¼š è¡çªã—ãŸå ´åˆã«trueãŒè¿”ã‚‹
+//aF Õ“Ë”»’è‚Ì‘Šè
+//bF Õ“Ë”»’è‚Ìå‘Ì
+//–ß‚è’lF Õ“Ë‚µ‚½ê‡‚Étrue‚ª•Ô‚é
 bool HitTestBox( ObjDataT *box, ObjDataT *ball );
 bool isHit( ObjDataT *a, ObjDataT *b );
 
-//ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ã¸ã®å¤‰æ›
+//ƒ[ƒJƒ‹À•WŒn‚©‚çƒ[ƒ‹ƒhÀ•WŒn‚Ö‚Ì•ÏŠ·
 void TransformLocalToWorld( ObjDataT *base, ObjDataT *local, ObjDataT *world );
-//ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ç³»ã‹ã‚‰ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ç³»ã¸ã®å¤‰æ›
+//ƒ[ƒ‹ƒhÀ•WŒn‚©‚çƒ[ƒJƒ‹À•WŒn‚Ö‚Ì•ÏŠ·
 void TransformWorldToLocal( ObjDataT *base, ObjDataT *world, ObjDataT *local );
 
-//---- ã‚¿ãƒ¼ã‚²ãƒƒãƒˆå‡¦ç†ç”¨é–¢æ•°
+//---- ƒ^[ƒQƒbƒgˆ——pŠÖ”
 void TargetToObjData(TargetT *src, ObjDataT *obj);
 void TransformLocalToWorldX(TargetT *base, ObjDataT *local, ObjDataT *world);
 

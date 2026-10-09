@@ -1,4 +1,4 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 #include "GLMetaseq.h"
 #include "../lib_ObjLoader/ObjLoader_seq.h"
 
@@ -12,9 +12,9 @@ static MQO_MODEL mymodel2;
 
 using namespace objloader;
 
-CObjLoader_Seq heartObj; //objå½¢å¼ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿å¤‰æ•°
+CObjLoader_Seq heartObj; //objŒ`®ƒ‚ƒfƒ‹ƒf[ƒ^•Ï”
 
-//â˜…è¿½åŠ ã™ã‚‹ãƒ¢ãƒ‡ãƒ«ç”¨ã®å¤‰æ•°ã‚’è¿½åŠ ã™ã‚‹
+//š’Ç‰Á‚·‚éƒ‚ƒfƒ‹—p‚Ì•Ï”‚ğ’Ç‰Á‚·‚é
 static MQO_MODEL chicken;
 
 static MQO_MODEL kingyo;
@@ -28,8 +28,8 @@ static MQO_MODEL star_take3;
 static MQO_MODEL star_take4;
 static MQO_MODEL starfish;
 
-static MQO_MODEL handR; //â˜…å³æ‰‹ã®ãƒ¢ãƒ‡ãƒ«ã‚’è¿½åŠ ã™ã‚‹ã¨ã™ã‚‹
-static MQO_MODEL handL; //å·¦æ‰‹ã‚‚è¿½åŠ ã™ã‚‹
+static MQO_MODEL handR; //š‰Eè‚Ìƒ‚ƒfƒ‹‚ğ’Ç‰Á‚·‚é‚Æ‚·‚é
+static MQO_MODEL handL; //¶è‚à’Ç‰Á‚·‚é
 
 static MQO_MODEL fish;
 
@@ -52,7 +52,7 @@ void makeRandomBlocks( int n )
 	glEndList();
 }
 //---------------------------------------------------- drawGround
-// drawGround: åœ°é¢ã‚’æç”»ã™ã‚‹
+// drawGround: ’n–Ê‚ğ•`‰æ‚·‚é
 
 void drawGround(void)
 {
@@ -96,7 +96,7 @@ void makeStars( int n, float range )
 	makeStars( n, range, range, range );
 }
 //-------------------------------------------------------------------- drawStars
-/* drawStars: æ˜Ÿã‚’æç”»ã™ã‚‹
+/* drawStars: ¯‚ğ•`‰æ‚·‚é
  */
 void drawStars( void )
 {
@@ -106,9 +106,9 @@ void drawStars( void )
     glPopAttrib();
     return;
 }
-/////////////////////////// å…±é€šé–¢æ•°
+/////////////////////////// ‹¤’ÊŠÖ”
 /*----------------------------------------------------- CreateMyModels
- * CreateMyModels: InitSceneã§1å›ã ã‘å‘¼ã³å‡ºã™ã“ã¨
+ * CreateMyModels: InitScene‚Å1‰ñ‚¾‚¯ŒÄ‚Ño‚·‚±‚Æ
  */
 void CreateMyModels()
 {
@@ -121,10 +121,10 @@ void CreateMyModels()
 
 	//makeStars( 2000, 100, 10, 100 );
 
-	//â–¼ãƒ¢ãƒ‡ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+	//¥ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
 	//chicken = mqoCreateModel( "data/full_body_chicken.mqo", 0.1 );
 
-	handR = mqoCreateModel( "../models/handR.mqo", 0.12 );//â˜…
+	handR = mqoCreateModel( "../models/handR.mqo", 0.12 );//š
 	handL = mqoCreateModel( "../models/handL.mqo", 0.12 );
 	fish = mqoCreateModel( "../models/kumanomi.mqo", 0.001 );
 
@@ -132,7 +132,7 @@ void CreateMyModels()
 	//shell = mqoCreateModel("../models/shell.mqo", 0.0001 );
 	
 	
-	glPushAttrib(GL_ALL_ATTRIB_BITS); //ãƒ¡ã‚¿ã‚»ã‚³ãƒ¢ãƒ‡ãƒ«ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£å•é¡Œå¯¾ç­–
+	glPushAttrib(GL_ALL_ATTRIB_BITS); //ƒƒ^ƒZƒRƒ‚ƒfƒ‹‚ÌƒeƒNƒXƒ`ƒƒ–â‘è‘Îô
 	heartObj.read_sequence("../objmodel/heart/test_%i.obj", 30, 30);
 	glPopAttrib();/////////////////////
 	
@@ -162,7 +162,7 @@ void DeleteMyModels()
 	mqoDeleteModel( shell );
 }
 
-/////////////////////////// å€‹åˆ¥ã®é–¢æ•°
+/////////////////////////// ŒÂ•Ê‚ÌŠÖ”
 
 void drawHeartModel()
 {
@@ -172,15 +172,15 @@ void drawHeartModel()
 void drawHandRmodel()
 {
     glPushMatrix();
-    glRotatef( 90.0, 0.0, 1.0, 0.0 );//ãƒ¢ãƒ‡ãƒ«ã®åº§æ¨™è»¸èª¿æ•´ãªã©
-    mqoCallModel( handR );//mqoãƒ¢ãƒ‡ãƒ«ã‚’æç”»ã™ã‚‹
+    glRotatef( 90.0, 0.0, 1.0, 0.0 );//ƒ‚ƒfƒ‹‚ÌÀ•W²’²®‚È‚Ç
+    mqoCallModel( handR );//mqoƒ‚ƒfƒ‹‚ğ•`‰æ‚·‚é
     glPopMatrix();
 }
 
 void drawHandLmodel()
 {
     glPushMatrix();
-    glRotatef( 90.0, 0.0, 1.0, 0.0 );//ãƒ¢ãƒ‡ãƒ«ã®åº§æ¨™è»¸èª¿æ•´ãªã©
+    glRotatef( 90.0, 0.0, 1.0, 0.0 );//ƒ‚ƒfƒ‹‚ÌÀ•W²’²®‚È‚Ç
     mqoCallModel( handL );
     glPopMatrix();
 }
@@ -188,7 +188,7 @@ void drawHandLmodel()
 void drawFish()
 {
     glPushMatrix();
-    //glRotatef( 90.0, 0.0, 1.0, 0.0 );//ãƒ¢ãƒ‡ãƒ«ã®åº§æ¨™è»¸èª¿æ•´ãªã©
+    //glRotatef( 90.0, 0.0, 1.0, 0.0 );//ƒ‚ƒfƒ‹‚ÌÀ•W²’²®‚È‚Ç
     mqoCallModel( fish );
     glPopMatrix();
 }
@@ -198,7 +198,7 @@ void drawFish()
 void drawChicken()
 {
     glPushMatrix();
-    //glRotatef( 90.0, 1.0, 0.0, 0.0 );//ãƒ¢ãƒ‡ãƒ«ã®åº§æ¨™è»¸èª¿æ•´ãªã©
+    //glRotatef( 90.0, 1.0, 0.0, 0.0 );//ƒ‚ƒfƒ‹‚ÌÀ•W²’²®‚È‚Ç
     mqoCallModel( chicken );
     glPopMatrix();
 }
@@ -208,7 +208,7 @@ void drawChicken()
 void DrawMymodel1()
 {
     glPushMatrix();
-    glRotatef( 90.0, 1.0, 0.0, 0.0 );//ãƒ¢ãƒ‡ãƒ«ã®åº§æ¨™è»¸èª¿æ•´ãªã©
+    glRotatef( 90.0, 1.0, 0.0, 0.0 );//ƒ‚ƒfƒ‹‚ÌÀ•W²’²®‚È‚Ç
     mqoCallModel( mymodel1 );
     glPopMatrix();
 }
@@ -217,7 +217,7 @@ void DrawMymodel1()
 void DrawMymodel2()
 {
     glPushMatrix();
-    glRotatef( 90.0, 1.0, 0.0, 0.0 );//ãƒ¢ãƒ‡ãƒ«ã®åº§æ¨™è»¸èª¿æ•´ãªã©
+    glRotatef( 90.0, 1.0, 0.0, 0.0 );//ƒ‚ƒfƒ‹‚ÌÀ•W²’²®‚È‚Ç
     mqoCallModel( mymodel2 );
     glPopMatrix();
 }

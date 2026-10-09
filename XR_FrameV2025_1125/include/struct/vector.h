@@ -1,21 +1,21 @@
-ï»¿#pragma once
+#pragma once
 #include <cmath>
 #include <iostream>
 
-/*3æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«*/
+/*3ŸŒ³ƒxƒNƒgƒ‹*/
 //-------------//
-//ãƒ»ä½¿ã„æ–¹ (ä¾‹)
-// (x, y, z) = (2.0, 3.0, 4.0)ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä½œæˆ
+//Eg‚¢•û (—á)
+// (x, y, z) = (2.0, 3.0, 4.0)‚ÌƒxƒNƒgƒ‹‚ğì¬
 // vector_t v(2.0, 3.0, 4.0);
 //
-// æ¨™æº–çš„ãªvector_tã‚’å–å¾—
-// vector_t::Zero();ã€€	(  0,  0,  0)
-// vector_t::Up();ã€€	(  0,  1,  0)
-// vector_t::Down();ã€€	(  0, -1,  0)
+// •W€“I‚Èvector_t‚ğæ“¾
+// vector_t::Zero();@	(  0,  0,  0)
+// vector_t::Up();@	(  0,  1,  0)
+// vector_t::Down();@	(  0, -1,  0)
 // vector_t::Forward(); (  0,  0, -1)
-// vector_t::Back();ã€€	(  0,  1,  1)
-// vector_t::Right();ã€€	(  1,  0,  0)
-// vector_t::Left();ã€€	( -1,  0,  0)
+// vector_t::Back();@	(  0,  1,  1)
+// vector_t::Right();@	(  1,  0,  0)
+// vector_t::Left();@	( -1,  0,  0)
 //-------------//
 struct vector_t {
 	float x, y, z;
@@ -26,35 +26,35 @@ struct vector_t {
 		: x(_x), y(_y), z(_z) {
 	}
 
-	//ãƒ™ã‚¯ãƒˆãƒ«ã®è¶³ã—ç®—
+	//ƒxƒNƒgƒ‹‚Ì‘«‚µZ
 	inline vector_t operator + (vector_t& _v) {
 		return vector_t(this->x + _v.x,
 						this->y + _v.y,
 						this->z + _v.z);
 	}
 
-	//ãƒ™ã‚¯ãƒˆãƒ«ã®å¼•ãç®—
+	//ƒxƒNƒgƒ‹‚Ìˆø‚«Z
 	inline vector_t operator - (vector_t& _v) {
 		return vector_t(this->x - _v.x,
 						this->y - _v.y,
 						this->z - _v.z);
 	}
 
-	//ãƒ™ã‚¯ãƒˆãƒ« * ã‚¹ã‚«ãƒ©ãƒ¼
+	//ƒxƒNƒgƒ‹ * ƒXƒJƒ‰[
 	inline friend vector_t operator * (vector_t& _v, float _f) {
 		return vector_t(_v.x * _f,
 						_v.y * _f,
 						_v.z * _f);
 	}
 
-	//ã‚¹ã‚«ãƒ©ãƒ¼ * ãƒ™ã‚¯ãƒˆãƒ«
+	//ƒXƒJƒ‰[ * ƒxƒNƒgƒ‹
 	inline friend vector_t operator * (float _f, vector_t& _v) {
 		return vector_t(_v.x * _f,
 						_v.y * _f,
 						_v.z * _f);
 	}
 
-	//ãƒ™ã‚¯ãƒˆãƒ« / ã‚¹ã‚«ãƒ©ãƒ¼
+	//ƒxƒNƒgƒ‹ / ƒXƒJƒ‰[
 	inline vector_t operator / (float _f) {
 		return vector_t(this->x / _f,
 						this->y / _f,
@@ -100,7 +100,7 @@ struct vector_t {
 	}
 
 
-	//0ãƒ™ã‚¯ãƒˆãƒ«
+	//0ƒxƒNƒgƒ‹
 	inline static vector_t Zero() {
 		return vector_t(0.0, 0.0, 0.0);
 	}
@@ -129,7 +129,7 @@ struct vector_t {
 		return vector_t(-1.0, 0.0, 0.0);
 	}
 
-	//å‡ºåŠ›ç”¨
+	//o—Í—p
 	inline friend std::ostream& operator << (std::ostream& _os, const vector_t& _v) {
 		_os << "(" << _v.x << ", " << _v.y << ", " << _v.z << ")";
 		return _os;
@@ -138,21 +138,21 @@ struct vector_t {
 	
 };
 
-//æ­£è¦åŒ–ã—ãŸãƒ™ã‚¯ãƒˆãƒ«ã‚’æ–°ãŸã«ç”Ÿæˆ
+//³‹K‰»‚µ‚½ƒxƒNƒgƒ‹‚ğV‚½‚É¶¬
 vector_t VectorNormalized(const vector_t& _v);
 
-//äºŒç‚¹é–“ã®è·é›¢
+//“ñ“_ŠÔ‚Ì‹——£
 float VectorDistance(const vector_t& _v, const vector_t& _w);
 
-//ãƒ™ã‚¯ãƒˆãƒ«ã®ãã‚Œãã‚Œã®è¦ç´ ã‚’ã‹ã‘ãŸãƒ™ã‚¯ãƒˆãƒ«ã‚’ä½œæˆ
+//ƒxƒNƒgƒ‹‚Ì‚»‚ê‚¼‚ê‚Ì—v‘f‚ğ‚©‚¯‚½ƒxƒNƒgƒ‹‚ğì¬
 vector_t VectorScale(const vector_t& _v, const vector_t& _w);
 
-//å¤–ç©
+//ŠOÏ
 vector_t VectorCross(const vector_t& _v, const vector_t& _w);
 
-//å†…ç©
+//“àÏ
 float VectorDot(const vector_t& _v, const vector_t& _w);
-//å¤§ãã•
+//‘å‚«‚³
 float VectorMagnitude(const vector_t& _v);
-//å¤§ãã•ã®äºŒä¹—
+//‘å‚«‚³‚Ì“ñæ
 float VectorSqrMagnitude(const vector_t& _v);

@@ -1,4 +1,4 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 
 #include "common.h" //WindowDataT, MouseDataT, KeyDataT
 #include "calc.h"
@@ -6,20 +6,20 @@
 #include "config.h"
 
 #include "ezTrack.h"
-#include "ezTrack_Vicon.h" // VICONç”¨ã®ez_Tracker : Crescent
+#include "ezTrack_Vicon.h" // VICON—p‚Ìez_Tracker : Crescent
 
 #include "Shapes.h"
-#include "mymodel.h" //â˜…
+#include "mymodel.h" //š
 
 #include <stdio.h>
 
 //-------------------------------------------------------------------------------------------------------
 // VRFL
 //-------------------------------------------------------------------------------------------------------
-#include "VRFLInterface.h" // VRFLåˆ©ç”¨ã®ç‚ºã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
+#include "VRFLInterface.h" // VRFL—˜—p‚Ìˆ×‚ÌƒCƒ“ƒNƒ‹[ƒh
 #include "vrconfig.h"
 const char* configfile = "";
-unsigned short remotePort = 12345;	// Unityã®å¾…ã¡å—ã‘ãƒãƒ¼ãƒˆ
+unsigned short remotePort = 12345;	// Unity‚Ì‘Ò‚¿ó‚¯ƒ|[ƒg
 
 /**/
 //inline float ObjX( ObjDataT *obj ){ return OBJ_X(obj);}
@@ -30,20 +30,20 @@ unsigned short remotePort = 12345;	// Unityã®å¾…ã¡å—ã‘ãƒãƒ¼ãƒˆ
 //inline float ObjYaw( ObjDataT *obj ){ return OBJ_YAW(obj);}
 /**/
 
-SimDataT simdata; //SimDataTå‹æ§‹é€ ä½“ã®ãƒ‡ãƒ¼ã‚¿ã‚’å®£è¨€
+SimDataT simdata; //SimDataTŒ^\‘¢‘Ì‚Ìƒf[ƒ^‚ğéŒ¾
 extern MouseDataT mouse;
-extern KeyDataT keydata; //â˜…ä¿®æ­£â˜…
+extern KeyDataT keydata; //šC³š
 
-ezTracker* tracker = nullptr; //å…±æœ‰ãƒ¡ãƒ¢ãƒªçµŒç”±ã§ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã®æƒ…å ±ã‚’å¾—ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
-//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰å—ã‘å–ã£ãŸãƒ‡ãƒ¼ã‚¿ã¸ã®ãƒã‚¤ãƒ³ã‚¿
-ezTrackDataT* trackBase = nullptr; //åŸºæº–ãƒãƒ¼ã‚«
+ezTracker* tracker = nullptr; //‹¤—Lƒƒ‚ƒŠŒo—R‚Åƒgƒ‰ƒbƒJ[‚Ìî•ñ‚ğ“¾‚éƒIƒuƒWƒFƒNƒg
+//ƒgƒ‰ƒbƒJ[‚©‚çó‚¯æ‚Á‚½ƒf[ƒ^‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ezTrackDataT* trackBase = nullptr; //Šî€ƒ}[ƒJ
 ezTrackDataT* trackHead = nullptr;
 ezTrackDataT* trackBody = nullptr;
 ezTrackDataT* trackHandR = nullptr;
 ezTrackDataT* trackHandL = nullptr;
 ezTrackDataT* trackFootR = nullptr;
 ezTrackDataT* trackFootL = nullptr;
-//ãƒãƒ¼ã‚«ãŒè¦‹ãˆãªã„å ´åˆãªã©ã®ãƒ€ãƒŸãƒ¼ãƒ‡ãƒ¼ã‚¿{id,x,y,z,roll,pitch,yaw}
+//ƒ}[ƒJ‚ªŒ©‚¦‚È‚¢ê‡‚È‚Ç‚Ìƒ_ƒ~[ƒf[ƒ^{id,x,y,z,roll,pitch,yaw}
 ezTrackDataT localBase = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 ezTrackDataT localHead = { 0, 0.0, 1.5, 0.0, 0.0, 0.0, 0.0 };
 ezTrackDataT localBody = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
@@ -85,24 +85,24 @@ void InitScene(void)
 
 #ifndef MREALMODE
 	/*
-	tracker = new ezTracker( use_tracker ); //VICONä½¿ã†ã¨ãã¯true
+	tracker = new ezTracker( use_tracker ); //VICONg‚¤‚Æ‚«‚Ítrue
 	if (use_vicon) {
-		tracker->open("VICON", false); //è­˜åˆ¥å, Wãƒ•ãƒ©ã‚°(false:R/O)
+		tracker->open("VICON", false); //¯•Ê–¼, Wƒtƒ‰ƒO(false:R/O)
 	}
 	else {
-		tracker->open("ARTOOLKIT", false); //è­˜åˆ¥å, Wãƒ•ãƒ©ã‚°(false:R/O)
+		tracker->open("ARTOOLKIT", false); //¯•Ê–¼, Wƒtƒ‰ƒO(false:R/O)
 	}
 	*/
-	//- Viconã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã€ezTracker_Viconã‚¯ãƒ©ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹:Crescent
+	//- Vicon‚ğg—p‚·‚éê‡AezTracker_ViconƒNƒ‰ƒX‚ğg—p‚·‚é:Crescent
 	if (use_vicon) {
-		tracker = new ezTracker_Vicon(use_tracker); //VICONä½¿ã†ã¨ãã¯true
-		// å¼•æ•°ã®æ–‡å­—åˆ—ã¯ã€"VICON PCã®IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼šé€šä¿¡ãƒãƒ¼ãƒˆç•ªå·(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼š801)"
+		tracker = new ezTracker_Vicon(use_tracker); //VICONg‚¤‚Æ‚«‚Ítrue
+		// ˆø”‚Ì•¶š—ñ‚ÍA"VICON PC‚ÌIPƒAƒhƒŒƒXF’ÊMƒ|[ƒg”Ô†(ƒfƒtƒHƒ‹ƒgF801)"
 		tracker->open("172.23.85.186:801", false);
 		//tracker->open("127.0.0.1:801", false);
 	}
 	else {
-		tracker = new ezTracker(use_tracker); //VICONä½¿ã†ã¨ãã¯true
-		tracker->open("ARTOOLKIT", false); //è­˜åˆ¥å, Wãƒ•ãƒ©ã‚°(false:R/O)
+		tracker = new ezTracker(use_tracker); //VICONg‚¤‚Æ‚«‚Ítrue
+		tracker->open("ARTOOLKIT", false); //¯•Ê–¼, Wƒtƒ‰ƒO(false:R/O)
 	}
 
 	trackHead = &localHead;
@@ -124,19 +124,19 @@ void InitScene(void)
 
 	ezInitShape();
 
-	////// æç”»ç©ºé–“ã®å¥¥è¡Œããƒ»ç©ºæ°—æ„Ÿãƒ»èƒŒæ™¯è‰²è¨­å®š
-	simdata.clip_far = 100.0; //â—†ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—ãƒ—ãƒ¬ãƒ¼ãƒ³
-	simdata.clip_near = 0.1; //â—†ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—ãƒ—ãƒ¬ãƒ¼ãƒ³
-	setColor(&simdata.fog, 1.0, 1.0, 1.0, 1.0);//â—†ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼
-	setColor(&simdata.sky, 0.2, 0.3, 0.4, 0.2);//â—†èƒŒæ™¯ã‚«ãƒ©ãƒ¼
+	////// •`‰æ‹óŠÔ‚Ì‰œs‚«E‹ó‹CŠ´E”wŒiFİ’è
+	simdata.clip_far = 100.0; //Ÿƒtƒ@[ƒNƒŠƒbƒvƒvƒŒ[ƒ“
+	simdata.clip_near = 0.1; //ŸƒjƒAƒNƒŠƒbƒvƒvƒŒ[ƒ“
+	setColor(&simdata.fog, 1.0, 1.0, 1.0, 1.0);//ŸƒtƒHƒOƒJƒ‰[
+	setColor(&simdata.sky, 0.2, 0.3, 0.4, 0.2);//Ÿ”wŒiƒJƒ‰[
 	//////
 
-	///â–¼è¿½åŠ ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–
+	///¥’Ç‰Á‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»
 	setObjPos(&simdata.cube, 0.0, 1.0, -50.0);
 	setObjRot(&simdata.cube, 0.0, 0.0, 60.0);
 	setObjColor(&simdata.cube, 0.5, 0.3, 0.2);
 	simdata.cube.visible = true;
-	simdata.cube.state = 0; //////////////â—†
+	simdata.cube.state = 0; //////////////Ÿ
 	simdata.cube.radius = 0.2;
 
 	simdata.cube.xsize = 8.0; //0.6
@@ -148,10 +148,10 @@ void InitScene(void)
 	setObjColor(&simdata.sphere, 1.0, 0.5, 0.0);
 	simdata.sphere.visible = true;
 	simdata.sphere.state = 0;
-	simdata.sphere.radius = 0.25; //â˜…â—†04
+	simdata.sphere.radius = 0.25; //šŸ04
 
-	simdata.handR.radius = 0.125; //â—†04
-	simdata.handL.radius = 0.125; //â—†04
+	simdata.handR.radius = 0.125; //Ÿ04
+	simdata.handL.radius = 0.125; //Ÿ04
 	simdata.handR.state = 0;
 	simdata.handL.state = 0;
 
@@ -173,27 +173,27 @@ void InitScene(void)
 	simdata.player.move = 0.0;
 	simdata.player.radius = 0.5;
 
-	//å³æ‰‹ï¼ˆãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ï¼‰ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ã®å­åº§æ¨™ç³»ã¨ã™ã‚‹
-	setObjLocal(&simdata.handR, &simdata.player); //â˜…
+	//‰Eèiƒ[ƒJƒ‹À•Wj‚ğƒvƒŒƒCƒ„‚ÌqÀ•WŒn‚Æ‚·‚é
+	setObjLocal(&simdata.handR, &simdata.player); //š
 
-	//â˜…å·¦æ‰‹ã‚‚åŒæ§˜
-	setObjLocal(&simdata.handL, &simdata.player); //â˜…
+	//š¶è‚à“¯—l
+	setObjLocal(&simdata.handL, &simdata.player); //š
 
-	//é ­ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å­åº§æ¨™ç³»ã«ã™ã‚‹
+	//“ª‚ğƒvƒŒƒCƒ„[‚ÌqÀ•WŒn‚É‚·‚é
 	setObjLocal(&simdata.head, &simdata.player);
 
 	simdata.active_camera = &simdata.head;
 
 	//simdata.active_camera = NULL;
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿ã«ç´ä»˜ã‘ã‚‹
+	//ƒvƒŒƒCƒ„ƒIƒuƒWƒFƒNƒg‚ÌƒAƒhƒŒƒX‚ğƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^‚É•R•t‚¯‚é
 
-	setObjColor(&simdata.handR, 0.0, 1.0, 0.0); //å³æ‰‹ã‚°ãƒªãƒ¼ãƒ³
-	setObjColor(&simdata.handL, 1.0, 0.0, 0.0); //å·¦æ‰‹ãƒ¬ãƒƒãƒ‰
+	setObjColor(&simdata.handR, 0.0, 1.0, 0.0); //‰EèƒOƒŠ[ƒ“
+	setObjColor(&simdata.handL, 1.0, 0.0, 0.0); //¶èƒŒƒbƒh
 
-	CreateMyModels(); //â˜…
+	CreateMyModels(); //š
 
 	simdata.cube.visible = true;
-	simdata.cube.state = 0; //////////////â—†
+	simdata.cube.state = 0; //////////////Ÿ
 	simdata.cube.radius = 0.2;
 
 	simdata.scale = 0;
@@ -218,14 +218,14 @@ void InitScene(void)
 	//-------------------------------------------------------------------------------------------------------
 	// VRFL
 	//-------------------------------------------------------------------------------------------------------
-	VRFL::InitializeSim(remotePort);				// VRFLåˆ©ç”¨å‰ã«åˆæœŸåŒ–, remotePortã¯Unityå´ã®å¾…ã¡å—ã‘ãƒãƒ¼ãƒˆç•ªå·
-	vrconfig::LoadConfig(configfile);				// è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«(CSV)ã®èª­è¾¼(è©³ç´°ã¯vrconfig::LoadConfigã«è¨˜è¼‰)
-	simdata.head.id = 0;							// Head(ã‚«ãƒ¡ãƒ©)ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã¯ "0" ã‚’æŒ¯ã‚‹(å¿…é ˆ)
-	simdata.handR.id = vrconfig::GetID("handR");	// csvãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰IDå–å¾—
-	simdata.handL.id = vrconfig::GetID("handL");	// csvãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰IDå–å¾—
-	simdata.sphere.id = vrconfig::GetID("heart");	// csvãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰IDå–å¾—
-	simdata.handR.offrot.yaw = 90;					// ãƒ¢ãƒ‡ãƒ«èª¿æ•´ã®ç‚ºã®ã‚ªãƒ•ã‚»ãƒƒãƒˆå›è»¢
-	simdata.handL.offrot.yaw = 90;					// ãƒ¢ãƒ‡ãƒ«èª¿æ•´ã®ç‚ºã®ã‚ªãƒ•ã‚»ãƒƒãƒˆå›è»¢
+	VRFL::InitializeSim(remotePort);				// VRFL—˜—p‘O‚É‰Šú‰», remotePort‚ÍUnity‘¤‚Ì‘Ò‚¿ó‚¯ƒ|[ƒg”Ô†
+	vrconfig::LoadConfig(configfile);				// İ’èƒtƒ@ƒCƒ‹(CSV)‚Ì“Ç(Ú×‚Ívrconfig::LoadConfig‚É‹LÚ)
+	simdata.head.id = 0;							// Head(ƒJƒƒ‰)‚ÌƒIƒuƒWƒFƒNƒg‚É‚Í "0" ‚ğU‚é(•K{)
+	simdata.handR.id = vrconfig::GetID("handR");	// csvƒtƒ@ƒCƒ‹‚©‚çIDæ“¾
+	simdata.handL.id = vrconfig::GetID("handL");	// csvƒtƒ@ƒCƒ‹‚©‚çIDæ“¾
+	simdata.sphere.id = vrconfig::GetID("heart");	// csvƒtƒ@ƒCƒ‹‚©‚çIDæ“¾
+	simdata.handR.offrot.yaw = 90;					// ƒ‚ƒfƒ‹’²®‚Ìˆ×‚ÌƒIƒtƒZƒbƒg‰ñ“]
+	simdata.handL.offrot.yaw = 90;					// ƒ‚ƒfƒ‹’²®‚Ìˆ×‚ÌƒIƒtƒZƒbƒg‰ñ“]
 
 	printf(".\n");
 	Sleep(1000);
@@ -259,17 +259,17 @@ void UpdateScene(void)
 	//copyObj( &simdata.target[0], &simdata.handR );
 	//copyObj( &simdata.target[1], &simdata.handL );
 #else
-	//////// ãƒ‡ãƒ¼ã‚¿æ›´æ–°ï¼šæ‰‹ã®å‹•ãã‚„ä½“ã®ä½ç½®ãƒ»å§¿å‹¢ ////////
+	//////// ƒf[ƒ^XVFè‚Ì“®‚«‚â‘Ì‚ÌˆÊ’uEp¨ ////////
 	if (use_tracker) {
-		//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚²ãƒƒãƒˆ
-		tracker->read(); //ï¼ˆå…±æœ‰ãƒ¡ãƒ¢ãƒªï¼‰ãƒãƒƒãƒˆçµŒç”±ã§ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿å‡ºã™
+		//ƒgƒ‰ƒbƒJ[‚©‚ç‚Ìƒf[ƒ^‚ğƒQƒbƒg
+		tracker->read(); //i‹¤—Lƒƒ‚ƒŠjƒlƒbƒgŒo—R‚Åƒf[ƒ^‚ğ“Ç‚İo‚·
 		if (use_vicon) {
-			trackHead = tracker->getTrackData("CAP"); //VICONãƒãƒ¼ã‚«ã®åå‰
+			trackHead = tracker->getTrackData("CAP"); //VICONƒ}[ƒJ‚Ì–¼‘O
 			trackHandR = tracker->getTrackData("TREE_A");
 			trackHandL = tracker->getTrackData("TREE_B");
 		}
 		else {
-			trackHead = tracker->getTrackData(0); //ARTOOLKITãƒãƒ¼ã‚«ã®ç•ªå·
+			trackHead = tracker->getTrackData(0); //ARTOOLKITƒ}[ƒJ‚Ì”Ô†
 			trackHandR = tracker->getTrackData(1);
 			trackHandL = tracker->getTrackData(2);
 		}
@@ -286,51 +286,51 @@ void UpdateScene(void)
 		copyTrackToObj(trackFootL, &simdata.footL);
 		copyTrackToObj(trackFootR, &simdata.footR);
 
-		//è§£èª¬ï¼šæ§‹é€ ä½“ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å¼•æ•°ã¨ã™ã‚‹
-		//&: ã‚¢ãƒ‰ãƒ¬ã‚¹ï¼ˆï¼ãƒã‚¤ãƒ³ã‚¿ï¼‰ã‚’æ¸¡ã™ã“ã¨ã‚’æŒ‡å®š
+		//‰ğàF\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^‚ğˆø”‚Æ‚·‚é
+		//&: ƒAƒhƒŒƒXiƒ|ƒCƒ“ƒ^j‚ğ“n‚·‚±‚Æ‚ğw’è
 		simdata.handR.pos.z -= 0.5; //########
 		simdata.handL.pos.z -= 0.5; //########
 	}
 	else {
-		//â—†01â—†ã‚³ãƒ¡ãƒ³ãƒˆåŒ–
+		//Ÿ01ŸƒRƒƒ“ƒg‰»
 
 		//copyTrackToObj( trackHandL, &simdata.handL );
 		//copyTrackToObj( trackHandR, &simdata.handR );
 
-		//â—†02â—†ãƒã‚¦ã‚¹ã§å³æ‰‹handRã‚’å‹•ã‹ã™
-		//æ„Ÿåº¦èª¿æ•´ï¼‹åŸºæº–ä½ç½®èª¿æ•´ ########
-		simdata.handR.pos.x = mouse.x * 2.0 + 0.25; // mouse.x: -1.0ï¼ˆå·¦ç«¯ï¼‰ï½1.0ï¼ˆå³ç«¯ï¼‰
-		simdata.handR.pos.y = -mouse.y * 2.0 + 1.2; // mouse.y; -1.0ï¼ˆä¸Šç«¯ï¼‰ï½1.0ï¼ˆä¸‹ç«¯ï¼‰
+		//Ÿ02Ÿƒ}ƒEƒX‚Å‰EèhandR‚ğ“®‚©‚·
+		//Š´“x’²®{Šî€ˆÊ’u’²® ########
+		simdata.handR.pos.x = mouse.x * 2.0 + 0.25; // mouse.x: -1.0i¶’[j`1.0i‰E’[j
+		simdata.handR.pos.y = -mouse.y * 2.0 + 1.2; // mouse.y; -1.0iã’[j`1.0i‰º’[j
 		simdata.handR.rot.pitch = (simdata.handR.pos.y - 1.2) * 100.0;
 		simdata.handR.rot.yaw = (simdata.handR.pos.x - 0.25) * (-100.0);
 		simdata.handR.rot.roll = simdata.handR.rot.yaw - 30.0;
-		//Zåº§æ¨™ã¯localHandRã§åˆæœŸè¨­å®šã®ã¾ã¾
-		//â–²
+		//ZÀ•W‚ÍlocalHandR‚Å‰Šúİ’è‚Ì‚Ü‚Ü
+		//£
 
-		//â—†03â—†ã¤ã„ã§ã«å·¦æ‰‹handLã‚‚å‹•ã‹ã™ï½å³æ‰‹ã¨ä¸Šä¸‹å·¦å³ã‚’é€†ã«ã—ãŸã‚Šã™ã‚‹
-		//æ„Ÿåº¦èª¿æ•´ï¼‹åŸºæº–ä½ç½®èª¿æ•´ ########
-		simdata.handL.pos.x = -mouse.x * 2.0 - 0.25; // mouse.x: -1.0ï¼ˆå·¦ç«¯ï¼‰ï½1.0ï¼ˆå³ç«¯ï¼‰
-		simdata.handL.pos.y = mouse.y * 2.0 + 1.2; // mouse.y; -1.0ï¼ˆä¸Šç«¯ï¼‰ï½1.0ï¼ˆä¸‹ç«¯ï¼‰
+		//Ÿ03Ÿ‚Â‚¢‚Å‚É¶èhandL‚à“®‚©‚·`‰Eè‚Æã‰º¶‰E‚ğ‹t‚É‚µ‚½‚è‚·‚é
+		//Š´“x’²®{Šî€ˆÊ’u’²® ########
+		simdata.handL.pos.x = -mouse.x * 2.0 - 0.25; // mouse.x: -1.0i¶’[j`1.0i‰E’[j
+		simdata.handL.pos.y = mouse.y * 2.0 + 1.2; // mouse.y; -1.0iã’[j`1.0i‰º’[j
 		simdata.handL.rot.pitch = (simdata.handL.pos.y - 1.2) * 100.0;
 		simdata.handL.rot.yaw = (simdata.handL.pos.x + 0.25) * (-100.0);
 		simdata.handL.rot.roll = simdata.handL.rot.yaw + 30.0;
-		//Zåº§æ¨™ã¯localHandRã§åˆæœŸè¨­å®šã®ã¾ã¾
-		//Zåº§æ¨™ã¯localHandLã§åˆæœŸè¨­å®šã®ã¾ã¾
-		//â–²
+		//ZÀ•W‚ÍlocalHandR‚Å‰Šúİ’è‚Ì‚Ü‚Ü
+		//ZÀ•W‚ÍlocalHandL‚Å‰Šúİ’è‚Ì‚Ü‚Ü
+		//£
 
-		////â˜…å‰å¾Œç§»å‹•è¿½åŠ 
+		////š‘OŒãˆÚ“®’Ç‰Á
 		if (keydata.arrowUp) {
 			simdata.handL.pos.z -= 0.01; //###### VECTOR Z
 		}
 		if (keydata.arrowDown) {
 			simdata.handL.pos.z += 0.01; //###### VECTOR Z
 		}
-		//////////â˜…
+		//////////š
 	}
 
 #endif
 	/*
-	//----------------------------------------------- ãƒã‚¦ã‚¹ã§ç§»å‹•ã™ã‚‹
+	//----------------------------------------------- ƒ}ƒEƒX‚ÅˆÚ“®‚·‚é
 	{
 		simdata.player.turn = - 0.5 * mouse.xRel;
 		simdata.player.move = - 0.2 * mouse.yRel;
@@ -338,15 +338,15 @@ void UpdateScene(void)
 	}
 	*/
 
-	//â˜…å®šæ•°ã¨ã—ã¦å¤‰æ•°ã‚’ä½¿ã„ãŸã„ã¨ãã«ã¯ã€Œconstã€ã‚’ã¤ã‘ã‚‹
-	const float yon = 1.25, yoff = 1.15; //å€¤ãŒé•ã†ã“ã¨ã«ã¯æ„å‘³ãŒã‚ã‚‹
+	//š’è”‚Æ‚µ‚Ä•Ï”‚ğg‚¢‚½‚¢‚Æ‚«‚É‚Íuconstv‚ğ‚Â‚¯‚é
+	const float yon = 1.25, yoff = 1.15; //’l‚ªˆá‚¤‚±‚Æ‚É‚ÍˆÓ–¡‚ª‚ ‚é
 
-	//â˜…å‰ã®å€¤ã‚’ä¿æŒã—ãŸã„ã¨ãã«ã¯ã€Œstaticã€ã‚’ã¤ã‘ã‚‹
-	static float xo, zo; //ç§»å‹•ãƒ¢ãƒ¼ãƒ‰ãŒã‚ªãƒ³ã«ãªã£ãŸã¨ãã®æ‰‹ã®ä½ç½®
+	//š‘O‚Ì’l‚ğ•Û‚µ‚½‚¢‚Æ‚«‚É‚Íustaticv‚ğ‚Â‚¯‚é
+	static float xo, zo; //ˆÚ“®ƒ‚[ƒh‚ªƒIƒ“‚É‚È‚Á‚½‚Æ‚«‚Ìè‚ÌˆÊ’u
 
-	//â˜…å·¦æ‰‹ã®å‹•ä½œã§ç§»å‹•ã™ã‚‹æ“ä½œ
+	//š¶è‚Ì“®ì‚ÅˆÚ“®‚·‚é‘€ì
 	switch (simdata.handL.state) {
-	case 0: //â—†éç§»å‹•ãƒ¢ãƒ¼ãƒ‰
+	case 0: //Ÿ”ñˆÚ“®ƒ‚[ƒh
 		if (simdata.handL.pos.y > yon) {  // simdata.handL.pos.y
 			simdata.handL.state = 1;
 			xo = simdata.handL.pos.x; // simdata.handL.pos.x
@@ -354,12 +354,12 @@ void UpdateScene(void)
 			//setObjColor(&simdata.handL, 1.0, 1.0, 0.0);
 		}
 		break;
-	case 1: //â—†ç§»å‹•ãƒ¢ãƒ¼ãƒ‰
+	case 1: //ŸˆÚ“®ƒ‚[ƒh
 		if (simdata.handL.pos.y < yoff) { // simdata.handL.pos.y
 			simdata.handL.state = 0;
 			//setObjColor(&simdata.handL, 1.0, 0.0, 0.0);
 		}
-		//ç§»å‹•ã®å‡¦ç†
+		//ˆÚ“®‚Ìˆ—
 
 		simdata.player.turn = -0.25 * (simdata.handL.pos.x - xo); // simdata.handL.pos.x
 
@@ -370,14 +370,14 @@ void UpdateScene(void)
 
 #ifdef ZIGSIM
 	{
-		//å·¦å³ã«å‚¾ã‘ã‚‹ã¨å·¦å³æ—‹å›
+		//¶‰E‚ÉŒX‚¯‚é‚Æ¶‰Eù‰ñ
 		if (simdata.zigsim->data.angle.roll > 5) {
 			simdata.player.turn = (simdata.zigsim->data.angle.roll - 5) * 0.0125;
 		}
 		if (simdata.zigsim->data.angle.roll < -5) {
 			simdata.player.turn = (simdata.zigsim->data.angle.roll + 5) * 0.0125;
 		}
-		//å‰å¾Œã«å‚¾ã‘ã‚‹ã¨å‰é€²å¾Œé€€
+		//‘OŒã‚ÉŒX‚¯‚é‚Æ‘OiŒã‘Ş
 		if (simdata.zigsim->data.angle.pitch < -5) {
 			simdata.player.move = -(simdata.zigsim->data.angle.pitch + 5) * 0.0025;
 		}
@@ -389,14 +389,14 @@ void UpdateScene(void)
 
 #ifdef WITMOTION
 	{
-		//å·¦å³ã«å‚¾ã‘ã‚‹ã¨å·¦å³æ—‹å›
+		//¶‰E‚ÉŒX‚¯‚é‚Æ¶‰Eù‰ñ
 		if (simdata.gyro->data.angle.roll > 5) {
 			simdata.player.turn = (simdata.gyro->data.angle.roll - 5) * 0.0125;
 		}
 		if (simdata.gyro->data.angle.roll < -5) {
 			simdata.player.turn = (simdata.gyro->data.angle.roll + 5) * 0.0125;
 		}
-		//å‰å¾Œã«å‚¾ã‘ã‚‹ã¨å‰é€²å¾Œé€€
+		//‘OŒã‚ÉŒX‚¯‚é‚Æ‘OiŒã‘Ş
 		if (simdata.gyro->data.angle.pitch < -5) {
 			simdata.player.move = -(simdata.gyro->data.angle.pitch + 5) * 0.0025;
 		}
@@ -413,16 +413,16 @@ void UpdateScene(void)
 
 	MoveObject(&simdata.player);
 
-	//çŠ¶æ…‹é·ç§»ã®ãƒã‚§ãƒƒã‚¯ã€çŠ¶æ…‹é·ç§»ã€
-	//â—†04
+	//ó‘Ô‘JˆÚ‚Ìƒ`ƒFƒbƒNAó‘Ô‘JˆÚA
+	//Ÿ04
 	bool ishit;
 	switch (simdata.sphere.state) {
-	case 0://â˜…å³æ‰‹ã‹ã‚‰å¤–ã‚Œã€ã‹ã¤å³æ‰‹ã«è§¦ã‚Œã¦ã„ãªã„çŠ¶æ…‹
+	case 0://š‰Eè‚©‚çŠO‚êA‚©‚Â‰Eè‚ÉG‚ê‚Ä‚¢‚È‚¢ó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handR);
 		if (ishit) {
 			setObjColor(&simdata.sphere, 0.0, 1.0, 0.5);
 
-			//â—†05
+			//Ÿ05
 			simdata.sphere.state = 1;
 			moveWorldToLocal(&simdata.sphere, &simdata.handR);
 		}
@@ -431,16 +431,16 @@ void UpdateScene(void)
 		}
 		break;
 
-	case 1: //â—†06â˜…å³æ‰‹ã«æŠŠæŒã•ã‚Œã¦ã„ã‚‹çŠ¶æ…‹
+	case 1: //Ÿ06š‰Eè‚É”c‚³‚ê‚Ä‚¢‚éó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handL);
 		if (ishit) {
 			setObjColor(&simdata.sphere, 1.0, 0.5, 0.0);
 			moveLocalToWorld(&simdata.sphere);
-			simdata.sphere.state = 2;//â—†07 0 -> 2
+			simdata.sphere.state = 2;//Ÿ07 0 -> 2
 		}
 		break;
 
-	case 2://â—†08 å³æ‰‹ã®æŠŠæŒã‹ã‚‰å¤–ã‚ŒãŸãŒè§¦ã£ã¦ã„ã‚‹çŠ¶æ…‹
+	case 2://Ÿ08 ‰Eè‚Ì”c‚©‚çŠO‚ê‚½‚ªG‚Á‚Ä‚¢‚éó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handR);
 		if (!ishit) {
 			setObjColor(&simdata.sphere, 0.7, 0.7, 0.7);
@@ -463,20 +463,20 @@ void UpdateScene(void)
 	// ---------------------------------------------------------
 	ObjDataT* pdata;
 	pdata = &simdata.head;
-	VRFL::Send((void**)&pdata, 1); // headæƒ…å ±é€ä¿¡
+	VRFL::Send((void**)&pdata, 1); // headî•ñ‘—M
 	pdata = &simdata.handL;
-	VRFL::Send((void**)&pdata, 1); // handLæƒ…å ±é€ä¿¡
+	VRFL::Send((void**)&pdata, 1); // handLî•ñ‘—M
 	pdata = &simdata.handR;
-	VRFL::Send((void**)&pdata, 1); // handRæƒ…å ±é€ä¿¡
+	VRFL::Send((void**)&pdata, 1); // handRî•ñ‘—M
     pdata = &simdata.sphere;
-    VRFL::Send((void**)&pdata, 1); // sphereæƒ…å ±é€ä¿¡
+    VRFL::Send((void**)&pdata, 1); // sphereî•ñ‘—M
 
     return;
 }
 ////////
 void TermScene(void)
 {
-	//// çµ‚äº†å‡¦ç†
+	//// I—¹ˆ—
 	printf("GOING TO EXIT..\n");
 
 #ifdef ZIGSIM

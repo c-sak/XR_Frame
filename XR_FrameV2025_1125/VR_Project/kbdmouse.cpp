@@ -1,4 +1,4 @@
-ï»¿/******************************************************************************
+/******************************************************************************
  * keybdmouse.cpp: keyboard and mouse callback functions 
  */
 #include <stdlib.h>
@@ -75,23 +75,23 @@ void charKeyDown( unsigned char key, int x, int y )
 		  simdata.cube.state = 5;
 		  break;
 
-	  case ' ': //ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã¨ã
+	  case ' ': //ƒXƒy[ƒXƒL[‚ğ‰Ÿ‚µ‚½‚Æ‚«
 		  simdata.cube.state = 7;
 		  break;
 
-	  case 'a': //å·¦æ—‹å›
+	  case 'a': //¶ù‰ñ
 		  //simdata.player.x -= 0.05;
 		  simdata.player.turn += 0.05;
 		  break;
-	  case 's': //å¾Œé€€
+	  case 's': //Œã‘Ş
 		  //simdata.player.z += 0.05;
 		  simdata.player.move += -0.001;
 		  break;
-      case 'd': //å³æ—‹å›
+      case 'd': //‰Eù‰ñ
 		  //simdata.player.x += 0.05;
 		  simdata.player.turn -= 0.05;
 		  break;
-	  case 'w': //å‰é€²
+	  case 'w': //‘Oi
 		  //simdata.player.z -= 0.05;
 		  simdata.player.move += 0.001;
 		  break;
@@ -115,29 +115,29 @@ void charKeyUp( unsigned char key, int x, int y )
  */
 void funcKeyDown( int key, int x, int y )
 {
-	//ãƒ•ã‚¡ãƒ³ã‚¯ã‚·ãƒ§ãƒ³ã‚­ãƒ¼
-	//[F*]: GLUT_KEY_F*(*ã¯1ï½12)
+	//ƒtƒ@ƒ“ƒNƒVƒ‡ƒ“ƒL[
+	//[F*]: GLUT_KEY_F*(*‚Í1`12)
 	//[F1]: GLUT_KEY_F1
 	//[F12]:GLUT_KEY_F12
-	//ãã®ä»–ã®æ©Ÿèƒ½ã‚­ãƒ¼
+	//‚»‚Ì‘¼‚Ì‹@”\ƒL[
     //[PageUp]  : GLUT_KEY_PAGE_UP:
     //[PageDown]: GLUT_KEY_PAGE_DOWN:
     //[Home]    : GLUT_KEY_HOME:
     //[End]     : GLUT_KEY_END:
     //[Insert]  : GLUT_KEY_INSERT:
 
-	//ã‚«ãƒ¼ã‚½ãƒ«ã‚­ãƒ¼
+	//ƒJ[ƒ\ƒ‹ƒL[
 	switch( key ){
-	  case GLUT_KEY_LEFT: //[â†]
+	  case GLUT_KEY_LEFT: //[©]
 
 		break;
-  	  case GLUT_KEY_RIGHT://[â†’]
+  	  case GLUT_KEY_RIGHT://[¨]
 
 		break;
-	  case GLUT_KEY_UP: //[â†‘]
+	  case GLUT_KEY_UP: //[ª]
 
 		break;
-	  case GLUT_KEY_DOWN://[â†“]
+	  case GLUT_KEY_DOWN://[«]
 
 		break;
 	}
@@ -145,16 +145,16 @@ void funcKeyDown( int key, int x, int y )
 void funcKeyUp( int key, int x, int y )
 {
 	switch( key ){
-	  case GLUT_KEY_LEFT: //[â†]
+	  case GLUT_KEY_LEFT: //[©]
 
 		break;
-  	  case GLUT_KEY_RIGHT://[â†’]
+  	  case GLUT_KEY_RIGHT://[¨]
 
 		break;
-	  case GLUT_KEY_UP: //[â†‘]
+	  case GLUT_KEY_UP: //[ª]
 
 		break;
-	  case GLUT_KEY_DOWN://[â†“]
+	  case GLUT_KEY_DOWN://[«]
 
 		break;
 	}
@@ -162,8 +162,8 @@ void funcKeyUp( int key, int x, int y )
 /*------------------------------------------------------------- mouseClick
  * mouseClick - GLUT mouse callback function
  * button: mouse button
- * stateï¼špress or release
- * x, yï¼šmouse position
+ * stateFpress or release
+ * x, yFmouse position
  *--------*/
 void mouseClick( int button , int state, int x, int y )
 {

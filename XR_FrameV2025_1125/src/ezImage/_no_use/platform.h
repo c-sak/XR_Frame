@@ -1,10 +1,10 @@
-﻿#ifndef PLATFORM_H
+#ifndef PLATFORM_H
 #define PLATFORM_H
-//↑platform.hのみ、教材として
-//「インクルードガード表記」の例として残しておきます
-//それ以外のヘッダーファイルでは
+//��platform.h�̂݁A���ނƂ���
+//�u�C���N���[�h�K�[�h�\�L�v�̗�Ƃ��Ďc���Ă����܂�
+//����ȊO�̃w�b�_�[�t�@�C���ł�
 //#pragma once
-//を使うことにします
+//���g�����Ƃɂ��܂�
 //-------- common
 #define _USE_MATH_DEFINES
 

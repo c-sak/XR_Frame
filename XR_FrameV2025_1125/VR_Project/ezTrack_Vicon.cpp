@@ -1,4 +1,4 @@
-ï»¿#include <stdlib.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "ezTrack_Vicon.h"
@@ -18,7 +18,7 @@ ezTracker_Vicon::~ezTracker_Vicon()
 }
 
 /// <summary>
-/// ezTracker_Viconã®åˆæœŸåŒ–
+/// ezTracker_Vicon‚Ì‰Šú‰»
 /// </summary>
 void ezTracker_Vicon::init() 
 {
@@ -27,14 +27,14 @@ void ezTracker_Vicon::init()
 
 #ifdef PLATFORM_WINDOWS
 /// <summary>
-/// VICONã‚·ã‚¹ãƒ†ãƒ ã«æ¥ç¶š
+/// VICONƒVƒXƒeƒ€‚ÉÚ‘±
 /// </summary>
-/// <param name="key">Viconã‚·ã‚¹ãƒ†ãƒ ã®ãƒ›ã‚¹ãƒˆå:Portç•ªå·(ä¾‹ 127.0.0.1:801)</param>
-/// <param name="w">ä½¿ç”¨ã—ãªã„</param>
+/// <param name="key">ViconƒVƒXƒeƒ€‚ÌƒzƒXƒg–¼:Port”Ô†(—á 127.0.0.1:801)</param>
+/// <param name="w">g—p‚µ‚È‚¢</param>
 /// <returns></returns>
 bool ezTracker_Vicon::open(char* key, bool w)
 {
-	//- VICONã«æ¥ç¶š
+	//- VICON‚ÉÚ‘±
 	if (use) {
 		cout << "Connecting to VICON " << key << " ..." << flush;
 		while (!MyClient.IsConnected().Connected) {
@@ -71,21 +71,21 @@ bool ezTracker_Vicon::open(char* key, bool w)
 			sleep(1);
 #endif
 
-			// Segment(â‰’ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£)æƒ…å ±ã®ã¿æœ‰åŠ¹åŒ–
+			// Segment(àƒŠƒWƒbƒhƒ{ƒfƒB)î•ñ‚Ì‚İ—LŒø‰»
 			MyClient.EnableSegmentData();
 
-			// åº§æ¨™ç³»ã‚’Z-UPã«è¨­å®š
-			// ezTrackDataTã¸æ ¼ç´ã™ã‚‹éš›ã«åº§æ¨™å¤‰æ›ã¯è¡Œã†
+			// À•WŒn‚ğZ-UP‚Éİ’è
+			// ezTrackDataT‚ÖŠi”[‚·‚éÛ‚ÉÀ•W•ÏŠ·‚Ís‚¤
 			MyClient.SetAxisMapping(Direction::Forward,
 				Direction::Left,
 				Direction::Up); // Z-up
 
-			// [å‚è€ƒ] Y-UPã«è¨­å®šã™ã‚‹å ´åˆ
+			// [Ql] Y-UP‚Éİ’è‚·‚éê‡
 			//MyClient.SetAxisMapping(Direction::Forward,
 			//	Direction::Up,
 			//	Direction::Right); // Y-up
 
-			// Clientã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’è¡¨ç¤º
+			// Client‚Ìƒo[ƒWƒ‡ƒ“î•ñ‚ğ•\¦
 			Output_GetVersion _Output_GetVersion = MyClient.GetVersion();
 			cout << "ViconDataStream Client Version: " << _Output_GetVersion.Major << "."
 				<< _Output_GetVersion.Minor << "."
@@ -97,24 +97,24 @@ bool ezTracker_Vicon::open(char* key, bool w)
 		return true;
 	}
 	else {
-		return true; // useãŒfalseã®ã¨ãã«ã¯ã€ãƒ€ãƒŸãƒ¼ã§trueã‚’è¿”ã™
+		return true; // use‚ªfalse‚Ì‚Æ‚«‚É‚ÍAƒ_ƒ~[‚Åtrue‚ğ•Ô‚·
 	}
 }
 
 /// <summary>
-/// VICONã‚·ã‚¹ãƒ†ãƒ ã‹ã‚‰æœ€æ–°ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã—ã¦ã€ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°æƒ…å ±ã‚’æ›´æ–°ã™ã‚‹
-/// - GetFrame()ã¯1å‘¨æœŸã«1å›ã ã‘å‘¼ã³ã€å…¨Subjectã‚’åŒä¸€ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‚‰æ›´æ–°ã™ã‚‹
-/// - Subjectã”ã¨ã®éª¨æ ¼ã¯ ezTracker (subjects_) ã«æ ¼ç´ã™ã‚‹
+/// VICONƒVƒXƒeƒ€‚©‚çÅVƒf[ƒ^‚ğæ“¾‚µ‚ÄAƒgƒ‰ƒbƒLƒ“ƒOî•ñ‚ğXV‚·‚é
+/// - GetFrame()‚Í1üŠú‚É1‰ñ‚¾‚¯ŒÄ‚ÑA‘SSubject‚ğ“¯ˆêƒtƒŒ[ƒ€‚©‚çXV‚·‚é
+/// - Subject‚²‚Æ‚ÌœŠi‚Í ezTracker (subjects_) ‚ÉŠi”[‚·‚é
 /// </summary>
 void ezTracker_Vicon::read()
 {
 	if (!use) return;
 
-	//- VICONã‹ã‚‰æœ€æ–°ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾— (ã“ã®å‘¨æœŸã§1å›ã ã‘)
+	//- VICON‚©‚çÅVƒf[ƒ^‚ğæ“¾ (‚±‚ÌüŠú‚Å1‰ñ‚¾‚¯)
 	if (MyClient.GetFrame().Result != Result::Success)
 		return;
 
-	//- å¾“æ¥ã®Subjectå˜ä½ãƒ“ãƒ¥ãƒ¼ã‚’åˆæœŸåŒ–
+	//- ]—ˆ‚ÌSubject’PˆÊƒrƒ…[‚ğ‰Šú‰»
 	n_tracks = 0;
 	for (int i = 0; i < _n_tracks; i++) {
 		trackarray.data[i].id = -1;
@@ -129,12 +129,12 @@ void ezTracker_Vicon::read()
 	{
 		const string SubjectName = MyClient.GetSubjectName(SubjectIndex).SubjectName;
 
-		//- Subjectã”ã¨ã®éª¨æ ¼ãƒ‡ãƒ¼ã‚¿ã‚’æ›´æ–° (1 Subject = 1 ezTracker)
+		//- Subject‚²‚Æ‚ÌœŠiƒf[ƒ^‚ğXV (1 Subject = 1 ezTracker)
 		SubjectT* subject = findSubject(SubjectName);
 		if (subject == NULL) subject = addSubject(SubjectName);
 		updateSubject(subject);
 
-		//- å¾“æ¥ã®Subjectå˜ä½ãƒ“ãƒ¥ãƒ¼ (æœ€å¾Œã®Segmentã®å€¤ã€Subjectåã§æ¤œç´¢ã§ãã‚‹)
+		//- ]—ˆ‚ÌSubject’PˆÊƒrƒ…[ (ÅŒã‚ÌSegment‚Ì’lASubject–¼‚ÅŒŸõ‚Å‚«‚é)
 		if (SubjectIndex < (unsigned int)_n_tracks && subject->hasLast) {
 			ezTrackDataT* data = &trackarray.data[SubjectIndex];
 			n_tracks = (int)SubjectIndex;
@@ -156,14 +156,14 @@ void ezTracker_Vicon::read()
 }
 
 /// <summary>
-/// 1 Subjectåˆ†ã®éª¨æ ¼ãƒ‡ãƒ¼ã‚¿ã‚’æ›´æ–°ã™ã‚‹
-/// Segment 1ã¤ = ezTrackDataT 1ã¤ã€‚parentã¯åŒä¸€Subjectå†…ã®è¦ªindex (-1 = root)
+/// 1 Subject•ª‚ÌœŠiƒf[ƒ^‚ğXV‚·‚é
+/// Segment 1‚Â = ezTrackDataT 1‚ÂBparent‚Í“¯ˆêSubject“à‚Ìeindex (-1 = root)
 /// </summary>
 void ezTracker_Vicon::updateSubject(SubjectT* subject)
 {
 	const unsigned int SegmentCount = MyClient.GetSegmentCount(subject->name).SegmentCount;
 
-	//- éª¨ã®æ§‹æˆãŒå¤‰ã‚ã£ãŸã¨ãã ã‘è¦ªå­é–¢ä¿‚ã‚’å†æ§‹ç¯‰
+	//- œ‚Ì\¬‚ª•Ï‚í‚Á‚½‚Æ‚«‚¾‚¯eqŠÖŒW‚ğÄ\’z
 	if (!subject->hierarchyValid || subject->segmentNames.size() != SegmentCount) {
 		rebuildHierarchy(subject);
 	}
@@ -187,19 +187,19 @@ void ezTracker_Vicon::updateSubject(SubjectT* subject)
 		if (t.Result != Result::Success || r.Result != Result::Success)
 			continue;
 
-		//- å¾“æ¥ã®Subjectå˜ä½ãƒ“ãƒ¥ãƒ¼ç”¨ã«æœ€çµ‚Segmentã®ç”Ÿå€¤ã‚’ä¿æŒ
+		//- ]—ˆ‚ÌSubject’PˆÊƒrƒ…[—p‚ÉÅISegment‚Ì¶’l‚ğ•Û
 		memcpy(subject->lastTranslation, t.Translation, sizeof(subject->lastTranslation));
 		memcpy(subject->lastRotationMatrix, r.Rotation, sizeof(subject->lastRotationMatrix));
 		subject->hasLast = true;
 
-		//- éª¨1æœ¬åˆ†ã®ãƒ‡ãƒ¼ã‚¿ã‚’æ ¼ç´
+		//- œ1–{•ª‚Ìƒf[ƒ^‚ğŠi”[
 		ezTrackDataT* data = trk->getTrackData((int)SegmentIndex);
 		data->id = (int)SegmentIndex;
 		data->parent = subject->parent[SegmentIndex];
 		strncpy(data->name, SegmentName.c_str(), sizeof(data->name) - 1);
 		data->name[sizeof(data->name) - 1] = '\0';
 
-		//- é®è”½ãƒ•ãƒ¬ãƒ¼ãƒ ã§ã¯å‰å›å€¤ã‚’ä¿æŒã™ã‚‹ (å…¨0ã®è¡Œåˆ—ã§getRot()ãŒNaNã«ãªã‚‹ã®ã‚’é˜²ã)
+		//- Õ•ÁƒtƒŒ[ƒ€‚Å‚Í‘O‰ñ’l‚ğ•Û‚·‚é (‘S0‚Ìs—ñ‚ÅgetRot()‚ªNaN‚É‚È‚é‚Ì‚ğ–h‚®)
 		if (!t.Occluded) {
 			data->x = (float)(-t.Translation[1] * 0.001); // [mm] -> [m]
 			data->y = (float)( t.Translation[2] * 0.001); // [mm] -> [m]
@@ -210,8 +210,8 @@ void ezTracker_Vicon::updateSubject(SubjectT* subject)
 }
 
 /// <summary>
-/// Subjectå†…ã®Segmentåã‹ã‚‰è¦ªå­é–¢ä¿‚ (parent index) ã‚’æ§‹ç¯‰ã™ã‚‹
-/// è¦ªãŒå­ã‚ˆã‚Šå¾Œã‚ã«ä¸¦ã‚“ã§ã„ã¦ã‚‚è§£æ±ºã§ãã‚‹ã‚ˆã†2ãƒ‘ã‚¹ã§è¡Œã†
+/// Subject“à‚ÌSegment–¼‚©‚çeqŠÖŒW (parent index) ‚ğ\’z‚·‚é
+/// e‚ªq‚æ‚èŒã‚ë‚É•À‚ñ‚Å‚¢‚Ä‚à‰ğŒˆ‚Å‚«‚é‚æ‚¤2ƒpƒX‚Ås‚¤
 /// </summary>
 void ezTracker_Vicon::rebuildHierarchy(SubjectT* subject)
 {
@@ -220,7 +220,7 @@ void ezTracker_Vicon::rebuildHierarchy(SubjectT* subject)
 	subject->segmentNames.clear();
 	subject->parent.assign(SegmentCount, -1);
 
-	//- ãƒ‘ã‚¹1: Segmentå -> index
+	//- ƒpƒX1: Segment–¼ -> index
 	map<string, int> indexOf;
 	for (unsigned int i = 0; i < SegmentCount; ++i) {
 		const string name = MyClient.GetSegmentName(subject->name, i).SegmentName;
@@ -228,7 +228,7 @@ void ezTracker_Vicon::rebuildHierarchy(SubjectT* subject)
 		indexOf[name] = (int)i;
 	}
 
-	//- ãƒ‘ã‚¹2: è¦ªå -> è¦ªindex (ç©ºæ–‡å­—ã¯root)
+	//- ƒpƒX2: e–¼ -> eindex (‹ó•¶š‚Íroot)
 	for (unsigned int i = 0; i < SegmentCount; ++i) {
 		const string parentName =
 			MyClient.GetSegmentParentName(subject->name, subject->segmentNames[i]).SegmentName;
@@ -249,7 +249,7 @@ void ezTracker_Vicon::write()
 }
 
 /// <summary>
-/// VICONã‚·ã‚¹ãƒ†ãƒ ã‹ã‚‰ã®åˆ‡æ–­
+/// VICONƒVƒXƒeƒ€‚©‚ç‚ÌØ’f
 /// </summary>
 void ezTracker_Vicon::close()
 {
@@ -270,7 +270,7 @@ void ezTracker_Vicon::close() {}
 #endif
 
 /// <summary>
-/// Subjectåã§SubjectTã‚’æ¢ã™
+/// Subject–¼‚ÅSubjectT‚ğ’T‚·
 /// </summary>
 ezTracker_Vicon::SubjectT* ezTracker_Vicon::findSubject(const string& name)
 {
@@ -281,7 +281,7 @@ ezTracker_Vicon::SubjectT* ezTracker_Vicon::findSubject(const string& name)
 }
 
 /// <summary>
-/// SubjectTã‚’æ–°è¦ä½œæˆã—ã¦ç™»éŒ²ã™ã‚‹
+/// SubjectT‚ğV‹Kì¬‚µ‚Ä“o˜^‚·‚é
 /// </summary>
 ezTracker_Vicon::SubjectT* ezTracker_Vicon::addSubject(const string& name)
 {
@@ -305,7 +305,7 @@ ezTracker_Vicon::SubjectT* ezTracker_Vicon::addSubject(const string& name)
 }
 
 /// <summary>
-/// ä¿æŒã—ã¦ã„ã‚‹SubjectTã‚’ã™ã¹ã¦ç ´æ£„ã™ã‚‹
+/// •Û‚µ‚Ä‚¢‚éSubjectT‚ğ‚·‚×‚Ä”jŠü‚·‚é
 /// </summary>
 void ezTracker_Vicon::clearSubjects()
 {
@@ -316,7 +316,7 @@ void ezTracker_Vicon::clearSubjects()
 }
 
 /// <summary>
-/// Subjectæ•°
+/// Subject”
 /// </summary>
 int ezTracker_Vicon::getSubjectCount() const
 {
@@ -324,7 +324,7 @@ int ezTracker_Vicon::getSubjectCount() const
 }
 
 /// <summary>
-/// indexã‹ã‚‰Subjectåã‚’å–å¾— (ç¯„å›²å¤–ã¯ç©ºæ–‡å­—)
+/// index‚©‚çSubject–¼‚ğæ“¾ (”ÍˆÍŠO‚Í‹ó•¶š)
 /// </summary>
 const char* ezTracker_Vicon::getSubjectName(int index) const
 {
@@ -333,7 +333,7 @@ const char* ezTracker_Vicon::getSubjectName(int index) const
 }
 
 /// <summary>
-/// Subjectåã‹ã‚‰éª¨æ ¼ãƒ‡ãƒ¼ã‚¿ (1 Subject = 1 ezTracker) ã‚’å–å¾—
+/// Subject–¼‚©‚çœŠiƒf[ƒ^ (1 Subject = 1 ezTracker) ‚ğæ“¾
 /// </summary>
 ezTracker* ezTracker_Vicon::getSubject(const char* name)
 {
@@ -343,7 +343,7 @@ ezTracker* ezTracker_Vicon::getSubject(const char* name)
 }
 
 /// <summary>
-/// indexã‹ã‚‰éª¨æ ¼ãƒ‡ãƒ¼ã‚¿ (1 Subject = 1 ezTracker) ã‚’å–å¾—
+/// index‚©‚çœŠiƒf[ƒ^ (1 Subject = 1 ezTracker) ‚ğæ“¾
 /// </summary>
 ezTracker* ezTracker_Vicon::getSubject(int index)
 {
@@ -352,7 +352,7 @@ ezTracker* ezTracker_Vicon::getSubject(int index)
 }
 
 /// <summary>
-/// å›è»¢è¡Œåˆ—ã‹ã‚‰Roll, Pitch, Yawã«å¤‰æ›
+/// ‰ñ“]s—ñ‚©‚çRoll, Pitch, Yaw‚É•ÏŠ·
 /// </summary>
 /// <param name="src"></param>
 /// <param name="roll"></param>

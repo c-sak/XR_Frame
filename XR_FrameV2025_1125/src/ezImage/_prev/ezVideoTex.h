@@ -1,15 +1,15 @@
-ï»¿#ifndef __EZ_VIDEO_TEX_H__
+#ifndef __EZ_VIDEO_TEX_H__
 #define __EZ_VIDEO_TEX_H__
 
 /*#############################################################################
 * VIDEO TEXTURE MODULE
-*20170706ezIMAGE claaè¿½åŠ 
+*20170706ezIMAGE claa’Ç‰Á
 *
  *###########################################################################*/
 
 #include "platform.h"
 
-#include "image.h" //â˜…
+#include "image.h" //š
 
 #include "ezWebCam.h"
 
@@ -50,7 +50,7 @@ class ezVideoTex {
   private:
 
 	double _fps;
-	image_t *image; //â˜…
+	image_t *image; //š
 	int _camID;
 	GLuint _meshID;
 };
@@ -89,7 +89,7 @@ public:
 	void Capture(void) {
 		if (webcam->isLatest()) Update();
 	}
-	void Copy(unsigned char *srcimage) { //â€»æœªãƒ†ã‚¹ãƒˆ
+	void Copy(unsigned char *srcimage) { //¦–¢ƒeƒXƒg
 		memcpy( image->pixdata, srcimage, image->width * image->height * image->pixsize );
 	}
 	//----------------
@@ -114,7 +114,7 @@ public:
 	}
 	//--------
 private:
-	image_t *image; //â˜…
+	image_t *image; //š
 	GLuint _meshID;
 	WebCam *webcam;
 };

@@ -1,4 +1,4 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 
 #include "common.h"
 #include "sim.h"
@@ -11,14 +11,14 @@ extern WindowDataT window;
  *--------*/
 void Viewing( void )
 {
-	//ä¸»è¦³ã‚«ãƒ¡ãƒ©ã®å ´åˆ
+	//åŠÏƒJƒƒ‰‚Ìê‡
     //gluLookAt( 0.0, 1.0, 5.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0 );
 
 	applyObjInverse( &simdata.head );
 	/*
-	glRotatef( - simdata.head.roll, 0.0, 0.0, 1.0 ); //rollã®é€†å¤‰æ›
-	glRotatef( - simdata.head.pitch, 1.0, 0.0, 0.0 ); //pitchã®é€†å¤‰æ›
-	glRotatef( - simdata.head.yaw, 0.0, 1.0, 0.0 ); //yawã®é€†å¤‰æ›
+	glRotatef( - simdata.head.roll, 0.0, 0.0, 1.0 ); //roll‚Ì‹t•ÏŠ·
+	glRotatef( - simdata.head.pitch, 1.0, 0.0, 0.0 ); //pitch‚Ì‹t•ÏŠ·
+	glRotatef( - simdata.head.yaw, 0.0, 1.0, 0.0 ); //yaw‚Ì‹t•ÏŠ·
 	glTranslatef( - simdata.head.x, - simdata.head.y, - simdata.head.z );
 	*/
 	//applyObjInverse( &simdata.player );
@@ -26,13 +26,13 @@ void Viewing( void )
 	glRotatef( - simdata.active_camera->roll, 0.0, 0.0, 1.0 );
 	glRotatef( - simdata.active_camera->pitch, 1.0, 0.0, 0.0 );
 	glRotatef( - simdata.active_camera->yaw, 0.0, 1.0, 0.0 );
-	//åˆ†ã‹ã‚Šã‚„ã™ã„ã‚ˆã†ã«æ”¹è¡Œã—ã¦ã„ã¾ã™ãŒã€æ”¹è¡Œãªã—ã§ã‚‚æ§‹ã„ã¾ã›ã‚“ã€‚
+	//•ª‚©‚è‚â‚·‚¢‚æ‚¤‚É‰üs‚µ‚Ä‚¢‚Ü‚·‚ªA‰üs‚È‚µ‚Å‚à\‚¢‚Ü‚¹‚ñB
 	glTranslatef( 	- simdata.active_camera->x,
 			- simdata.active_camera->y, 
 			- simdata.active_camera->z );
 	*/
 	//----------------------------------------------------
-	//å®¢è¦³ã‚«ãƒ¡ãƒ©ï¼ˆå›ºå®šã‚«ãƒ¡ãƒ©ï¼‰ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚’æ³¨è¦–ã™ã‚‹å ´åˆã¯ã“ã¡ã‚‰
+	//‹qŠÏƒJƒƒ‰iŒÅ’èƒJƒƒ‰j‚ÅƒvƒŒƒCƒ„‚ğ’‹‚·‚éê‡‚Í‚±‚¿‚ç
 	//gluLookAt( 0.0, 1.0, 3.0, simdata.player.x, simdata.player.y, simdata.player.z, 0.0, 1.0, 0.0 );
 }
 /*---------------------------------------------------------------- Projection

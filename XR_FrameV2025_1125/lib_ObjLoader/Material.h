@@ -1,4 +1,4 @@
-ï»¿#ifndef __CMaterial_h__
+#ifndef __CMaterial_h__
 #define __CMaterial_h__
 
 #if defined _WIN64 
@@ -8,113 +8,113 @@
 #endif
 
 /** @class  CMaterial
- *  @brief  ãƒãƒ†ãƒªã‚¢ãƒ«ã‚¯ãƒ©ã‚¹
+ *  @brief  ƒ}ƒeƒŠƒAƒ‹ƒNƒ‰ƒX
  *  @author  Masakazu Yoshida(yoshida@iltj.jp)
  *  @version  1.0
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @date  2008/12/1 ... V‹Kì¬
  *  @attention  Copyright (C) 2008, ILTJ Inc.
  */
 class CMaterial
 {
 /*--------------*/
-/* å…¬é–‹ãƒ¡ãƒ³ãƒ   */
+/* ŒöŠJƒƒ“ƒo   */
 /*--------------*/
 public:
 //*******************************************************************
 /*!
- *  @brief  ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   CMaterial(void);
 
 //*******************************************************************
 /*!
- *  @brief  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  ƒfƒXƒgƒ‰ƒNƒ^
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   ~CMaterial(void);
 
 //*******************************************************************
 /*!
- *  @brief  Diffuse(æ‹¡æ•£å…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚
- *  @param  val ... [In] è¡¨è£[GL_FRONT:è¡¨, GL_BACK:è£]
- *  @param  red ... [In] èµ¤è‰²æˆåˆ†
- *  @param  green ... [In] ç·‘è‰²æˆåˆ†
- *  @param  blue ... [In] é’è‰²æˆåˆ†
- *  @param  alpha ... [In] ã‚¢ãƒ«ãƒ•ã‚¡å€¤
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  Diffuse(ŠgUŒõ)İ’è‚ğs‚¢‚Ü‚·B
+ *  @param  val ... [In] •\— [GL_FRONT:•\, GL_BACK:— ]
+ *  @param  red ... [In] ÔF¬•ª
+ *  @param  green ... [In] —ÎF¬•ª
+ *  @param  blue ... [In] ÂF¬•ª
+ *  @param  alpha ... [In] ƒAƒ‹ƒtƒ@’l
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   void setDiffuse(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 
 //*******************************************************************
 /*!
- *  @brief  Ambient(ç’°å¢ƒå…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚
- *  @param  val ... [In] è¡¨è£[GL_FRONT:è¡¨, GL_BACK:è£]
- *  @param  red ... [In] èµ¤è‰²æˆåˆ†
- *  @param  green ... [In] ç·‘è‰²æˆåˆ†
- *  @param  blue ... [In] é’è‰²æˆåˆ†
- *  @param  alpha ... [In] ã‚¢ãƒ«ãƒ•ã‚¡å€¤
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  Ambient(ŠÂ‹«Œõ)İ’è‚ğs‚¢‚Ü‚·B
+ *  @param  val ... [In] •\— [GL_FRONT:•\, GL_BACK:— ]
+ *  @param  red ... [In] ÔF¬•ª
+ *  @param  green ... [In] —ÎF¬•ª
+ *  @param  blue ... [In] ÂF¬•ª
+ *  @param  alpha ... [In] ƒAƒ‹ƒtƒ@’l
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   void setAmbient(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 
 //*******************************************************************
 /*!
- *  @brief  Specular(é¡é¢å…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚
- *  @param  val ... [In] è¡¨è£[GL_FRONT:è¡¨, GL_BACK:è£]
- *  @param  red ... [In] èµ¤è‰²æˆåˆ†
- *  @param  green ... [In] ç·‘è‰²æˆåˆ†
- *  @param  blue ... [In] é’è‰²æˆåˆ†
- *  @param  alpha ... [In] ã‚¢ãƒ«ãƒ•ã‚¡å€¤
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  Specular(‹¾–ÊŒõ)İ’è‚ğs‚¢‚Ü‚·B
+ *  @param  val ... [In] •\— [GL_FRONT:•\, GL_BACK:— ]
+ *  @param  red ... [In] ÔF¬•ª
+ *  @param  green ... [In] —ÎF¬•ª
+ *  @param  blue ... [In] ÂF¬•ª
+ *  @param  alpha ... [In] ƒAƒ‹ƒtƒ@’l
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   void setSpecular(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 
 //*******************************************************************
 /*!
- *  @brief  Emission(æ”¾å°„å…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚
- *  @param  val ... [In] è¡¨è£[GL_FRONT:è¡¨, GL_BACK:è£]
- *  @param  red ... [In] èµ¤è‰²æˆåˆ†
- *  @param  green ... [In] ç·‘è‰²æˆåˆ†
- *  @param  blue ... [In] é’è‰²æˆåˆ†
- *  @param  alpha ... [In] ã‚¢ãƒ«ãƒ•ã‚¡å€¤
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  Emission(•úËŒõ)İ’è‚ğs‚¢‚Ü‚·B
+ *  @param  val ... [In] •\— [GL_FRONT:•\, GL_BACK:— ]
+ *  @param  red ... [In] ÔF¬•ª
+ *  @param  green ... [In] —ÎF¬•ª
+ *  @param  blue ... [In] ÂF¬•ª
+ *  @param  alpha ... [In] ƒAƒ‹ƒtƒ@’l
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   void setEmission(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 
 //*******************************************************************
 /*!
- *  @brief  Shininess(é¡é¢æŒ‡æ•°)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚
- *  @param  val1 ... [In] è¡¨è£ [GL_FRONT=è¡¨, GL_BACK=è£]
- *  @param  val2 ... [In] é¡é¢æŒ‡æ•°
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  Shininess(‹¾–Êw”)İ’è‚ğs‚¢‚Ü‚·B
+ *  @param  val1 ... [In] •\—  [GL_FRONT=•\, GL_BACK=— ]
+ *  @param  val2 ... [In] ‹¾–Êw”
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   void setShininess(int val1, GLfloat val2);
 
 //*******************************************************************
 /*!
- *  @brief  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ã‚’è¡Œã„ã¾ã™ã€‚
- *  @date  2008/12/1 ... æ–°è¦ä½œæˆ
+ *  @brief  “à•”ƒf[ƒ^‚Ì‰Šú‰»‚ğs‚¢‚Ü‚·B
+ *  @date  2008/12/1 ... V‹Kì¬
  */
 //********************************************************************
   void clear(void);
 
 /*--------------*/
-/* éå…¬é–‹ãƒ¡ãƒ³ãƒ */
+/* ”ñŒöŠJƒƒ“ƒo */
 /*--------------*/
 private:
-  GLfloat diffuse[5];                            // DIFFUSEè¨­å®šå€¤
-  GLfloat ambient[5];                            // AMBIENTè¨­å®šå€¤
-  GLfloat specular[5];                           // SPECULARè¨­å®šå€¤
-  GLfloat emission[5];                           // EMISSIONè¨­å®šå€¤
-  GLfloat shininess[2];                          // SHAININESSè¨­å®šå€¤
+  GLfloat diffuse[5];                            // DIFFUSEİ’è’l
+  GLfloat ambient[5];                            // AMBIENTİ’è’l
+  GLfloat specular[5];                           // SPECULARİ’è’l
+  GLfloat emission[5];                           // EMISSIONİ’è’l
+  GLfloat shininess[2];                          // SHAININESSİ’è’l
 };
 
 #endif

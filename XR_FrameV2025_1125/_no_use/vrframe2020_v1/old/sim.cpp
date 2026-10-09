@@ -1,4 +1,4 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 
 #include "common.h" //WindowDataT, MouseDataT, KeyDataT
 #include "calc.h"
@@ -9,7 +9,7 @@
 
 #include "gyro.h"
 
-#include "mymodel.h" //â˜…
+#include "mymodel.h" //š
 
 inline float ObjX( ObjDataT *obj ){ return OBJ_X(obj);}
 inline float ObjY( ObjDataT *obj ){ return OBJ_Y(obj);}
@@ -18,29 +18,29 @@ inline float ObjRoll( ObjDataT *obj ){ return OBJ_ROLL(obj);}
 inline float ObjPitch( ObjDataT *obj ){ return OBJ_PITCH(obj);}
 inline float ObjYaw( ObjDataT *obj ){ return OBJ_YAW(obj);}
 
-SimDataT simdata; //SimDataTå‹æ§‹é€ ä½“ã®ãƒ‡ãƒ¼ã‚¿ã‚’å®£è¨€
+SimDataT simdata; //SimDataTŒ^\‘¢‘Ì‚Ìƒf[ƒ^‚ğéŒ¾
 extern MouseDataT mouse;
-extern KeyDataT keydata; //â˜…ä¿®æ­£â˜…
+extern KeyDataT keydata; //šC³š
 
 ///////////////////////////////////////////////////////
-//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ãƒ‡ãƒã‚¤ã‚¹ã‚’æœ‰åŠ¹ã«ã™ã‚‹ãƒ•ãƒ©ã‚°
-//bool use_tracker = false; //æœ‰åŠ¹ã«ã™ã‚‹ã¨ãtrue
+//ƒgƒ‰ƒbƒJ[ƒfƒoƒCƒX‚ğ—LŒø‚É‚·‚éƒtƒ‰ƒO
+//bool use_tracker = false; //—LŒø‚É‚·‚é‚Æ‚«true
 
-ezTracker *tracker; //å…±æœ‰ãƒ¡ãƒ¢ãƒªçµŒç”±ã§ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã®æƒ…å ±ã‚’å¾—ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
-//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰å—ã‘å–ã£ãŸãƒ‡ãƒ¼ã‚¿ã¸ã®ãƒã‚¤ãƒ³ã‚¿
-ezTrackDataT *trackBase; //åŸºæº–ãƒãƒ¼ã‚«
+ezTracker *tracker; //‹¤—Lƒƒ‚ƒŠŒo—R‚Åƒgƒ‰ƒbƒJ[‚Ìî•ñ‚ğ“¾‚éƒIƒuƒWƒFƒNƒg
+//ƒgƒ‰ƒbƒJ[‚©‚çó‚¯æ‚Á‚½ƒf[ƒ^‚Ö‚Ìƒ|ƒCƒ“ƒ^
+ezTrackDataT *trackBase; //Šî€ƒ}[ƒJ
 ezTrackDataT *trackHead;
 ezTrackDataT *trackBody;
 ezTrackDataT *trackHandR;
 ezTrackDataT *trackHandL;
 ezTrackDataT *trackFootR;
 ezTrackDataT *trackFootL;
-//ãƒãƒ¼ã‚«ãŒè¦‹ãˆãªã„å ´åˆãªã©ã®ãƒ€ãƒŸãƒ¼ãƒ‡ãƒ¼ã‚¿
+//ƒ}[ƒJ‚ªŒ©‚¦‚È‚¢ê‡‚È‚Ç‚Ìƒ_ƒ~[ƒf[ƒ^
 ezTrackDataT localBase = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 ezTrackDataT localHead = { 0, 0.0, 1.5, 0.0, 0.0, 0.0, 0.0 };
 ezTrackDataT localBody = { 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-ezTrackDataT localHandR = { 0, 0.25, 1.25, -2.0, 0.0, 0.0, 0.0 };//â˜…-2.0
-ezTrackDataT localHandL = { 0,-0.25, 1.25, -2.0, 0.0, 0.0, 0.0 };//â˜…-2.0
+ezTrackDataT localHandR = { 0, 0.25, 1.25, -2.0, 0.0, 0.0, 0.0 };//š-2.0
+ezTrackDataT localHandL = { 0,-0.25, 1.25, -2.0, 0.0, 0.0, 0.0 };//š-2.0
 ezTrackDataT localFootR = { 0, 0.25, 0.0, -0.5, 0.0, 0.0, 0.0 };
 ezTrackDataT localFootL = { 0,-0.25, 0.0, -0.5, 0.0, 0.0, 0.0 };
 ////////////////////////////////////////////////////////
@@ -63,8 +63,8 @@ static void copyTrackToObj( ezTrackDataT *src, ObjDataT *dst )
  *--------*/
 void InitScene( void )
 {
-	////// ã‚·ãƒ¼ãƒ³ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
-	simdata.clip_far = 200.0; //â—†ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—ãƒ—ãƒ¬ãƒ¼ãƒ³
+	////// ƒV[ƒ“ƒf[ƒ^‚Ì‰Šú‰»
+	simdata.clip_far = 200.0; //Ÿƒtƒ@[ƒNƒŠƒbƒvƒvƒŒ[ƒ“
 	simdata.clip_near = 0.1;
 	simdata.air_color[0] = 1.0;
 	simdata.air_color[1] = 1.0;
@@ -76,12 +76,12 @@ void InitScene( void )
 	simdata.sky_color[3] = 0.5; // sky color factor
 	//////
 
-	///â–¼è¿½åŠ ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸåŒ–
+	///¥’Ç‰Á‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ì‰Šú‰»
 	setObjPos( &simdata.cube, 1.0, 0.0, -3.0 );
 	setObjRot( &simdata.cube, 0.0, 45.0, 30.0 );
     setObjColor( &simdata.cube, 0.0, 0.0, 0.0 );
 	simdata.cube.visible = true;
-	simdata.cube.state = 0; //////////////â—†
+	simdata.cube.state = 0; //////////////Ÿ
     simdata.cube.radius = 0.5;
 
 	simdata.cube.xsize = 2.0;
@@ -93,10 +93,10 @@ void InitScene( void )
 	setObjColor( &simdata.sphere, 1.0, 0.5, 0.0 );
 	simdata.sphere.visible = true;
 	simdata.sphere.state = 0;
-	simdata.sphere.radius = 0.5; //â˜…â—†04
+	simdata.sphere.radius = 0.5; //šŸ04
 
-	simdata.handR.radius = 0.25; //â—†04
-	simdata.handL.radius = 0.25; //â—†04
+	simdata.handR.radius = 0.25; //Ÿ04
+	simdata.handL.radius = 0.25; //Ÿ04
 	simdata.handR.state = 0;
 	simdata.handL.state = 0;
 	
@@ -109,24 +109,24 @@ void InitScene( void )
 	simdata.player.move = 0.0;
 	simdata.player.radius = 0.5;
 	
-	//å³æ‰‹ï¼ˆãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ï¼‰ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ã®å­åº§æ¨™ç³»ã¨ã™ã‚‹
-	setObjLocal( &simdata.handR, &simdata.player ); //â˜…
+	//‰Eèiƒ[ƒJƒ‹À•Wj‚ğƒvƒŒƒCƒ„‚ÌqÀ•WŒn‚Æ‚·‚é
+	setObjLocal( &simdata.handR, &simdata.player ); //š
 
-	//â˜…å·¦æ‰‹ã‚‚åŒæ§˜
-	setObjLocal( &simdata.handL, &simdata.player ); //â˜…
+	//š¶è‚à“¯—l
+	setObjLocal( &simdata.handL, &simdata.player ); //š
 
-	//é ­ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å­åº§æ¨™ç³»ã«ã™ã‚‹
+	//“ª‚ğƒvƒŒƒCƒ„[‚ÌqÀ•WŒn‚É‚·‚é
 	setObjLocal(&simdata.head, &simdata.player );
 
 	simdata.active_camera = &simdata.player;
 	//simdata.active_camera = NULL;
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿ã«ç´ä»˜ã‘ã‚‹
+	//ƒvƒŒƒCƒ„ƒIƒuƒWƒFƒNƒg‚ÌƒAƒhƒŒƒX‚ğƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^‚É•R•t‚¯‚é
 
-	setObjColor( &simdata.handR, 0.0, 1.0, 0.0 ); //å³æ‰‹ã‚°ãƒªãƒ¼ãƒ³
-	setObjColor( &simdata.handL, 1.0, 0.0, 0.0 ); //å·¦æ‰‹ãƒ¬ãƒƒãƒ‰
+	setObjColor( &simdata.handR, 0.0, 1.0, 0.0 ); //‰EèƒOƒŠ[ƒ“
+	setObjColor( &simdata.handL, 1.0, 0.0, 0.0 ); //¶èƒŒƒbƒh
 
-	tracker = new ezTracker( use_tracker ); //VICONä½¿ã†ã¨ãã¯true
-	tracker->open( "VICON", false ); //è­˜åˆ¥å, Wãƒ•ãƒ©ã‚°(false:R/O)
+	tracker = new ezTracker( use_tracker ); //VICONg‚¤‚Æ‚«‚Ítrue
+	tracker->open( "VICON", false ); //¯•Ê–¼, Wƒtƒ‰ƒO(false:R/O)
 
 	trackHead = &localHead;
 	trackBody = &localBody;
@@ -136,7 +136,7 @@ void InitScene( void )
 	trackFootL = &localFootL;
 	trackFootR = &localFootR;
 
-	//â˜…ä¿®æ­£â˜…UpdataSceneã‹ã‚‰ã‚³ãƒ”ãƒ¼
+	//šC³šUpdataScene‚©‚çƒRƒs[
 	copyTrackToObj( trackHead, &simdata.head );
     copyTrackToObj( trackBody, &simdata.body );
 	copyTrackToObj( trackHandL, &simdata.handL );
@@ -144,7 +144,7 @@ void InitScene( void )
 	copyTrackToObj( trackFootL, &simdata.footL );
 	copyTrackToObj( trackFootR, &simdata.footR );
 
-	CreateMyModels(); //â˜…
+	CreateMyModels(); //š
 
 	if( use_gyro ) InitGyro();
 
@@ -160,11 +160,11 @@ void UpdateScene( void )
 		TargetToObjData( &simdata.TargetList[i], &simdata.target[i] ); 
 	}
 #else
-	//////// ãƒ‡ãƒ¼ã‚¿æ›´æ–° ////////
+	//////// ƒf[ƒ^XV ////////
 	if( use_tracker ){
-		//ãƒˆãƒ©ãƒƒã‚«ãƒ¼ã‹ã‚‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚²ãƒƒãƒˆ
-		tracker->read(); //å…±æœ‰ãƒ¡ãƒ¢ãƒªã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿å‡ºã™
-		trackHead = tracker->getTrackData( "CAP" ); //VICONãƒãƒ¼ã‚«ã®åå‰
+		//ƒgƒ‰ƒbƒJ[‚©‚ç‚Ìƒf[ƒ^‚ğƒQƒbƒg
+		tracker->read(); //‹¤—Lƒƒ‚ƒŠ‚©‚çƒf[ƒ^‚ğ“Ç‚İo‚·
+		trackHead = tracker->getTrackData( "CAP" ); //VICONƒ}[ƒJ‚Ì–¼‘O
 		trackBody = tracker->getTrackData( "Chest" );
 		trackHandR = tracker->getTrackData("TREE_A" );
 		trackHandL = tracker->getTrackData(  "TREE_B" );
@@ -178,39 +178,39 @@ void UpdateScene( void )
 		copyTrackToObj( trackHandR, &simdata.handR );
 		copyTrackToObj( trackFootL, &simdata.footL );
 		copyTrackToObj( trackFootR, &simdata.footR );
-		//è§£èª¬ï¼šæ§‹é€ ä½“ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å¼•æ•°ã¨ã™ã‚‹
-		//&: ã‚¢ãƒ‰ãƒ¬ã‚¹ï¼ˆï¼ãƒã‚¤ãƒ³ã‚¿ï¼‰ã‚’æ¸¡ã™ã“ã¨ã‚’æŒ‡å®š
+		//‰ğàF\‘¢‘Ì‚Ìƒ|ƒCƒ“ƒ^‚ğˆø”‚Æ‚·‚é
+		//&: ƒAƒhƒŒƒXiƒ|ƒCƒ“ƒ^j‚ğ“n‚·‚±‚Æ‚ğw’è
 		simdata.handR.pos.z -= 0.5; //########
 		simdata.handL.pos.z -= 0.5; //########
 	}
 	else{
-		//â—†01â—†ã‚³ãƒ¡ãƒ³ãƒˆåŒ–
+		//Ÿ01ŸƒRƒƒ“ƒg‰»
 		/*
 		copyTrackToObj( trackHandL, &simdata.handL );
 		copyTrackToObj( trackHandR, &simdata.handR );
 		*/
-		//â—†02â—†ãƒã‚¦ã‚¹ã§å³æ‰‹handRã‚’å‹•ã‹ã™
-		//æ„Ÿåº¦èª¿æ•´ï¼‹åŸºæº–ä½ç½®èª¿æ•´ ########
-		simdata.handR.pos.x = mouse.x * 2.0 + 0.25; // mouse.x: -1.0ï¼ˆå·¦ç«¯ï¼‰ï½1.0ï¼ˆå³ç«¯ï¼‰
-		simdata.handR.pos.y = -mouse.y * 2.0 + 1.2; // mouse.y; -1.0ï¼ˆä¸Šç«¯ï¼‰ï½1.0ï¼ˆä¸‹ç«¯ï¼‰
-		//simdata.handR.z = -2.0;//â˜…ã‚³ãƒ¡ãƒ³ãƒˆã«
-		//â–²
+		//Ÿ02Ÿƒ}ƒEƒX‚Å‰EèhandR‚ğ“®‚©‚·
+		//Š´“x’²®{Šî€ˆÊ’u’²® ########
+		simdata.handR.pos.x = mouse.x * 2.0 + 0.25; // mouse.x: -1.0i¶’[j`1.0i‰E’[j
+		simdata.handR.pos.y = -mouse.y * 2.0 + 1.2; // mouse.y; -1.0iã’[j`1.0i‰º’[j
+		//simdata.handR.z = -2.0;//šƒRƒƒ“ƒg‚É
+		//£
 		
-		//â—†03â—†ã¤ã„ã§ã«å·¦æ‰‹handLã‚‚å‹•ã‹ã™ï½å³æ‰‹ã¨ä¸Šä¸‹å·¦å³ã‚’é€†ã«ã—ãŸã‚Šã™ã‚‹
-		//æ„Ÿåº¦èª¿æ•´ï¼‹åŸºæº–ä½ç½®èª¿æ•´ ########
-		simdata.handL.pos.x = - mouse.x * 2.0 - 0.25; // mouse.x: -1.0ï¼ˆå·¦ç«¯ï¼‰ï½1.0ï¼ˆå³ç«¯ï¼‰
-		simdata.handL.pos.y = mouse.y * 2.0 + 1.2; // mouse.y; -1.0ï¼ˆä¸Šç«¯ï¼‰ï½1.0ï¼ˆä¸‹ç«¯ï¼‰
-		//simdata.handL.z = -2.0;//â˜…ã‚³ãƒ¡ãƒ³ãƒˆã«
-		//â–²
+		//Ÿ03Ÿ‚Â‚¢‚Å‚É¶èhandL‚à“®‚©‚·`‰Eè‚Æã‰º¶‰E‚ğ‹t‚É‚µ‚½‚è‚·‚é
+		//Š´“x’²®{Šî€ˆÊ’u’²® ########
+		simdata.handL.pos.x = - mouse.x * 2.0 - 0.25; // mouse.x: -1.0i¶’[j`1.0i‰E’[j
+		simdata.handL.pos.y = mouse.y * 2.0 + 1.2; // mouse.y; -1.0iã’[j`1.0i‰º’[j
+		//simdata.handL.z = -2.0;//šƒRƒƒ“ƒg‚É
+		//£
 		
-		////â˜…è¿½åŠ 
+		////š’Ç‰Á
 		if (keydata.arrowUp) {
 			simdata.handL.pos.z -= 0.01; //###### VECTOR Z
 		}
 		if (keydata.arrowDown) {
 			simdata.handL.pos.z += 0.01; //###### VECTOR Z
 		}
-		//////////â˜…
+		//////////š
 	}
 
 	if( use_gyro ){
@@ -225,21 +225,21 @@ void UpdateScene( void )
 	}
 #endif
 	/*
-	//----------------------------------------------- ãƒã‚¦ã‚¹ã§ç§»å‹•ã™ã‚‹
+	//----------------------------------------------- ƒ}ƒEƒX‚ÅˆÚ“®‚·‚é
 	simdata.player.turn = - 0.5 * mouse.xRel;
 	simdata.player.move = - 0.2 * mouse.yRel;
 	MoveObject( &simdata.player ); 
 	*/
 
-	//â˜…å®šæ•°ã¨ã—ã¦å¤‰æ•°ã‚’ä½¿ã„ãŸã„ã¨ãã«ã¯ã€Œconstã€ã‚’ã¤ã‘ã‚‹
+	//š’è”‚Æ‚µ‚Ä•Ï”‚ğg‚¢‚½‚¢‚Æ‚«‚É‚Íuconstv‚ğ‚Â‚¯‚é
 	const float yon = 1.5, yoff = 1.0;
 
-	//â˜…å‰ã®å€¤ã‚’ä¿æŒã—ãŸã„ã¨ãã«ã¯ã€Œstaticã€ã‚’ã¤ã‘ã‚‹
+	//š‘O‚Ì’l‚ğ•Û‚µ‚½‚¢‚Æ‚«‚É‚Íustaticv‚ğ‚Â‚¯‚é
 	static float xo, zo;
 
-	//â˜…å·¦æ‰‹ã®å‹•ä½œã§ç§»å‹•ã™ã‚‹æ“ä½œ
+	//š¶è‚Ì“®ì‚ÅˆÚ“®‚·‚é‘€ì
 	switch (simdata.handL.state) {
-	case 0: //â—†éç§»å‹•ãƒ¢ãƒ¼ãƒ‰
+	case 0: //Ÿ”ñˆÚ“®ƒ‚[ƒh
 		if (ObjY(&simdata.handL) > yon) {  ////////VECTOR Y
 			simdata.handL.state = 1;
 			xo = ObjX(&simdata.handL); ////////VECTOR X
@@ -247,28 +247,28 @@ void UpdateScene( void )
 			setObjColor(&simdata.handL, 1.0, 1.0, 0.0);
 		}
 		break;
-	case 1: //â—†ç§»å‹•ãƒ¢ãƒ¼ãƒ‰
+	case 1: //ŸˆÚ“®ƒ‚[ƒh
 		if (ObjY(&simdata.handL) < yoff) { ////////VECTOR Y
 			simdata.handL.state = 0;
 			setObjColor(&simdata.handL, 1.0, 0.0, 0.0);
 		}
-		//ç§»å‹•ã®å‡¦ç†
+		//ˆÚ“®‚Ìˆ—
 		simdata.player.turn = - 0.5 * (ObjX(&simdata.handL) - xo); ////////VECTOR X
 		simdata.player.move = - 0.2 * (ObjZ(&simdata.handL) - zo); ////////VECTOR Z
 		MoveObject(&simdata.player);
 		break;
 	}
 
-	//çŠ¶æ…‹é·ç§»ã®ãƒã‚§ãƒƒã‚¯ã€çŠ¶æ…‹é·ç§»ã€
-	//â—†04
+	//ó‘Ô‘JˆÚ‚Ìƒ`ƒFƒbƒNAó‘Ô‘JˆÚA
+	//Ÿ04
 	bool ishit;
 	switch (simdata.sphere.state) {
-	case 0://â˜…å³æ‰‹ã‹ã‚‰å¤–ã‚Œã€ã‹ã¤å³æ‰‹ã«è§¦ã‚Œã¦ã„ãªã„çŠ¶æ…‹
+	case 0://š‰Eè‚©‚çŠO‚êA‚©‚Â‰Eè‚ÉG‚ê‚Ä‚¢‚È‚¢ó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handR);
 		if (ishit) {
 			setObjColor(&simdata.sphere, 0.0, 1.0, 0.5);
 
-			//â—†05
+			//Ÿ05
 			simdata.sphere.state = 1;
 			moveWorldToLocal( &simdata.sphere, &simdata.handR );
 
@@ -279,15 +279,15 @@ void UpdateScene( void )
 		}
 		break;
 
-	case 1: //â—†06â˜…å³æ‰‹ã«æŠŠæŒã•ã‚Œã¦ã„ã‚‹çŠ¶æ…‹
+	case 1: //Ÿ06š‰Eè‚É”c‚³‚ê‚Ä‚¢‚éó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handL);
 		if (ishit) {
 			setObjColor(&simdata.sphere, 1.0, 0.5, 0.0);
 			moveLocalToWorld(&simdata.sphere);
-			simdata.sphere.state = 2;//â—†07 0 -> 2
+			simdata.sphere.state = 2;//Ÿ07 0 -> 2
 		}
 		break;
-	case 2://â—†08 å³æ‰‹ã®æŠŠæŒã‹ã‚‰å¤–ã‚ŒãŸãŒè§¦ã£ã¦ã„ã‚‹çŠ¶æ…‹
+	case 2://Ÿ08 ‰Eè‚Ì”c‚©‚çŠO‚ê‚½‚ªG‚Á‚Ä‚¢‚éó‘Ô
 		ishit = isHit(&simdata.sphere, &simdata.handR);
 		if (!ishit) {
 			setObjColor(&simdata.sphere, 0.7, 0.7, 0.7);

@@ -1,4 +1,4 @@
-ï»¿#include "pch.h"
+#include "pch.h"
 #include "UnityMtl.h"
 
 /////////////////////////////
@@ -8,7 +8,7 @@
 /////////////////////////////
 
 //-----------------------------------------------------------------//
-// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                        //
+// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^                                        //
 //-----------------------------------------------------------------//
 uMtl::uMtl(void)
 {
@@ -18,13 +18,13 @@ uMtl::uMtl(void)
 //		(PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
 //#endif
 	//////////////////////////
-  texturebind_flg = false;                       // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
-  spherebind_flg = false;                        // ã‚¹ãƒ•ã‚£ã‚¢ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
-  cubebind_flg = false;                          // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
+  texturebind_flg = false;                       // ƒeƒNƒXƒ`ƒƒƒoƒCƒ“ƒhƒtƒ‰ƒO‰Šú‰»
+  spherebind_flg = false;                        // ƒXƒtƒBƒAƒeƒNƒXƒ`ƒƒƒoƒCƒ“ƒhƒtƒ‰ƒO‰Šú‰»
+  cubebind_flg = false;                          // ƒLƒ…[ƒuƒeƒNƒXƒ`ƒƒƒoƒCƒ“ƒhƒtƒ‰ƒO‰Šú‰»
 }
 
 //-----------------------------------------------------------------//
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                    //
+// ƒfƒXƒgƒ‰ƒNƒ^                                                    //
 //-----------------------------------------------------------------//
 uMtl::~uMtl(void)
 {
@@ -32,248 +32,248 @@ uMtl::~uMtl(void)
 }
 
 //-----------------------------------------------------------------//
-// ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚                          //
+// ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B                          //
 //-----------------------------------------------------------------//
 bool uMtl::loadMtl(string mtlfnm)
 {
-  St_uo_mtl_data *pst;                              // mtlãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“ä¸€æ™‚é ˜åŸŸ
-  int token_cnt = 0;                             // ãƒˆãƒ¼ã‚¯ãƒ³ç”¨ã‚«ã‚¦ãƒ³ã‚¿
-  char line_buff[255];                           // ãƒ¬ã‚³ãƒ¼ãƒ‰èª­è¾¼ã¿ç”¨ãƒãƒƒãƒ•ã‚¡
-  char bufftemp[255];                            // ä¸€æ™‚é ˜åŸŸãƒãƒƒãƒ•ã‚¡
-  char *psrc;                                    // æ–‡å­—åˆ—æ¤œç´¢ç”¨ãƒã‚¤ãƒ³ã‚¿
-  char *token;                                   // æ–‡å­—åˆ—åˆ†å‰²ç”¨ãƒã‚¤ãƒ³ã‚¿
-  ifstream ifs;                                  // èª­è¾¼ã¿ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ã‚¹ãƒˆãƒªãƒ¼ãƒ 
-  bool newflg = false;                           // åˆå›åˆ¤å®šãƒ•ãƒ©ã‚°
+  St_uo_mtl_data *pst;                              // mtlƒf[ƒ^\‘¢‘Ìˆê—Ìˆæ
+  int token_cnt = 0;                             // ƒg[ƒNƒ“—pƒJƒEƒ“ƒ^
+  char line_buff[255];                           // ƒŒƒR[ƒh“Ç‚İ—pƒoƒbƒtƒ@
+  char bufftemp[255];                            // ˆê—Ìˆæƒoƒbƒtƒ@
+  char *psrc;                                    // •¶š—ñŒŸõ—pƒ|ƒCƒ“ƒ^
+  char *token;                                   // •¶š—ñ•ªŠ„—pƒ|ƒCƒ“ƒ^
+  ifstream ifs;                                  // “Ç‚İƒtƒ@ƒCƒ‹—pƒXƒgƒŠ[ƒ€
+  bool newflg = false;                           // ‰‰ñ”»’èƒtƒ‰ƒO
 
-  // èª­è¾¼ã¿ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+  // “Ç‚İƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
   ifs.open(mtlfnm.c_str(), ios::in);
 
-  // ã‚ªãƒ¼ãƒ—ãƒ³ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯
+  // ƒI[ƒvƒ“ƒGƒ‰[ƒ`ƒFƒbƒN
   if(!ifs.is_open())
   {
-    cout << "èª­è¾¼ã¿ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ file: " << mtlfnm.c_str() << endl;
+    cout << "“Ç‚İƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½B file: " << mtlfnm.c_str() << endl;
     return false;
   }
 
-  // OBJæ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹ã‚’å–å¾—
+  // OBJŠi”[ƒfƒBƒŒƒNƒgƒŠƒpƒX‚ğæ“¾
   string::size_type copysize = mtlfnm.rfind("/");
   string mtldir = mtlfnm.substr(0, copysize+1);
 
-  ifs.unsetf(ios::skipws);                       // ãƒ–ãƒ©ãƒ³ã‚¯ã‚’ã‚¹ã‚­ãƒƒãƒ—ã•ã›ãªã„
+  ifs.unsetf(ios::skipws);                       // ƒuƒ‰ƒ“ƒN‚ğƒXƒLƒbƒv‚³‚¹‚È‚¢
 
-  string texpath;                                // ãƒ†ã‚¯ã‚¹ãƒãƒ£æ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹
+  string texpath;                                // ƒeƒNƒXƒ`ƒƒŠi”[ƒfƒBƒŒƒNƒgƒŠƒpƒX
 
-  // mtlãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã¿
+  // mtlƒtƒ@ƒCƒ‹“Ç‚İ
   while(!ifs.eof())
   {
-    // 1ãƒ¬ã‚³ãƒ¼ãƒ‰èª­è¾¼ã¿
+    // 1ƒŒƒR[ƒh“Ç‚İ
     ifs.getline(line_buff, 255 - 1);
     token_cnt = 0;
 
-    // å…ˆé ­ãŒã€Œ#ã€ã§ã‚ã‚‹å ´åˆ
+    // æ“ª‚ªu#v‚Å‚ ‚éê‡
     if(line_buff[0] == '#')
     {
-      ;                // ã‚¹ã‚­ãƒƒãƒ—
+      ;                // ƒXƒLƒbƒv
     }
-    // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©å
+    // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼
     else if(psrc = strstr(line_buff, "newmtl"))
     {
-      // 1å›ç›®ã®å‡¦ç†ã§ã‚ã‚‹å ´åˆ
+      // 1‰ñ–Ú‚Ìˆ—‚Å‚ ‚éê‡
       if(!newflg)
       {
         newflg = true;
       }
-      // ä¸Šè¨˜ä»¥å¤–ã§ã‚ã‚‹å ´åˆ
+      // ã‹LˆÈŠO‚Å‚ ‚éê‡
       else
       {
-        // mtlå®šç¾©ã«è¿½åŠ 
+        // mtl’è‹`‚É’Ç‰Á
         v_mtl.push_back(*pst);
-        // é ˜åŸŸé–‹æ”¾
+        // —ÌˆæŠJ•ú
         delete pst;
       }
       pst = new St_uo_mtl_data;
       pst->init();
 
       strcpy(bufftemp, (psrc + 7));
-      pst->mtlnm = bufftemp;                     // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©åè¨­å®š
-      pst->mtlfilenm = mtlfnm;                   // ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®š
+      pst->mtlnm = bufftemp;                     // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼İ’è
+      pst->mtlfilenm = mtlfnm;                   // ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼‚ğİ’è
     }
-    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°
+    // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO
     else if(psrc = strstr(line_buff, "map_Kd"))
     {
-      pst->isTexture = true;                     // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ON
+      pst->isTexture = true;                     // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒOON
 
-      texpath = mtldir;                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-      texpath.append(psrc + 7);                  // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-      pst->texturefnm = texpath;                 // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«åè¨­å®š
+      texpath = mtldir;                          // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+      texpath.append(psrc + 7);                  // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+      pst->texturefnm = texpath;                 // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼İ’è
 
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£IDã¯ãƒ­ãƒ¼ãƒ‰æ™‚ã«ãƒãƒƒãƒ•ã‚¡ãƒ—ãƒ¼ãƒ«ç™»éŒ²ã§è¨­å®šã™ã‚‹
+      // ƒeƒNƒXƒ`ƒƒID‚Íƒ[ƒh‚Éƒoƒbƒtƒ@ƒv[ƒ‹“o˜^‚Åİ’è‚·‚é
 
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ãƒ­ãƒ¼ãƒ‰
+      // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹ƒ[ƒh
       if(!loadTexture(pst))
       {
         return false;
       }
     }
 
-    // ç’°å¢ƒ(ã‚¹ãƒ•ã‚£ã‚¢)ãƒãƒƒãƒ”ãƒ³ã‚°
+    // ŠÂ‹«(ƒXƒtƒBƒA)ƒ}ƒbƒsƒ“ƒO
     else if(psrc = strstr(line_buff, "map_Ka"))
     {
       pst->isSphereTexture = true;
 
-      texpath = mtldir;                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-      texpath.append(psrc + 7);                  // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-      pst->texturefnm = texpath;                 // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«åè¨­å®š
+      texpath = mtldir;                          // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+      texpath.append(psrc + 7);                  // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+      pst->texturefnm = texpath;                 // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼İ’è
 
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£IDã¯ãƒ­ãƒ¼ãƒ‰æ™‚ã«ãƒãƒƒãƒ•ã‚¡ãƒ—ãƒ¼ãƒ«ç™»éŒ²ã§è¨­å®šã™ã‚‹
+      // ƒeƒNƒXƒ`ƒƒID‚Íƒ[ƒh‚Éƒoƒbƒtƒ@ƒv[ƒ‹“o˜^‚Åİ’è‚·‚é
 
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ãƒ­ãƒ¼ãƒ‰
+      // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹ƒ[ƒh
       loadSphereTexture(pst);
     }
-    // ãƒªãƒ•ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³(ã‚­ãƒ¥ãƒ¼ãƒ–)ãƒãƒƒãƒ”ãƒ³ã‚°
+    // ƒŠƒtƒŒƒNƒVƒ‡ƒ“(ƒLƒ…[ƒu)ƒ}ƒbƒsƒ“ƒO
     else if(psrc = strstr(line_buff, "refl"))
     {
-      texpath.clear();                           // ãƒ†ã‚¯ã‚¹ãƒãƒ£æ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹ã®åˆæœŸåŒ–
-      // 6ã¤ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¨­å®š
+      texpath.clear();                           // ƒeƒNƒXƒ`ƒƒŠi”[ƒfƒBƒŒƒNƒgƒŠƒpƒX‚Ì‰Šú‰»
+      // 6‚Â‚ÌƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼‚ğİ’è
       if(psrc = strstr(line_buff, "cube_top"))
       {
-        texpath = mtldir;                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-        texpath.append(psrc + 9);                // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-        pst->v_texturefnm.push_back(texpath);    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(top)ã‚’è¨­å®š
-        pst->textureCnt++;                       // èª­è¾¼ã¿æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°+1
+        texpath = mtldir;                        // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+        texpath.append(psrc + 9);                // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+        pst->v_texturefnm.push_back(texpath);    // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(top)‚ğİ’è
+        pst->textureCnt++;                       // “Ç‚İÏ‚İƒeƒNƒXƒ`ƒƒ”+1
       }
       else if(psrc = strstr(line_buff, "cube_bottom"))
       {
-        texpath = mtldir;                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-        texpath.append(psrc + 12);               // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-        pst->v_texturefnm.push_back(texpath);    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(bottom)ã‚’è¨­å®š
-        pst->textureCnt++;                       // èª­è¾¼ã¿æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°+1
+        texpath = mtldir;                        // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+        texpath.append(psrc + 12);               // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+        pst->v_texturefnm.push_back(texpath);    // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(bottom)‚ğİ’è
+        pst->textureCnt++;                       // “Ç‚İÏ‚İƒeƒNƒXƒ`ƒƒ”+1
       }
       else if(psrc = strstr(line_buff, "cube_front"))
       {
-        texpath = mtldir;                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-        texpath.append(psrc + 11);               // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-        pst->v_texturefnm.push_back(texpath);    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(front)ã‚’è¨­å®š
-        pst->textureCnt++;                       // èª­è¾¼ã¿æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°+1
+        texpath = mtldir;                        // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+        texpath.append(psrc + 11);               // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+        pst->v_texturefnm.push_back(texpath);    // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(front)‚ğİ’è
+        pst->textureCnt++;                       // “Ç‚İÏ‚İƒeƒNƒXƒ`ƒƒ”+1
       }
       else if(psrc = strstr(line_buff, "cube_back"))
       {
-        texpath = mtldir;                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-        texpath.append(psrc + 10);               // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-        pst->v_texturefnm.push_back(texpath);    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(back)ã‚’è¨­å®š
-        pst->textureCnt++;                       // èª­è¾¼ã¿æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°+1
+        texpath = mtldir;                        // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+        texpath.append(psrc + 10);               // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+        pst->v_texturefnm.push_back(texpath);    // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(back)‚ğİ’è
+        pst->textureCnt++;                       // “Ç‚İÏ‚İƒeƒNƒXƒ`ƒƒ”+1
       }
       else if(psrc = strstr(line_buff, "cube_left"))
       {
-        texpath = mtldir;                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-        texpath.append(psrc + 10);               // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-        pst->v_texturefnm.push_back(texpath);    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(left)ã‚’è¨­å®š
-        pst->textureCnt++;                       // èª­è¾¼ã¿æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°+1
+        texpath = mtldir;                        // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+        texpath.append(psrc + 10);               // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+        pst->v_texturefnm.push_back(texpath);    // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(left)‚ğİ’è
+        pst->textureCnt++;                       // “Ç‚İÏ‚İƒeƒNƒXƒ`ƒƒ”+1
       }
       else if(psrc = strstr(line_buff, "cube_right"))
       {
-        texpath = mtldir;                        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ‘ã‚¹ã‚’è¨­å®š
-        texpath.append(psrc + 11);               // ãƒ†ã‚¯ã‚¹ãƒãƒ£åã‚’è¿½åŠ 
-        pst->v_texturefnm.push_back(texpath);    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«å(right)ã‚’è¨­å®š
-        pst->textureCnt++;                       // èª­è¾¼ã¿æ¸ˆã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°+1
+        texpath = mtldir;                        // ƒeƒNƒXƒ`ƒƒƒpƒX‚ğİ’è
+        texpath.append(psrc + 11);               // ƒeƒNƒXƒ`ƒƒ–¼‚ğ’Ç‰Á
+        pst->v_texturefnm.push_back(texpath);    // ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼(right)‚ğİ’è
+        pst->textureCnt++;                       // “Ç‚İÏ‚İƒeƒNƒXƒ`ƒƒ”+1
       }
       else
       {
-        cout << "æœªçŸ¥ã® refl ãŒå®šç¾©ã•ã‚Œã¾ã—ãŸã€‚ rec:" << line_buff << endl;
+        cout << "–¢’m‚Ì refl ‚ª’è‹`‚³‚ê‚Ü‚µ‚½B rec:" << line_buff << endl;
         return false;
       }
 
-      // 6ã¤ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ãŒæƒã£ãŸå ´åˆ
+      // 6‚Â‚ÌƒeƒNƒXƒ`ƒƒî•ñ‚ª‘µ‚Á‚½ê‡
       if(pst->textureCnt == 6)
       {
         pst->isCubeTexture = true;
-        // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èª­ã¿ã€glTexImage2Dã«è¨­å®š
+        // ƒeƒNƒXƒ`ƒƒ‚ğ“Ç‚İAglTexImage2D‚Éİ’è
         loadCubeTexture(pst);
       }
     }
 
-    // ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³
+    // ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“
     else if(psrc = strstr(line_buff, "illum"))
     {
       strcpy(bufftemp, (psrc + 6));
       pst->isIllumination = true;
-      pst->illumination = atoi(bufftemp);        // ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³å€¤è¨­å®š
+      pst->illumination = atoi(bufftemp);        // ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“’lİ’è
     }
-    // ç’°å¢ƒå…‰
+    // ŠÂ‹«Œõ
     else if(psrc = strstr(line_buff, "Ka"))
     {
       pst->isAmbient = true;
       token = strtok((psrc + 3), " ");
       while(token != NULL)
       {
-        // ç’°å¢ƒå…‰å€¤è¨­å®š(x, y, z)
+        // ŠÂ‹«Œõ’lİ’è(x, y, z)
         pst->ambient[token_cnt] = atof(token);
         token = strtok(NULL, " ");
         token_cnt++;
       }
     }
-    // æ‹¡æ•£å…‰
+    // ŠgUŒõ
     else if(psrc = strstr(line_buff, "Kd"))
     {
       pst->isDiffuse = true;
       token = strtok((psrc + 3), " ");
       while(token != NULL)
       {
-        // æ‹¡æ•£å…‰å€¤è¨­å®š(x, y, z)
+        // ŠgUŒõ’lİ’è(x, y, z)
         pst->diffuse[token_cnt] = atof(token);
         token = strtok(NULL, " ");
         token_cnt++;
       }
     }
-    // é¡é¢å…‰
+    // ‹¾–ÊŒõ
     else if(psrc = strstr(line_buff, "Ks"))
     {
-      pst->isSpecular = true;                    // é¡é¢å…‰æŒ‡å®šã‚ã‚Šã«è¨­å®š
+      pst->isSpecular = true;                    // ‹¾–ÊŒõw’è‚ ‚è‚Éİ’è
       token = strtok((psrc + 3), " ");
 
-      // ãƒˆãƒ¼ã‚¯ãƒ³ãŒãªããªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
+      // ƒg[ƒNƒ“‚ª‚È‚­‚È‚é‚Ü‚Åƒ‹[ƒv
       while(token != NULL)
       {
-        // é¡é¢å…‰å€¤è¨­å®š(x, y, z)
+        // ‹¾–ÊŒõ’lİ’è(x, y, z)
         pst->specular[token_cnt] = atof(token);
         token = strtok(NULL, " ");
         token_cnt++;
       }
     }
-    // é¡é¢ä¿‚æ•°
+    // ‹¾–ÊŒW”
     else if(psrc = strstr(line_buff, "Ns"))
     {
       pst->isShininess = true;
       strcpy(bufftemp, (psrc + 3));
-      pst->shininess = atoi(bufftemp);           // é¡é¢ä¿‚æ•°è¨­å®š
+      pst->shininess = atoi(bufftemp);           // ‹¾–ÊŒW”İ’è
     }
-    // ã‚¢ãƒ«ãƒ•ã‚¡å€¤(é€æ˜åº¦å˜ä¸€æŒ‡å®š)
+    // ƒAƒ‹ƒtƒ@’l(“§–¾“x’Pˆêw’è)
     else if(line_buff[0] == 'd')
     {
-      // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®ã‚³ãƒ”ãƒ¼
+      // ƒAƒ‹ƒtƒ@’l‚ÌƒRƒs[
       strcpy(bufftemp, &line_buff[2]);
 
-      // æŒ‡å®šå€¤ãŒ1.0fã‚ˆã‚Šå¤§ãã„å ´åˆ
+      // w’è’l‚ª1.0f‚æ‚è‘å‚«‚¢ê‡
       if(1.0f < atof(bufftemp))
       {
         pst->isTransparency = true;
-        pst->transparency = 1.0f;                // ã‚¢ãƒ«ãƒ•ã‚¡å€¤æœ€å¤§å€¤ã‚’è¨­å®š
+        pst->transparency = 1.0f;                // ƒAƒ‹ƒtƒ@’lÅ‘å’l‚ğİ’è
       }
-      // æŒ‡å®šå€¤ãŒ0.0fã‚ˆã‚Šå°ã•ã„å ´åˆ
+      // w’è’l‚ª0.0f‚æ‚è¬‚³‚¢ê‡
       else if(0.0f > atof(bufftemp))
       {
         pst->isTransparency = true;
-        pst->transparency = 0.0f;                // ã‚¢ãƒ«ãƒ•ã‚¡å€¤æœ€å°å€¤ã‚’è¨­å®š
+        pst->transparency = 0.0f;                // ƒAƒ‹ƒtƒ@’lÅ¬’l‚ğİ’è
       }
-      // ä¸Šè¨˜ä»¥å¤–ã®å ´åˆ
+      // ã‹LˆÈŠO‚Ìê‡
       else
       {
         pst->isTransparency = true;
-        pst->transparency = atof(bufftemp);      // ã‚¢ãƒ«ãƒ•ã‚¡å€¤è¨­å®š
+        pst->transparency = atof(bufftemp);      // ƒAƒ‹ƒtƒ@’lİ’è
       }
     }
 
-    // ã‚¢ãƒ«ãƒ•ã‚¡å€¤(é€æ˜åº¦RGBæŒ‡å®š)
+    // ƒAƒ‹ƒtƒ@’l(“§–¾“xRGBw’è)
     else if(psrc = strstr(line_buff, "Tf"))
     {
       float tmpTransparency = 0.0f;
@@ -282,10 +282,10 @@ bool uMtl::loadMtl(string mtlfnm)
 
       tmpToken = strtok((psrc + 3), " ");
 
-      // ãƒˆãƒ¼ã‚¯ãƒ³ãŒãªããªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
+      // ƒg[ƒNƒ“‚ª‚È‚­‚È‚é‚Ü‚Åƒ‹[ƒv
       while(tmpToken != NULL)
       {
-        // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’è¶³ã—è¾¼ã‚€
+        // ƒAƒ‹ƒtƒ@’l‚ğ‘«‚µ‚Ş
         tmpTransparency += atof(tmpToken);
 
         tmpToken = strtok(NULL, " ");
@@ -293,57 +293,57 @@ bool uMtl::loadMtl(string mtlfnm)
       }
       pst->isTransparency = true;
 
-      // å–å¾—ã—ãŸå€¤ã®å¹³å‡å€¤ã‚’è¨­å®š
+      // æ“¾‚µ‚½’l‚Ì•½‹Ï’l‚ğİ’è
       tmpTransparency = tmpTransparency / tmpTokenCnt;
       
-      // å€¤ãŒ1ã‚ˆã‚Šå¤§ãã„å ´åˆ
+      // ’l‚ª1‚æ‚è‘å‚«‚¢ê‡
       if(1.0f < tmpTransparency)
       {
         tmpTransparency = 1.0f;
       }
-      // å€¤ãŒ0ã‚ˆã‚Šå°ã•ã„å ´åˆ
+      // ’l‚ª0‚æ‚è¬‚³‚¢ê‡
       else if(1.0 > tmpTransparency)
       {
         tmpTransparency = 0.0f;
       }
 
-      // å€¤ã®è¨­å®š
+      // ’l‚Ìİ’è
       pst->transparency = tmpTransparency;
     }
 
-    // ä¸Šè¨˜ä»¥å¤–
+    // ã‹LˆÈŠO
     else
     {
-      ;  // ã‚¹ã‚­ãƒƒãƒ—
+      ;  // ƒXƒLƒbƒv
     }
   }
   ifs.close();
 
-  // mtlå®šç¾©ã«è¿½åŠ 
+  // mtl’è‹`‚É’Ç‰Á
   v_mtl.push_back(*pst);
 
-  // é ˜åŸŸé–‹æ”¾
+  // —ÌˆæŠJ•ú
   delete pst;
 
   return true;
 }
 
 //-----------------------------------------------------------------//
-// å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ã‚’è¡Œã„ã¾ã™ã€‚                                  //
+// “à•”ƒf[ƒ^‚Ì‰Šú‰»‚ğs‚¢‚Ü‚·B                                  //
 //-----------------------------------------------------------------//
 void uMtl::clear(void)
 {
-  texturebind_flg = false;                       // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
-  spherebind_flg = false;                        // ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
-  cubebind_flg = false;                          // ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ãƒã‚¤ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°åˆæœŸåŒ–
+  texturebind_flg = false;                       // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒOƒoƒCƒ“ƒhƒtƒ‰ƒO‰Šú‰»
+  spherebind_flg = false;                        // ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒOƒoƒCƒ“ƒhƒtƒ‰ƒO‰Šú‰»
+  cubebind_flg = false;                          // ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒOƒoƒCƒ“ƒhƒtƒ‰ƒO‰Šú‰»
 
-  // mtlå®šç¾©ä¿æŒé ˜åŸŸã‚¯ãƒªã‚¢
+  // mtl’è‹`•Û—ÌˆæƒNƒŠƒA
   v_mtl.clear();
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£å(ID)ä¿æŒé ˜åŸŸã‚¯ãƒªã‚¢
+  // ƒeƒNƒXƒ`ƒƒ–¼(ID)•Û—ÌˆæƒNƒŠƒA
   v_tNo.clear();
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡ä¿æŒé ˜åŸŸã‚¯ãƒªã‚¢
+  // ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@•Û—ÌˆæƒNƒŠƒA
   clearTexturePool();
 }
 
@@ -386,13 +386,13 @@ int uMtl::registerTextureBuffer(const string& texturefnm)
   ret = readPngImage(texturefnm.c_str(), &width, &height, &depth, &bits, &image);
   if(ret == 1)
   {
-    cout << "ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ file = "
+    cout << "ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“ƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B file = "
          << texturefnm.c_str() << endl;
     return -1;
   }
   else if(ret == 2)
   {
-    cout << "ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­è¾¼ã¿ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ file = "
+    cout << "ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹‚Ì“Ç‚İƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B file = "
          << texturefnm.c_str() << endl;
     return -1;
   }
@@ -404,7 +404,7 @@ int uMtl::registerTextureBuffer(const string& texturefnm)
   texPoolData.height = height;
   texPoolData.channels = depth;
   texPoolData.bits = bits;
-  // readPngImage() ã® depth ã¯å®Ÿãƒ‡ãƒ¼ã‚¿ä¸Šã®1pixelã‚ãŸã‚Šãƒã‚¤ãƒˆæ•°
+  // readPngImage() ‚Ì depth ‚ÍÀƒf[ƒ^ã‚Ì1pixel‚ ‚½‚èƒoƒCƒg”
   texPoolData.imageSize = width * height * depth;
   texPoolData.image = image;
 
@@ -413,54 +413,54 @@ int uMtl::registerTextureBuffer(const string& texturefnm)
 }
 
 //-----------------------------------------------------------------//
-// å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®å‡ºåŠ›ã‚’è¡Œã„ã¾ã™ã€‚                                    //
+// “à•”ƒf[ƒ^‚Ìo—Í‚ğs‚¢‚Ü‚·B                                    //
 //-----------------------------------------------------------------//
 void uMtl::show(const St_uo_mtl_data &val, ostream &os)
 {
-  os << "MTLåï¼š" << val.mtlnm.c_str() << endl;
-  os << "ç’°å¢ƒå…‰Rï¼š" << val.ambient[0] << endl;
-  os << "ç’°å¢ƒå…‰Gï¼š" << val.ambient[1] << endl;
-  os << "ç’°å¢ƒå…‰Bï¼š" << val.ambient[2] << endl;
+  os << "MTL–¼F" << val.mtlnm.c_str() << endl;
+  os << "ŠÂ‹«ŒõRF" << val.ambient[0] << endl;
+  os << "ŠÂ‹«ŒõGF" << val.ambient[1] << endl;
+  os << "ŠÂ‹«ŒõBF" << val.ambient[2] << endl;
 
-  os << "æ‹¡æ•£å…‰Rï¼š" << val.diffuse[0] << endl;
-  os << "æ‹¡æ•£å…‰Gï¼š" << val.diffuse[1] << endl;
-  os << "æ‹¡æ•£å…‰Bï¼š" << val.diffuse[2] << endl;
+  os << "ŠgUŒõRF" << val.diffuse[0] << endl;
+  os << "ŠgUŒõGF" << val.diffuse[1] << endl;
+  os << "ŠgUŒõBF" << val.diffuse[2] << endl;
 
-  os << "é¡é¢å…‰Rï¼š" << val.specular[0] << endl;
-  os << "é¡é¢å…‰Gï¼š" << val.specular[1] << endl;
-  os << "é¡é¢å…‰Bï¼š" << val.specular[2] << endl;
+  os << "‹¾–ÊŒõRF" << val.specular[0] << endl;
+  os << "‹¾–ÊŒõGF" << val.specular[1] << endl;
+  os << "‹¾–ÊŒõBF" << val.specular[2] << endl;
 
-  os << "ã‚¢ãƒ«ãƒ•ã‚¡å€¤ï¼š" << val.transparency << endl;
-  os << "é¡é¢ä¿‚æ•°ï¼š" << val.shininess << endl;
-  os << "ã‚¤ãƒ«ãƒŸãƒãƒ¼ã‚·ãƒ§ãƒ³ï¼š" << val.illumination << endl;
-  os << "ãƒ†ã‚¯ã‚¹ãƒãƒ£Noï¼š" << val.tNo << endl;
-  os << "ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«åï¼š" << val.texturefnm.c_str() << endl;
+  os << "ƒAƒ‹ƒtƒ@’lF" << val.transparency << endl;
+  os << "‹¾–ÊŒW”F" << val.shininess << endl;
+  os << "ƒCƒ‹ƒ~ƒl[ƒVƒ‡ƒ“F" << val.illumination << endl;
+  os << "ƒeƒNƒXƒ`ƒƒNoF" << val.tNo << endl;
+  os << "ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹–¼F" << val.texturefnm.c_str() << endl;
 
-  os << "ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°:";
+  os << "ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO:";
   if(val.isSphereTexture)
   {
-    os << "ã‚ã‚Š";
+    os << "‚ ‚è";
   }
   else
   {
-    os << "ãªã—";
+    os << "‚È‚µ";
   }
   os << endl;
 
-  os << "ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°:";
+  os << "ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO:";
   if(val.isCubeTexture)
   {
-    os << "ã‚ã‚Š";
+    os << "‚ ‚è";
   }
   else
   {
-    os << "ãªã—";
+    os << "‚È‚µ";
   }
   os << endl;
 }
 
 //-----------------------------------------------------------------//
-// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚                                  //
+// ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B                                  //
 //-----------------------------------------------------------------//
 bool uMtl::loadTexture(St_uo_mtl_data *pval)
 {
@@ -477,11 +477,11 @@ bool uMtl::loadTexture(St_uo_mtl_data *pval)
   pval->textureNo = textureID;
   pval->tNo = textureID;
 
-  //glEnable(GL_TEXTURE_2D);                       // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°æœ‰åŠ¹åŒ–
+  //glEnable(GL_TEXTURE_2D);                       // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO—LŒø‰»
 
-  //glBindTexture(GL_TEXTURE_2D, pval->tNo);       // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ãƒ‰
+  //glBindTexture(GL_TEXTURE_2D, pval->tNo);       // ƒeƒNƒXƒ`ƒƒ‚ÌƒoƒCƒ“ƒh
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ç’°å¢ƒ
+  // ƒeƒNƒXƒ`ƒƒŠÂ‹«
   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -489,13 +489,13 @@ bool uMtl::loadTexture(St_uo_mtl_data *pval)
   //glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
   //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, fimage);
 
-  //glDisable(GL_TEXTURE_2D);                      // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ”ãƒ³ã‚°ç„¡åŠ¹åŒ–
+  //glDisable(GL_TEXTURE_2D);                      // ƒeƒNƒXƒ`ƒƒƒ}ƒbƒsƒ“ƒO–³Œø‰»
 
   return true;
 }
 
 //-----------------------------------------------------------------//
-// ã‚¹ãƒ•ã‚£ã‚¢ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚              //
+// ƒXƒtƒBƒAƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B              //
 //-----------------------------------------------------------------//
 bool uMtl::loadSphereTexture(St_uo_mtl_data *pval)
 {
@@ -512,14 +512,14 @@ bool uMtl::loadSphereTexture(St_uo_mtl_data *pval)
   pval->sphereTextureNo = textureID;
   pval->tNo = textureID;
 
-//  glBindTexture(GL_TEXTURE_2D, pval->tNo);       // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ãƒ‰
+//  glBindTexture(GL_TEXTURE_2D, pval->tNo);       // ƒeƒNƒXƒ`ƒƒ‚ÌƒoƒCƒ“ƒh
 //#ifdef _WIN32
 //  glActiveTexture(GL_TEXTURE1);
 //#endif
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã¯ãƒã‚¤ãƒˆå˜ä½ã«è©°ã‚è¾¼ã¾ã‚Œã¦ã„ã‚‹
+  // ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚ÍƒoƒCƒg’PˆÊ‚É‹l‚ß‚Ü‚ê‚Ä‚¢‚é
   //glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å‰²ã‚Šå½“ã¦
+  // ƒeƒNƒXƒ`ƒƒ‚ÌŠ„‚è“–‚Ä
   //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0
   //      ,GL_RGB, GL_UNSIGNED_BYTE, fimage);
 //#ifdef _WIN32
@@ -530,7 +530,7 @@ bool uMtl::loadSphereTexture(St_uo_mtl_data *pval)
 }
 
 //-----------------------------------------------------------------//
-// ã‚­ãƒ¥ãƒ¼ãƒ–ãƒãƒƒãƒ”ãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰ã‚’è¡Œã„ã¾ã™ã€‚              //
+// ƒLƒ…[ƒuƒ}ƒbƒsƒ“ƒO—pƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh‚ğs‚¢‚Ü‚·B              //
 //-----------------------------------------------------------------//
 bool uMtl::loadCubeTexture(St_uo_mtl_data *pval)
 {
@@ -539,15 +539,15 @@ bool uMtl::loadCubeTexture(St_uo_mtl_data *pval)
     return false;
   }
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆå
+  // ƒeƒNƒXƒ`ƒƒ‚Ìƒ^[ƒQƒbƒg–¼
   //int target[] =
   //{
-  //    GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,  // ä¸‹
-  //    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,  // è£
-  //    GL_TEXTURE_CUBE_MAP_POSITIVE_X,  // å³
-  //    GL_TEXTURE_CUBE_MAP_POSITIVE_Z,  // å‰
-  //    GL_TEXTURE_CUBE_MAP_NEGATIVE_X,  // å·¦
-  //    GL_TEXTURE_CUBE_MAP_POSITIVE_Y   // ä¸Š
+  //    GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,  // ‰º
+  //    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,  // — 
+  //    GL_TEXTURE_CUBE_MAP_POSITIVE_X,  // ‰E
+  //    GL_TEXTURE_CUBE_MAP_POSITIVE_Z,  // ‘O
+  //    GL_TEXTURE_CUBE_MAP_NEGATIVE_X,  // ¶
+  //    GL_TEXTURE_CUBE_MAP_POSITIVE_Y   // ã
   //};
 
 //  glBindTexture(GL_TEXTURE_CUBE_MAP, pval->tNo);
@@ -556,7 +556,7 @@ bool uMtl::loadCubeTexture(St_uo_mtl_data *pval)
 //  glActiveTexture(GL_TEXTURE2);
 //#endif
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£æ•°åˆ†(6ã¤)ãƒ«ãƒ¼ãƒ—
+  // ƒeƒNƒXƒ`ƒƒ”•ª(6‚Â)ƒ‹[ƒv
   for(int i = 0; i < pval->textureCnt; i++)
   {
     int textureID = registerTextureBuffer(pval->v_texturefnm[pval->textureIndex[i]]);
@@ -570,10 +570,10 @@ bool uMtl::loadCubeTexture(St_uo_mtl_data *pval)
       pval->tNo = textureID;
     }
     pval->cubeTextureNo[i] = textureID;
-    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã¯ãƒã‚¤ãƒˆå˜ä½ã«è©°ã‚è¾¼ã¾ã‚Œã¦ã„ã‚‹
+    // ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚ÍƒoƒCƒg’PˆÊ‚É‹l‚ß‚Ü‚ê‚Ä‚¢‚é
     //glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å‰²ã‚Šå½“ã¦
+    // ƒeƒNƒXƒ`ƒƒ‚ÌŠ„‚è“–‚Ä
     //glTexImage2D(target[i], 0, GL_RGB, width, height, 0
     //      ,GL_RGB, GL_UNSIGNED_BYTE, fimage);
 

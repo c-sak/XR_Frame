@@ -1,4 +1,4 @@
-ï»¿#include "calc.h"
+#include "calc.h"
 #include "ezGyro/Com.h"
 #include "stdio.h"
 
@@ -15,10 +15,10 @@ static void CopeSerialData2(unsigned char* buf, int len, vector_t* acc, euler_t*
 	unsigned short data[10]; /////////
 
 	int i = 0;
-	if (buf[0] != 0xff) {//å…ˆé ­ãŒ255ã§ãªã‹ã£ãŸã‚‰
-		//å…ˆé ­ãŒãšã‚Œã¦ã„ã‚‹ã®ã§ã€ã„ãã¤ã‹ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿é£›ã°ã™
+	if (buf[0] != 0xff) {//æ“ª‚ª255‚Å‚È‚©‚Á‚½‚ç
+		//æ“ª‚ª‚¸‚ê‚Ä‚¢‚é‚Ì‚ÅA‚¢‚­‚Â‚©ƒf[ƒ^‚ğ“Ç‚İ”ò‚Î‚·
 
-		while (buf[i] != 0xff) {//255ã¾ã§é£›ã°ã™
+		while (buf[i] != 0xff) {//255‚Ü‚Å”ò‚Î‚·
 			i++;
 			if (i > len) return;
 		}
@@ -26,7 +26,7 @@ static void CopeSerialData2(unsigned char* buf, int len, vector_t* acc, euler_t*
 	i++;
 	unsigned char* p = &buf[i]; ////////
 
-	//buf[i]ã‚ˆã‚Šå¾Œã®æ•°ã‚’bufbuf[0]ã®å¾Œã«ä»£å…¥ã™ã‚‹
+	//buf[i]‚æ‚èŒã‚Ì”‚ğbufbuf[0]‚ÌŒã‚É‘ã“ü‚·‚é
 	for (int j = 0; j < 10; j++) {
 		data[j] = (*p << 8) | *p;
 		p += 2;
@@ -48,7 +48,7 @@ static void CopeSerialData2(unsigned char* buf, int len, vector_t* acc, euler_t*
 
 	temp = ((float)data[9] / K - 1.0) * 100;
 
-	//Sleep(0); //// å‰Šé™¤ã—ã¦ã‚ˆã„
+	//Sleep(0); //// íœ‚µ‚Ä‚æ‚¢
 	/////////////////////////////////////////////////////////
 }
 //-------------------------------------------------------------------------------------------
@@ -63,10 +63,10 @@ static int CopeSerialData3(unsigned char* buf, int len, vector_t* acc, euler_t* 
 	unsigned short data[10]; /////////
 
 	int i = 0;
-	if (buf[0] != 0xff) {//å…ˆé ­ãŒ255ã§ãªã‹ã£ãŸã‚‰
-		//å…ˆé ­ãŒãšã‚Œã¦ã„ã‚‹ã®ã§ã€ã„ãã¤ã‹ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿é£›ã°ã™
+	if (buf[0] != 0xff) {//æ“ª‚ª255‚Å‚È‚©‚Á‚½‚ç
+		//æ“ª‚ª‚¸‚ê‚Ä‚¢‚é‚Ì‚ÅA‚¢‚­‚Â‚©ƒf[ƒ^‚ğ“Ç‚İ”ò‚Î‚·
 
-		while (buf[i] != 0xff) {//255ã¾ã§é£›ã°ã™
+		while (buf[i] != 0xff) {//255‚Ü‚Å”ò‚Î‚·
 			i++;
 			if (i > len) return 0; /////
 		}
@@ -76,7 +76,7 @@ static int CopeSerialData3(unsigned char* buf, int len, vector_t* acc, euler_t* 
 	i++; ////////
 	unsigned char* p = &buf[i];
 
-	//buf[i]ã‚ˆã‚Šå¾Œã®æ•°ã‚’bufbuf[0]ã®å¾Œã«ä»£å…¥ã™ã‚‹
+	//buf[i]‚æ‚èŒã‚Ì”‚ğbufbuf[0]‚ÌŒã‚É‘ã“ü‚·‚é
 	for (int j = 0; j < 10; j++) {
 		data[j] = (*p << 8) | *p;
 		p += 2;
@@ -98,7 +98,7 @@ static int CopeSerialData3(unsigned char* buf, int len, vector_t* acc, euler_t* 
 
 	temp = ((float)data[9] / K - 1.0) * 100;
 
-	//Sleep(0); //// å‰Šé™¤ã—ã¦ã‚ˆã„
+	//Sleep(0); //// íœ‚µ‚Ä‚æ‚¢
 	/////////////////////////////////////////////////////////
 
 	i += 20; ////////

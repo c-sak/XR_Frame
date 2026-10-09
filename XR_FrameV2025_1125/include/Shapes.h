@@ -1,4 +1,4 @@
-ï»¿//void makeGlobe(float radius, int slices, int stacks, char *texfile);
+//void makeGlobe(float radius, int slices, int stacks, char *texfile);
 /*
 typedef struct {
 	float x, y, z;
@@ -10,15 +10,15 @@ typedef struct{
 	float nx, ny, nz;
 } VertexT;
 
-#define _STACKS 8   //ç·¯åº¦æ–¹å‘ã®åˆ†å‰²
-#define _SLICES 16  //çµŒåº¦æ–¹å‘ã®åˆ†å‰²
+#define _STACKS 8   //ˆÜ“x•ûŒü‚Ì•ªŠ„
+#define _SLICES 16  //Œo“x•ûŒü‚Ì•ªŠ„
 
 typedef struct{
 
-	float eq_d; //èµ¤é“ç›´å¾„
-	float pl_d; //æ¥µç›´å¾„
+	float eq_d; //Ô“¹’¼Œa
+	float pl_d; //‹É’¼Œa
 
-    VertexT globev[ _STACKS + 1][ _SLICES ];  //_stacks+1ã¯è¦ç´ æ•°ã ã‹ã‚‰ä¸€ã¤å¤šãç®±ã‚’ä½œã‚‹
+    VertexT globev[ _STACKS + 1][ _SLICES ];  //_stacks+1‚Í—v‘f”‚¾‚©‚çˆê‚Â‘½‚­” ‚ğì‚é
 
 	VertexT *v;
 
@@ -61,6 +61,6 @@ GlobeT *makeGlobe( float eq_d, float pl_d = 0.0 );
 void drawGlobe( GlobeT *globe );
 
 void drawGlobeZoom( GlobeT *globe, float lt, float lg, float range, float zoom );
-// ç·¯åº¦çµŒåº¦lat/longã‚’ä¸­å¿ƒã«ã€ç·¯åº¦æ–¹å‘rangeåº¦ã®ç¯„å›²ã‚’zoomå€æ‹¡å¤§è¡¨ç¤ºã™ã‚‹
+// ˆÜ“xŒo“xlat/long‚ğ’†S‚ÉAˆÜ“x•ûŒürange“x‚Ì”ÍˆÍ‚ğzoom”{Šg‘å•\¦‚·‚é
 
 void drawPartialGlobe( float lt, float lg, float zoom );

@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 /*########################################################################
  * ezMovie.h
  *######################################################################*/
@@ -26,7 +26,7 @@ public:
 		strcpy(_path, path);
 		_n_frames = n;
 		_fps = fps;
-		_curr = 1; // â—† 0
+		_curr = 1; // Ÿ 0
 		_play = false;
 		_pause = false;
 		_time = 0;
@@ -61,7 +61,7 @@ public:
 	void stop( void ) {
 		_play = false;
 		_pause = false;
-		_curr = 1; // â—† 0
+		_curr = 1; // Ÿ 0
 		_time = 0;
 		_elapsed = 0; 
 		read();
@@ -81,13 +81,13 @@ public:
 
 	bool update( int t = 0 ) {
 		if( !_play ) return false;
-		if( t == 0 ){ //ã‚³ãƒé€ã‚Šãƒ¢ãƒ¼ãƒ‰
-			if ( _curr < _n_frames ) { // â—† -1
+		if( t == 0 ){ //ƒRƒ}‘—‚èƒ‚[ƒh
+			if ( _curr < _n_frames ) { // Ÿ -1
 				_curr++;
 				read();
 				return true;
 			}
-			else { //æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§åœæ­¢
+			else { //ÅŒã‚ÌƒtƒŒ[ƒ€‚Å’â~
 				stop();
 				return false;
 			}
@@ -96,14 +96,14 @@ public:
 			_elapsed = t - _time;
 			int i = 0.001 * _elapsed * _fps;
 			if( _curr < i ){
-				if( i < _n_frames + 1 ) _curr = i; // â—† +0
+				if( i < _n_frames + 1 ) _curr = i; // Ÿ +0
 				else{
 					if( _repeat ){
 						stop();
 						play( t );
 					}
 					else{
-						_curr = _n_frames; // â—† -1
+						_curr = _n_frames; // Ÿ -1
 						_play = false;
 					}
 				}

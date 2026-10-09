@@ -1,4 +1,4 @@
-ï»¿/******************************************************************************
+/******************************************************************************
  * glut_keyboard.cpp 
  */
 
@@ -11,7 +11,7 @@
 #include "WarpTex.h"
 #include "gyro.h"
 
- //ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
+ //ƒOƒ[ƒoƒ‹•Ï”
 extern WarpTex g_DC, g_DC_right, g_DC_left;
 extern float g_cx;
 extern float g_cy;
@@ -63,7 +63,7 @@ void charKeyDown( unsigned char key, int x, int y )
 	  case 'z':
 		  if( use_gyro ) ResetGyro();
 		  break;
-		//RGBãã‚Œãã‚Œã®æ­ªã¿ç³»æ•°è¨­å®š
+		//RGB‚»‚ê‚¼‚ê‚Ì˜c‚İŒn”İ’è
 	  case 'R':
 		  if( !distortion ) break;
 		  g_kR += 0.00005f;
@@ -124,7 +124,7 @@ void charKeyDown( unsigned char key, int x, int y )
 		  g_DC_left.setCenter(g_cx, g_cy);
 		  g_DC_right.setCenter(-g_cx, g_cy);
 		  break;
-		  //ãƒ‡ãƒãƒƒã‚°è¡¨ç¤ºåˆ‡ã‚Šæ›¿ãˆ
+		  //ƒfƒoƒbƒO•\¦Ø‚è‘Ö‚¦
 	  case 'D':
 	  case 'd':
 		  if( !distortion ) break;

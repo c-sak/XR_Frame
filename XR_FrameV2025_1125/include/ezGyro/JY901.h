@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 #ifndef JY901_h
 #define JY901_h
 /*
@@ -134,7 +134,7 @@ struct HATENA
 	short param[4];
 };
 
-struct PDOP //ç²¾åº¦ä½ä¸‹ç‡
+struct PDOP //¸“x’á‰º—¦
 {
 	short nsat; //number of satellites
 	short pdop; //position dilution of precision
@@ -142,7 +142,7 @@ struct PDOP //ç²¾åº¦ä½ä¸‹ç‡
 	short vdop; //vertical -
 };
 
-struct QUATERN //ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³
+struct QUATERN //ƒNƒH[ƒ^ƒjƒIƒ“
 {
 	short q0;
 	short q1;
@@ -175,7 +175,7 @@ public:
 
     void CopeSerialData(char ucData[],unsigned short usLength );
 
-private: ////è¿½åŠ 
+private: ////’Ç‰Á
 	unsigned short usRxLength;
 	unsigned char chrTemp[2000];
 

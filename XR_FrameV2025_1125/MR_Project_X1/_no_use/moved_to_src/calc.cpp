@@ -1,4 +1,4 @@
-ï»¿//vectorç‰ˆ
+//vector”Å
 #include "platform.h"
 
 #include <math.h>
@@ -112,29 +112,29 @@ void initObj(ObjDataT *obj)
 	setObjWorld(obj);
 }
 
-//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆaã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆbã¸ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹é–¢æ•°
-//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«
+//¥ƒIƒuƒWƒFƒNƒga‚©‚çƒIƒuƒWƒFƒNƒgb‚Ö‚Ì•ûŒüƒxƒNƒgƒ‹‚ğ‹‚ß‚éŠÖ”
+//ƒIƒuƒWƒFƒNƒgŠÔ‚Ì•ûŒüƒxƒNƒgƒ‹
 void DirectionAtoB( ObjDataT *a, ObjDataT *b, vector_t *dir )
 {
 	dir->x = b->pos.x - a->pos.x;
 	dir->y = b->pos.y - a->pos.y;
 	dir->z = b->pos.z - a->pos.z;
 }
-//â–¼ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
-//ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•
+//¥ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ğŒvZ‚·‚éŠÖ”
+//ƒxƒNƒgƒ‹‚Ì‘å‚«‚³
 float VectorNorm( vector_t *v )
 {
 	return sqrtf( v->x * v->x + v->y * v->y + v->z * v->z );
 }
-//â–¼è·é›¢ã‚’æ±‚ã‚ã‚‹é–¢æ•°ï¼ˆã€Œè¡çªåˆ¤å®šã€ã§ä½œã£ãŸé–¢æ•°ã®åˆ¥ãƒãƒ¼ã‚¸ãƒ§ãƒ³ï¼‰
-//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“è·é›¢
+//¥‹——£‚ğ‹‚ß‚éŠÖ”iuÕ“Ë”»’èv‚Åì‚Á‚½ŠÖ”‚Ì•Êƒo[ƒWƒ‡ƒ“j
+//ƒIƒuƒWƒFƒNƒgŠÔ‹——£
 float DistanceAtoB( ObjDataT *a, ObjDataT *b )
 {
 	vector_t v;
  	DirectionAtoB( a, b, &v );
 	return VectorNorm( &v );
 }
-//â–¼æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰æ–¹ä½è§’ã¨ä»°è§’ã‚’æ±‚ã‚ã‚‹é–¢æ•°
+//¥•ûŒüƒxƒNƒgƒ‹‚©‚ç•ûˆÊŠp‚Æ‹ÂŠp‚ğ‹‚ß‚éŠÖ”
 float VectorToPolar( vector_t *v,  euler_t *angle )
 {
 	float d = sqrtf( v->x * v->x + v->z * v->z );
@@ -142,7 +142,7 @@ float VectorToPolar( vector_t *v,  euler_t *angle )
 	angle->yaw = DEGREE * atan2f( - v->x, - v->z );
 	return VectorNorm( v );
 }
-//â–¼æ–¹ä½è§’ã¨ä»°è§’ã‹ã‚‰å˜ä½æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹é–¢æ•°
+//¥•ûˆÊŠp‚Æ‹ÂŠp‚©‚ç’PˆÊ•ûŒüƒxƒNƒgƒ‹‚ğ‹‚ß‚éŠÖ”
 void PolarToVector( euler_t *angle, vector_t *v)
 {
     float rad, l;
@@ -157,7 +157,7 @@ void PolarToVector( euler_t *angle, vector_t *v)
 
 	return;
 }
-//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è§’åº¦ï¼ˆaã‹ã‚‰bã‚’è¦‹è¾¼ã‚€æ–¹ä½è§’ã¨ä»°è§’ï¼‰
+//¥ƒIƒuƒWƒFƒNƒgŠÔ‚ÌŠp“xia‚©‚çb‚ğŒ©‚Ş•ûˆÊŠp‚Æ‹ÂŠpj
 float EulerAtoB( ObjDataT *a, ObjDataT *b, euler_t *angle )
 {
 	vector_t dir;
@@ -165,44 +165,44 @@ float EulerAtoB( ObjDataT *a, ObjDataT *b, euler_t *angle )
 	VectorToPolar( &dir, angle );
 	return VectorNorm( &dir );
 }
-//â–¼å‚™è€ƒï¼šæ§‹é€ ä½“ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å¼•æ•°ã¨ã—ã¦ã„ã‚‹
+//¥”õlF\‘¢‘Ì‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğˆø”‚Æ‚µ‚Ä‚¢‚é
 void MoveObject( ObjDataT *obj )
 {
 	obj->rot.yaw += obj->turn;
 	obj->pos.x -= obj->move * sinf( obj->rot.yaw * RADIAN );
 	obj->pos.z -= obj->move * cosf( obj->rot.yaw * RADIAN );
-	obj->pos.y += obj->move * sinf( obj->rot.pitch * RADIAN ); ///// yæ–¹å‘ã®ç§»å‹•ã‚‚è€ƒæ…®ã™ã‚‹å ´åˆ
+	obj->pos.y += obj->move * sinf( obj->rot.pitch * RADIAN ); ///// y•ûŒü‚ÌˆÚ“®‚àl—¶‚·‚éê‡
 }
-//â–¼ç‰©ä½“åŒå£«ã®è·é›¢ã«åŸºã¥ã„ã¦è¡çªã—ãŸã‹ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹é–¢æ•°
+//¥•¨‘Ì“¯m‚Ì‹——£‚ÉŠî‚Ã‚¢‚ÄÕ“Ë‚µ‚½‚©‚ğƒ`ƒFƒbƒN‚·‚éŠÖ”
 bool HitTest( ObjDataT *a, ObjDataT *b )
 {
 	if( DistanceAtoB( a, b ) < a->radius + b->radius ) return true;
 	else return false;
 }
-//â–¼ç®±å‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆé ˜åŸŸï¼‰ã¨çƒçŠ¶ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆé ˜åŸŸï¼‰ã®è¡çªåˆ¤å®š
+//¥” Œ^ƒIƒuƒWƒFƒNƒgi—Ìˆæj‚Æ‹…óƒIƒuƒWƒFƒNƒgi—Ìˆæj‚ÌÕ“Ë”»’è
 bool HitTestBox(ObjDataT *box, ObjDataT *ball)
 {
-	//çƒä½“ãƒ¬ãƒ™ãƒ«ã®è¡çªåˆ¤å®šã§falseãªã‚‰è¡çªåˆ¤å®šfalseã§çµ‚äº†
-	//å‰æã¨ã—ã¦ã€boxå…¨ä½“ã‚’åŒ…ã‚€çƒä½“ã®åŠå¾„ã¨ã—ã¦radiusãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã“ã¨
+	//‹…‘ÌƒŒƒxƒ‹‚ÌÕ“Ë”»’è‚Åfalse‚È‚çÕ“Ë”»’èfalse‚ÅI—¹
+	//‘O’ñ‚Æ‚µ‚ÄAbox‘S‘Ì‚ğ•ï‚Ş‹…‘Ì‚Ì”¼Œa‚Æ‚µ‚Äradius‚ªİ’è‚³‚ê‚Ä‚¢‚é‚±‚Æ
 	if(HitTest(box, ball) == false){
 		return false;
 	}
-	//ç®±ã®åº§æ¨™ç¯„å›²
+	//” ‚ÌÀ•W”ÍˆÍ
 	float xmin = box->pos.x - box->xsize / 2.0;
 	float xmax = box->pos.x + box->xsize / 2.0;
 	float ymin = box->pos.y - box->ysize / 2.0;
 	float ymax = box->pos.y + box->ysize / 2.0;
 	float zmin = box->pos.z - box->zsize / 2.0;
 	float zmax = box->pos.z + box->zsize / 2.0;
-	//Xåº§æ¨™ã®è¡çªåˆ¤å®š
+	//XÀ•W‚ÌÕ“Ë”»’è
 	if( xmax < ball->pos.x - ball->radius || xmin > ball->pos.x + ball->radius){
 		return false;
 	}
-	//Yåº§æ¨™ã®è¡çªåˆ¤å®š
+	//YÀ•W‚ÌÕ“Ë”»’è
 	if( ymax < ball->pos.y - ball->radius || ymin > ball->pos.y + ball->radius){
 		return false;
 	}
-	//Zåº§æ¨™ã®è¡çªåˆ¤å®š
+	//ZÀ•W‚ÌÕ“Ë”»’è
 	if( zmax < ball->pos.z - ball->radius || zmin > ball->pos.z + ball->radius){
 		return false;
 	}
@@ -235,15 +235,15 @@ bool isHitBox( ObjDataT *box, ObjDataT *ball )
 	return HitTestBox( box, &ball_world );
 }
 //====================================================================================================
-//â–¼ä¹±æ•°ç”Ÿæˆé–¢æ•°
-//æœ€å°å€¤minã¨æœ€å¤§å€¤maxã®é–“ã®å€¤ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¿”ã™
+//¥—”¶¬ŠÖ”
+//Å¬’lmin‚ÆÅ‘å’lmax‚ÌŠÔ‚Ì’l‚ğƒ‰ƒ“ƒ_ƒ€‚É•Ô‚·
 float uniformRandom( float min, float max ){
     double r;
     r = (double)rand()/(double)RAND_MAX;
     r = r * ( max - min ) + min;
     return r;
 }
-//â–¼ç°¡æ˜“ã‚¬ã‚¦ã‚¹ãƒã‚¤ã‚ºé–¢æ•°
+//¥ŠÈˆÕƒKƒEƒXƒmƒCƒYŠÖ”
 float gaussianRandom( float rmin, float rmax ){
     int i;
 	float r = 0.0;
@@ -254,7 +254,7 @@ float gaussianRandom( float rmin, float rmax ){
 	return r / n;
 }
 
-//â–¼æ•´æ•°å‹ãƒ©ãƒ³ãƒ€ãƒ é–¢æ•°
+//¥®”Œ^ƒ‰ƒ“ƒ_ƒ€ŠÖ”
 int diceRandom(int min, int max)
 {
 	int n;
@@ -263,7 +263,7 @@ int diceRandom(int min, int max)
 	return n;
 }
 
-//-------------åº§æ¨™ç³»éšå±¤æ§‹é€ æ“ä½œé–¢æ•°
+//-------------À•WŒnŠK‘w\‘¢‘€ìŠÖ”
 // setObjLocal
 void setObjLocal( ObjDataT *target, ObjDataT *base )
 {
@@ -277,7 +277,7 @@ void setObjWorld( ObjDataT *target )
 	return;
 }
 //--------------- 
-//ãƒ­ãƒ¼ã‚«ãƒ«ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰ã¸
+//ƒ[ƒJƒ‹‚©‚çƒ[ƒ‹ƒh‚Ö
 void moveLocalToWorld( ObjDataT *target )
 {
 	ObjDataT *base;
@@ -290,7 +290,7 @@ void moveLocalToWorld( ObjDataT *target )
 	setObjWorld( target );
 	return;
 }
-//ãƒ¯ãƒ¼ãƒ«ãƒ‰ã‹ã‚‰ãƒ­ãƒ¼ã‚«ãƒ«ã¸
+//ƒ[ƒ‹ƒh‚©‚çƒ[ƒJƒ‹‚Ö
 void moveWorldToLocal( ObjDataT *target, ObjDataT *base )
 {
 	ObjDataT *b, world;
@@ -447,7 +447,7 @@ void TransformLocalToWorldX(  TargetT *base, ObjDataT *local, ObjDataT *world )
 	return;
 }
 
-//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®ã¨å§¿å‹¢ã®å¹¾ä½•å¤‰æ›ã‚’è¡Œã†é–¢æ•°
+//¥ƒIƒuƒWƒFƒNƒg‚ÌˆÊ’u‚Æp¨‚ÌŠô‰½•ÏŠ·‚ğs‚¤ŠÖ”
 /*----------------------------------------------*/
 void applyObjTransform( ObjDataT *obj )
 {
@@ -455,38 +455,38 @@ void applyObjTransform( ObjDataT *obj )
 		applyObjTransform( obj->base );
 	}
 	/*
-	glTranslatef( obj->x, obj->y, obj->z ); //ä½ç½®
-	glRotatef( obj->yaw,	0.0, 1.0, 0.0 );//ãƒ¨ãƒ¼ï¼ˆæ–¹ä½è§’ï¼‰ï½™è»¸
-	glRotatef( obj->pitch,	1.0, 0.0, 0.0 );//ãƒ”ãƒƒãƒï¼ˆä»°è§’ï¼‰ï½˜è»¸
-	glRotatef( obj->roll,	0.0, 0.0, 1.0 );//ãƒ­ãƒ¼ãƒ«ï¼ˆå‚¾ãï¼‰ï½šè»¸
+	glTranslatef( obj->x, obj->y, obj->z ); //ˆÊ’u
+	glRotatef( obj->yaw,	0.0, 1.0, 0.0 );//ƒˆ[i•ûˆÊŠpj‚™²
+	glRotatef( obj->pitch,	1.0, 0.0, 0.0 );//ƒsƒbƒ`i‹ÂŠpj‚˜²
+	glRotatef( obj->roll,	0.0, 0.0, 1.0 );//ƒ[ƒ‹iŒX‚«j‚š²
 	*/
 	
-	glTranslatef( OBJ_X(obj), OBJ_Y(obj), OBJ_Z(obj) ); //ä½ç½®
-	glRotatef( OBJ_YAW(obj),	0.0, 1.0, 0.0 );//ãƒ¨ãƒ¼ï¼ˆæ–¹ä½è§’ï¼‰ï½™è»¸
-	glRotatef( OBJ_PITCH(obj),	1.0, 0.0, 0.0 );//ãƒ”ãƒƒãƒï¼ˆä»°è§’ï¼‰ï½˜è»¸
-	glRotatef( OBJ_ROLL(obj),	0.0, 0.0, 1.0 );//ãƒ­ãƒ¼ãƒ«ï¼ˆå‚¾ãï¼‰ï½šè»¸
+	glTranslatef( OBJ_X(obj), OBJ_Y(obj), OBJ_Z(obj) ); //ˆÊ’u
+	glRotatef( OBJ_YAW(obj),	0.0, 1.0, 0.0 );//ƒˆ[i•ûˆÊŠpj‚™²
+	glRotatef( OBJ_PITCH(obj),	1.0, 0.0, 0.0 );//ƒsƒbƒ`i‹ÂŠpj‚˜²
+	glRotatef( OBJ_ROLL(obj),	0.0, 0.0, 1.0 );//ƒ[ƒ‹iŒX‚«j‚š²
 	return;
 }
 
 void applyObjInverse( ObjDataT *obj )
 {
 	/*
-	glRotatef( - obj->roll,	0.0, 0.0, 1.0 );//ãƒ­ãƒ¼ãƒ«ï¼ˆå‚¾ãï¼‰ï½šè»¸
-	glRotatef( - obj->pitch,1.0, 0.0, 0.0 );//ãƒ”ãƒƒãƒï¼ˆä»°è§’ï¼‰ï½˜è»¸
-	glRotatef( - obj->yaw,	0.0, 1.0, 0.0 );//ãƒ¨ãƒ¼ï¼ˆæ–¹ä½è§’ï¼‰ï½™è»¸
-	glTranslatef( - obj->x, - obj->y, - obj->z ); //ä½ç½®
+	glRotatef( - obj->roll,	0.0, 0.0, 1.0 );//ƒ[ƒ‹iŒX‚«j‚š²
+	glRotatef( - obj->pitch,1.0, 0.0, 0.0 );//ƒsƒbƒ`i‹ÂŠpj‚˜²
+	glRotatef( - obj->yaw,	0.0, 1.0, 0.0 );//ƒˆ[i•ûˆÊŠpj‚™²
+	glTranslatef( - obj->x, - obj->y, - obj->z ); //ˆÊ’u
 	*/
 	
-	glRotatef( - OBJ_ROLL(obj),	0.0, 0.0, 1.0 );//ãƒ­ãƒ¼ãƒ«ï¼ˆå‚¾ãï¼‰ï½šè»¸
-	glRotatef( - OBJ_PITCH(obj),1.0, 0.0, 0.0 );//ãƒ”ãƒƒãƒï¼ˆä»°è§’ï¼‰ï½˜è»¸
-	glRotatef( - OBJ_YAW(obj),	0.0, 1.0, 0.0 );//ãƒ¨ãƒ¼ï¼ˆæ–¹ä½è§’ï¼‰ï½™è»¸
-	glTranslatef( - OBJ_X(obj), - OBJ_Y(obj), - OBJ_Z(obj) ); //ä½ç½®
+	glRotatef( - OBJ_ROLL(obj),	0.0, 0.0, 1.0 );//ƒ[ƒ‹iŒX‚«j‚š²
+	glRotatef( - OBJ_PITCH(obj),1.0, 0.0, 0.0 );//ƒsƒbƒ`i‹ÂŠpj‚˜²
+	glRotatef( - OBJ_YAW(obj),	0.0, 1.0, 0.0 );//ƒˆ[i•ûˆÊŠpj‚™²
+	glTranslatef( - OBJ_X(obj), - OBJ_Y(obj), - OBJ_Z(obj) ); //ˆÊ’u
 	if( obj->base != NULL ){
 		applyObjInverse( obj->base );
 	}	
 	return;
 }
-//â–¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚«ãƒ©ãƒ¼ã‚’é©ç”¨ã™ã‚‹é–¢æ•°
+//¥ƒIƒuƒWƒFƒNƒg‚ÌƒJƒ‰[‚ğ“K—p‚·‚éŠÖ”
 void applyObjColor( ObjDataT *obj )
 {
 	applyMaterialColor( obj->red, obj->green, obj->blue );

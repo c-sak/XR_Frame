@@ -1,10 +1,10 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 
 #include <math.h>
 #include "Shapes.h"
 
-const int _stacks = _STACKS;  //ç·¯åº¦æ–¹å‘ã®åˆ†å‰²
-const int _slices = _SLICES;  //çµŒåº¦æ–¹å‘ã®åˆ†å‰²
+const int _stacks = _STACKS;  //ˆÜ“x•ûŒü‚Ì•ªŠ„
+const int _slices = _SLICES;  //Œo“x•ûŒü‚Ì•ªŠ„
 
 static GLUquadric* pFillObj = nullptr;
 static GLUquadric* pLineObj = nullptr;
@@ -74,7 +74,7 @@ void ezWireCylinder(float bottom, float top, float height, int n_slices, int n_s
 }
 //-------- ezSolidDisk
 void ezSolidDisk(float inner, float outer, int n_slices, int n_loops){
-	gluDisk(pFillObj, inner, outer, n_slices, n_loops); ////////â˜…////////
+	gluDisk(pFillObj, inner, outer, n_slices, n_loops); ////////š////////
 }
 //-------- ezWireDisk
 void ezWireDisk(float inner, float outer, int n_slices, int n_loops) {
@@ -162,7 +162,7 @@ void ezSolidCube(float size)
 	dispCube(size, true);
 }
 //--------------------------------------------------------------------------------
-VertexT globev[_stacks + 1][_slices];  //_stacks+1ã¯è¦ç´ æ•°ã ã‹ã‚‰ä¸€ã¤å¤šãç®±ã‚’ä½œã‚‹
+VertexT globev[_stacks + 1][_slices];  //_stacks+1‚Í—v‘f”‚¾‚©‚çˆê‚Â‘½‚­” ‚ğì‚é
 /*-------------------------------------------------------------- ezSmoothSphere
  * ezSmoothSphere:
  *--------*/
@@ -176,11 +176,11 @@ void ezSmoothSphere(float radius, int n_slices, int n_stacks)
 	static float x1, y1, z1, l1;
 
 	int i, j;
-	float ds, dt; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤
-	float s = 0.0, t = 1.0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float ds, dt; //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’l
+	float s = 0.0, t = 1.0; //ƒeƒNƒXƒ`ƒƒÀ•W
 
-	ds = 1.0 / n_slices; //çµŒåº¦æ–¹å‘ï¼Såº§æ¨™
-	dt = 1.0 / n_stacks; //ç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™
+	ds = 1.0 / n_slices; //Œo“x•ûŒüSÀ•W
+	dt = 1.0 / n_stacks; //ˆÜ“x•ûŒüTÀ•W
 
 	float rot = 0.0, elev = 0.0;
 	float sin_rot, cos_rot;
@@ -194,17 +194,17 @@ void ezSmoothSphere(float radius, int n_slices, int n_stacks)
 	//glEnable(GL_AUTO_NORMAL);
 	//glEnable(GL_NORMALIZE);
 
-	for (j = 0; j <= n_slices; j++) { //çµŒåº¦
+	for (j = 0; j <= n_slices; j++) { //Œo“x
 		rot = 2.0 * M_PI * ds * j;
 		s_rot[j] = sinf(rot);
 		c_rot[j] = cosf(rot);
 	}
-	for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+	for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 		elev = M_PI * dt * i - M_PI_2;
 		s_elev[i] = sinf(elev);
 		c_elev[i] = cosf(elev);
 	}
-	for (j = 0; j < n_slices; j++) { //çµŒåº¦
+	for (j = 0; j < n_slices; j++) { //Œo“x
 		sin_rot = s_rot[j];
 		cos_rot = c_rot[j];
 		glBegin(GL_TRIANGLE_STRIP);
@@ -212,7 +212,7 @@ void ezSmoothSphere(float radius, int n_slices, int n_stacks)
 		y0 = 0.0;
 		z = -radius;
 		l = 0;
-		for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+		for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 			z1 = z;
 			l1 = l;
 			z = radius * s_elev[i];
@@ -251,11 +251,11 @@ void ezSolidSphere(float radius, int n_slices, int n_stacks)
 	static float x1, y1, z1, l1;
 
 	int i, j;
-	float ds, dt; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤
-	float s = 0.0, t = 1.0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float ds, dt; //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’l
+	float s = 0.0, t = 1.0; //ƒeƒNƒXƒ`ƒƒÀ•W
 
-	ds = 1.0 / n_slices; //çµŒåº¦æ–¹å‘ï¼Såº§æ¨™
-	dt = 1.0 / n_stacks; //ç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™
+	ds = 1.0 / n_slices; //Œo“x•ûŒüSÀ•W
+	dt = 1.0 / n_stacks; //ˆÜ“x•ûŒüTÀ•W
 
 	float rot = 0.0, elev = 0.0;
 	float sin_rot, cos_rot;
@@ -270,17 +270,17 @@ void ezSolidSphere(float radius, int n_slices, int n_stacks)
 	//glEnable(GL_AUTO_NORMAL);
 	glEnable(GL_NORMALIZE);
 
-	for (j = 0; j <= n_slices; j++) { //çµŒåº¦
+	for (j = 0; j <= n_slices; j++) { //Œo“x
 		rot = 2.0 * M_PI * ds * j;
 		s_rot[j] = sinf(rot);
 		c_rot[j] = cosf(rot);
 	}
-	for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+	for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 		elev = M_PI * dt * i - M_PI_2;
 		s_elev[i] = sinf(elev);
 		c_elev[i] = cosf(elev);
 	}
-	for (j = 0; j < n_slices; j++) { //çµŒåº¦
+	for (j = 0; j < n_slices; j++) { //Œo“x
 		sin_rot = s_rot[j];
 		cos_rot = c_rot[j];
 		glBegin(GL_TRIANGLE_STRIP);
@@ -288,7 +288,7 @@ void ezSolidSphere(float radius, int n_slices, int n_stacks)
 		y0 = 0.0;
 		z = -radius;
 		l = 0;
-		for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+		for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 			z1 = z;
 			l1 = l;
 			z = radius * s_elev[i];
@@ -331,11 +331,11 @@ void ezWireSphere(float radius, int n_slices, int n_stacks)
 	static float x1, y1, z1, l1;
 
 	int i, j;
-	float ds, dt; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤
-	float s = 0.0, t = 1.0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float ds, dt; //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’l
+	float s = 0.0, t = 1.0; //ƒeƒNƒXƒ`ƒƒÀ•W
 
-	ds = 1.0 / n_slices; //çµŒåº¦æ–¹å‘ï¼Såº§æ¨™
-	dt = 1.0 / n_stacks; //ç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™
+	ds = 1.0 / n_slices; //Œo“x•ûŒüSÀ•W
+	dt = 1.0 / n_stacks; //ˆÜ“x•ûŒüTÀ•W
 
 	float rot = 0.0, elev = 0.0;
 	float sin_rot, cos_rot;
@@ -349,17 +349,17 @@ void ezWireSphere(float radius, int n_slices, int n_stacks)
 	//glEnable(GL_AUTO_NORMAL);
 	glEnable(GL_NORMALIZE);
 
-	for (j = 0; j <= n_slices; j++) { //çµŒåº¦
+	for (j = 0; j <= n_slices; j++) { //Œo“x
 		rot = 2.0 * M_PI * ds * j;
 		s_rot[j] = sinf(rot);
 		c_rot[j] = cosf(rot);
 	}
-	for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+	for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 		elev = M_PI * dt * i - M_PI_2;
 		s_elev[i] = sinf(elev);
 		c_elev[i] = cosf(elev);
 	}
-	for (j = 0; j < n_slices; j++) { //çµŒåº¦
+	for (j = 0; j < n_slices; j++) { //Œo“x
 		sin_rot = s_rot[j];
 		cos_rot = c_rot[j];
 		glBegin(GL_LINE_STRIP);
@@ -368,7 +368,7 @@ void ezWireSphere(float radius, int n_slices, int n_stacks)
 		z = -radius;
 		l = 0;
 		bool up = false;
-		for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+		for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 			z1 = z;
 			l1 = l;
 			z = radius * s_elev[i];
@@ -420,11 +420,11 @@ void ezSphere(float radius, int n_slices, int n_stacks)
 	static float x1, y1, z1, l1;
 
 	int i, j;
-	float ds, dt; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤
-	float s = 0.0, t = 0.0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™f
+	float ds, dt; //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’l
+	float s = 0.0, t = 0.0; //ƒeƒNƒXƒ`ƒƒÀ•Wf
 
-	ds = 1.0 / n_slices; //çµŒåº¦æ–¹å‘ï¼Såº§æ¨™
-	dt = 1.0 / n_stacks; //ç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™
+	ds = 1.0 / n_slices; //Œo“x•ûŒüSÀ•W
+	dt = 1.0 / n_stacks; //ˆÜ“x•ûŒüTÀ•W
 
 	float rot = 0.0, elev = 0.0;
 	float sin_rot, cos_rot;
@@ -440,17 +440,17 @@ void ezSphere(float radius, int n_slices, int n_stacks)
 	//glEnable(GL_AUTO_NORMAL);
 	glEnable(GL_NORMALIZE);
 
-	for (j = 0; j <= n_slices; j++) { //çµŒåº¦
+	for (j = 0; j <= n_slices; j++) { //Œo“x
 		rot = 2.0 * M_PI * ds * j;
 		s_rot[j] = sinf(rot);
 		c_rot[j] = cosf(rot);
 	}
-	for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+	for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 		elev = M_PI * dt * i - M_PI_2;
 		s_elev[i] = sinf(elev);
 		c_elev[i] = cosf(elev);
 	}
-	for (j = 0; j <= n_slices; j++) { //çµŒåº¦
+	for (j = 0; j <= n_slices; j++) { //Œo“x
 		sin_rot = s_rot[j];
 		cos_rot = c_rot[j];
 		glBegin(GL_TRIANGLE_STRIP);
@@ -458,7 +458,7 @@ void ezSphere(float radius, int n_slices, int n_stacks)
 		y0 = 0.0;
 		z = -radius;
 		l = 0;
-		for (i = 0; i <= n_stacks; i++) { //ç·¯åº¦
+		for (i = 0; i <= n_stacks; i++) { //ˆÜ“x
 			z1 = z;
 			l1 = l;
 			z = radius * s_elev[i];
@@ -495,13 +495,13 @@ void ezSphere(float radius, int n_slices, int n_stacks)
 	VertexT *v1 = globev + n_stacks + 1;
 
 	/*
-	for (j = 0; j < n_slices; j++) {//ç·¯åº¦
+	for (j = 0; j < n_slices; j++) {//ˆÜ“x
 		//glBegin(GL_POINTS);
 		//glBegin(GL_LINE);
 		//glBegin(GL_POLYGON);
 		glBegin(GL_TRIANGLE_STRIP);
 		//glBegin(GL_LINE_STRIP);
-		for (i = 0; i <= n_stacks; i++) { //çµŒåº¦
+		for (i = 0; i <= n_stacks; i++) { //Œo“x
 			//glNormal3f(v1->x, v1->y, v1->z);
 			//if (i == n_stacks) {
 			if( i > 0 ){
@@ -529,7 +529,7 @@ void ezSphere(float radius, int n_slices, int n_stacks)
  *--------*/
 GlobeT *makeGlobe( float r, float eq_d, float pl_d )
 {
-	GlobeT *globe = (GlobeT *)malloc( sizeof(GlobeT) ); //å‹•çš„ãƒ¡ãƒ¢ãƒªé ˜åŸŸç¢ºä¿
+	GlobeT *globe = (GlobeT *)malloc( sizeof(GlobeT) ); //“®“Iƒƒ‚ƒŠ—ÌˆæŠm•Û
 
 	globe->eq_d = eq_d;
 	if( pl_d > 0.0 ) globe->pl_d = pl_d;
@@ -540,17 +540,17 @@ GlobeT *makeGlobe( float r, float eq_d, float pl_d )
 	float z = 0.0;
 
 	float l = 0;
-	//int slices = 16; //çµŒåº¦æ–¹å‘ã®åˆ†å‰²
-	//int stacks = 8;  //ç·¯åº¦æ–¹å‘ã®åˆ†å‰²
+	//int slices = 16; //Œo“x•ûŒü‚Ì•ªŠ„
+	//int stacks = 8;  //ˆÜ“x•ûŒü‚Ì•ªŠ„
 
 	int i, j;
-	float a = 360.0 / _slices; //çµŒåº¦æ–¹å‘ã®å¢—åˆ†å€¤
-	float b = 180.0 / _stacks; //ç·¯åº¦æ–¹å‘ã®å¢—åˆ†å€¤
+	float a = 360.0 / _slices; //Œo“x•ûŒü‚Ì‘•ª’l
+	float b = 180.0 / _stacks; //ˆÜ“x•ûŒü‚Ì‘•ª’l
 
-	for( i = 0; i <= _stacks; i++ ){              //ç·¯åº¦
+	for( i = 0; i <= _stacks; i++ ){              //ˆÜ“x
 		z = r * sinf( M_PI * ((float)i * b - 90.0) / 180 );
 		l = r * cosf( M_PI * ((float)i * b - 90.0) / 180 );
-		for( j = 0; j < _slices; j++ ){           //çµŒåº¦
+		for( j = 0; j < _slices; j++ ){           //Œo“x
 			x = l * cosf( M_PI * (float)j * a / 180 );
 			y = l * sinf( M_PI * (float)j * a / 180 );
 
@@ -570,15 +570,15 @@ GlobeT *makeGlobe( float r, float eq_d, float pl_d )
 void drawGlobe( GlobeT *globe )
 {
 	int i, j;
-	float ds, dt; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤
-	float s, t; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™f
+	float ds, dt; //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’l
+	float s, t; //ƒeƒNƒXƒ`ƒƒÀ•Wf
 
-	ds = 1.0/_SLICES; //çµŒåº¦æ–¹å‘ï¼Såº§æ¨™
-	dt = 1.0/(_STACKS+1);//ç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™
+	ds = 1.0/_SLICES; //Œo“x•ûŒüSÀ•W
+	dt = 1.0/(_STACKS+1);//ˆÜ“x•ûŒüTÀ•W
 
 	//glEnable( GL_AUTO_NORMAL );
 	glEnable( GL_NORMALIZE );
-	/*å—æ¥µ*/
+	/*“ì‹É*/
 	/*glBegin(GL_TRIANGLE_FAN);
 	s = 0.0;
 	t = 0.0;
@@ -586,10 +586,10 @@ void drawGlobe( GlobeT *globe )
 	glNormal3f( globe->globev[0][0].x, globe->globev[0][0].y, globe->globev[0][0].z );
 	glVertex3f( globe->globev[0][0].x, globe->globev[0][0].y, globe->globev[0][0].z );
 	t += dt;
-	for( j = _slices - 1; j >= 0; j-- ){//çµŒåº¦
+	for( j = _slices - 1; j >= 0; j-- ){//Œo“x
 		glTexCoord2f( s, 1.0 - t );
 		s += ds;
-		glNormal3f( globe->globev[1][j].x, globe->globev[1][j].y, globe->globev[1][j].z ); //æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+		glNormal3f( globe->globev[1][j].x, globe->globev[1][j].y, globe->globev[1][j].z ); //–@üƒxƒNƒgƒ‹
 		glVertex3f( globe->globev[1][j].x, globe->globev[1][j].y, globe->globev[1][j].z );
 	}
 	glTexCoord2f( s, 1.0 -  t );
@@ -597,13 +597,13 @@ void drawGlobe( GlobeT *globe )
 	glVertex3f( globe->globev[1][_slices - 1].x, globe->globev[1][_slices - 1].y, globe->globev[1][_slices - 1].z );
 	glEnd();*/
 
-	/*ãƒ™ãƒ«ãƒˆ*/
+	/*ƒxƒ‹ƒg*/
 	glBegin(GL_TRIANGLE_STRIP);
 	s = 0.0;
 	t = 0.0;
 	for( i = 0; i < _stacks; i++ ){ 
 		for( j = 0; j < _slices; j++ ){
-			glTexCoord2f( s, 1.0 - (t+dt) ); //åŒ—æ¥µã¨å—æ¥µãŒé€†ã«ãªã£ã¦ã„ãŸãŸã‚ã€1.0ã‹ã‚‰t+dtã‚’å¼•ã„ã¦é€†ã«ã—ãŸ
+			glTexCoord2f( s, 1.0 - (t+dt) ); //–k‹É‚Æ“ì‹É‚ª‹t‚É‚È‚Á‚Ä‚¢‚½‚½‚ßA1.0‚©‚çt+dt‚ğˆø‚¢‚Ä‹t‚É‚µ‚½
 			glNormal3f( globe->globev[i + 1][j].x, globe->globev[i + 1][j].y, globe->globev[i + 1][j].z );
 			glVertex3f( globe->globev[i + 1][j].x, globe->globev[i + 1][j].y, globe->globev[i + 1][j].z );
 			glTexCoord2f( s, 1.0 - t );
@@ -621,13 +621,13 @@ void drawGlobe( GlobeT *globe )
 	}
 	glEnd();
 
-	/*åŒ—æ¥µ*/
+	/*–k‹É*/
 	/*s = 0.0;
 	glBegin(GL_TRIANGLE_FAN);
 	glTexCoord2f( s, 1.0 - t );
 	glNormal3f( globe->globev[_stacks][0].x, globe->globev[_stacks][0].y, globe->globev[_stacks][0].z );
 	glVertex3f( globe->globev[_stacks][0].x, globe->globev[_stacks][0].y, globe->globev[_stacks][0].z );
-	for( j = 0; j < _slices; j++ ){//çµŒåº¦
+	for( j = 0; j < _slices; j++ ){//Œo“x
 		glTexCoord2f( s, 1.0 - t );
 		s += ds;
 		glNormal3f( globe->globev[_stacks - 1][j].x, globe->globev[_stacks - 1][j].y, globe->globev[_stacks - 1][j].z );
@@ -647,50 +647,50 @@ void drawGlobe( GlobeT *globe )
  * drawGlobeZoom:
  *--------*/
 void drawGlobeZoom( GlobeT *globe, float lt, float lg, float range, float zoom )
-{ // lt:ç·¯åº¦, lg:çµŒåº¦
+{ // lt:ˆÜ“x, lg:Œo“x
 	int i, j;
-	float ds, dt; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤
-	float s, t;   //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
+	float ds, dt; //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’l
+	float s, t;   //ƒeƒNƒXƒ`ƒƒÀ•W
 
-	float dlong, dlat; //1ã¤ã®SLICEã€STACKã‚ãŸã‚Šã®è§’åº¦
-	int   nlong, nlat; //SLICEã¨STACKã®ç•ªå·
+	float dlong, dlat; //1‚Â‚ÌSLICEASTACK‚ ‚½‚è‚ÌŠp“x
+	int   nlong, nlat; //SLICE‚ÆSTACK‚Ì”Ô†
 
-	/*ç·¯åº¦*/
-	dlat = 180.0 / _STACKS;     //1ã¤ã®STACKï¼ˆç·¯åº¦æ–¹å‘ã®åˆ†å‰²ï¼‰ã‚ãŸã‚Šã®è§’åº¦
-	nlat = (int)( lt / dlat );  //å—æ¥µã‹ã‚‰æ•°ãˆãŸSTACKã®ç•ªå·ï¼ˆå—æ¥µã‹ã‚‰æ•°ãˆã¦ä½•ç•ªç›®ã®STACKã‹ï¼‰
-	nlat = _STACKS / 2 + nlat;  //-90åº¦åˆ†è£œæ­£ã—ãŸã€å—æ¥µã‹ã‚‰æ•°ãˆãŸSTACKã®ç•ªå·ï¼ˆå—æ¥µã‹ã‚‰æ•°ãˆã¦ä½•ç•ªç›®ã®STACKã‹ï¼‰
+	/*ˆÜ“x*/
+	dlat = 180.0 / _STACKS;     //1‚Â‚ÌSTACKiˆÜ“x•ûŒü‚Ì•ªŠ„j‚ ‚½‚è‚ÌŠp“x
+	nlat = (int)( lt / dlat );  //“ì‹É‚©‚ç”‚¦‚½STACK‚Ì”Ô†i“ì‹É‚©‚ç”‚¦‚Ä‰½”Ô–Ú‚ÌSTACK‚©j
+	nlat = _STACKS / 2 + nlat;  //-90“x•ª•â³‚µ‚½A“ì‹É‚©‚ç”‚¦‚½STACK‚Ì”Ô†i“ì‹É‚©‚ç”‚¦‚Ä‰½”Ô–Ú‚ÌSTACK‚©j
 
-	/*çµŒåº¦*/
-	dlong = 360.0 / _SLICES;    //1ã¤ã®SLICEï¼ˆçµŒåº¦æ–¹å‘ã®åˆ†å‰²ï¼‰ã‚ãŸã‚Šã®è§’åº¦
-	nlong = (int)( lg /dlong ); //SLICEã®ç•ªå·ï¼ˆä½•ç•ªç›®ã®SLICEã‹ï¼‰
+	/*Œo“x*/
+	dlong = 360.0 / _SLICES;    //1‚Â‚ÌSLICEiŒo“x•ûŒü‚Ì•ªŠ„j‚ ‚½‚è‚ÌŠp“x
+	nlong = (int)( lg /dlong ); //SLICE‚Ì”Ô†i‰½”Ô–Ú‚ÌSLICE‚©j
 
 	/*
-	float n; //rangeã§æŒ‡å®šã•ã‚Œã‚‹ç¯„å›²ã«å…¥ã‚‹ã‚¹ã‚¿ãƒƒã‚¯ã®æ•°
+	float n; //range‚Åw’è‚³‚ê‚é”ÍˆÍ‚É“ü‚éƒXƒ^ƒbƒN‚Ì”
     n = range / 180.0 * _STACKS;
 	*/
 
-	ds = 1.0/_SLICES;     //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤ï¼ˆçµŒåº¦æ–¹å‘ï¼Såº§æ¨™ï¼‰
-	dt = 1.0/(_STACKS+1); //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™å¢—åˆ†å€¤ï¼ˆç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™ï¼‰
+	ds = 1.0/_SLICES;     //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’liŒo“x•ûŒüSÀ•Wj
+	dt = 1.0/(_STACKS+1); //ƒeƒNƒXƒ`ƒƒÀ•W‘•ª’liˆÜ“x•ûŒüTÀ•Wj
 
 	//glEnable( GL_AUTO_NORMAL );
 	glEnable( GL_NORMALIZE );
 	
-	/*ãƒ™ãƒ«ãƒˆ*/
+	/*ƒxƒ‹ƒg*/
 	glBegin(GL_TRIANGLE_STRIP);
-	s = ds * nlong; //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ï¼ˆçµŒåº¦æ–¹å‘ï¼Såº§æ¨™ï¼‰
-	t = dt * nlat;  //ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ï¼ˆç·¯åº¦æ–¹å‘ï¼Tåº§æ¨™ï¼‰
+	s = ds * nlong; //ƒeƒNƒXƒ`ƒƒÀ•WiŒo“x•ûŒüSÀ•Wj
+	t = dt * nlat;  //ƒeƒNƒXƒ`ƒƒÀ•WiˆÜ“x•ûŒüTÀ•Wj
 
 	i = nlat; 
 	for( j = nlong; j <= nlong+1; j++ ){  
-		glTexCoord2f( s, 1.0 - (t+dt) ); //åŒ—æ¥µã¨å—æ¥µãŒé€†ã«ãªã£ã¦ã„ãŸãŸã‚ã€1.0ã‹ã‚‰t+dtã‚’å¼•ã„ã¦é€†ã«ã—ãŸ
-		if( lt >= 0.0 ){   //åŒ—æ¥µã®ã¨ã
+		glTexCoord2f( s, 1.0 - (t+dt) ); //–k‹É‚Æ“ì‹É‚ª‹t‚É‚È‚Á‚Ä‚¢‚½‚½‚ßA1.0‚©‚çt+dt‚ğˆø‚¢‚Ä‹t‚É‚µ‚½
+		if( lt >= 0.0 ){   //–k‹É‚Ì‚Æ‚«
 			glNormal3f( globe->globev[i+1][j].x, globe->globev[i+1][j].y, globe->globev[i+1][j].z );
 			glVertex3f( globe->globev[i+1][j].x, globe->globev[i+1][j].y, globe->globev[i+1][j].z );
 			glTexCoord2f( s, 1.0 - t );
 			glNormal3f( globe->globev[i][j].x, globe->globev[i][j].y, globe->globev[i][j].z );
 			glVertex3f( globe->globev[i][j].x, globe->globev[i][j].y, globe->globev[i][j].z );
 		}
-		else{              //å—æ¥µã®ã¨ã
+		else{              //“ì‹É‚Ì‚Æ‚«
 			glNormal3f( globe->globev[i][j].x, globe->globev[i][j].y, globe->globev[i][j].z );
 			glVertex3f( globe->globev[i][j].x, globe->globev[i][j].y, globe->globev[i][j].z );
 			glTexCoord2f( s, 1.0 - t );
@@ -703,26 +703,26 @@ void drawGlobeZoom( GlobeT *globe, float lt, float lg, float range, float zoom )
 }
 #if 0
 /*-------------------------------------------------------------- drawPartialGlobe
- * drawPartialGlobe:ãƒãƒªã‚´ãƒ³ã®é ‚ç‚¹ã‚’æŒ‡å®šã—ã¦æç”»ã™ã‚‹
+ * drawPartialGlobe:ƒ|ƒŠƒSƒ“‚Ì’¸“_‚ğw’è‚µ‚Ä•`‰æ‚·‚é
  *--------*/
 void drawPartialGlobe( float lt, float lg, float zoom )
 {
 	float x, y, z;
-	float t = 0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç·¯åº¦æ–¹å‘ã®åº§æ¨™
-	float s = 0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®çµŒåº¦æ–¹å‘ã®åº§æ¨™
-	float dlt = 0; //ãƒ‘ãƒƒãƒã®ä¸­å¿ƒã‚’åŸºæº–ã¨ã—ãŸã€ç·¯åº¦æ–¹å‘ã®ãƒ‘ãƒƒãƒã®é ‚ç‚¹ã¾ã§ã®è§’åº¦
-	float dlg = 0; //ãƒ‘ãƒƒãƒã®ä¸­å¿ƒã‚’åŸºæº–ã¨ã—ãŸã€çµŒåº¦æ–¹å‘ã®ãƒ‘ãƒƒãƒã®é ‚ç‚¹ã¾ã§ã®è§’åº¦
-	float dt = 0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç·¯åº¦æ–¹å‘ã®åº§æ¨™ã®å¢—åˆ†å€¤
-	float ds = 0; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®çµŒåº¦æ–¹å‘ã®åº§æ¨™ã®å¢—åˆ†å€¤
+	float t = 0; //ƒeƒNƒXƒ`ƒƒ‚ÌˆÜ“x•ûŒü‚ÌÀ•W
+	float s = 0; //ƒeƒNƒXƒ`ƒƒ‚ÌŒo“x•ûŒü‚ÌÀ•W
+	float dlt = 0; //ƒpƒbƒ`‚Ì’†S‚ğŠî€‚Æ‚µ‚½AˆÜ“x•ûŒü‚Ìƒpƒbƒ`‚Ì’¸“_‚Ü‚Å‚ÌŠp“x
+	float dlg = 0; //ƒpƒbƒ`‚Ì’†S‚ğŠî€‚Æ‚µ‚½AŒo“x•ûŒü‚Ìƒpƒbƒ`‚Ì’¸“_‚Ü‚Å‚ÌŠp“x
+	float dt = 0; //ƒeƒNƒXƒ`ƒƒ‚ÌˆÜ“x•ûŒü‚ÌÀ•W‚Ì‘•ª’l
+	float ds = 0; //ƒeƒNƒXƒ`ƒƒ‚ÌŒo“x•ûŒü‚ÌÀ•W‚Ì‘•ª’l
 
-	//ç·¯åº¦
-	t = ( lt + 90 ) / 180; //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç·¯åº¦æ–¹å‘ã®åº§æ¨™
-	dlt = 180.0 / _STACKS; //ãƒ‘ãƒƒãƒã®ä¸­å¿ƒã‚’åŸºæº–ã¨ã—ãŸã€ç·¯åº¦æ–¹å‘ã®ãƒ‘ãƒƒãƒã®é ‚ç‚¹ã¾ã§ã®è§’åº¦
-	dt = dlt / 180 * zoom;        //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç·¯åº¦æ–¹å‘ã®åº§æ¨™ã®å¢—åˆ†å€¤
-	//çµŒåº¦
-	s = lg / 360;          //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®çµŒåº¦æ–¹å‘ã®åº§æ¨™
-	dlg = 360.0 / _SLICES; //ãƒ‘ãƒƒãƒã®ä¸­å¿ƒã‚’åŸºæº–ã¨ã—ãŸã€çµŒåº¦æ–¹å‘ã®ãƒ‘ãƒƒãƒã®é ‚ç‚¹ã¾ã§ã®è§’åº¦
-	ds = dlg / 360 * zoom;        //ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®çµŒåº¦æ–¹å‘ã®åº§æ¨™ã®å¢—åˆ†å€¤
+	//ˆÜ“x
+	t = ( lt + 90 ) / 180; //ƒeƒNƒXƒ`ƒƒ‚ÌˆÜ“x•ûŒü‚ÌÀ•W
+	dlt = 180.0 / _STACKS; //ƒpƒbƒ`‚Ì’†S‚ğŠî€‚Æ‚µ‚½AˆÜ“x•ûŒü‚Ìƒpƒbƒ`‚Ì’¸“_‚Ü‚Å‚ÌŠp“x
+	dt = dlt / 180 * zoom;        //ƒeƒNƒXƒ`ƒƒ‚ÌˆÜ“x•ûŒü‚ÌÀ•W‚Ì‘•ª’l
+	//Œo“x
+	s = lg / 360;          //ƒeƒNƒXƒ`ƒƒ‚ÌŒo“x•ûŒü‚ÌÀ•W
+	dlg = 360.0 / _SLICES; //ƒpƒbƒ`‚Ì’†S‚ğŠî€‚Æ‚µ‚½AŒo“x•ûŒü‚Ìƒpƒbƒ`‚Ì’¸“_‚Ü‚Å‚ÌŠp“x
+	ds = dlg / 360 * zoom;        //ƒeƒNƒXƒ`ƒƒ‚ÌŒo“x•ûŒü‚ÌÀ•W‚Ì‘•ª’l
 	
 
 	glEnable( GL_NORMALIZE );
@@ -787,19 +787,19 @@ void drawGlobe0( void )
 	float r = 0.5;
 
 	float l = 0;
-	//int slices = 16; //çµŒåº¦æ–¹å‘ã®åˆ†å‰²
-	//int stacks = 8;  //ç·¯åº¦æ–¹å‘ã®åˆ†å‰²
+	//int slices = 16; //Œo“x•ûŒü‚Ì•ªŠ„
+	//int stacks = 8;  //ˆÜ“x•ûŒü‚Ì•ªŠ„
 	int i, j;
-	float a = 360.0 / _slices; //çµŒåº¦æ–¹å‘ã®å¢—åˆ†å€¤
-	float b = 180.0 / _stacks; //ç·¯åº¦æ–¹å‘ã®å¢—åˆ†å€¤
+	float a = 360.0 / _slices; //Œo“x•ûŒü‚Ì‘•ª’l
+	float b = 180.0 / _stacks; //ˆÜ“x•ûŒü‚Ì‘•ª’l
 
     glColor3f( 1.0, 1.0, 1.0);
     glPointSize( 4.0 );
 	glBegin(GL_POINTS);
-	for( i = 0; i <= _stacks; i++ ){              //ç·¯åº¦
+	for( i = 0; i <= _stacks; i++ ){              //ˆÜ“x
 		z = r * sinf( M_PI * ((float)i * b - 90.0) / 180 );
 		l = r * cosf( M_PI * ((float)i * b - 90.0) / 180 );
-		for( j = 0; j < _slices; j++ ){          //çµŒåº¦
+		for( j = 0; j < _slices; j++ ){          //Œo“x
 			x = l * cosf( M_PI * (float)j * a / 180 );
 			y = l * sinf( M_PI * (float)j * a / 180 );
 
@@ -827,16 +827,16 @@ void makeGlobe( void )
 	float r = 0.5;
 
 	float l = 0;
-	//int slices = 16; //çµŒåº¦æ–¹å‘ã®åˆ†å‰²
-	//int stacks = 8;  //ç·¯åº¦æ–¹å‘ã®åˆ†å‰²
+	//int slices = 16; //Œo“x•ûŒü‚Ì•ªŠ„
+	//int stacks = 8;  //ˆÜ“x•ûŒü‚Ì•ªŠ„
 	int i, j;
-	float a = 360.0 / _slices; //çµŒåº¦æ–¹å‘ã®å¢—åˆ†å€¤
-	float b = 180.0 / _stacks; //ç·¯åº¦æ–¹å‘ã®å¢—åˆ†å€¤
+	float a = 360.0 / _slices; //Œo“x•ûŒü‚Ì‘•ª’l
+	float b = 180.0 / _stacks; //ˆÜ“x•ûŒü‚Ì‘•ª’l
 
-	for( i = 0; i <= _stacks; i++ ){              //ç·¯åº¦
+	for( i = 0; i <= _stacks; i++ ){              //ˆÜ“x
 		z = r * sinf( M_PI * ((float)i * b - 90.0) / 180 );
 		l = r * cosf( M_PI * ((float)i * b - 90.0) / 180 );
-		for( j = 0; j < _slices; j++ ){          //çµŒåº¦
+		for( j = 0; j < _slices; j++ ){          //Œo“x
 			x = l * cosf( M_PI * (float)j * a / 180 );
 			y = l * sinf( M_PI * (float)j * a / 180 );
 
@@ -849,15 +849,15 @@ void makeGlobe( void )
 }
 */
 
-/*é ‚ç‚¹ã‚’æŒ‡å®šã—ã¦çƒä½“ã‚’è¡¨ç¤º*/
+/*’¸“_‚ğw’è‚µ‚Ä‹…‘Ì‚ğ•\¦*/
 /*void drawGlobePoints()
 {
 	int i, j;
     glColor3f( 1.0, 1.0, 1.0);
     glPointSize( 4.0 );
 	glBegin(GL_POINTS);
-	for( i = 0; i <= _stacks; i++ ){             //ç·¯åº¦
-		for( j = 0; j < _slices; j++ ){          //çµŒåº¦
+	for( i = 0; i <= _stacks; i++ ){             //ˆÜ“x
+		for( j = 0; j < _slices; j++ ){          //Œo“x
 			glVertex3f( globev[i][j].x, globev[i][j].y, globev[i][j].z );
 		}
 	}
@@ -866,7 +866,7 @@ void makeGlobe( void )
 */
 
 /*------------------------------------------------------------------ drawObj
- * drawGlobe:ä½¿ã£ã¦ã„ãªã„é–¢æ•°
+ * drawGlobe:g‚Á‚Ä‚¢‚È‚¢ŠÖ”
  *--------*/
 /*
 void drawGlobe()
@@ -877,18 +877,18 @@ void drawGlobe()
 
 	//glEnable( GL_AUTO_NORMAL );
 	glEnable( GL_NORMALIZE );
-	//å—æ¥µ
+	//“ì‹É
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f( globev[0][0].x, globev[0][0].y, globev[0][0].z );
-	for( j = _slices - 1; j >= 0; j-- ){               //çµŒåº¦
-		glNormal3f( globev[1][j].x, globev[1][j].y, globev[1][j].z ); //æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+	for( j = _slices - 1; j >= 0; j-- ){               //Œo“x
+		glNormal3f( globev[1][j].x, globev[1][j].y, globev[1][j].z ); //–@üƒxƒNƒgƒ‹
 		glVertex3f( globev[1][j].x, globev[1][j].y, globev[1][j].z );
 	}
 	glNormal3f( globev[1][_slices - 1].x, globev[1][_slices - 1].y, globev[1][_slices - 1].z );
 	glVertex3f( globev[1][_slices - 1].x, globev[1][_slices - 1].y, globev[1][_slices - 1].z );
 	glEnd();
 
-	//ãƒ™ãƒ«ãƒˆ
+	//ƒxƒ‹ƒg
 	glBegin(GL_TRIANGLE_STRIP);
 	for( i = 1; i < _stacks-1; i++ ){ 
 		for( j = 0; j < _slices; j++ ){
@@ -905,10 +905,10 @@ void drawGlobe()
 	}
 	glEnd();
 
-	//åŒ—æ¥µ
+	//–k‹É
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f( globev[_stacks][0].x, globev[_stacks][0].y, globev[_stacks][0].z );
-	for( j = 0; j < _slices; j++ ){              //çµŒåº¦
+	for( j = 0; j < _slices; j++ ){              //Œo“x
 		glNormal3f( globev[_stacks - 1][j].x, globev[_stacks - 1][j].y, globev[_stacks - 1][j].z );
 		glVertex3f( globev[_stacks - 1][j].x, globev[_stacks - 1][j].y, globev[_stacks - 1][j].z );
 	}

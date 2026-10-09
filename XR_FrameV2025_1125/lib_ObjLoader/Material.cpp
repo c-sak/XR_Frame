@@ -1,21 +1,21 @@
-ï»¿#include ".\material.h"
+#include ".\material.h"
 
 //-----------------------------------------------------------------//
-// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                        //
+// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^                                        //
 //-----------------------------------------------------------------//
 CMaterial::CMaterial(void)
 {
 }
 
 //-----------------------------------------------------------------//
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                    //
+// ƒfƒXƒgƒ‰ƒNƒ^                                                    //
 //-----------------------------------------------------------------//
 CMaterial::~CMaterial(void)
 {
 }
 
 //-----------------------------------------------------------------//
-// Diffuse(æ‹¡æ•£å…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚                                 //
+// Diffuse(ŠgUŒõ)İ’è‚ğs‚¢‚Ü‚·B                                 //
 //-----------------------------------------------------------------//
 void CMaterial::setDiffuse(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
@@ -28,7 +28,7 @@ void CMaterial::setDiffuse(int val, GLfloat red, GLfloat green, GLfloat blue, GL
 }
 
 //-----------------------------------------------------------------//
-// Ambient(ç’°å¢ƒå…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚                                 //
+// Ambient(ŠÂ‹«Œõ)İ’è‚ğs‚¢‚Ü‚·B                                 //
 //-----------------------------------------------------------------//
 void CMaterial::setAmbient(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
@@ -42,7 +42,7 @@ void CMaterial::setAmbient(int val, GLfloat red, GLfloat green, GLfloat blue, GL
 }
 
 //-----------------------------------------------------------------//
-// Specular(é¡é¢å…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚                                //
+// Specular(‹¾–ÊŒõ)İ’è‚ğs‚¢‚Ü‚·B                                //
 //-----------------------------------------------------------------//
 void CMaterial::setSpecular(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
@@ -55,7 +55,7 @@ void CMaterial::setSpecular(int val, GLfloat red, GLfloat green, GLfloat blue, G
 }
 
 //-----------------------------------------------------------------//
-// Emission(æ”¾å°„å…‰)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚                                //
+// Emission(•úËŒõ)İ’è‚ğs‚¢‚Ü‚·B                                //
 //-----------------------------------------------------------------//
 void CMaterial::setEmission(int val, GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
@@ -68,7 +68,7 @@ void CMaterial::setEmission(int val, GLfloat red, GLfloat green, GLfloat blue, G
 }
 
 //-----------------------------------------------------------------//
-// Shininess(é¡é¢æŒ‡æ•°)è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚                             //
+// Shininess(‹¾–Êw”)İ’è‚ğs‚¢‚Ü‚·B                             //
 //-----------------------------------------------------------------//
 void CMaterial::setShininess(int val1, GLfloat val2)
 {
@@ -76,11 +76,11 @@ void CMaterial::setShininess(int val1, GLfloat val2)
 }
 
 //-----------------------------------------------------------------//
-// å†…éƒ¨ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ã‚’è¡Œã„ã¾ã™ã€‚                                  //
+// “à•”ƒf[ƒ^‚Ì‰Šú‰»‚ğs‚¢‚Ü‚·B                                  //
 //-----------------------------------------------------------------//
 void CMaterial::clear(void)
 {
-  // DIFFUSEè¨­å®šå€¤
+  // DIFFUSEİ’è’l
   diffuse[0] = GL_FRONT;
   diffuse[1] = 0.8f;
   diffuse[2] = 0.8f;
@@ -88,7 +88,7 @@ void CMaterial::clear(void)
   diffuse[4] = 1.0f;
   setDiffuse((int)diffuse[0], diffuse[1], diffuse[2], diffuse[3], diffuse[4]);
 
-  // AMBIENTè¨­å®šå€¤
+  // AMBIENTİ’è’l
   ambient[0] = GL_FRONT;
   ambient[1] = 0.2f;
   ambient[2] = 0.2f;
@@ -96,7 +96,7 @@ void CMaterial::clear(void)
   ambient[4] = 1.0f;
   setAmbient((int)ambient[0], ambient[1], ambient[2], ambient[3], ambient[4]);
   
-  // SPECULARè¨­å®šå€¤
+  // SPECULARİ’è’l
   specular[0] = GL_FRONT;
   specular[1] = 0.0f;
   specular[2] = 0.0f;  
@@ -104,7 +104,7 @@ void CMaterial::clear(void)
   specular[4] = 1.0f;
   setSpecular((int)specular[0], specular[1], specular[2], specular[3], specular[4]);
 
-  // EMISSIONè¨­å®šå€¤
+  // EMISSIONİ’è’l
   emission[0] = GL_FRONT;
   emission[1] = 0.0f;
   emission[2] = 0.0f;
@@ -112,7 +112,7 @@ void CMaterial::clear(void)
   emission[4] = 1.0f;
   setEmission((int)emission[0], emission[1], emission[2], emission[3], emission[4]);
 
-  // SHAININESSè¨­å®šå€¤
+  // SHAININESSİ’è’l
   shininess[0] = GL_FRONT;
   shininess[1] = 0.0f;
   setShininess((int)shininess[0], shininess[1]);

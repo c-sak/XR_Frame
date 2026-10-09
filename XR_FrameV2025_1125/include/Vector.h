@@ -1,74 +1,74 @@
-ï»¿#pragma once
+#pragma once
 
-/* ãƒ™ã‚¯ãƒˆãƒ«é–¢æ•°
-* OpenGLéä¾å­˜
+/* ƒxƒNƒgƒ‹ŠÖ”
+* OpenGL”ñˆË‘¶
 */
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«ã‚’æç”»ã™ã‚‹
+//-------- ƒxƒNƒgƒ‹‚ğ•`‰æ‚·‚é
 void vectorDraw(vector_t* p, vector_t* v);
 void vectorDrawAtoB(vector_t* a, vector_t* b);
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«vã®æˆåˆ†è¡¨ç¤º
+//-------- ƒxƒNƒgƒ‹v‚Ì¬•ª•\¦
 void vectorPrint(const char *head, const vector_t* v);
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«vã¸ã®å€¤(x,y,z)ã®è¨­å®š
+//-------- ƒxƒNƒgƒ‹v‚Ö‚Ì’l(x,y,z)‚Ìİ’è
 void vectorSet( vector_t *v, float x, float y, float z );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«srcã‚’dstã«ã‚³ãƒ”ãƒ¼
+//-------- ƒxƒNƒgƒ‹src‚ğdst‚ÉƒRƒs[
 void vectorCopy( vector_t *dst, const vector_t *src );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«vã®å¤§ãã•
+//-------- ƒxƒNƒgƒ‹v‚Ì‘å‚«‚³
 float vectorNorm( const vector_t *v );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«vã®å¤§ãã•ã®2ä¹—
+//-------- ƒxƒNƒgƒ‹v‚Ì‘å‚«‚³‚Ì2æ
 float vectorNorm2( const vector_t *v );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«vã‚’å˜ä½ãƒ™ã‚¯ãƒˆãƒ«åŒ–
+//-------- ƒxƒNƒgƒ‹v‚ğ’PˆÊƒxƒNƒgƒ‹‰»
 float vectorNormalize( const vector_t *v );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«aã¨bã®å†…ç©
+//-------- ƒxƒNƒgƒ‹a‚Æb‚Ì“àÏ
 float vectorDot( const vector_t *a, const vector_t *b );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«aã¨bã®å¤–ç©aXb
+//-------- ƒxƒNƒgƒ‹a‚Æb‚ÌŠOÏaXb
 void vectorCross( vector_t *aXb, const vector_t *a, const vector_t *b );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«åˆæˆ v = a + b
+//-------- ƒxƒNƒgƒ‹‡¬ v = a + b
 void vectorAdd( vector_t *v, const vector_t *a, const vector_t *b );
 
-//-------- å·®åˆ†ãƒ™ã‚¯ãƒˆãƒ« v = a - b
+//-------- ·•ªƒxƒNƒgƒ‹ v = a - b
 void vectorSub( vector_t *v, const vector_t *a, const vector_t *b );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«vã®å®šæ•°å€ã®ãƒ™ã‚¯ãƒˆãƒ«sv
+//-------- ƒxƒNƒgƒ‹v‚Ì’è””{‚ÌƒxƒNƒgƒ‹sv
 void vectorScale(vector_t* sv, float s, const vector_t* v);
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ« a ã¨ b ã®å„æˆåˆ†åŒå£«ã‚’æ›ã‘ãŸãƒ™ã‚¯ãƒˆãƒ« abï¼ˆå†…ç©ã§ã¯ãªãï¼‰
+//-------- ƒxƒNƒgƒ‹ a ‚Æ b ‚ÌŠe¬•ª“¯m‚ğŠ|‚¯‚½ƒxƒNƒgƒ‹ abi“àÏ‚Å‚Í‚È‚­j
 void vectorMult(vector_t* ab, const vector_t* a, const vector_t* b);
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«åˆæˆ v = k * a + ( 1 - k ) * b
+//-------- ƒxƒNƒgƒ‹‡¬ v = k * a + ( 1 - k ) * b
 void vectorBlend( vector_t *v, float k, const vector_t *a, const vector_t *b );
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«aã¨bã®é–“ã®è§’åº¦(0,180)
+//-------- ƒxƒNƒgƒ‹a‚Æb‚ÌŠÔ‚ÌŠp“x(0,180)
 float vectorAngle( const vector_t *a, const vector_t *b );
 
-//-------- å‚ç…§ãƒ™ã‚¯ãƒˆãƒ« ref ã‚’è»¸ã¨ã—ãŸãƒ™ã‚¯ãƒˆãƒ« a ã¨ãƒ™ã‚¯ãƒˆãƒ« b ã®é–“ã®è§’åº¦(-180,180)
+//-------- QÆƒxƒNƒgƒ‹ ref ‚ğ²‚Æ‚µ‚½ƒxƒNƒgƒ‹ a ‚ÆƒxƒNƒgƒ‹ b ‚ÌŠÔ‚ÌŠp“x(-180,180)
 float vectorAngleRef(const vector_t* a, const vector_t* b, const vector_t* ref);
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ«viã‚’ãƒãƒˆãƒªã‚¯ã‚¹mã§ãƒ™ã‚¯ãƒˆãƒ«voã«å¤‰æ›
+//-------- ƒxƒNƒgƒ‹vi‚ğƒ}ƒgƒŠƒNƒXm‚ÅƒxƒNƒgƒ‹vo‚É•ÏŠ·
 void vectorXform(vector_t * vo, const vector_t * vi, const matrix_t m);
 
-//-------- ã‚ªã‚¤ãƒ©ãƒ¼è§’ rot ã« (roll, pitch, yaw) ã‚’è¨­å®š
+//-------- ƒIƒCƒ‰[Šp rot ‚É (roll, pitch, yaw) ‚ğİ’è
 void eulerSet(euler_t * rot, float roll, float pitch, float yaw);
 
 void eulerCopy(euler_t* dst, const euler_t* src);
 
-//-------- ãƒ™ã‚¯ãƒˆãƒ« v ã‹ã‚‰ã‚ªã‚¤ãƒ©ãƒ¼è§’ angle ã¸å¤‰æ›(0,pitch,yaw)
+//-------- ƒxƒNƒgƒ‹ v ‚©‚çƒIƒCƒ‰[Šp angle ‚Ö•ÏŠ·(0,pitch,yaw)
 float VectorToPolar(vector_t* v, euler_t* angle);
-//-------- ã‚ªã‚¤ãƒ©ãƒ¼è§’ angle ã‹ã‚‰ãƒ™ã‚¯ãƒˆãƒ« v ã¸å¤‰æ›
+//-------- ƒIƒCƒ‰[Šp angle ‚©‚çƒxƒNƒgƒ‹ v ‚Ö•ÏŠ·
 void PolarToVector(euler_t* angle, vector_t* v);
 
-//-------- ä¸€æ§˜ãƒ©ãƒ³ãƒ€ãƒ é–¢æ•°
+//-------- ˆê—lƒ‰ƒ“ƒ_ƒ€ŠÖ”
 float uniformRandom(float min, float max);
-//-------- ç°¡æ˜“ã‚¬ã‚¦ã‚·ã‚¢ãƒ³ãƒ©ãƒ³ãƒ€ãƒ é–¢æ•°
+//-------- ŠÈˆÕƒKƒEƒVƒAƒ“ƒ‰ƒ“ƒ_ƒ€ŠÖ”
 float gaussianRandom(float rmin, float rmax);
-//-------- æ•´æ•°å‹ãƒ©ãƒ³ãƒ€ãƒ é–¢æ•°
+//-------- ®”Œ^ƒ‰ƒ“ƒ_ƒ€ŠÖ”
 int diceRandom(int min, int max);

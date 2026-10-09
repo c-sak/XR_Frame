@@ -1,30 +1,30 @@
-ï»¿#ifndef __DEPTH_H__
+#ifndef __DEPTH_H__
 #define __DEPTH_H__
 
 //--------------------------------------------------------------------------------------
-//â–¼ç‚¹ç¾¤ã‚’æç”»ã™ã‚‹ï¼ˆéãƒ¦ãƒ¼ã‚¶é–¢æ•°ï¼šezDepthã‚¯ãƒ©ã‚¹ã§ã®ã¿ä½¿ç”¨ã™ã‚‹é–¢æ•°ï¼‰
+//¥“_ŒQ‚ğ•`‰æ‚·‚éi”ñƒ†[ƒUŠÖ”FezDepthƒNƒ‰ƒX‚Å‚Ì‚İg—p‚·‚éŠÖ”j
 void drawPointCloud( unsigned short *depth, unsigned char *image, 
 	int width, int height, float fovy, float clip_far, float clip_near, bool mirror );
 //--------
-//â–¼è·é›¢ç”»åƒã‚’Zãƒãƒƒãƒ•ã‚¡ç”¨ã®Zå€¤ç”»åƒã«å¤‰æ›ã™ã‚‹
+//¥‹——£‰æ‘œ‚ğZƒoƒbƒtƒ@—p‚ÌZ’l‰æ‘œ‚É•ÏŠ·‚·‚é
 void depthToZ( float *zimage, unsigned short *depth, int w, int h, float n, float f );
 float _depthToZ( unsigned short depth, float n, float f );
 //--------
-//â–¼Zå€¤ç”»åƒã‚’Zãƒãƒƒãƒ•ã‚¡ã«æ›¸ãè¾¼ã‚€ï¼ˆéãƒ¦ãƒ¼ã‚¶é–¢æ•°ï¼‰
-//zimage: Zå€¤ç”»åƒ
-//w, h: Zå€¤ç”»åƒã®ã‚µã‚¤ã‚º
-//win_w, win_h: æç”»ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚µã‚¤ã‚º
-//reverse: å·¦å³åè»¢ãƒ•ãƒ©ã‚°
+//¥Z’l‰æ‘œ‚ğZƒoƒbƒtƒ@‚É‘‚«‚Şi”ñƒ†[ƒUŠÖ”j
+//zimage: Z’l‰æ‘œ
+//w, h: Z’l‰æ‘œ‚ÌƒTƒCƒY
+//win_w, win_h: •`‰æƒEƒBƒ“ƒhƒE‚ÌƒTƒCƒY
+//reverse: ¶‰E”½“]ƒtƒ‰ƒO
 void drawToZ( float *zimage, int w, int h, int win_w, int win_h, bool reverse );
 //--------
-//â–¼
+//¥
 void drawDepthView( void );
 //-------------------------------------------------------------------------------------
 class ezDepth {
 public:
 	ezDepth(){}
 	~ezDepth(){}
-	//â–¼KINECTã®ãƒ‡ãƒ—ã‚¹ã‚«ãƒ¡ãƒ©ã®ç”»åƒã‚µã‚¤ã‚ºãƒ»ç”»è§’ãƒ»ã‚¯ãƒªãƒƒãƒ—ãƒ¬ãƒ³ã‚¸ã‚’è¨­å®šã™ã‚‹
+	//¥KINECT‚ÌƒfƒvƒXƒJƒƒ‰‚Ì‰æ‘œƒTƒCƒYE‰æŠpEƒNƒŠƒbƒvƒŒƒ“ƒW‚ğİ’è‚·‚é
 	void open( int w, int h, float fovy, float clip_near, float clip_far ){
 		//_color = (unsigned char *)malloc( w * h * sizeof(unsigned char) * 4 );
 		//_depth = (unsigned short*)malloc( w * h * sizeof(unsigned short ) );
@@ -36,7 +36,7 @@ public:
 		_clip_near = clip_near;
 		_clip_far = clip_far;
 	}
-	//â–¼KINECTã‹ã‚‰ã®ã‚«ãƒ©ãƒ¼ç”»åƒã¨ãƒ‡ãƒ—ã‚¹ç”»åƒã®é…åˆ—ã‚’ç´ã¥ã‘ã‚‹
+	//¥KINECT‚©‚ç‚ÌƒJƒ‰[‰æ‘œ‚ÆƒfƒvƒX‰æ‘œ‚Ì”z—ñ‚ğ•R‚Ã‚¯‚é
 	void attach( unsigned char *image, unsigned short *depth ){
 		_color = image;
 		_depth = depth;

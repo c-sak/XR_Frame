@@ -1,4 +1,4 @@
-ï»¿#ifndef __SIM_H__
+#ifndef __SIM_H__
 #define __SIM_H__
 
 #include "platform.h"
@@ -31,32 +31,32 @@ void DrawScene( void );
 //-------- simulation data
 typedef struct {
 
-	ezCamera *camL; //å³ç›®ã‚«ãƒ¡ãƒ©
-	ezCamera *camR; //å·¦ç›®ã‚«ãƒ¡ãƒ©
+	ezCamera *camL; //‰E–ÚƒJƒƒ‰
+	ezCamera *camR; //¶–ÚƒJƒƒ‰
 
 	int time;
 
-	float clip_near;//ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—è·é›¢
-	float clip_far;//ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—è·é›¢
-	color_t fog; //ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼
-	color_t sky; //èƒŒæ™¯ã‚«ãƒ©ãƒ¼
-    //////// ãƒ¦ãƒ¼ã‚¶å®šç¾©ã®ã‚·ãƒ¼ãƒ³ã«ã¤ã„ã¦ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã“ã“ã«ã¾ã¨ã‚ã‚‹
+	float clip_near;//ƒjƒAƒNƒŠƒbƒv‹——£
+	float clip_far;//ƒtƒ@[ƒNƒŠƒbƒv‹——£
+	color_t fog; //ƒtƒHƒOƒJƒ‰[
+	color_t sky; //”wŒiƒJƒ‰[
+    //////// ƒ†[ƒU’è‹`‚ÌƒV[ƒ“‚É‚Â‚¢‚Ä‚Ìƒf[ƒ^‚ğ‚±‚±‚É‚Ü‚Æ‚ß‚é
 
-	ObjDataT cube; ///////â—†ã‚­ãƒ¥ãƒ¼ãƒ–ï¼ˆã€Œæ¿ã€ï¼‰
-	ObjDataT sphere; /////â—†çƒä½“ï¼ˆã€Œå¿ƒè‡“ã€ï¼‰
+	ObjDataT cube; ///////ŸƒLƒ…[ƒuiu”Âvj
+	ObjDataT sphere; /////Ÿ‹…‘ÌiuS‘Ÿvj
 
-	ObjDataT player; //â˜…ãƒ—ãƒ¬ã‚¤ãƒ¤ï¼ˆã®è¶³å…ƒâ˜…ï¼‰ã‚’ã‚ã‚‰ã‚ã™ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	ObjDataT player; //šƒvƒŒƒCƒ„i‚Ì‘«Œ³šj‚ğ‚ ‚ç‚í‚·ƒIƒuƒWƒFƒNƒg
 
-	ObjDataT head;//â˜…
+	ObjDataT head;//š
 	ObjDataT body;
-	ObjDataT handL;//â˜…
-	ObjDataT handR;//â˜…
+	ObjDataT handL;//š
+	ObjDataT handR;//š
 	ObjDataT footL;
 	ObjDataT footR;
 
-	ObjDataT *active_camera; //ã‚«ãƒ¡ãƒ©ã®ãƒã‚¤ãƒ³ã‚¿å¤‰æ•°
+	ObjDataT *active_camera; //ƒJƒƒ‰‚Ìƒ|ƒCƒ“ƒ^•Ï”
 
-	//---- MREALç”¨å¤‰æ•°â˜…
+	//---- MREAL—p•Ï”š
 	ObjDataT target[N_TARGET];
 	int n_cam;
 	TargetT mrealCamera[8];

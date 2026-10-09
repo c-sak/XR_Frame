@@ -1,4 +1,4 @@
-ï»¿#define _CRT_SECURE_NO_WARNINGS //è¿½åŠ 
+#define _CRT_SECURE_NO_WARNINGS //’Ç‰Á
 
 #include <stdio.h>
 #include <tchar.h>
@@ -67,14 +67,14 @@ signed char SendUARTMessageLength(const unsigned long ulChannelNo, const char ch
 	memcpy(&chrDataToSend[usLen],chrSendBuffer,usLen);
 
 	GetCommState(hComDev[ulChannelNo] ,&dcb);
-	dcb.fDtrControl = 0;//DTR = 1;ï½·ï½¢ï¾‹ï¾
+	dcb.fDtrControl = 0;//DTR = 1;·¢ËÍ
 	SetCommState(hComDev[ulChannelNo] ,&dcb);
 
 	if ( WriteFile(hComDev[ulChannelNo],chrSendBuffer,usLen,&iR,&(stcWriteStatus[ulChannelNo])) || GetLastError() != ERROR_IO_PENDING  ) 
 		return -1;
 	dwRes = WaitForSingleObject(stcWriteStatus[ulChannelNo].hEvent,1000);
 	Sleep(10);
-	dcb.fDtrControl = 1;//DTR = 0;ï½½ï¾“ï¾Šï¾•
+	dcb.fDtrControl = 1;//DTR = 0;½ÓÊÕ
 	SetCommState(hComDev[ulChannelNo] ,&dcb);
 	Sleep(10);
 
@@ -221,8 +221,8 @@ signed char OpenCOMDevice(const unsigned long ulPortNo,const unsigned long ulBau
 		dcb.BaudRate = ulBaundrate;
 	dcb.fParity = NOPARITY;
 	dcb.ByteSize=8;
-	dcb.fDtrControl = 1;//DTR = 0;ï½½ï¾“ï¾Šï¾•
-	dcb.fRtsControl = 0;//RTS = 0;ï½½ï¾“ï¾Šï¾•
+	dcb.fDtrControl = 1;//DTR = 0;½ÓÊÕ
+	dcb.fRtsControl = 0;//RTS = 0;½ÓÊÕ
 	dcb.StopBits=ONESTOPBIT;
 
 	SetCommState(hComDev[ulPortNo] ,&dcb);

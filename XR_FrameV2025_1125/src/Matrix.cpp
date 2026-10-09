@@ -1,4 +1,4 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 #include "calc.h"
 
 #include "Vector.h"
@@ -216,10 +216,10 @@ void matrixRot(matrix_t m, float a, float x, float y, float z)
 	float c = cosf(a * RADIAN);
 	float c1 = 1.0 - c;
 	float s = sinf(a * RADIAN);
-	float l = sqrtf(x * x + y * y + z * z);//â˜…
-	x /= l; //â˜…
-	y /= l; //â˜…å›è»¢è»¸ã‚’å˜ä½ãƒ™ã‚¯ãƒˆãƒ«åŒ–ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
-	z /= l; //â˜…
+	float l = sqrtf(x * x + y * y + z * z);//š
+	x /= l; //š
+	y /= l; //š‰ñ“]²‚ğ’PˆÊƒxƒNƒgƒ‹‰»‚·‚é•K—v‚ª‚ ‚é
+	z /= l; //š
 	//----1st row
 	m[0] = x * x * c1 + c;
 	m[1] = x * y * c1 + z * s;

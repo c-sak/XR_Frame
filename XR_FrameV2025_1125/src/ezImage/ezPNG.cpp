@@ -1,4 +1,4 @@
-ï»¿//#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
 #include "ezPNG.h"
 #include "libpng/png.h"
 #include <stdio.h>
@@ -14,7 +14,7 @@ unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *ima
 	png_bytep *row_pointers;
 	unsigned char *rawimage;
 
-	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
+	//ƒtƒ@ƒCƒ‹‚ğŠJ‚­
 	FILE *fp = fopen(file, "rb");
 	if (!fp) {
 		printf("Failed to open PNG file %s\n", file);
@@ -22,7 +22,7 @@ unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *ima
 		return NULL;
 	}
 
-	//PNGæ§‹é€ ä½“ã¨æƒ…å ±æ§‹é€ ä½“ã®ä½œæˆ
+	//PNG\‘¢‘Ì‚Æî•ñ\‘¢‘Ì‚Ìì¬
 	m_png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 	if (!m_png_ptr) {
 		printf("Failed to create PNG read struct\n");
@@ -38,7 +38,7 @@ unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *ima
 		return NULL;
 	}
 
-	//ã‚¨ãƒ©ãƒ¼ãƒãƒ³ãƒ‰ãƒªãƒ³ã‚°
+	//ƒGƒ‰[ƒnƒ“ƒhƒŠƒ“ƒO
 	if (setjmp(png_jmpbuf(m_png_ptr))) {
 		png_destroy_read_struct(&m_png_ptr, &m_info_ptr, (png_infopp)NULL);  // Cleanup
 		fclose(fp);
@@ -48,26 +48,26 @@ unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *ima
 	png_init_io(m_png_ptr, fp);
 	png_read_info(m_png_ptr, m_info_ptr);
 	
-	// ç”»åƒã®å¹…ã¨é«˜ã•ã‚’å–å¾—
+	// ‰æ‘œ‚Ì•‚Æ‚‚³‚ğæ“¾
 	*w = png_get_image_width(m_png_ptr, m_info_ptr);
 	*h = png_get_image_height(m_png_ptr, m_info_ptr);
 
-	// PNGã®è‰²ã‚¿ã‚¤ãƒ—ã¨ãƒ“ãƒƒãƒˆæ·±åº¦ã‚’å–å¾—
+	// PNG‚ÌFƒ^ƒCƒv‚Æƒrƒbƒg[“x‚ğæ“¾
 	png_byte color_type = png_get_color_type(m_png_ptr, m_info_ptr);
 	png_byte bit_depth = png_get_bit_depth(m_png_ptr, m_info_ptr);
 
-	// 16ãƒ“ãƒƒãƒˆã®è‰²ã‚’8ãƒ“ãƒƒãƒˆã«å¤‰æ›
+	// 16ƒrƒbƒg‚ÌF‚ğ8ƒrƒbƒg‚É•ÏŠ·
 	if (png_get_bit_depth(m_png_ptr, m_info_ptr) == 16) {
 		png_set_strip_16(m_png_ptr);
 	}
 
-	// RGBAã§8ãƒ“ãƒƒãƒˆæ·±åº¦ã§ãªã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
+	// RGBA‚Å8ƒrƒbƒg[“x‚Å‚È‚¢ê‡‚ÍƒGƒ‰[
 	if (color_type != PNG_COLOR_TYPE_RGBA || bit_depth != 8) {
 		printf("This PNG file is not 8bit!\n");
 		return NULL;
 	}
 
-	// ã‚¢ãƒ«ãƒ•ã‚¡ãƒãƒ£ãƒ³ãƒãƒ«ã®æœ‰ç„¡ã‚’ç¢ºèªã—ã¦æ‹¡å¼µ
+	// ƒAƒ‹ƒtƒ@ƒ`ƒƒƒ“ƒlƒ‹‚Ì—L–³‚ğŠm”F‚µ‚ÄŠg’£
 	if (color_type == PNG_COLOR_TYPE_PALETTE) {
 		png_set_palette_to_rgb(m_png_ptr);
 	}
@@ -78,26 +78,26 @@ unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *ima
 		png_set_tRNS_to_alpha(m_png_ptr);
 	}
 
-	// RGBAã¾ãŸã¯GRAY + ALPHAã§ãªã„å ´åˆã¯ã€ã‚¢ãƒ«ãƒ•ã‚¡ãƒãƒ£ãƒ³ãƒãƒ«ã‚’è¿½åŠ 
+	// RGBA‚Ü‚½‚ÍGRAY + ALPHA‚Å‚È‚¢ê‡‚ÍAƒAƒ‹ƒtƒ@ƒ`ƒƒƒ“ƒlƒ‹‚ğ’Ç‰Á
 	if (color_type == PNG_COLOR_TYPE_RGB || color_type == PNG_COLOR_TYPE_GRAY || color_type == PNG_COLOR_TYPE_PALETTE) {
 		png_set_add_alpha(m_png_ptr, 0xFF, PNG_FILLER_AFTER);
 	}
 
-	// ä¸Šè¨˜ã®è¨­å®šã«åŸºã¥ãã€ç”»åƒã‚’èª­ã¿è¾¼ã‚€å‰ã«è¡Œã†æ›´æ–°
+	// ã‹L‚Ìİ’è‚ÉŠî‚Ã‚«A‰æ‘œ‚ğ“Ç‚İ‚Ş‘O‚És‚¤XV
 	png_read_update_info(m_png_ptr, m_info_ptr);
 
-	//ãƒ”ã‚¯ã‚»ãƒ«ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
+	//ƒsƒNƒZƒ‹ƒf[ƒ^‚Ìæ“¾
 	image = (unsigned char *)malloc(png_get_rowbytes(m_png_ptr, m_info_ptr) * (*h));
 	row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * (*h));
 	for (int y = 0; y < *h; y++) {
 		row_pointers[y] = image + y * png_get_rowbytes(m_png_ptr, m_info_ptr);
 	}
 
-	//PNGç”»åƒãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+	//PNG‰æ‘œƒf[ƒ^“Ç‚İ‚İ
 	png_read_image(m_png_ptr, row_pointers);
 
 	/*
-	// ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’imageãƒãƒƒãƒ•ã‚¡ã«ã‚³ãƒ”ãƒ¼
+	// ‰æ‘œƒf[ƒ^‚ğimageƒoƒbƒtƒ@‚ÉƒRƒs[
 	int row_bytes = png_get_rowbytes(m_png_ptr, m_info_ptr);
 	unsigned char* pImage = image;
 
@@ -106,7 +106,7 @@ unsigned char* readImagePNG(const char *file, int *w, int *h, unsigned char *ima
 		pImage += row_bytes;
 	}
 
-	//PNGã®çµ‚äº†å‡¦ç†
+	//PNG‚ÌI—¹ˆ—
 	for (int y = 0; y < *h; y++) {
 		free(row_pointers[y]);
 	}
@@ -125,11 +125,11 @@ void writeImagePNG(const char *file, unsigned char *image, int w, int h) {
 	png_infop m_info_ptr;
 	png_bytep row;
 
-	//æ›¸ãè¾¼ã¿ã®åˆæœŸåŒ–
+	//‘‚«‚İ‚Ì‰Šú‰»
 	m_png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 	m_info_ptr = png_create_info_struct(m_png_ptr);
 
-	//ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã®æ›¸ãè¾¼ã¿
+	//ƒCƒ[ƒWƒf[ƒ^‚Ì‘‚«‚İ
 	FILE *fp = fopen(file, "wb");
 	if (!fp) {
 		printf("Failed to open PNG file %s for writing\n", file);
@@ -151,7 +151,7 @@ void writeImagePNG(const char *file, unsigned char *image, int w, int h) {
 		png_write_row(m_png_ptr, row);
 	}
 
-	//PNGæ›¸ãè¾¼ã¿ã®çµ‚äº†å‡¦ç†
+	//PNG‘‚«‚İ‚ÌI—¹ˆ—
 	png_write_end(m_png_ptr, NULL);
 	png_destroy_write_struct(&m_png_ptr, &m_info_ptr);
 	fclose(fp);

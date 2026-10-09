@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 /*
 typedef struct {
 	float roll, pitch, yaw;
@@ -12,15 +12,15 @@ typedef struct{
 */
 typedef struct {
 
-	euler_t gyro;//â—†ã‚¸ãƒ£ã‚¤ãƒ­å®Ÿè£…æ¸ˆ
-	euler_t angle;//â—‡
+	euler_t gyro;//ŸƒWƒƒƒCƒÀ‘•Ï
+	euler_t angle;//
 	float zero;//
 
-	float compass;//â—†ã‚³ãƒ³ãƒ‘ã‚¹å®Ÿè£…æ¸ˆ
-	float faceup;//â—†ãƒ•ã‚§ãƒ¼ã‚¹ã‚¢ãƒƒãƒ—å®Ÿè£…æ¸ˆ
-	float north; //èµ·å‹•æ™‚ã®åŒ—ã¸ã®æ–¹ä½è§’
+	float compass;//ŸƒRƒ“ƒpƒXÀ‘•Ï
+	float faceup;//ŸƒtƒF[ƒXƒAƒbƒvÀ‘•Ï
+	float north; //‹N“®‚Ì–k‚Ö‚Ì•ûˆÊŠp
 
-	quat_t qt;//â—†ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³å®Ÿè£…æ¸ˆ
+	quat_t qt;//ŸƒNƒH[ƒ^ƒjƒIƒ“À‘•Ï
 
 	vector_t accel;
 	vector_t gravity;
@@ -31,7 +31,7 @@ typedef struct {
 	float pressure;
 	float altitude;
 
-	vector_t touch[5];//â—†ã‚¿ãƒƒãƒï¼šå®Ÿè£…æ¸ˆ
+	vector_t touch[5];//Ÿƒ^ƒbƒ`FÀ‘•Ï
 	int n_touch;
 
 } ezZigSimDataT;

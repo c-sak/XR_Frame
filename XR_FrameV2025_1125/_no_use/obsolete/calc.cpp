@@ -1,4 +1,4 @@
-ï»¿#define _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
 
 #include <math.h>
 #include <stdlib.h>
@@ -10,8 +10,8 @@
 const float radian = M_PI / 180.0;
 const float degree = 180.0 / M_PI;
 
-//â–¼ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
-//ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•
+//¥ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ðŒvŽZ‚·‚éŠÖ”
+//ƒxƒNƒgƒ‹‚Ì‘å‚«‚³
 float VectorNorm( vector_t *v )
 {
 	return sqrtf( v->x * v->x + v->y * v->y + v->z * v->z );
@@ -42,7 +42,7 @@ void DirectionAtoB( vector_t *a, vector_t *b, vector_t *dir )
 	dir->z = b->z - a->z;
 }
 
-//â–¼æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰æ–¹ä½è§’ã¨ä»°è§’ã‚’æ±‚ã‚ã‚‹é–¢æ•°
+//¥•ûŒüƒxƒNƒgƒ‹‚©‚ç•ûˆÊŠp‚Æ‹ÂŠp‚ð‹‚ß‚éŠÖ”
 float VectorToPolar( vector_t *v,  euler_t *angle )
 {
 	float d = sqrtf( v->x * v->x + v->z * v->z );

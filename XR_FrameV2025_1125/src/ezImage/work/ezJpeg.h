@@ -1,9 +1,9 @@
-ï»¿#pragma once
+#pragma once
 //ezJpeg.h
 
-//JPGç”»åƒã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã‚€
-//w, h: ç”»åƒã‚µã‚¤ã‚º
-//image: ç”»åƒãƒãƒƒãƒ•ã‚¡ã‚’æŒ‡å®šã—ãªã„å ´åˆã«ã¯ã€æ–°ã—ãé ˜åŸŸã‚’ç¢ºä¿ã—è¿”ã™
+//JPG‰æ‘œ‚ğƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
+//w, h: ‰æ‘œƒTƒCƒY
+//image: ‰æ‘œƒoƒbƒtƒ@‚ğw’è‚µ‚È‚¢ê‡‚É‚ÍAV‚µ‚­—Ìˆæ‚ğŠm•Û‚µ•Ô‚·
 unsigned char* readImageJPEG( const char *file, int *w, int *h, 
 	unsigned char *image = nullptr, bool reverse = true );
 void writeImageJPEG( const char *file, unsigned char *image, int w, int h );

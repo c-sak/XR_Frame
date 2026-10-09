@@ -1,25 +1,25 @@
-ï»¿#pragma once
+#pragma once
 
-//è¡¨ç¤ºç”»é¢
-const bool fullscreen = false; //â—†ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ•ãƒ©ã‚°
-//â€»ã‚¹ãƒ†ãƒ¬ã‚ªãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã«ã¯å¼·åˆ¶çš„ã«ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«ãªã‚Šã¾ã™
-const bool no_cursor = false;  //â—†ã‚«ãƒ¼ã‚½ãƒ«éè¡¨ç¤ºãƒ•ãƒ©ã‚°
-//ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³çŠ¶æ…‹ã®ã¨ãã‚«ãƒ¼ã‚½ãƒ«ã¯å¼·åˆ¶çš„ã«éè¡¨ç¤ºã«ãªã‚Šã¾ã™
+//•\¦‰æ–Ê
+const bool fullscreen = false; //Ÿƒtƒ‹ƒXƒNƒŠ[ƒ“ƒtƒ‰ƒO
+//¦ƒXƒeƒŒƒIƒ‚[ƒh‚Ì‚Æ‚«‚É‚Í‹­§“I‚Éƒtƒ‹ƒXƒNƒŠ[ƒ“‚É‚È‚è‚Ü‚·
+const bool no_cursor = false;  //ŸƒJ[ƒ\ƒ‹”ñ•\¦ƒtƒ‰ƒO
+//ƒtƒ‹ƒXƒNƒŠ[ƒ“ó‘Ô‚Ì‚Æ‚«ƒJ[ƒ\ƒ‹‚Í‹­§“I‚É”ñ•\¦‚É‚È‚è‚Ü‚·
 
-//HMDãƒ¢ãƒ¼ãƒ‰
-const bool hmd = false; //â—†HMDãƒ¢ãƒ¼ãƒ‰ãƒ•ãƒ©ã‚°
-const bool distortion = true; //â—†HMDæ­ªè£œæ­£ãƒ•ãƒ©ã‚°
+//HMDƒ‚[ƒh
+const bool hmd = false; //ŸHMDƒ‚[ƒhƒtƒ‰ƒO
+const bool distortion = true; //ŸHMD˜c•â³ƒtƒ‰ƒO
 
-//ï¼ŠHMDãƒ¢ãƒ¼ãƒ‰ãŒã‚ªãƒ•ã®ã¨ãä¸‹è¨˜è¨­å®šãŒæ©Ÿèƒ½ã—ã¾ã™
-const bool cylindrical = false; //â—†ã‚·ãƒªãƒ³ãƒ‰ãƒªã‚«ãƒ«ãƒ•ãƒ©ã‚°
-const bool stereo = false;    //â—†ã‚¹ãƒ†ãƒ¬ã‚ªãƒ•ãƒ©ã‚°
-//â€»ã‚¹ãƒ†ãƒ¬ã‚ªãƒ¢ãƒ¼ãƒ‰ã®ã¨ãã«ã¯å¼·åˆ¶çš„ã«ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«ãªã‚Šã¾ã™
-const bool swapeyes = false; //â—†å·¦å³ç”»åƒã®å…¥ã‚Œæ›¿ãˆ 
-const float parallax = 0.0625; //â—†å·¦å³ç³é–“è·é›¢
-const bool quadbuffer = false; //â—†æ¶²æ™¶ã‚·ãƒ£ãƒƒã‚¿ãƒ¡ã‚¬ãƒå¯¾å¿œ
-//â€»ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã‚«ãƒ¼ãƒ‰ã«ã¯NVIDIA QuadroãŒå¿…è¦ã§ã™
-//å¯¾å¿œã—ã¦ã„ãªã„PCç’°å¢ƒã§ã¯ã€ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒè½ã¡ã¾ã™
+//–HMDƒ‚[ƒh‚ªƒIƒt‚Ì‚Æ‚«‰º‹Lİ’è‚ª‹@”\‚µ‚Ü‚·
+const bool cylindrical = false; //ŸƒVƒŠƒ“ƒhƒŠƒJƒ‹ƒtƒ‰ƒO
+const bool stereo = false;    //ŸƒXƒeƒŒƒIƒtƒ‰ƒO
+//¦ƒXƒeƒŒƒIƒ‚[ƒh‚Ì‚Æ‚«‚É‚Í‹­§“I‚Éƒtƒ‹ƒXƒNƒŠ[ƒ“‚É‚È‚è‚Ü‚·
+const bool swapeyes = false; //Ÿ¶‰E‰æ‘œ‚Ì“ü‚ê‘Ö‚¦ 
+const float parallax = 0.0625; //Ÿ¶‰E“µŠÔ‹——£
+const bool quadbuffer = false; //Ÿ‰t»ƒVƒƒƒbƒ^ƒƒKƒl‘Î‰
+//¦ƒOƒ‰ƒtƒBƒbƒNƒXƒJ[ƒh‚É‚ÍNVIDIA Quadro‚ª•K—v‚Å‚·
+//‘Î‰‚µ‚Ä‚¢‚È‚¢PCŠÂ‹«‚Å‚ÍAƒvƒƒOƒ‰ƒ€‚ª—‚¿‚Ü‚·
 
-//ãƒˆãƒ©ãƒƒã‚­ãƒ³ã‚°ãƒ‡ãƒã‚¤ã‚¹
-const bool use_tracker = false; //â—†ãƒˆãƒ©ãƒƒã‚«ãƒ¼ãƒ•ãƒ©ã‚°
-const bool use_gyro = false; //â—†ã‚¸ãƒ£ã‚¤ãƒ­ãƒ•ãƒ©ã‚°
+//ƒgƒ‰ƒbƒLƒ“ƒOƒfƒoƒCƒX
+const bool use_tracker = false; //Ÿƒgƒ‰ƒbƒJ[ƒtƒ‰ƒO
+const bool use_gyro = false; //ŸƒWƒƒƒCƒƒtƒ‰ƒO

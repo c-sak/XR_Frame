@@ -1,4 +1,4 @@
-ï»¿/******************************************************************************
+/******************************************************************************
  * glsample_frame.cpp 
  * Level 3 - base framework */
 
@@ -16,15 +16,15 @@ void HeadLight();
 void Lighting();
 
 /*------------------------------------------------------------------- display
- * View_Cylindical:ã‚·ãƒªãƒ³ãƒ‰ãƒªã‚«ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ç”¨ã®ç”»åƒç”Ÿæˆ 
+ * View_Cylindical:ƒVƒŠƒ“ƒhƒŠƒJƒ‹ƒXƒNƒŠ[ƒ“—p‚Ì‰æ‘œ¶¬ 
  */
 void cylindricalView( float dx )
 {
 	int i;
-	float glnear = simdata.clip_near; //ãƒ‹ã‚¢ãƒ—ãƒ¬ãƒ¼ãƒ³è·é›¢
-    float glfar = simdata.clip_far;   ////ãƒ•ã‚¡ãƒ¼ãƒ—ãƒ¬ãƒ¼ãƒ³è·é›¢
-    const float view_angle_h = 125.0; //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³è¦–é‡Žè§’ï¼ˆã‚·ã‚¹ãƒ†ãƒ å›ºæœ‰ï¼‰
-    const int n_views = 5; //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åˆ†å‰²æ•°ï¼ˆå¥‡æ•°æŽ¨å¥¨,å¤šãã™ã‚‹ã¨é«˜è² è·æ³¨æ„ï¼‰
+	float glnear = simdata.clip_near; //ƒjƒAƒvƒŒ[ƒ“‹——£
+    float glfar = simdata.clip_far;   ////ƒtƒ@[ƒvƒŒ[ƒ“‹——£
+    const float view_angle_h = 125.0; //ƒXƒNƒŠ[ƒ“Ž‹–ìŠpiƒVƒXƒeƒ€ŒÅ—Lj
+    const int n_views = 5; //ƒXƒNƒŠ[ƒ“•ªŠ„”iŠï”„§,‘½‚­‚·‚é‚Æ‚•‰‰×’ˆÓj
 
 	ObjDataT player_world;
 
@@ -49,7 +49,7 @@ void cylindricalView( float dx )
     top    =   right * height / width;
     bottom = - top;
 
-    //â– ãƒãƒƒãƒ•ã‚¡ã‚¯ãƒªã‚¢
+    //¡ƒoƒbƒtƒ@ƒNƒŠƒA
     //glViewport( 0, 0, g_width, g_height );
     //glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -74,17 +74,17 @@ void cylindricalView( float dx )
 		glTranslatef( dx, 0.0, 0.0 );
 
 /*
-        //â–¼ã‚«ãƒ¡ãƒ©ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+        //¥ƒJƒƒ‰ƒIƒtƒZƒbƒg
 		gluLookAt(
 			0.0, 1.6, 0.0,
 			0.0, 1.6, -6.0,
 			0.0, 1.0, 0.0 );
 */
-		//â–¼ãƒ˜ãƒƒãƒ‰ã«ã‚ˆã‚‹ãƒ“ãƒ¥ãƒ¼ã‚¤ãƒ³ã‚°å¤‰æ›
+		//¥ƒwƒbƒh‚É‚æ‚éƒrƒ…[ƒCƒ“ƒO•ÏŠ·
 /*
-	    glRotatef( - simdata.head.roll, 0.0, 0.0, 1.0 ); //rollã®é€†å¤‰æ›
-	    glRotatef( - simdata.head.pitch, 1.0, 0.0, 0.0 ); //pitchã®é€†å¤‰æ›
-	    glRotatef( - simdata.head.yaw, 0.0, 1.0, 0.0 ); //yawã®é€†å¤‰æ›
+	    glRotatef( - simdata.head.roll, 0.0, 0.0, 1.0 ); //roll‚Ì‹t•ÏŠ·
+	    glRotatef( - simdata.head.pitch, 1.0, 0.0, 0.0 ); //pitch‚Ì‹t•ÏŠ·
+	    glRotatef( - simdata.head.yaw, 0.0, 1.0, 0.0 ); //yaw‚Ì‹t•ÏŠ·
 */
 	    //glTranslatef( - simdata.head.x, - simdata.head.y, - simdata.head.z );
 
@@ -103,7 +103,7 @@ void cylindricalView( float dx )
 		glTranslatef( - player_world.x, - player_world.y, - player_world.z );
 		*/
 		
-		//---- è¦–ç‚¹ã®å›žè»¢ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹å ´åˆ
+		//---- Ž‹“_‚Ì‰ñ“]‚ðƒLƒƒƒ“ƒZƒ‹‚·‚éê‡
 		glRotatef( simdata.active_camera->rot.yaw, 0.0, 1.0, 0.0);
 		glRotatef( simdata.active_camera->rot.pitch, 1.0, 0.0, 0.0);
 		glRotatef( simdata.active_camera->rot.roll, 0.0, 0.0, 1.0);

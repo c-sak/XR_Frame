@@ -1,4 +1,4 @@
-ï»¿/******************************************************************************
+/******************************************************************************
  * glsample_frame.cpp 
  * Level 3 - base framework */
 
@@ -6,7 +6,7 @@
 
 #include "common.h" //WindowDataT, MouseDataT, KeyDataT
 #include "sim.h"
-#include "config.h" //â—†è¡¨ç¤ºç’°å¢ƒã®è¨­å®š
+#include "config.h" //Ÿ•\¦ŠÂ‹«‚Ìİ’è
 #include "light.h"
 #include "Shapes.h"
 #include "WarpTex.h"
@@ -116,7 +116,7 @@ void singleView( float d )
  *--------*/
 void display( void )
 {
-	//â–¼èƒŒæ™¯è‰²ã¨ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼ã‚’ãƒ–ãƒ¬ãƒ³ãƒ‰
+	//¥”wŒiF‚ÆƒtƒHƒOƒJƒ‰[‚ğƒuƒŒƒ“ƒh
 	ezBackground(&simdata);
 	glViewport( 0, 0, window.width, window.height );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -166,7 +166,7 @@ void configWindow(int win_id)
  *--------*/
 void initWindow( char *winname )
 {
-	if( !fullscreen ){// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰
+	if( !fullscreen ){// ƒEƒBƒ“ƒhƒEƒ‚[ƒh
 		if (cylindrical) {
 			window.width = 1681;//3362/4
 			window.height = 360;//720/4
@@ -193,17 +193,17 @@ void initWindow( char *winname )
 	window.title = winname;
 	windowFront = glutCreateWindow( window.title );
 
-	if (fullscreen) {// ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¢ãƒ¼ãƒ‰
-		if (cylindrical) { //ã‚·ãƒªãƒ³ãƒ‰ãƒªã‚«ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®å ´åˆ
+	if (fullscreen) {// ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒ‚[ƒh
+		if (cylindrical) { //ƒVƒŠƒ“ƒhƒŠƒJƒ‹ƒXƒNƒŠ[ƒ“‚Ìê‡
 			window.width = 3362;
 			window.height = 720;
 			window.xo = 3200;
 			window.yo = 0;
-			//GLã®ãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒãƒ³ãƒ‰ãƒ«å–å¾—
+			//GL‚ÌƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒgƒnƒ“ƒhƒ‹æ“¾
 			HDC glDc = wglGetCurrentDC();
-			//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«å–å¾—
+			//ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹æ“¾
 			HWND hWnd = WindowFromDC(glDc);
-			//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å±æ€§(æ ç„¡ã—)ã¨ä½ç½®å¤‰æ›´
+			//ƒEƒBƒ“ƒhƒE‚Ì‘®«(˜g–³‚µ)‚ÆˆÊ’u•ÏX
 			SetWindowLong(hWnd, GWL_STYLE, WS_POPUP);
 			SetWindowPos(hWnd, HWND_TOP, window.xo, window.yo, window.width, window.height, SWP_SHOWWINDOW);
 		}
@@ -263,7 +263,7 @@ void initWindow( char *winname )
  *--------*/
 int main( int argc, char *argv[] )
 {
-	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’æº–å‚™
+	/// ƒEƒBƒ“ƒhƒE‚ğ€”õ
     glutInit( &argc, argv );
 
 	/*
@@ -278,7 +278,7 @@ int main( int argc, char *argv[] )
 	*/
     initWindow( argv[0] );
 
-	//-------- basic callbacksã€€åŸºæœ¬çš„ãªã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®è¨­å®š
+	//-------- basic callbacks@Šî–{“I‚ÈƒR[ƒ‹ƒoƒbƒNŠÖ”‚Ìİ’è
 	if (hmd) {
 		if (hmd && distortion) {
 			HMD_Config();
@@ -310,12 +310,12 @@ int main( int argc, char *argv[] )
 	
     printf( "[H]:Help\n" );     // indicate help instruction
 
-    InitScene(); //â˜…çŠ¶æ…‹ã®åˆæœŸåŒ–
+    InitScene(); //šó‘Ô‚Ì‰Šú‰»
 
 	simdata.time = glutGet( GLUT_ELAPSED_TIME );
 
-	printf( "//////// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã™ã‚‹ã¨ãã«ã¯[Q]ã‚’æŠ¼ã—ã¦ãã ã•ã„////////\n" );
-	printf( "ã§ã¯ã€ENTERã‚­ãƒ¼ã‚’æŠ¼ã™ã¨ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãŒã‚¹ã‚¿ãƒ¼ãƒˆã—ã¾ã™\n" );
+	printf( "//////// ƒvƒƒOƒ‰ƒ€‚ğI—¹‚·‚é‚Æ‚«‚É‚Í[Q]‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢////////\n" );
+	printf( "‚Å‚ÍAENTERƒL[‚ğ‰Ÿ‚·‚ÆƒvƒƒOƒ‰ƒ€‚ªƒXƒ^[ƒg‚µ‚Ü‚·\n" );
 	getchar();
 
     glutMainLoop(); // run main loop

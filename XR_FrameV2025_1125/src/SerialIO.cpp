@@ -1,4 +1,4 @@
-ï»¿#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <windows.h>
 #include "SerialIO.h"
@@ -13,70 +13,70 @@
 //
 int DevicePart(unsigned char code)
 {
-	//ä¸Šä½ï¼“ãƒ“ãƒƒãƒˆã ã‘è¦‹ã¦ãƒ‡ãƒã‚¤ã‚¹IDã‚’å–ã‚Šå‡ºã™
+	//ãˆÊ‚Rƒrƒbƒg‚¾‚¯Œ©‚ÄƒfƒoƒCƒXID‚ğæ‚èo‚·
 	unsigned char mask = 0xe0; //11100000
 	return (int)(mask & code) >> 5;
 }
 
 float ValuePart(unsigned char code)
 {
-	//ä¸‹ä½ï¼•ãƒ“ãƒƒãƒˆã ã‘ã‚’å–ã‚Šå‡ºã—ã€æ­£è¦åŒ–ã—ã¦è¿”ã™
+	//‰ºˆÊ‚Tƒrƒbƒg‚¾‚¯‚ğæ‚èo‚µA³‹K‰»‚µ‚Ä•Ô‚·
 	unsigned char mask = 0x1f; //00011111
 	return(float)(mask & code) / 31.0f;
 }
 
-//HANDLE hComm;									// ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã¨ã®é€šä¿¡ãƒãƒ³ãƒ‰ãƒ«
+//HANDLE hComm;									// ƒVƒŠƒAƒ‹ƒ|[ƒg‚Æ‚Ì’ÊMƒnƒ“ƒhƒ‹
 //------------------------------------------------------------------------------------------------
 HANDLE ComInit(char* comport, int baudrate)
 {
 	HANDLE hComm;
-	// ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã‚’é–‹ã‘ã‚‹
+	// ƒVƒŠƒAƒ‹ƒ|[ƒg‚ğŠJ‚¯‚é
 	do {
 	hComm = CreateFile(
-		comport,					/* ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã®æ–‡å­—åˆ— */
-		GENERIC_READ | GENERIC_WRITE,	/* ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ï¼šèª­ã¿æ›¸ã */
-		0,								/* å…±æœ‰ãƒ¢ãƒ¼ãƒ‰ï¼šä»–ã‹ã‚‰ã¯ã‚¢ã‚¯ã‚»ã‚¹ä¸å¯ */
-		NULL,							/* ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£å±æ€§ï¼šãƒãƒ³ãƒ‰ãƒ«ç¶™æ‰¿ã›ãš */
-		OPEN_EXISTING,					/* ä½œæˆãƒ•ãƒ©ã‚°ï¼š */
-		FILE_ATTRIBUTE_NORMAL,			/* å±æ€§ï¼š */
-		NULL							/* ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ãƒãƒ³ãƒ‰ãƒ«ï¼š */
+		comport,					/* ƒVƒŠƒAƒ‹ƒ|[ƒg‚Ì•¶š—ñ */
+		GENERIC_READ | GENERIC_WRITE,	/* ƒAƒNƒZƒXƒ‚[ƒhF“Ç‚İ‘‚« */
+		0,								/* ‹¤—Lƒ‚[ƒhF‘¼‚©‚ç‚ÍƒAƒNƒZƒX•s‰Â */
+		NULL,							/* ƒZƒLƒ…ƒŠƒeƒB‘®«Fƒnƒ“ƒhƒ‹Œp³‚¹‚¸ */
+		OPEN_EXISTING,					/* ì¬ƒtƒ‰ƒOF */
+		FILE_ATTRIBUTE_NORMAL,			/* ‘®«F */
+		NULL							/* ƒeƒ“ƒvƒŒ[ƒg‚Ìƒnƒ“ƒhƒ‹F */
 	);
 	printf("COMPORT = %s\n", comport);
 	if (hComm == INVALID_HANDLE_VALUE) {
-		printf("ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã‚’é–‹ãã“ã¨ãŒå‡ºæ¥ã¾ã›ã‚“ã§ã—ãŸã€‚\n");
+		printf("ƒVƒŠƒAƒ‹ƒ|[ƒg‚ğŠJ‚­‚±‚Æ‚ªo—ˆ‚Ü‚¹‚ñ‚Å‚µ‚½B\n");
 		//return hComm;
 		Sleep(100);
 	}
 	} while (hComm == INVALID_HANDLE_VALUE);
 
-	printf("ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã‚’é–‹ãã¾ã—ãŸã€‚\n");
+	printf("ƒVƒŠƒAƒ‹ƒ|[ƒg‚ğŠJ‚«‚Ü‚µ‚½B\n");
 
-	// é€šä¿¡å±æ€§ã‚’è¨­å®šã™ã‚‹
+	// ’ÊM‘®«‚ğİ’è‚·‚é
 	DCB dcb;
-	GetCommState(hComm, &dcb); /* DCB ã‚’å–å¾— */
+	GetCommState(hComm, &dcb); /* DCB ‚ğæ“¾ */
 	dcb.BaudRate = baudrate; // BAUD_RATE;
 	dcb.ByteSize = BYTE_SIZE;
 	dcb.Parity = PARITY;
 	dcb.fParity = STOP_BIT;
 	dcb.StopBits = F_PARITY;
-	SetCommState(hComm, &dcb); /* DCB ã‚’è¨­å®š */
+	SetCommState(hComm, &dcb); /* DCB ‚ğİ’è */
 
 	return hComm;
 }
 //---------------------------------------------------------------------------------------------
 void ComEnd(HANDLE hComm)
 {
-	// ãƒãƒ³ãƒ‰ãƒ«ã‚’é–‰ã˜ã‚‹
+	// ƒnƒ“ƒhƒ‹‚ğ•Â‚¶‚é
 	CloseHandle(hComm);
 }
 //----------------------------------------------------------------------------------------------
 bool WriteData(HANDLE hComm, char* buff, unsigned int data_size)
 {
-	DWORD dwWritten; /* ãƒãƒ¼ãƒˆã¸æ›¸ãè¾¼ã‚“ã ãƒã‚¤ãƒˆæ•° */
+	DWORD dwWritten; /* ƒ|[ƒg‚Ö‘‚«‚ñ‚¾ƒoƒCƒg” */
 	WriteFile(hComm, buff, data_size, &dwWritten, NULL);
 
 	if (dwWritten != data_size) {
-		printf("ãƒ‡ãƒ¼ã‚¿ã®é€ä¿¡ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\n");
+		printf("ƒf[ƒ^‚Ì‘—M‚É¸”s‚µ‚Ü‚µ‚½B\n");
 		return false;
 	}
 	return true;
@@ -84,27 +84,27 @@ bool WriteData(HANDLE hComm, char* buff, unsigned int data_size)
 //----------------------------------------------------------------------------------------------
 int ReadData(HANDLE hComm, char* buff, unsigned int nread, unsigned int max_size)
 {
-	DWORD dwErrors;  /* ã‚¨ãƒ©ãƒ¼æƒ…å ± */
-	COMSTAT ComStat; /* ãƒ‡ãƒã‚¤ã‚¹ã®çŠ¶æ…‹ */
-	DWORD dwCount;   /* å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒˆæ•° */
-	DWORD dwRead;    /* ãƒãƒ¼ãƒˆã‹ã‚‰èª­ã¿å‡ºã—ãŸãƒã‚¤ãƒˆæ•° */
+	DWORD dwErrors;  /* ƒGƒ‰[î•ñ */
+	COMSTAT ComStat; /* ƒfƒoƒCƒX‚Ìó‘Ô */
+	DWORD dwCount;   /* óMƒf[ƒ^‚ÌƒoƒCƒg” */
+	DWORD dwRead;    /* ƒ|[ƒg‚©‚ç“Ç‚İo‚µ‚½ƒoƒCƒg” */
 
 	ClearCommError(hComm, &dwErrors, &ComStat);
 	dwCount = ComStat.cbInQue;
-	if (dwCount > max_size) { //å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒˆæ•°ãŒæœ€å¤§æ•°ã‚ˆã‚Šã‚‚å¤§ãã„å ´åˆ
-		//printf("ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºãŒè¶³ã‚Šã¾ã›ã‚“ã€‚\n");
+	if (dwCount > max_size) { //óMƒf[ƒ^‚ÌƒoƒCƒg”‚ªÅ‘å”‚æ‚è‚à‘å‚«‚¢ê‡
+		//printf("ƒoƒbƒtƒ@ƒTƒCƒY‚ª‘«‚è‚Ü‚¹‚ñB\n");
 		//return -1;
 	}
 	int status;
 	status = ReadFile(hComm, buff, nread, &dwRead, NULL);
 
-	//if (dwCount != dwRead) { //å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒˆæ•°ã¨ãƒãƒ¼ãƒˆã‹ã‚‰èª­ã¿å‡ºã—ãŸãƒã‚¤ãƒˆæ•°ãŒä¸€è‡´ã—ãªã„å ´åˆ
+	//if (dwCount != dwRead) { //óMƒf[ƒ^‚ÌƒoƒCƒg”‚Æƒ|[ƒg‚©‚ç“Ç‚İo‚µ‚½ƒoƒCƒg”‚ªˆê’v‚µ‚È‚¢ê‡
 	
 	//if (nread != dwRead) {
 	if( dwRead <= 0 ){
-		printf("ãƒ‡ãƒ¼ã‚¿ã®å—ã‘å–ã‚Šã«å¤±æ•—ã—ã¾ã—ãŸã€‚\n");
+		printf("ƒf[ƒ^‚Ìó‚¯æ‚è‚É¸”s‚µ‚Ü‚µ‚½B\n");
 		return -1;
 	}
-	return dwRead; //æ­£å¸¸ã«è¡Œã‘ã°ãƒãƒ¼ãƒˆã‹ã‚‰èª­ã¿å‡ºã—ãŸãƒã‚¤ãƒˆæ•°ã‚’è¿”ã™
+	return dwRead; //³í‚És‚¯‚Îƒ|[ƒg‚©‚ç“Ç‚İo‚µ‚½ƒoƒCƒg”‚ğ•Ô‚·
 }
 

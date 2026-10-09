@@ -1,112 +1,112 @@
-﻿#ifndef __GLMETASEQ_H__
+#ifndef __GLMETASEQ_H__
 #define __GLMETASEQ_H__
 
 /*=========================================================================================
-	メタセコイアで作成したモデル(*.mqo)をOpenGL上に読み込む関数をまとめたC/C++用ヘッダ
+	���^�Z�R�C�A�ō쐬�������f��(*.mqo)��OpenGL��ɓǂݍ��ފ֐����܂Ƃ߂�C/C++�p�w�b�_
 =========================================================================================*/
 
 /*
 ----------------------------------------------------------------------------------------
-	1. このヘッダを使う上での注意点
+	1. ���̃w�b�_���g����ł̒��ӓ_
 ----------------------------------------------------------------------------------------
   
-	●読み込み可能なテクスチャの画像形式はbmp，tga，jpeg，png
-	　ただし
-	　　jpegの読み込みにはJPEGライブラリ（libjpeg.lib, jpeglib.h）が別途必要
-	　　jpegの読み込みを有効にするには，このヘッダの DEF_USE_LIBJPEG を 1 にすること
+	���ǂݍ��݉\�ȃe�N�X�`���̉摜�`����bmp�Ctga�Cjpeg�Cpng
+	�@������
+	�@�@jpeg�̓ǂݍ��݂ɂ�JPEG���C�u�����ilibjpeg.lib, jpeglib.h�j���ʓr�K�v
+	�@�@jpeg�̓ǂݍ��݂�L���ɂ���ɂ́C���̃w�b�_�� DEF_USE_LIBJPEG �� 1 �ɂ��邱��
 
-	　	pngの読み込みにはPNGライブラリ（libpng.lib, zlib.lib, png.h ,zlib.h）が別途必要
-	　　pngの読み込みを有効にするには，このヘッダの DEF_USE_LIBPNG  を 1 にすること
+	�@	png�̓ǂݍ��݂ɂ�PNG���C�u�����ilibpng.lib, zlib.lib, png.h ,zlib.h�j���ʓr�K�v
+	�@�@png�̓ǂݍ��݂�L���ɂ���ɂ́C���̃w�b�_�� DEF_USE_LIBPNG  �� 1 �ɂ��邱��
 
-	●テクスチャ画像のサイズは「一辺が2のn乗サイズ(64,128,256…)の正方形」に限る
+	���e�N�X�`���摜�̃T�C�Y�́u��ӂ�2��n��T�C�Y(64,128,256�c)�̐����`�v�Ɍ���
 
 
 ----------------------------------------------------------------------------------------
-	2. 使い方(1) 1つのMQOファイルを読み込んで表示する場合
+	2. �g����(1) 1��MQO�t�@�C����ǂݍ���ŕ\������ꍇ
 ----------------------------------------------------------------------------------------
 
-	(1) 初期化（ARToolKitの場合，argInit()の後に使用）
+	(1) �������iARToolKit�̏ꍇ�CargInit()�̌�Ɏg�p�j
 
 		mqoInit();
 
-	(2) ファイルからのモデルの読み込み
+	(2) �t�@�C������̃��f���̓ǂݍ���
 
 		MQO_MODEL model;
 		model = mqoCreateModel( "mario.mqo", 1.0 );
 
-	(3) モデルの呼び出し
+	(3) ���f���̌Ăяo��
 		
 		mqoCallModel( model );
 
-	(4) モデルの消去
+	(4) ���f���̏���
 
 		mqoDeleteModel( model );
 
-	(5) 終了処理（プログラム終了時にやってください）
+	(5) �I�������i�v���O�����I�����ɂ���Ă��������j
 
 		mqoCleanup();
 
 ----------------------------------------------------------------------------------------
-	3. 使い方(2) 連番ファイルを読み込んで表示する場合
+	3. �g����(2) �A�ԃt�@�C����ǂݍ���ŕ\������ꍇ
 ----------------------------------------------------------------------------------------
 
-	(1) 初期化（ARToolKitの場合，argInit()の後に使用）
+	(1) �������iARToolKit�̏ꍇ�CargInit()�̌�Ɏg�p�j
 
 		mqoInit();
 
-	(2) 連番シーケンスの作成
+	(2) �A�ԃV�[�P���X�̍쐬
 	
-	  　例：mario0.mqo ～ mario9.mqo を読み込む
+	  �@��Fmario0.mqo �` mario9.mqo ��ǂݍ���
 
 		MQO_SEQUENCE seq;
 		seq = mqoCreateSequence( "mario%d.mqo", 10, 1.0 );
 
-	(3) 連番シーケンスの指定フレームの呼び出し（iはフレーム番号）
+	(3) �A�ԃV�[�P���X�̎w��t���[���̌Ăяo���ii�̓t���[���ԍ��j
 		
 		mqoCallSequence( seq, i );
 
-	(4) 連番シーケンスの消去
+	(4) �A�ԃV�[�P���X�̏���
 
 		mqoDeleteSequence( seq );
 
-	(5) 終了処理（プログラム終了時にやってください）
+	(5) �I�������i�v���O�����I�����ɂ���Ă��������j
 
 		mqoCleanup();
 
 ----------------------------------------------------------------------------------------
-	4. 主な仕様
+	4. ��Ȏd�l
 ----------------------------------------------------------------------------------------
 
-	●表示機能
-	・サポートしているMQOファイルのバージョンは「Metasequoia Ver1.0/2.0～2.4」
+	���\���@�\
+	�E�T�|�[�g���Ă���MQO�t�@�C���̃o�[�W�����́uMetasequoia Ver1.0/2.0�`2.4�v
 
-	・対応している材質情報
-	　色（光）
-	　テクスチャマップ（バンプマップ非対応／UVマッピングのみ）
+	�E�Ή����Ă���ގ����
+	�@�F�i���j
+	�@�e�N�X�`���}�b�v�i�o���v�}�b�v��Ή��^UV�}�b�s���O�̂݁j
 
-	・対応しているオブジェクト情報
-	　表示／非表示の切り替え
-	　スムージングの有無
-	　頂点法線を決めるときのスムージング角
-	　頂点情報
-	　面情報（頂点カラー非対応）
+	�E�Ή����Ă���I�u�W�F�N�g���
+	�@�\���^��\���̐؂�ւ�
+	�@�X���[�W���O�̗L��
+	�@���_�@�������߂�Ƃ��̃X���[�W���O�p
+	�@���_���
+	�@�ʏ��i���_�J���[��Ή��j
 
-	・曲面・鏡面・回転体には非対応
-	・メタボールは非対応
+	�E�ȖʁE���ʁE��]�̂ɂ͔�Ή�
+	�E���^�{�[���͔�Ή�
 
-	●仕様
-	・チャンク名は原則として大文字と小文字の区別をしないことになっているが
-	　区別してしまっている．
-	・テクスチャのパスに多バイト文字をつかっていて
-	　そのなかに'\'(0x5c)や'/'(0x2f)がはいっているとうまくテクスチャが読めない．
-	・未着色のマテリアルに対応していない．
-	　Objectチャンク→faceチャンクの材質インデックス（M(%d)）が-1に未対応．
+	���d�l
+	�E�`�����N���͌����Ƃ��đ啶���Ə������̋�ʂ����Ȃ����ƂɂȂ��Ă��邪
+	�@��ʂ��Ă��܂��Ă���D
+	�E�e�N�X�`���̃p�X�ɑ��o�C�g�����������Ă���
+	�@���̂Ȃ���'\'(0x5c)��'/'(0x2f)���͂����Ă���Ƃ��܂��e�N�X�`�����ǂ߂Ȃ��D
+	�E�����F�̃}�e���A���ɑΉ����Ă��Ȃ��D
+	�@Object�`�����N��face�`�����N�̍ގ��C���f�b�N�X�iM(%d)�j��-1�ɖ��Ή��D
 
 ----------------------------------------------------------------------------------------
 	5. Copyright
 ----------------------------------------------------------------------------------------
 
-	GLMetaseq.hおよびGLMetaseq.cの再配布・改変は自由です．
+	GLMetaseq.h�����GLMetaseq.c�̍Ĕz�z�E���ς͎��R�ł��D
 
 	Copyright (c) 2008 Sunao Hashimoto & Keisuke Konishi(kei)
 
@@ -115,41 +115,41 @@
 
 
 /*=========================================================================
-【ユーザが任意で設定】
+�y���[�U���C�ӂŐݒ�z
 =========================================================================*/
 
-#define MAX_TEXTURE				100			// テクスチャの最大取り扱い数
-#define MAX_OBJECT				50			// 1個のMQOファイル内の最大オブジェクト数
-#define SIZE_STR				256			// 文字列バッファのサイズ
-#define DEF_IS_LITTLE_ENDIAN	1			// エンディアン指定（intel系=1）
-#define DEF_USE_LIBJPEG			0			// libjpegの使用（1:使用 0:未使用）
-#define DEF_USE_LIBPNG			0			// libpng の使用（1:使用 0:未使用）
+#define MAX_TEXTURE				100			// �e�N�X�`���̍ő��舵����
+#define MAX_OBJECT				50			// 1��MQO�t�@�C�����̍ő�I�u�W�F�N�g��
+#define SIZE_STR				256			// ������o�b�t�@�̃T�C�Y
+#define DEF_IS_LITTLE_ENDIAN	1			// �G���f�B�A���w��iintel�n=1�j
+#define DEF_USE_LIBJPEG			0			// libjpeg�̎g�p�i1:�g�p 0:���g�p�j
+#define DEF_USE_LIBPNG			0			// libpng �̎g�p�i1:�g�p 0:���g�p�j
 
 
 
 /*=========================================================================
-【コンパイルオプション】
+�y�R���p�C���I�v�V�����z
 =========================================================================*/
 
-// JPEGを使用する
+// JPEG���g�p����
 #ifdef D_JPEG
 	#undef	DEF_USE_LIBJPEG
 	#define	DEF_USE_LIBJPEG 1
 #endif
 
-// JPEGを使用しない
+// JPEG���g�p���Ȃ�
 #ifdef D_NO_JPEG
 	#undef	DEF_USE_LIBJPEG
 	#define	DEF_USE_LIBJPEG 0
 #endif
 
-// PNGを使用する
+// PNG���g�p����
 #ifdef D_PNG
 	#undef	DEF_USE_LIBPNG
 	#define	DEF_USE_LIBPNG 1
 #endif
 
-// PNGを使用しない
+// PNG���g�p���Ȃ�
 #ifdef D_NO_PNG
 	#undef	DEF_USE_LIBPNG
 	#define	DEF_USE_LIBPNG 0
@@ -157,7 +157,7 @@
 
 
 /*=========================================================================
-【ヘッダ】
+�y�w�b�_�z
 =========================================================================*/
 #if defined _WIN64 || defined _WIN32
 #include <windows.h>
@@ -195,12 +195,12 @@
 
 
 /*=========================================================================
-【機能設定】 libjpeg使用設定
+�y�@�\�ݒ�z libjpeg�g�p�ݒ�
 =========================================================================*/
 
 #if DEF_USE_LIBJPEG
 
-	#define XMD_H // INT16とINT32の再定義エラーを防ぐ
+	#define XMD_H // INT16��INT32�̍Ē�`�G���[��h��
 	#ifdef FAR
 		#undef FAR
 	#endif
@@ -212,7 +212,7 @@
 
 
 /*=========================================================================
-【機能設定】 libpng使用設定
+�y�@�\�ݒ�z libpng�g�p�ݒ�
 =========================================================================*/
 
 #if DEF_USE_LIBPNG
@@ -226,7 +226,7 @@
 
 
 /*=========================================================================
-【マクロ定義】 最大値マクロ
+�y�}�N����`�z �ő�l�}�N��
 =========================================================================*/
 
 #ifndef MAX
@@ -235,7 +235,7 @@
 
 
 /*=========================================================================
-【型定義】 TGAフォーマット
+�y�^��`�z TGA�t�H�[�}�b�g
 =========================================================================*/
 
 #define DEF_TGA_COLOR_MAP_FLAG_VALID	1
@@ -267,7 +267,7 @@ typedef struct {
 
 
 /*=========================================================================
-【型定義】 OpenGL用色構造体 (4色float)
+�y�^��`�z OpenGL�p�F�\���� (4�Ffloat)
 =========================================================================*/
 typedef struct {
 	GLfloat r;
@@ -278,7 +278,7 @@ typedef struct {
 
 
 /*=========================================================================
-【型定義】 OpenGL用２次元座標構造体 (float)
+�y�^��`�z OpenGL�p�Q�������W�\���� (float)
 =========================================================================*/
 typedef struct {
 	GLfloat x;
@@ -287,7 +287,7 @@ typedef struct {
 
 
 /*=========================================================================
-【型定義】 OpenGL用３次元座標構造体 (float)
+�y�^��`�z OpenGL�p�R�������W�\���� (float)
 =========================================================================*/
 typedef struct tag_glPOINT3f {
 	GLfloat x;
@@ -297,138 +297,138 @@ typedef struct tag_glPOINT3f {
 
 
 /*=========================================================================
-【型定義】 面情報構造体
+�y�^��`�z �ʏ��\����
 =========================================================================*/
 typedef struct {
-	int			n;		// 1つの面を構成する頂点の数（3～4）
-	int			m;		// 面の材質番号
-	int			v[4];	// 頂点番号を格納した配列
-	glPOINT2f	uv[4];	// UVマップ
+	int			n;		// 1�̖ʂ��\�����钸�_�̐��i3�`4�j
+	int			m;		// �ʂ̍ގ��ԍ�
+	int			v[4];	// ���_�ԍ����i�[�����z��
+	glPOINT2f	uv[4];	// UV�}�b�v
 } MQO_FACE;
 
 
 /*=========================================================================
-【型定義】 材質情報構造体（ファイルから情報を読み込む際に使用）
+�y�^��`�z �ގ����\���́i�t�@�C���������ǂݍ��ލۂɎg�p�j
 =========================================================================*/
 typedef struct {
-	glCOLOR4f	col;				// 色
-	GLfloat		dif[4];				// 拡散光
-	GLfloat		amb[4];				// 周囲光
-	GLfloat		emi[4];				// 自己照明
-	GLfloat		spc[4];				// 反射光
-	GLfloat		power;				// 反射光の強さ
-	int			useTex;				// テクスチャの有無
-	char		texFile[SIZE_STR];	// テクスチャファイル
-	char		alpFile[SIZE_STR];	// アルファテクスチャファイル
-	GLuint		texName;			// テクスチャ名
+	glCOLOR4f	col;				// �F
+	GLfloat		dif[4];				// �g�U��
+	GLfloat		amb[4];				// ���͌�
+	GLfloat		emi[4];				// ���ȏƖ�
+	GLfloat		spc[4];				// ���ˌ�
+	GLfloat		power;				// ���ˌ��̋���
+	int			useTex;				// �e�N�X�`���̗L��
+	char		texFile[SIZE_STR];	// �e�N�X�`���t�@�C��
+	char		alpFile[SIZE_STR];	// �A���t�@�e�N�X�`���t�@�C��
+	GLuint		texName;			// �e�N�X�`����
 } MQO_MATDATA;
 
 
 /*=========================================================================
-【型定義】 オブジェクト構造体（パーツ１個のデータ）
+�y�^��`�z �I�u�W�F�N�g�\���́i�p�[�c�P�̃f�[�^�j
 =========================================================================*/
 typedef struct {
-	char		objname[SIZE_STR];	// パーツ名
-	int			visible;			// 可視状態
-	int			shading;			// シェーディング（0:フラット／1:グロー）
-	float		facet;				// スムージング角
-	int			n_face;				// 面数
-	int			n_vertex;			// 頂点数
-	MQO_FACE	*F;					// 面
-	glPOINT3f	*V;					// 頂点
+	char		objname[SIZE_STR];	// �p�[�c��
+	int			visible;			// �����
+	int			shading;			// �V�F�[�f�B���O�i0:�t���b�g�^1:�O���[�j
+	float		facet;				// �X���[�W���O�p
+	int			n_face;				// �ʐ�
+	int			n_vertex;			// ���_��
+	MQO_FACE	*F;					// ��
+	glPOINT3f	*V;					// ���_
 } MQO_OBJDATA;
 
 
 /*=========================================================================
-【型定義】 テクスチャプール
+�y�^��`�z �e�N�X�`���v�[��
 =========================================================================*/
 typedef struct {
-	GLuint			texture_id;			// テクスチャID
-	int				texsize;			// テクスチャサイズ
-	char			texfile[MAX_PATH];	// テクスチャファイル
-	char			alpfile[MAX_PATH];	// アルファテクスチャファイル
-	unsigned char	alpha;				// アルファ
+	GLuint			texture_id;			// �e�N�X�`��ID
+	int				texsize;			// �e�N�X�`���T�C�Y
+	char			texfile[MAX_PATH];	// �e�N�X�`���t�@�C��
+	char			alpfile[MAX_PATH];	// �A���t�@�e�N�X�`���t�@�C��
+	unsigned char	alpha;				// �A���t�@
 } TEXTURE_POOL;
 
 
 /*=========================================================================
-【型定義】 頂点データ（テクスチャ使用時）
+�y�^��`�z ���_�f�[�^�i�e�N�X�`���g�p���j
 =========================================================================*/
 typedef struct {		
-	GLfloat point[3];	// 頂点配列 (x, y, z)
-	GLfloat normal[3];	// 法線配列 (x, y, z)
-	GLfloat uv[2];		// UV配列 (u, v)
+	GLfloat point[3];	// ���_�z�� (x, y, z)
+	GLfloat normal[3];	// �@���z�� (x, y, z)
+	GLfloat uv[2];		// UV�z�� (u, v)
 } VERTEX_TEXUSE;
 
 
 /*=========================================================================
-【型定義】 頂点データ（テクスチャ不使用時）
+�y�^��`�z ���_�f�[�^�i�e�N�X�`���s�g�p���j
 =========================================================================*/
 typedef struct {
-	GLfloat point[3];	// 頂点配列 (x, y, z)
-	GLfloat normal[3];	// 法線配列 (x, y, z)
+	GLfloat point[3];	// ���_�z�� (x, y, z)
+	GLfloat normal[3];	// �@���z�� (x, y, z)
 } VERTEX_NOTEX;
 
 
 /*=========================================================================
-【型定義】 マテリアル情報（マテリアル別に頂点配列を持つ）
+�y�^��`�z �}�e���A�����i�}�e���A���ʂɒ��_�z������j
 =========================================================================*/
 typedef struct {
-	int				isValidMaterialInfo;// マテリアル情報の有効/無効
-	int				isUseTexture;		// テクスチャの有無：USE_TEXTURE / NOUSE_TEXTURE
-	GLuint			texture_id;			// テクスチャの名前(OpenGL)
-	GLuint			VBO_id;				// 頂点バッファのID(OpenGL)　対応してる時だけ使用
-	int				datanum;			// 頂点数
-	GLfloat			color[4];			// 色配列 (r, g, b, a)
-	GLfloat			dif[4];				// 拡散光
-	GLfloat			amb[4];				// 周囲光
-	GLfloat			emi[4];				// 自己照明
-	GLfloat			spc[4];				// 反射光
-	GLfloat			power;				// 反射光の強さ
-	VERTEX_NOTEX	*vertex_p;			// ポリゴンのみの時の頂点配列
-	VERTEX_TEXUSE	*vertex_t;			// テクスチャ使用時の頂点配列
+	int				isValidMaterialInfo;// �}�e���A�����̗L��/����
+	int				isUseTexture;		// �e�N�X�`���̗L���FUSE_TEXTURE / NOUSE_TEXTURE
+	GLuint			texture_id;			// �e�N�X�`���̖��O(OpenGL)
+	GLuint			VBO_id;				// ���_�o�b�t�@��ID(OpenGL)�@�Ή����Ă鎞�����g�p
+	int				datanum;			// ���_��
+	GLfloat			color[4];			// �F�z�� (r, g, b, a)
+	GLfloat			dif[4];				// �g�U��
+	GLfloat			amb[4];				// ���͌�
+	GLfloat			emi[4];				// ���ȏƖ�
+	GLfloat			spc[4];				// ���ˌ�
+	GLfloat			power;				// ���ˌ��̋���
+	VERTEX_NOTEX	*vertex_p;			// �|���S���݂̂̎��̒��_�z��
+	VERTEX_TEXUSE	*vertex_t;			// �e�N�X�`���g�p���̒��_�z��
 } MQO_MATERIAL;
 
 
 /*=========================================================================
-【型定義】 内部オブジェクト（1つのパーツを管理）
+�y�^��`�z �����I�u�W�F�N�g�i1�̃p�[�c���Ǘ��j
 =========================================================================*/
 typedef struct {
-	char			objname[SIZE_STR];		// オブジェクト名
-	int				isVisible;				// 0：非表示　その他：表示
-	int				isShadingFlat;			// シェーディングモード
-	int				matnum;					// 使用マテリアル数
-	MQO_MATERIAL	*mat;					// マテリアル配列
+	char			objname[SIZE_STR];		// �I�u�W�F�N�g��
+	int				isVisible;				// 0�F��\���@���̑��F�\��
+	int				isShadingFlat;			// �V�F�[�f�B���O���[�h
+	int				matnum;					// �g�p�}�e���A����
+	MQO_MATERIAL	*mat;					// �}�e���A���z��
 } MQO_INNER_OBJECT;
 
 
 /*=========================================================================
-【型定義】 MQOオブジェクト（1つのモデルを管理）　※MQO_MODELの実体
+�y�^��`�z MQO�I�u�W�F�N�g�i1�̃��f�����Ǘ��j�@��MQO_MODEL�̎���
 =========================================================================*/
 typedef struct {
-	unsigned char		alpha;				// 頂点配列作成時に指定されたアルファ値（参照用）
-	int					objnum;				// 内部オブジェクト数
-	MQO_INNER_OBJECT	obj[MAX_OBJECT];	// 内部オブジェクト配列
+	unsigned char		alpha;				// ���_�z��쐬���Ɏw�肳�ꂽ�A���t�@�l�i�Q�Ɨp�j
+	int					objnum;				// �����I�u�W�F�N�g��
+	MQO_INNER_OBJECT	obj[MAX_OBJECT];	// �����I�u�W�F�N�g�z��
 } MQO_OBJECT;
 
 
 /*=========================================================================
-【型定義】 MQO_MODEL構造体
+�y�^��`�z MQO_MODEL�\����
 =========================================================================*/
-typedef MQO_OBJECT * MQO_MODEL;		// MQO_MODELは独自形式構造体へのアドレス
+typedef MQO_OBJECT * MQO_MODEL;		// MQO_MODEL�͓Ǝ��`���\���̂ւ̃A�h���X
 
 
 /*=========================================================================
-【型定義】 MQOシーケンス
+�y�^��`�z MQO�V�[�P���X
 =========================================================================*/
 typedef struct {
-	MQO_MODEL	model;		// モデル
-	int			n_frame;	// フレーム数
+	MQO_MODEL	model;		// ���f��
+	int			n_frame;	// �t���[����
 } MQO_SEQUENCE;
 
 
 /*=========================================================================
-【型定義】 glext.h からの VBO Extension の定義
+�y�^��`�z glext.h ����� VBO Extension �̒�`
 =========================================================================*/
 #ifdef WIN32
 	#define GL_ARRAY_BUFFER_ARB	0x8892
@@ -441,7 +441,7 @@ typedef struct {
 
 
 /*=========================================================================
-【グローバル変数定義】
+�y�O���[�o���ϐ���`�z
 =========================================================================*/
 
 #ifdef __GLMETASEQ_C__
@@ -450,21 +450,21 @@ typedef struct {
 	#define __GLMETASEQ_C__EXTERN extern
 #endif
 
-__GLMETASEQ_C__EXTERN int g_isVBOSupported;	// OpenGLの頂点バッファのサポート有無
+__GLMETASEQ_C__EXTERN int g_isVBOSupported;	// OpenGL�̒��_�o�b�t�@�̃T�|�[�g�L��
 
 #ifdef WIN32	
-	// VBO Extension 関数のポインタ
-	__GLMETASEQ_C__EXTERN PFNGLGENBUFFERSARBPROC glGenBuffersARB;		// VBO 名前生成
-	__GLMETASEQ_C__EXTERN PFNGLBINDBUFFERARBPROC glBindBufferARB;		// VBO 結びつけ
-	__GLMETASEQ_C__EXTERN PFNGLBUFFERDATAARBPROC glBufferDataARB;		// VBO データロード
-	__GLMETASEQ_C__EXTERN PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB;	// VBO 削除
+	// VBO Extension �֐��̃|�C���^
+	__GLMETASEQ_C__EXTERN PFNGLGENBUFFERSARBPROC glGenBuffersARB;		// VBO ���O����
+	__GLMETASEQ_C__EXTERN PFNGLBINDBUFFERARBPROC glBindBufferARB;		// VBO ���т�
+	__GLMETASEQ_C__EXTERN PFNGLBUFFERDATAARBPROC glBufferDataARB;		// VBO �f�[�^���[�h
+	__GLMETASEQ_C__EXTERN PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB;	// VBO �폜
 #endif
 
 #undef __GLMETASEQ_C__EXTERN
 
 
 /*=========================================================================
-【関数宣言】
+�y�֐��錾�z
 =========================================================================*/
 
 #ifdef __cplusplus
@@ -472,32 +472,32 @@ extern "C" {
 #endif
 
 
-// 初期化
+// ������
 void mqoInit(void);
 
-// 終了処理
+// �I������
 void mqoCleanup(void);
 
-// モデル生成
+// ���f������
 MQO_MODEL	 mqoCreateModel(char *filename, double scale);
 
-// シーケンス生成
+// �V�[�P���X����
 MQO_SEQUENCE mqoCreateSequence(const char *format, int n_file, double scale);
 
-// シーケンス生成（拡張版）
+// �V�[�P���X�����i�g���Łj
 MQO_SEQUENCE mqoCreateSequenceEx(const char *format, int n_file, double scale,
 								 int fade_inout, unsigned char alpha);
 
-// モデル呼び出し
+// ���f���Ăяo��
 void mqoCallModel(MQO_MODEL model);
 
-// シーケンス呼び出し
+// �V�[�P���X�Ăяo��
 void mqoCallSequence(MQO_SEQUENCE seq, int i);
 
-// モデルの削除
+// ���f���̍폜
 void mqoDeleteModel(MQO_MODEL model);
 
-// シーケンスの削除
+// �V�[�P���X�̍폜
 void mqoDeleteSequence(MQO_SEQUENCE seq);
 
 

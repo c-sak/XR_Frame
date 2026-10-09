@@ -1,8 +1,8 @@
-ï»¿#include <stdlib.h>
+#include <stdlib.h>
 #include "ezWebCam.h"
 
 #include "ewclib/ewclib.h"
-//ç°¡æ˜“ã‚«ãƒ¡ãƒ©å…¥åŠ›ãƒ©ã‚¤ãƒ–ãƒ©ãƒªEWCLIBã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
+//ŠÈˆÕƒJƒƒ‰“ü—Íƒ‰ƒCƒuƒ‰ƒŠEWCLIB‚ÌƒCƒ“ƒNƒ‹[ƒh
 //http://insubaru.g1.xrea.com/ewclib/index.html
 
 void ezWebCam_GetFormat( char *devicename )
@@ -14,7 +14,7 @@ void ezWebCam_GetFormat( char *devicename )
 
 	n_cams = EWC_GetFormat( devicename, f, &nmax);
 	printf( ">>> %s\n", devicename );
-	//ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆä¸€è¦§ã®è¡¨ç¤º
+	//ƒtƒH[ƒ}ƒbƒgˆê——‚Ì•\¦
     for(int i=0; i<nmax; i++){
         printf("%d: %dx%d(%d) %I64d %f[fps] %s\n",
                i, f[i].width, f[i].height, f[i].bit, 
@@ -23,7 +23,7 @@ void ezWebCam_GetFormat( char *devicename )
 }
 
 //=============================================================================
-// EWCLIBã‚’ãƒ©ãƒƒãƒ”ãƒ³ã‚°ã—ewclib.hã‚’éš ãºã„ã™ã‚‹
+// EWCLIB‚ğƒ‰ƒbƒsƒ“ƒO‚µewclib.h‚ğ‰B‚Ø‚¢‚·‚é
 //-----------------------------------------------------------------------------
 int ezWebCam_Open( int cam, int wx, int wy, double fps, int device, int mstype )
 {
@@ -40,15 +40,15 @@ int ezWebCam_Open( int cam, int wx, int wy, double fps, int device, int mstype )
 		printf("%s\n",s);
 		printf("[ezWebCam] EWC_Open Error %d\n", status);
 	}
-	EWC_PropertyPage( cam ); // ã‚«ãƒ¡ãƒ©ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’é–‹ã
+	EWC_PropertyPage( cam ); // ƒJƒƒ‰ƒvƒƒpƒeƒB‚ğŠJ‚­
 	printf("[ezWebCam] BufferSize: %d\n", EWC_GetBufferSize( cam ));
 	//printf("[ezwebCam] CameraNum: %d\n",  EWC_GetCamera());
 	printf("[ezwebCam] DeviceName: %s\n", EWC_GetDeviceName( cam ));
-	// å¿…è¦ãªãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºã®å–å¾—
+	// •K—v‚Èƒoƒbƒtƒ@ƒTƒCƒY‚Ìæ“¾
 
 	return status;
 }
-//ã‚«ãƒ¡ãƒ©åæŒ‡å®šãƒãƒ¼ã‚¸ãƒ§ãƒ³
+//ƒJƒƒ‰–¼w’èƒo[ƒWƒ‡ƒ“
 int ezWebCam_OpenName( int cam, char *devicename, int wx, int wy, double fps, int mstype)
 {
 	GUID guidmstype;
@@ -60,7 +60,7 @@ int ezWebCam_OpenName( int cam, char *devicename, int wx, int wy, double fps, in
 	if( status != 0 ) {
 		printf("[ezWebCam] EWC_Open Error 0\n");
 	}
-	EWC_PropertyPage( cam ); // ã‚«ãƒ¡ãƒ©ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’é–‹ã
+	EWC_PropertyPage( cam ); // ƒJƒƒ‰ƒvƒƒpƒeƒB‚ğŠJ‚­
 	printf("[ezWebCam] BufferSize: %d\n", EWC_GetBufferSize( cam ));
 	printf("[ezwebCam] GetDeviceName: %s\n", EWC_GetDeviceName( cam ));
 	return status;

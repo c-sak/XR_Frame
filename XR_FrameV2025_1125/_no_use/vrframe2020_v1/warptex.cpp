@@ -1,4 +1,4 @@
-ï»¿#include <stdarg.h>
+#include <stdarg.h>
 #include "WarpTex.h"
 
 WarpTex::WarpTex(void)
@@ -19,13 +19,13 @@ WarpTex::~WarpTex(void)
 
 #include <stdio.h>
 
-//åˆæœŸåŒ–å‡¦ç†
+//‰Šú‰»ˆ—
 void WarpTex::init(void)
 {
-	//GLè¨­å®šã®ä¿å­˜
+	//GLİ’è‚Ì•Û‘¶
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
-	//ã‚ªãƒ•ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”Ÿæˆ
+	//ƒIƒtƒXƒNƒŠ[ƒ“ƒŒƒ“ƒ_ƒŠƒ“ƒO—pƒeƒNƒXƒ`ƒƒ¶¬
 	glEnable(GL_TEXTURE_2D);
 	glGenTextures(4, &m_texture);
 
@@ -35,11 +35,11 @@ void WarpTex::init(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-	//GLè¨­å®šå¾©å…ƒ
+	//GLİ’è•œŒ³
 	glPopAttrib();
 }
 
-//æ­ªã¿ã®ä¸­å¿ƒè¨­å®š
+//˜c‚İ‚Ì’†Sİ’è
 void WarpTex::setCenter(float cx, float cy)
 {
 	m_centerX = cx;
@@ -48,7 +48,7 @@ void WarpTex::setCenter(float cx, float cy)
 	updateVertices();
 }
 
-//æ­ªã¿ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
+//˜c‚İƒpƒ‰ƒ[ƒ^İ’è
 void WarpTex::setParams(float kR, float kG, float kB)
 {
 	m_kR = kR;
@@ -58,7 +58,7 @@ void WarpTex::setParams(float kR, float kG, float kB)
 	updateVertices();
 }
 
-//â˜…æ­ªã¿ã®é©ç”¨ç¯„å›²
+//š˜c‚İ‚Ì“K—p”ÍˆÍ
 void WarpTex::setSize(float w, float h)
 {
 	m_width = w;
@@ -67,7 +67,7 @@ void WarpTex::setSize(float w, float h)
 	updateVertices();
 }
 
-//â˜†ç¾åœ¨ã®ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®ã‚µã‚¤ã‚ºã‚’å–å¾—
+//™Œ»İ‚Ìƒrƒ…[ƒ|[ƒg‚ÌƒTƒCƒY‚ğæ“¾
 void WarpTex::getViewportSize( void )
 {
 	GLint v[4];
@@ -76,7 +76,7 @@ void WarpTex::getViewportSize( void )
 	m_height = v[3];
 }
 
-//é ‚ç‚¹æ›´æ–°
+//’¸“_XV
 void WarpTex::updateVertices(void)
 {
 	float dw = m_width / (float)DC_MESH_NUM_X;
@@ -108,95 +108,95 @@ void WarpTex::updateVertices(void)
 	}
 }
 
-//ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰åˆ‡ã‚Šæ›¿ãˆ
+//ƒfƒoƒbƒOƒ‚[ƒhØ‚è‘Ö‚¦
 void WarpTex::switchDebugMode(void)
 {
 	m_debugMode = !m_debugMode;
 }
 
-//æ­ªã¿è£œæ­£â—†å…ƒã€…ã®æ­ªè£œæ­£é–¢æ•°ã ãŒä½¿ã‚ãªã„ï¼Updateã¨Drawã‚’ä½¿ã†ã“ã¨
+//˜c‚İ•â³ŸŒ³X‚Ì˜c•â³ŠÖ”‚¾‚ªg‚í‚È‚¢„Update‚ÆDraw‚ğg‚¤‚±‚Æ
 void WarpTex::runDC(void)
 {
-	//GLè¨­å®šã®ä¿å­˜
+	//GLİ’è‚Ì•Û‘¶
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
-	//MatrixModeå–å¾—
+	//MatrixModeæ“¾
 	GLint mode;
 	glGetIntegerv(GL_MATRIX_MODE, &mode);
 
-	//æŠ•å½±è¡Œåˆ—å–å¾—
+	//“Š‰es—ñæ“¾
 	GLfloat p[16];
 	glGetFloatv(GL_PROJECTION_MATRIX, p);
 
-	//ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—å–å¾—
+	//ƒ‚ƒfƒ‹ƒrƒ…[s—ñæ“¾
 	GLfloat m[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, m);
 
-	//ç”»é¢ã®è§£åƒåº¦å–å¾—
+	//‰æ–Ê‚Ì‰ğ‘œ“xæ“¾
 	GLint v[4];
 	glGetIntegerv(GL_VIEWPORT, v);
 	m_width = v[2];
 	m_height = v[3];
 
-	//ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ç„¡åŠ¹
+	//ƒ‰ƒCƒeƒBƒ“ƒO–³Œø
 	glDisable(GL_LIGHTING);
 
-	//ãƒ‡ãƒ—ã‚¹ãƒ†ã‚¹ãƒˆç„¡åŠ¹
+	//ƒfƒvƒXƒeƒXƒg–³Œø
 	glDisable(GL_DEPTH_TEST);
 
-	//æŠ•å½±è¡Œåˆ—æŒ‡å®š
+	//“Š‰es—ñw’è
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, m_width, 0, m_height, -1, 1);
 
-	//ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—æŒ‡å®š
+	//ƒ‚ƒfƒ‹ƒrƒ…[s—ñw’è
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	//ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ†ã‚¯ã‚¹ãƒãƒ£ã«ã‚³ãƒ”ãƒ¼
+	//ƒoƒbƒNƒoƒbƒtƒ@‚ğƒeƒNƒXƒ`ƒƒ‚ÉƒRƒs[
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_width, m_height);
 
-	//ç”»é¢ã‚¯ãƒªã‚¢â˜…å‰Šé™¤
+	//‰æ–ÊƒNƒŠƒAšíœ
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//æ­ªã¿è£œæ­£ç”»åƒæç”»
+	//˜c‚İ•â³‰æ‘œ•`‰æ
 	renderUndistortedImage();
 
 	glDisable(GL_TEXTURE_2D);
 
-	//ãƒ‡ãƒãƒƒã‚°è¡¨ç¤º
+	//ƒfƒoƒbƒO•\¦
 	if (m_debugMode) {
 		Grid();
 		Params();
 	}
-	//ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—å¾©å…ƒ
+	//ƒ‚ƒfƒ‹ƒrƒ…[s—ñ•œŒ³
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glMultMatrixf(m);
 
-	//æŠ•å½±è¡Œåˆ—å¾©å…ƒ
+	//“Š‰es—ñ•œŒ³
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glMultMatrixf(p);
 
-	//MatrixModeå¾©å…ƒ
+	//MatrixMode•œŒ³
 	glMatrixMode(mode);
 
-	//GLè¨­å®šå¾©å…ƒ
+	//GLİ’è•œŒ³
 	glPopAttrib();
 }
 
-//â˜…ç”»åƒæ›´æ–°
+//š‰æ‘œXV
 void WarpTex::Update(void)
 {
-	//ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’ãƒ†ã‚¯ã‚¹ãƒãƒ£ã«ã‚³ãƒ”ãƒ¼
+	//ƒoƒbƒNƒoƒbƒtƒ@‚ğƒeƒNƒXƒ`ƒƒ‚ÉƒRƒs[
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, m_width, m_height);
-	/*â˜…
-	glCopyTexSubImage2D: ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡é ˜åŸŸã‹ã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ã«ç”»åƒã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+	/*š
+	glCopyTexSubImage2D: ƒoƒbƒNƒoƒbƒtƒ@—Ìˆæ‚©‚çƒeƒNƒXƒ`ƒƒ‚É‰æ‘œ‚ğƒRƒs[‚·‚é
 	void glCopyTexSubImage2D(	GLenum target,
 	GLint level,
 	GLint xoffset,
@@ -211,27 +211,27 @@ void WarpTex::Update(void)
 	glDisable(GL_TEXTURE_2D);
 }
 
-//â˜…ç”»åƒæç”»
+//š‰æ‘œ•`‰æ
 void WarpTex::Draw(float x, float y, float s )
 {
-	//GLè¨­å®šã®ä¿å­˜
+	//GLİ’è‚Ì•Û‘¶
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 
-	//æŠ•å½±è¡Œåˆ—æŒ‡å®š
+	//“Š‰es—ñw’è
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//glOrtho(0, m_width, 0, m_height, -1, 1);
 	glOrtho( -m_width/2.0, m_width/2.0, -m_height/2.0, m_height/2.0, -1, 1);
 
-	//ãƒ¢ãƒ‡ãƒ«ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—æŒ‡å®š
+	//ƒ‚ƒfƒ‹ƒrƒ…[s—ñw’è
 	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix(); //â˜…
+	glPushMatrix(); //š
 	glLoadIdentity();
 
 	glTranslatef( x * m_width, y * m_width, 0.0);
 	glScalef(s, s, 1.0);
 
-	//æ­ªã¿è£œæ­£ç”»åƒæç”»
+	//˜c‚İ•â³‰æ‘œ•`‰æ
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
@@ -239,19 +239,19 @@ void WarpTex::Draw(float x, float y, float s )
 
 	glDisable(GL_TEXTURE_2D);
 
-	//ãƒ‡ãƒãƒƒã‚°è¡¨ç¤º
+	//ƒfƒoƒbƒO•\¦
 	if (m_debugMode) {
 		Grid();
 		Params();
 	}
-	glPopMatrix(); //â˜…
+	glPopMatrix(); //š
 }
 
-//æ­ªã¿è£œæ­£ç”»åƒæç”»
+//˜c‚İ•â³‰æ‘œ•`‰æ
 void WarpTex::renderUndistortedImage(void)
 {
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE);//åŠ ç®—åˆæˆ
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);//‰ÁZ‡¬
 
 	glColor3f(1.0, 0.0, 0.0);
 	renderEachImage(m_verticesR);
@@ -265,7 +265,7 @@ void WarpTex::renderUndistortedImage(void)
 	glDisable(GL_BLEND);
 }
 
-//å„ç”»åƒæç”»
+//Še‰æ‘œ•`‰æ
 void WarpTex::renderEachImage(vertex2f vertices[DC_MESH_NUM_X + 1][DC_MESH_NUM_Y + 1])
 {
 	float dw = m_width / (float)DC_MAX_TEX_SIZE_X / (float)DC_MESH_NUM_X;
@@ -286,7 +286,7 @@ void WarpTex::renderEachImage(vertex2f vertices[DC_MESH_NUM_X + 1][DC_MESH_NUM_Y
 	}
 }
 
-//ãƒ‡ãƒãƒƒã‚°è¡¨ç¤º
+//ƒfƒoƒbƒO•\¦
 void WarpTex::Grid(void)
 {
 	glEnable(GL_BLEND);
@@ -339,7 +339,7 @@ void WarpTex::Grid(void)
 	glEnd();
 	glLineWidth(1.0);
 }
-//ãƒ‡ãƒãƒƒã‚°è¡¨ç¤º
+//ƒfƒoƒbƒO•\¦
 void WarpTex::Params(void)
 {
 	glColor3d(0.0, 1.0, 0.5);
@@ -355,7 +355,7 @@ void WarpTex::Params(void)
 	renderString(w + 10, h - 120, "kG: %f", m_kG);
 	renderString(w + 10, h - 140, "kB: %f", m_kB);
 }
-//ãƒ‡ãƒãƒƒã‚°ç”¨æ–‡å­—åˆ—æç”»ï¼ˆé…ã„ï¼‰
+//ƒfƒoƒbƒO—p•¶š—ñ•`‰æi’x‚¢j
 void WarpTex::renderString(float x, float y, const char *_Format, ...)
 {
 	char str[128];

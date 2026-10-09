@@ -1,6 +1,6 @@
-ï»¿/** @class	iglib::igSharedMemoryT
+/** @class	iglib::igSharedMemoryT
 	@brief
-	å…±æœ‰ãƒ¡ãƒ¢ãƒªã‚’æä¾›ã—ã¾ã™ã€‚
+	‹¤—Lƒƒ‚ƒŠ‚ğ’ñ‹Ÿ‚µ‚Ü‚·B
 
 	@author Toshimitsu Mukai(toshimi@iltj.jp)
 
@@ -12,13 +12,13 @@
 	Copyright (C) 2007, ILTJ Inc.
 
 @verbatim
-å‚è€ƒ:
-	æœ¬ã‚¯ãƒ©ã‚¹ã®æä¾›ã™ã‚‹å…±æœ‰ãƒ¡ãƒ¢ãƒªé ˜åŸŸã¯ã€ï¼‘ã¤ã®reae/writeå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ã¨ã€è¤‡æ•°ã®read onlyã®ãƒ—ãƒ­ã‚»ã‚¹é–“ã§
-	åˆ©ç”¨ã•ã‚Œã‚‹äº‹ã‚’å‰æã¨ã—ã¦ãŠã‚Šã€è¤‡æ•°ã®read/writeå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ã®å­˜åœ¨ã‚’è¨±ã—ã¦ã„ã¾ã›ã‚“ã€‚
-	ã¾ãŸã€read/writeå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ãŒä¸€ç•ªåˆã‚ã«ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹ã‚ˆã†ã«ã—ã¦ã„ã¾ã™ã€‚
-	æœ¬ã‚¯ãƒ©ã‚¹åˆ©ç”¨è€…ã¯read/writeã‚’è¡Œã†ãƒ—ãƒ­ã‚»ã‚¹ãŒï¼‘ã¤ã«ãªã‚‹æ§˜ã«é…æ…®ã™ã‚Œã°ã€ã©ã®ã‚ˆã†ãªé †ç•ªã§ãƒ—ãƒ­ã‚»ã‚¹ãŒèµ·å‹•
-	ã—ã¦ã‚‚ã€read/writeå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ãŒã€ä¸€ç•ªåˆã‚ã«ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹ã‚ˆã†ã«ãªã£ã¦ã„ã¾ã™ã€‚
-	é€†ã«read onlyã®ãƒ—ãƒ­ã‚»ã‚¹ã®ã¿ã—ã‹èµ·å‹•ã—ãªã„ã¨ã€ã„ã¤ã¾ã§ã‚‚waitçŠ¶æ…‹ã¨ãªã‚Šã¾ã™ã€‚
+Ql:
+	–{ƒNƒ‰ƒX‚Ì’ñ‹Ÿ‚·‚é‹¤—Lƒƒ‚ƒŠ—Ìˆæ‚ÍA‚P‚Â‚Ìreae/write‰Â”\‚ÈƒvƒƒZƒX‚ÆA•¡”‚Ìread only‚ÌƒvƒƒZƒXŠÔ‚Å
+	—˜—p‚³‚ê‚é–‚ğ‘O’ñ‚Æ‚µ‚Ä‚¨‚èA•¡”‚Ìread/write‰Â”\‚ÈƒvƒƒZƒX‚Ì‘¶İ‚ğ‹–‚µ‚Ä‚¢‚Ü‚¹‚ñB
+	‚Ü‚½Aread/write‰Â”\‚ÈƒvƒƒZƒX‚ªˆê”Ô‰‚ß‚Éƒ}ƒbƒsƒ“ƒOƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg‚ğì¬‚·‚é‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·B
+	–{ƒNƒ‰ƒX—˜—pÒ‚Íread/write‚ğs‚¤ƒvƒƒZƒX‚ª‚P‚Â‚É‚È‚é—l‚É”z—¶‚·‚ê‚ÎA‚Ç‚Ì‚æ‚¤‚È‡”Ô‚ÅƒvƒƒZƒX‚ª‹N“®
+	‚µ‚Ä‚àAread/write‰Â”\‚ÈƒvƒƒZƒX‚ªAˆê”Ô‰‚ß‚Éƒ}ƒbƒsƒ“ƒOƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg‚ğì¬‚·‚é‚æ‚¤‚É‚È‚Á‚Ä‚¢‚Ü‚·B
+	‹t‚Éread only‚ÌƒvƒƒZƒX‚Ì‚İ‚µ‚©‹N“®‚µ‚È‚¢‚ÆA‚¢‚Â‚Ü‚Å‚àwaitó‘Ô‚Æ‚È‚è‚Ü‚·B
 @endverbatim
 */
 #ifndef __IG_SHARED_MEMORY_T_H__
@@ -31,40 +31,40 @@ using namespace std;
 namespace iglib {	// iglib namespace start here...................................................
 
 template <class T> class igSharedMemoryT {
-	string m_mappedFilename;	///< ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå(ä»»æ„ã«æŒ‡å®šãŒå¯èƒ½ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã‚ã‚Š)
-	string m_mutexName;			///< ãƒŸãƒ¥ãƒ¼ãƒ†ãƒƒã‚¯å(å›ºå®šå€¤)
-	HANDLE m_handle;			///< ãƒãƒƒãƒ”ãƒ³ã‚°ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ³ãƒ‰ãƒ«
-	bool m_writable;			///< æ›¸è¾¼ã¿ã‚’è¨±å¯ã™ã‚‹ã‹(çœŸã§è¨±å¯)ã€‚èª­ã¿è¾¼ã¿ã¯å¸¸æ™‚å¯
-	T *m_data;					///< å…±æœ‰é ˜åŸŸã¸ã®read/writeç”¨ãƒ‡ãƒ¼ã‚¿
+	string m_mappedFilename;	///< ƒ}ƒbƒsƒ“ƒOƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg–¼(”CˆÓ‚Éw’è‚ª‰Â”\BƒfƒtƒHƒ‹ƒg’l‚ ‚è)
+	string m_mutexName;			///< ƒ~ƒ…[ƒeƒbƒN–¼(ŒÅ’è’l)
+	HANDLE m_handle;			///< ƒ}ƒbƒsƒ“ƒOƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg‚Ìƒnƒ“ƒhƒ‹
+	bool m_writable;			///< ‘‚İ‚ğ‹–‰Â‚·‚é‚©(^‚Å‹–‰Â)B“Ç‚İ‚İ‚Íí‰Â
+	T *m_data;					///< ‹¤—L—Ìˆæ‚Ö‚Ìread/write—pƒf[ƒ^
 
 public:
 	igSharedMemoryT();
 
-	/// @brief	ä»®å¼•æ•°ã®ã‚ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
-	///	@brief	ä»®å¼•æ•°ã§iniãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹ã‚’æŒ‡å®šã—ã¾ã™ã€‚
-	///	@param	filename	[in]	å…±æœ‰ãƒ¡ãƒ¢ãƒªè­˜åˆ¥ç”¨ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
+	/// @brief	‰¼ˆø”‚Ì‚ ‚éƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	///	@brief	‰¼ˆø”‚Åiniƒtƒ@ƒCƒ‹‚ÌƒpƒX‚ğw’è‚µ‚Ü‚·B
+	///	@param	filename	[in]	‹¤—Lƒƒ‚ƒŠ¯•Ê—p‚ÌƒL[ƒ[ƒh
 	igSharedMemoryT(const string filename);
 
 	~igSharedMemoryT(){};
 
-	///	@brief	å…±æœ‰é ˜åŸŸã‚’ä½œæˆã—ã¾ã™ã€‚ã¾ãŸã¯æ—¢ã«ã‚ã‚‹å…±æœ‰é ˜åŸŸã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’å¯èƒ½ã¨ã—ã¾ã™ã€‚
-	///	@param	writable	[in]	trueã§read/writeã§å…±æœ‰é ˜åŸŸã‚’ä½œæˆã—ã¾ã™ã€falseã§read onlyã§å…±æœ‰é ˜åŸŸã‚’é–‹ãã¾ã™ã€‚
-	///	@return	å…±æœ‰é ˜åŸŸã®ä½œæˆã«æˆåŠŸã™ã‚Œã°trueã€å¤±æ•—ã™ã‚Œã°falseãŒæˆ»ã‚Šã¾ã™ã€‚
+	///	@brief	‹¤—L—Ìˆæ‚ğì¬‚µ‚Ü‚·B‚Ü‚½‚ÍŠù‚É‚ ‚é‹¤—L—Ìˆæ‚Ö‚ÌƒAƒNƒZƒX‚ğ‰Â”\‚Æ‚µ‚Ü‚·B
+	///	@param	writable	[in]	true‚Åread/write‚Å‹¤—L—Ìˆæ‚ğì¬‚µ‚Ü‚·Afalse‚Åread only‚Å‹¤—L—Ìˆæ‚ğŠJ‚«‚Ü‚·B
+	///	@return	‹¤—L—Ìˆæ‚Ìì¬‚É¬Œ÷‚·‚ê‚ÎtrueA¸”s‚·‚ê‚Îfalse‚ª–ß‚è‚Ü‚·B
 	bool open(const bool writable = false);
 
-	///	@brief	å…±æœ‰é ˜åŸŸã®ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿ã¾ã™ã€‚
-	///	@param	data	[out]	å…±æœ‰é ˜åŸŸå†…ã®ãƒ‡ãƒ¼ã‚¿
-	///	@return	readã«æˆåŠŸã™ã‚Œã°trueã€å¤±æ•—ã™ã‚Œã°falseãŒæˆ»ã‚Šã¾ã™ã€‚
-	/// @attention readãŒå¯èƒ½ãªã®ã¯å…±æœ‰é ˜åŸŸã‚’open(true)ã§ä½œæˆã—ãŸæ™‚ã®ã¿ã§ã™ã€‚
+	///	@brief	‹¤—L—Ìˆæ‚Ìƒf[ƒ^‚ğ“Ç‚İ‚Ü‚·B
+	///	@param	data	[out]	‹¤—L—Ìˆæ“à‚Ìƒf[ƒ^
+	///	@return	read‚É¬Œ÷‚·‚ê‚ÎtrueA¸”s‚·‚ê‚Îfalse‚ª–ß‚è‚Ü‚·B
+	/// @attention read‚ª‰Â”\‚È‚Ì‚Í‹¤—L—Ìˆæ‚ğopen(true)‚Åì¬‚µ‚½‚Ì‚İ‚Å‚·B
 	bool read(T &data)const;
 
-	///	@brief	å…±æœ‰é ˜åŸŸã¸ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãã¾ã™ã€‚
-	///	@param	data	[in]	å…±æœ‰é ˜åŸŸã¸æ›¸ããƒ‡ãƒ¼ã‚¿
-	///	@return	writeã«æˆåŠŸã™ã‚Œã°trueã€å¤±æ•—ã™ã‚Œã°falseãŒæˆ»ã‚Šã¾ã™ã€‚
+	///	@brief	‹¤—L—Ìˆæ‚Öƒf[ƒ^‚ğ‘‚«‚Ü‚·B
+	///	@param	data	[in]	‹¤—L—Ìˆæ‚Ö‘‚­ƒf[ƒ^
+	///	@return	write‚É¬Œ÷‚·‚ê‚ÎtrueA¸”s‚·‚ê‚Îfalse‚ª–ß‚è‚Ü‚·B
 	bool write(const T &data);
 
-	///	@brief	å…±æœ‰é ˜åŸŸã‚’å‰Šé™¤ã—ã¾ã™ã€‚ã¾ãŸã¯åˆ©ç”¨ä¸­ã®å…±æœ‰é ˜åŸŸã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’é–‰ã˜ã¾ã™ã€‚
-	///	@return	å…±æœ‰é ˜åŸŸã®å‰Šé™¤ã¾ãŸã¯é–‰ã˜ã‚‹ã“ã¨ã«ã«æˆåŠŸã™ã‚Œã°trueã€å¤±æ•—ã™ã‚Œã°falseãŒæˆ»ã‚Šã¾ã™ã€‚
+	///	@brief	‹¤—L—Ìˆæ‚ğíœ‚µ‚Ü‚·B‚Ü‚½‚Í—˜—p’†‚Ì‹¤—L—Ìˆæ‚Ö‚ÌƒAƒNƒZƒX‚ğ•Â‚¶‚Ü‚·B
+	///	@return	‹¤—L—Ìˆæ‚Ìíœ‚Ü‚½‚Í•Â‚¶‚é‚±‚Æ‚É‚É¬Œ÷‚·‚ê‚ÎtrueA¸”s‚·‚ê‚Îfalse‚ª–ß‚è‚Ü‚·B
 	bool close(void)const;
 };
 
@@ -98,7 +98,7 @@ bool igSharedMemoryT<T>::open(const bool writable){
 	m_writable = writable;
 	DWORD fdwProtect = m_writable ? PAGE_READWRITE : PAGE_READONLY;
 
-	// ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒƒãƒ—ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
+	// ƒtƒ@ƒCƒ‹ƒ}ƒbƒvƒIƒuƒWƒFƒNƒg‚Ìì¬
 	for(;;){
 		m_handle = CreateFileMappingA(
 			HANDLE(-1),
@@ -109,29 +109,29 @@ bool igSharedMemoryT<T>::open(const bool writable){
 			m_mappedFilename.c_str()
 		);
 
-		// æ—¢ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹ã‹ã‚’ç¢ºèªã™ã‚‹
+		// Šù‚Éƒtƒ@ƒCƒ‹‚ª‚ ‚é‚©‚ğŠm”F‚·‚é
 		DWORD fileExists = GetLastError();
 
 		if(m_handle == NULL)return false;
 
-		// æ—¢ã«read/writeå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ãŒå­˜åœ¨ã—ã€å†ã³read/writeãŒå¯èƒ½ãª
-		// ãƒ¢ãƒ¼ãƒ‰ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã“ã†ã¨ã—ãŸå ´åˆã«ã¯ã‚¨ãƒ©ãƒ¼ã¨ãªã‚‹
+		// Šù‚Éread/write‰Â”\‚ÈƒvƒƒZƒX‚ª‘¶İ‚µAÄ‚Ñread/write‚ª‰Â”\‚È
+		// ƒ‚[ƒh‚Åƒtƒ@ƒCƒ‹‚ğŠJ‚±‚¤‚Æ‚µ‚½ê‡‚É‚ÍƒGƒ‰[‚Æ‚È‚é
 		if(m_writable){
-			if(fileExists == ERROR_ALREADY_EXISTS){			// æ—¢ã«read/writeãŒå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ãŒã‚ã‚‹
+			if(fileExists == ERROR_ALREADY_EXISTS){			// Šù‚Éread/write‚ª‰Â”\‚ÈƒvƒƒZƒX‚ª‚ ‚é
 				this->close();
 				return false;
-			}else break;									// åˆã‚ã¦read/writeãŒå¯èƒ½ãªãƒ—ãƒ­ã‚»ã‚¹ã‚’ä½œæˆã—ãŸ
+			}else break;									// ‰‚ß‚Äread/write‚ª‰Â”\‚ÈƒvƒƒZƒX‚ğì¬‚µ‚½
 		}else{
-			if(fileExists == ERROR_ALREADY_EXISTS)break;	// read onlyã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ï¼’ç•ªç›®ä»¥é™ã«é–‹ã„ãŸ
-			else{											// read onlyã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¸€ç•ªåˆã‚ã«ä½œæˆã—ã‚ˆã†ã¨ã—ãŸ
+			if(fileExists == ERROR_ALREADY_EXISTS)break;	// read only‚Ìƒtƒ@ƒCƒ‹‚ğ‚Q”Ô–ÚˆÈ~‚ÉŠJ‚¢‚½
+			else{											// read only‚Ìƒtƒ@ƒCƒ‹‚ğˆê”Ô‰‚ß‚Éì¬‚µ‚æ‚¤‚Æ‚µ‚½
 				this->close();
-				Sleep(1000);								// 1ç§’å¾Œã«å†åº¦ãƒˆãƒ©ã‚¤ã™ã‚‹
+				Sleep(1000);								// 1•bŒã‚ÉÄ“xƒgƒ‰ƒC‚·‚é
 				continue;
 			}
 		}
 	}
 
-	// ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
+	// ƒrƒ…[‚Ìì¬
 	DWORD dwDesiredAccess = m_writable ? FILE_MAP_WRITE : FILE_MAP_READ;
 	m_data = (T *)MapViewOfFile(m_handle, dwDesiredAccess, 0, 0, sizeof(T));
 	if(m_data == NULL)return false;
@@ -144,7 +144,7 @@ bool igSharedMemoryT<T>::open(const bool writable){
 //
 template <class T>
 bool igSharedMemoryT<T>::read(T &data)const{
-	// æ’ä»–å‡¦ç†ã®é–‹å§‹
+	// ”r‘¼ˆ—‚ÌŠJn
 #ifdef UNICODE
   wchar_t l_mutexName[1024];
   mbstowcs(l_mutexName, m_mutexName.c_str(), 1023);
@@ -157,7 +157,7 @@ bool igSharedMemoryT<T>::read(T &data)const{
 
 	data = *m_data;
 
-	// æ’ä»–å‡¦ç†ã®è§£é™¤ 
+	// ”r‘¼ˆ—‚Ì‰ğœ 
 	ReleaseMutex(hMutex);
 	CloseHandle(hMutex);
 
@@ -169,7 +169,7 @@ bool igSharedMemoryT<T>::read(T &data)const{
 //
 template <class T>
 bool igSharedMemoryT<T>::write(const T &data){
-	// æ’ä»–å‡¦ç†ã®é–‹å§‹
+	// ”r‘¼ˆ—‚ÌŠJn
 #ifdef UNICODE
   wchar_t l_mutexName[1024];
   mbstowcs(l_mutexName, m_mutexName.c_str(), 1023);
@@ -182,7 +182,7 @@ bool igSharedMemoryT<T>::write(const T &data){
 
 	*m_data = data;
 
-	// æ’ä»–å‡¦ç†ã®è§£é™¤
+	// ”r‘¼ˆ—‚Ì‰ğœ
 	ReleaseMutex(hMutex);
 	CloseHandle(hMutex);
 

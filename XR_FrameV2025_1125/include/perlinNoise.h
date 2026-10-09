@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 void perlinInit();
 float perlinNoise(float x, float y);
@@ -9,22 +9,22 @@ void perlinDraw(void);
 
 void perlinMake( float freq, float fractal );
 
-//-------- ezGround_Draw: åœ°é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æç”»ã™ã‚‹
+//-------- ezGround_Draw: ’n–ÊƒIƒuƒWƒFƒNƒg‚ğ•`‰æ‚·‚é
 void ezGround_Draw(GLuint list);
 
-//-------- ezGround_Make: åœ°é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
+//-------- ezGround_Make: ’n–ÊƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
 GLuint ezGround_Make(float freq, float fractal);
 
-//-------- ezGround_MakeSquare: å››è§’å½¢ã®åœ°é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
+//-------- ezGround_MakeSquare: lŠpŒ`‚Ì’n–ÊƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
 GLuint ezGround_MakeSquare(float freq, float fractal, float height, float size );
 
-//-------- ezGround_MakeCircle: å††å½¢ã®åœ°é¢ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã™ã‚‹
+//-------- ezGround_MakeCircle: ‰~Œ`‚Ì’n–ÊƒIƒuƒWƒFƒNƒg‚ğ¶¬‚·‚é
 GLuint ezGround_MakeCircle(float freq, float fractal, float height, float radius );
 
 /*
 graph TD
 
-%% åŸºæœ¬ãƒã‚¤ã‚ºé–¢æ•°
+%% Šî–{ƒmƒCƒYŠÖ”
 perlinNoise --> fade
 perlinNoise --> lerp
 perlinNoise --> grad
@@ -34,7 +34,7 @@ perlinNoiseCircle --> perlinNoise
 perlinFractal --> perlinNoise
 perlinFractalCircle --> perlinNoiseCircle
 
-%% åœ°å½¢ç”Ÿæˆãƒ»æç”»
+%% ’nŒ`¶¬E•`‰æ
 perlinMake --> perlinInit
 perlinMake --> perlinFractal
 
@@ -54,7 +54,7 @@ ezGround_MakeCircle --> drawWeb
 
 ezGround_Draw --> glCallList
 
-%% è£œåŠ©é–¢æ•°
+%% •â•ŠÖ”
 fade
 lerp
 grad

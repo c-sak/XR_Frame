@@ -1,8 +1,8 @@
-ï»¿#include "pch.h"
+#include "pch.h"
 #include "UnityThreedVector.h"
 
 //-----------------------------------------------------------------//
-//  ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                       //
+//  ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^                                       //
 //-----------------------------------------------------------------//
 uoThreedVector::uoThreedVector(void)
 {
@@ -13,7 +13,7 @@ uoThreedVector::uoThreedVector(void)
 }
 
 //-----------------------------------------------------------------//
-//  ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(åº§æ¨™å€¤é…åˆ—æŒ‡å®š)                                 //
+//  ƒRƒ“ƒXƒgƒ‰ƒNƒ^(À•W’l”z—ñw’è)                                 //
 //-----------------------------------------------------------------//
 uoThreedVector::uoThreedVector(double *pval)
 {
@@ -24,7 +24,7 @@ uoThreedVector::uoThreedVector(double *pval)
 }
 
 //-----------------------------------------------------------------//
-//  ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿(åº§æ¨™å€¤å€‹åˆ¥æŒ‡å®š)                                 //
+//  ƒRƒ“ƒXƒgƒ‰ƒNƒ^(À•W’lŒÂ•Êw’è)                                 //
 //-----------------------------------------------------------------//
 uoThreedVector::uoThreedVector(double val1, double val2, double val3)
 {
@@ -34,7 +34,7 @@ uoThreedVector::uoThreedVector(double val1, double val2, double val3)
 }
 
 //-----------------------------------------------------------------//
-//  ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                           //
+//  ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^                                           //
 //-----------------------------------------------------------------//
 uoThreedVector::uoThreedVector(const uoThreedVector &val)
 {
@@ -44,14 +44,14 @@ uoThreedVector::uoThreedVector(const uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                   //
+//  ƒfƒXƒgƒ‰ƒNƒ^                                                   //
 //-----------------------------------------------------------------//
 uoThreedVector::~uoThreedVector(void)
 {
 }
 
 //-----------------------------------------------------------------//
-//  Xåº§æ¨™å€¤è¨­å®š                                                    //
+//  XÀ•W’lİ’è                                                    //
 //-----------------------------------------------------------------//
 void uoThreedVector::setPointX(double val)
 {
@@ -59,7 +59,7 @@ void uoThreedVector::setPointX(double val)
 }
 
 //-----------------------------------------------------------------//
-//  Yåº§æ¨™å€¤è¨­å®š                                                    //
+//  YÀ•W’lİ’è                                                    //
 //-----------------------------------------------------------------//
 void uoThreedVector::setPointY(double val)
 {
@@ -67,7 +67,7 @@ void uoThreedVector::setPointY(double val)
 }
 
 //-----------------------------------------------------------------//
-//  Zåº§æ¨™å€¤è¨­å®š                                                    //
+//  ZÀ•W’lİ’è                                                    //
 //-----------------------------------------------------------------//
 void uoThreedVector::setPointZ(double val)
 {
@@ -75,7 +75,7 @@ void uoThreedVector::setPointZ(double val)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«åº§æ¨™å€¤è¨­å®š                                             //
+//  ƒxƒNƒgƒ‹À•W’lİ’è                                             //
 //-----------------------------------------------------------------//
 void uoThreedVector::setPointAll(const double *pval)
 {
@@ -86,7 +86,7 @@ void uoThreedVector::setPointAll(const double *pval)
 }
 
 //-----------------------------------------------------------------//
-//  Xåº§æ¨™å€¤å–å¾—                                                    //
+//  XÀ•W’læ“¾                                                    //
 //-----------------------------------------------------------------//
 double uoThreedVector::getPointX(void)
 {
@@ -94,7 +94,7 @@ double uoThreedVector::getPointX(void)
 }
 
 //-----------------------------------------------------------------//
-//  Yåº§æ¨™å€¤å–å¾—                                                    //
+//  YÀ•W’læ“¾                                                    //
 //-----------------------------------------------------------------//
 double uoThreedVector::getPointY(void)
 {
@@ -102,7 +102,7 @@ double uoThreedVector::getPointY(void)
 }
 
 //-----------------------------------------------------------------//
-//  Zåº§æ¨™å€¤å–å¾—                                                    //
+//  ZÀ•W’læ“¾                                                    //
 //-----------------------------------------------------------------//
 double uoThreedVector::getPointZ(void)
 {
@@ -110,7 +110,7 @@ double uoThreedVector::getPointZ(void)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«åº§æ¨™å€¤å–å¾—                                             //
+//  ƒxƒNƒgƒ‹À•W’læ“¾                                             //
 //-----------------------------------------------------------------//
 double *uoThreedVector::getPointAll(void)
 {
@@ -118,56 +118,56 @@ double *uoThreedVector::getPointAll(void)
 }
 
 //-----------------------------------------------------------------//
-//  å˜ä½ãƒ™ã‚¯ãƒˆãƒ«Xåº§æ¨™å€¤å–å¾—                                        //
+//  ’PˆÊƒxƒNƒgƒ‹XÀ•W’læ“¾                                        //
 //-----------------------------------------------------------------//
 double uoThreedVector::getNormalizeX(void)
 {
-  culcNormalVector();      // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+  culcNormalVector();      // ’PˆÊƒxƒNƒgƒ‹‚ğŒvZ
   return this->fnormalvector[0];
 }
 
 //-----------------------------------------------------------------//
-//  å˜ä½ãƒ™ã‚¯ãƒˆãƒ«Yåº§æ¨™å€¤å–å¾—                                        //
+//  ’PˆÊƒxƒNƒgƒ‹YÀ•W’læ“¾                                        //
 //-----------------------------------------------------------------//
 double uoThreedVector::getNormalizeY(void)
 {
-  culcNormalVector();      // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+  culcNormalVector();      // ’PˆÊƒxƒNƒgƒ‹‚ğŒvZ
   return this->fnormalvector[1];
 }
 
 //-----------------------------------------------------------------//
-//  å˜ä½ãƒ™ã‚¯ãƒˆãƒ«Zåº§æ¨™å€¤å–å¾—                                        //
+//  ’PˆÊƒxƒNƒgƒ‹ZÀ•W’læ“¾                                        //
 //-----------------------------------------------------------------//
 double uoThreedVector::getNormalizeZ(void)
 {
-  culcNormalVector();      // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+  culcNormalVector();      // ’PˆÊƒxƒNƒgƒ‹‚ğŒvZ
   return this->fnormalvector[2];
 }
 
 //-----------------------------------------------------------------//
-//  å˜ä½ãƒ™ã‚¯ãƒˆãƒ«åº§æ¨™å€¤å–å¾—                                         //
+//  ’PˆÊƒxƒNƒgƒ‹À•W’læ“¾                                         //
 //-----------------------------------------------------------------//
 double *uoThreedVector::getNormalizeALL(void)
 {
-  culcNormalVector();      // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+  culcNormalVector();      // ’PˆÊƒxƒNƒgƒ‹‚ğŒvZ
   return this->fnormalvector;
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•å–å¾—                                             //
+//  ƒxƒNƒgƒ‹‚Ì’·‚³æ“¾                                             //
 //-----------------------------------------------------------------//
 double uoThreedVector::getLength(void)
 {
-  culcLength();      // ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’è¨ˆç®—
+  culcLength();      // ƒxƒNƒgƒ‹‚Ì’·‚³‚ğŒvZ
   return this->fvectorlength;
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®åŠ ç®—                                                 //
+//  ƒxƒNƒgƒ‹‚Ì‰ÁZ                                                 //
 //-----------------------------------------------------------------//
 uoThreedVector uoThreedVector::operator+(uoThreedVector &val)
 {
-  uoThreedVector temp;    // ä¸€æ™‚ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+  uoThreedVector temp;    // ˆêƒIƒuƒWƒFƒNƒg
 
   temp.setPointX(this->getPointX() + val.getPointX());
   temp.setPointY(this->getPointY() + val.getPointY());
@@ -177,11 +177,11 @@ uoThreedVector uoThreedVector::operator+(uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®æ¸›ç®—                                                 //
+//  ƒxƒNƒgƒ‹‚ÌŒ¸Z                                                 //
 //-----------------------------------------------------------------//
 uoThreedVector uoThreedVector::operator-(uoThreedVector &val)
 {
-  uoThreedVector temp;    // ä¸€æ™‚ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+  uoThreedVector temp;    // ˆêƒIƒuƒWƒFƒNƒg
 
   temp.setPointX(this->getPointX() - val.getPointX());
   temp.setPointY(this->getPointY() - val.getPointY());
@@ -191,11 +191,11 @@ uoThreedVector uoThreedVector::operator-(uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  ã‚¹ã‚«ãƒ©ãƒ¼ã®ä¹—ç®—                                                 //
+//  ƒXƒJƒ‰[‚ÌæZ                                                 //
 //-----------------------------------------------------------------//
 uoThreedVector uoThreedVector::operator*(double val)
 {
-  uoThreedVector temp;    // ä¸€æ™‚ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+  uoThreedVector temp;    // ˆêƒIƒuƒWƒFƒNƒg
 
   temp.setPointX(this->getPointX() * val);
   temp.setPointY(this->getPointY() * val);
@@ -205,16 +205,16 @@ uoThreedVector uoThreedVector::operator*(double val)
 }
 
 //-----------------------------------------------------------------//
-//  ã‚¹ã‚«ãƒ©ãƒ¼ã®é™¤ç®—                                                 //
+//  ƒXƒJƒ‰[‚ÌœZ                                                 //
 //-----------------------------------------------------------------//
 uoThreedVector uoThreedVector::operator/(double val)
 {
-  uoThreedVector temp;    // ä¸€æ™‚ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+  uoThreedVector temp;    // ˆêƒIƒuƒWƒFƒNƒg
 
-  // 0é™¤ç®—å¯¾å¿œ
+  // 0œZ‘Î‰
   if(val == 0.0f)
   {
-    cout << "ã‚¹ã‚«ãƒ©ãƒ¼é‡ã®æ¸›ç®—ã«0ãŒæŒ‡å®šã•ã‚Œã¾ã—ãŸã€‚" << endl;
+    cout << "ƒXƒJƒ‰[—Ê‚ÌŒ¸Z‚É0‚ªw’è‚³‚ê‚Ü‚µ‚½B" << endl;
     return NULL;
   }
 
@@ -226,7 +226,7 @@ uoThreedVector uoThreedVector::operator/(double val)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®ä»£å…¥                                                 //
+//  ƒxƒNƒgƒ‹‚Ì‘ã“ü                                                 //
 //-----------------------------------------------------------------//
 uoThreedVector &uoThreedVector::operator=(const uoThreedVector &val)
 {
@@ -238,7 +238,7 @@ uoThreedVector &uoThreedVector::operator=(const uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®æ¯”è¼ƒ(==)                                             //
+//  ƒxƒNƒgƒ‹‚Ì”äŠr(==)                                             //
 //-----------------------------------------------------------------//
 bool uoThreedVector::operator==(uoThreedVector &val)
 {
@@ -248,7 +248,7 @@ bool uoThreedVector::operator==(uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®æ¯”è¼ƒ(!=)                                             //
+//  ƒxƒNƒgƒ‹‚Ì”äŠr(!=)                                             //
 //-----------------------------------------------------------------//
 bool uoThreedVector::operator!=(uoThreedVector &val)
 {
@@ -258,14 +258,14 @@ bool uoThreedVector::operator!=(uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  è¡Œåˆ—è¦ç´ ã®å–å¾—                                                 //
+//  s—ñ—v‘f‚Ìæ“¾                                                 //
 //-----------------------------------------------------------------//
 double & uoThreedVector::operator[](int id)
 {
-  // 0ã‚ˆã‚Šå°ã•ãã€15ã‚ˆã‚Šå¤§ãã„å ´åˆã¯ã‚¨ãƒ©ãƒ¼
+  // 0‚æ‚è¬‚³‚­A15‚æ‚è‘å‚«‚¢ê‡‚ÍƒGƒ‰[
   if(id > 4 || 0 > id)
   {
-    cout << "å¼•æ•°ã®æŒ‡å®šãŒä¸æ­£(0ã‚ˆã‚Šå°ã•ã„ã€åˆã¯4ã‚ˆã‚Šå¤§ãã„)ã§ã™ã€‚" << endl;
+    cout << "ˆø”‚Ìw’è‚ª•s³(0‚æ‚è¬‚³‚¢A–”‚Í4‚æ‚è‘å‚«‚¢)‚Å‚·B" << endl;
     exit(1);
   }
 
@@ -273,7 +273,7 @@ double & uoThreedVector::operator[](int id)
 }
 
 //-----------------------------------------------------------------//
-//  å†…ç©å–å¾—                                                       //
+//  “àÏæ“¾                                                       //
 //-----------------------------------------------------------------//
 double uoThreedVector::getDotProduct(uoThreedVector &val)
 {
@@ -283,11 +283,11 @@ double uoThreedVector::getDotProduct(uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  å¤–ç©å–å¾—                                                       //
+//  ŠOÏæ“¾                                                       //
 //-----------------------------------------------------------------//
 uoThreedVector uoThreedVector::getCrossProduct(uoThreedVector &val)
 {
-  uoThreedVector temp;    // ä¸€æ™‚ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+  uoThreedVector temp;    // ˆêƒIƒuƒWƒFƒNƒg
   
   temp.setPointX((this->getPointY() * val.getPointZ()) - (this->getPointZ() * val.getPointY()));
   temp.setPointY((this->getPointZ() * val.getPointX()) - (this->getPointX() * val.getPointZ()));
@@ -297,22 +297,22 @@ uoThreedVector uoThreedVector::getCrossProduct(uoThreedVector &val)
 }
 
 //-----------------------------------------------------------------//
-//  è§’åº¦å–å¾—                                                       //
+//  Šp“xæ“¾                                                       //
 //-----------------------------------------------------------------//
 double uoThreedVector::getAngle(uoThreedVector &val)
 {
-  double angle;      // è§’åº¦
+  double angle;      // Šp“x
 
-  // acos(å†…ç© / |A|*|B|)
+  // acos(“àÏ / |A|*|B|)
   angle = acos(this->getDotProduct(val) / (this->fvectorlength * val.fvectorlength));
-  // ãƒ©ã‚¸ã‚¢ãƒ³ã‹ã‚‰è§’åº¦ã«å¤‰æ›
+  // ƒ‰ƒWƒAƒ“‚©‚çŠp“x‚É•ÏŠ·
   angle = (angle * 180.0f) / (double)M_PI;
 
   return angle;
 }
 
 //-----------------------------------------------------------------//
-//  ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ã‚’è¨ˆç®—                                           //
+//  ƒxƒNƒgƒ‹‚Ì’·‚³‚ğŒvZ                                           //
 //-----------------------------------------------------------------//
 void uoThreedVector::culcLength(void)
 {
@@ -322,7 +322,7 @@ void uoThreedVector::culcLength(void)
 }
 
 //-----------------------------------------------------------------//
-//  å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—                                             //
+//  ’PˆÊƒxƒNƒgƒ‹‚ğŒvZ                                             //
 //-----------------------------------------------------------------//
 void uoThreedVector::culcNormalVector(void)
 {
@@ -330,7 +330,7 @@ void uoThreedVector::culcNormalVector(void)
 
   for(int i = 0; i < 3; i++)
   {
-    // ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ãŒ0ã§ã‚ã‚‹å ´åˆ
+    // ƒxƒNƒgƒ‹‚Ì’·‚³‚ª0‚Å‚ ‚éê‡
     if(this->fvectorlength == 0)
     {
       this->fnormalvector[i] = 0;
@@ -343,17 +343,17 @@ void uoThreedVector::culcNormalVector(void)
 }
 
 //-----------------------------------------------------------------//
-//  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿å‡ºåŠ›                                                 //
+//  “à•”ƒf[ƒ^o—Í                                                 //
 //-----------------------------------------------------------------//
 void uoThreedVector::show(ostream &ost)
 {
   ost << "=======================================" << endl;
-  ost << "ï¼œï¼œåŸºæœ¬æƒ…å ±ï¼ï¼" << endl;
-  ost << "ãƒ™ã‚¯ãƒˆãƒ« X:" << this->getPointX() << endl;
-  ost << "ãƒ™ã‚¯ãƒˆãƒ« Y:" << this->getPointY() << endl;
-  ost << "ãƒ™ã‚¯ãƒˆãƒ« Z:" << this->getPointZ() << endl;
-  ost << "ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•:" << this->getLength() << endl;
-  ost << "å˜ä½ãƒ™ã‚¯ãƒˆãƒ« X:" << this->getNormalizeX() << endl;
-  ost << "å˜ä½ãƒ™ã‚¯ãƒˆãƒ« Y:" << this->getNormalizeY() << endl;
-  ost << "å˜ä½ãƒ™ã‚¯ãƒˆãƒ« Z:" << this->getNormalizeZ() << endl;
+  ost << "ƒƒŠî–{î•ñ„„" << endl;
+  ost << "ƒxƒNƒgƒ‹ X:" << this->getPointX() << endl;
+  ost << "ƒxƒNƒgƒ‹ Y:" << this->getPointY() << endl;
+  ost << "ƒxƒNƒgƒ‹ Z:" << this->getPointZ() << endl;
+  ost << "ƒxƒNƒgƒ‹‚Ì’·‚³:" << this->getLength() << endl;
+  ost << "’PˆÊƒxƒNƒgƒ‹ X:" << this->getNormalizeX() << endl;
+  ost << "’PˆÊƒxƒNƒgƒ‹ Y:" << this->getNormalizeY() << endl;
+  ost << "’PˆÊƒxƒNƒgƒ‹ Z:" << this->getNormalizeZ() << endl;
 }

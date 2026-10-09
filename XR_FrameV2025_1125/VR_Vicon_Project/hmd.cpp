@@ -1,4 +1,4 @@
-ï»¿/******************************************************************************
+/******************************************************************************
 * hmd.cpp
 */
 
@@ -11,7 +11,7 @@
 
 #include "WarpTex.h"
 
- //ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°
+ //ƒOƒ[ƒoƒ‹•Ï”
 WarpTex g_DC_right, g_DC_left;
 float g_cx = 0;
 float g_cy = 0;
@@ -78,14 +78,14 @@ void HMD_View( void )
 	//float h = 0.072;
 	//float w = 0.065;
 	float h = 0.12;
-	float w = 0.1075; //ãƒ†ã‚¹ãƒˆ
+	float w = 0.1075; //ƒeƒXƒg
 
 	float bottom = - h/2.0;
 	float top = h/2.0;
 	float znear = 0.03;
 	float zfar = 100.0;
 
-	//â–¼èƒŒæ™¯è‰²ã¨ãƒ•ã‚©ã‚°ã‚«ãƒ©ãƒ¼ã‚’ãƒ–ãƒ¬ãƒ³ãƒ‰
+	//¥”wŒiF‚ÆƒtƒHƒOƒJƒ‰[‚ğƒuƒŒƒ“ƒh
 	ezBackground(&simdata);
 
 	//-------- viewport
@@ -96,11 +96,11 @@ void HMD_View( void )
 	glEnable(GL_DEPTH_TEST); // ---- begin: 
 	glEnable(GL_LIGHTING);
 
-	//â–¼å·¦çœ¼ç”»åƒ
+	//¥¶Šá‰æ‘œ
 	glViewport( 0, 0, window.width/2.0, window.height );
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	if (distortion) { //â˜…
+	if (distortion) { //š
 		left = -w / 2.0;
 		right = w / 2.0;
 	}
@@ -127,13 +127,13 @@ void HMD_View( void )
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 
-	//â˜…æ­ªã¿è£œæ­£å®Ÿè¡Œ
+	//š˜c‚İ•â³Às
 	if( distortion ){
 		g_DC_left.Update();
 		//g_DC_left.runDC();
 	}
 
-	//â–¼å³çœ¼ç”»åƒ
+	//¥‰EŠá‰æ‘œ
 	glEnable(GL_DEPTH_TEST); // ---- begin: 
 	glEnable(GL_LIGHTING);
 
@@ -147,7 +147,7 @@ void HMD_View( void )
 
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	if (distortion) {//â˜…
+	if (distortion) {//š
 		left = -w / 2.0;
 		right = w / 2.0;
 	}
@@ -175,13 +175,13 @@ void HMD_View( void )
 	glDisable(GL_DEPTH_TEST);
 	//PostDraw();
 
-	//â˜…æ­ªã¿è£œæ­£å®Ÿè¡Œ
+	//š˜c‚İ•â³Às
 	if( distortion ){
 		g_DC_right.Update();
 		//g_DC_right.runDC();
 	}
 
-	//â˜…æ­ªè£œæ­£æç”»
+	//š˜c•â³•`‰æ
 	if (distortion) {
 		glViewport(0, 0, window.width, window.height);
 		glClearColor(0.0, 0.0, 0.0, 1.0);

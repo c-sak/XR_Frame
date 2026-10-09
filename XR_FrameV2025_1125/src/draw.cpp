@@ -1,10 +1,10 @@
-ï»¿#include "platform.h"
+#include "platform.h"
 
 #include "ezUtil.h"
 #include "sim.h"
 #include "light.h"
 #include "Shapes.h"
-#include "mymodel.h" //â˜…
+#include "mymodel.h" //š
 
 #include "ezFont.h"
 
@@ -62,10 +62,10 @@ void drawSolidCube( void )
 {
 	glPushMatrix();
 	{
-		glTranslatef( 0.0, 0.0, 0.0 );   //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–ä½ç½®èª¿æ•´
-		glRotatef( 0.0, 0.0, 1.0, 0.0 ); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ¨ãƒ¼è§’
-		glRotatef( 0.0, 1.0, 0.0, 0.0 ); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ”ãƒƒãƒè§’
-		glRotatef( 0.0, 0.0, 0.0, 1.0 ); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ­ãƒ¼ãƒ«è§’
+		glTranslatef( 0.0, 0.0, 0.0 );   //ƒIƒuƒWƒFƒNƒgŠî€ˆÊ’u’²®
+		glRotatef( 0.0, 0.0, 1.0, 0.0 ); //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒˆ[Šp
+		glRotatef( 0.0, 1.0, 0.0, 0.0 ); //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒsƒbƒ`Šp
+		glRotatef( 0.0, 0.0, 0.0, 1.0 ); //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒ[ƒ‹Šp
 		//glutSolidCube( 1.0 );
 		ezSolidCube(1.0);
 	}
@@ -79,11 +79,11 @@ void drawSolidSphere( void )
 {
 	glPushMatrix();
 	{
-		glTranslatef( 0.0, 0.0, 0.0 );    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–ä½ç½®èª¿æ•´
-		glRotatef( 0.0, 0.0, 1.0, 0.0 );  //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ¨ãƒ¼è§’
-		glRotatef( 90.0, 1.0, 0.0, 0.0 ); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ”ãƒƒãƒè§’
-		glRotatef( 0.0, 0.0, 0.0, 1.0 );  //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ­ãƒ¼ãƒ«è§’
-		glutSolidSphere( 0.125, 18, 16 );   //åŠå¾„ï¼ŒçµŒåº¦æ–¹å‘åˆ†å‰²æ•°ï¼Œç·¯åº¦æ–¹å‘åˆ†å‰²æ•°
+		glTranslatef( 0.0, 0.0, 0.0 );    //ƒIƒuƒWƒFƒNƒgŠî€ˆÊ’u’²®
+		glRotatef( 0.0, 0.0, 1.0, 0.0 );  //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒˆ[Šp
+		glRotatef( 90.0, 1.0, 0.0, 0.0 ); //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒsƒbƒ`Šp
+		glRotatef( 0.0, 0.0, 0.0, 1.0 );  //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒ[ƒ‹Šp
+		glutSolidSphere( 0.125, 18, 16 );   //”¼ŒaCŒo“x•ûŒü•ªŠ„”CˆÜ“x•ûŒü•ªŠ„”
 	}
 	glPopMatrix();
     return;
@@ -93,11 +93,11 @@ void drawPlayer( void )
 {
 	glPushMatrix();
 	{
-		glTranslatef( 0.0, 0.0, 0.0 );    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–ä½ç½®èª¿æ•´
-		glRotatef( 0.0, 0.0, 1.0, 0.0 );  //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ¨ãƒ¼è§’
-		glRotatef( 180.0, 1.0, 0.0, 0.0 ); //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ”ãƒƒãƒè§’
-		glRotatef( 0.0, 0.0, 0.0, 1.0 );  //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŸºæº–å§¿å‹¢èª¿æ•´ï¼šãƒ­ãƒ¼ãƒ«è§’
-		glutSolidCone( 0.5, 1.0, 6, 4 );   //åŠå¾„ï¼ŒçµŒåº¦æ–¹å‘åˆ†å‰²æ•°ï¼Œç·¯åº¦æ–¹å‘åˆ†å‰²æ•°
+		glTranslatef( 0.0, 0.0, 0.0 );    //ƒIƒuƒWƒFƒNƒgŠî€ˆÊ’u’²®
+		glRotatef( 0.0, 0.0, 1.0, 0.0 );  //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒˆ[Šp
+		glRotatef( 180.0, 1.0, 0.0, 0.0 ); //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒsƒbƒ`Šp
+		glRotatef( 0.0, 0.0, 0.0, 1.0 );  //ƒIƒuƒWƒFƒNƒgŠî€p¨’²®Fƒ[ƒ‹Šp
+		glutSolidCone( 0.5, 1.0, 6, 4 );   //”¼ŒaCŒo“x•ûŒü•ªŠ„”CˆÜ“x•ûŒü•ªŠ„”
 	}
 	glPopMatrix();
 }
@@ -107,8 +107,8 @@ void drawHandR( void )
 	glPushMatrix();
 	applyObjColor( &simdata.handR );
 	applyObjTransform( &simdata.handR );
-	drawHandRmodel();//mymodels.cppã§ä½œã£ãŸæç”»é–¢æ•°
-	//è¡çªåˆ¤å®šç¯„å›²ãŒã‚ã‹ã‚Šã‚„ã™ã„ã‚ˆã†ãƒ¯ã‚¤ãƒ¤çƒæç”»
+	drawHandRmodel();//mymodels.cpp‚Åì‚Á‚½•`‰æŠÖ”
+	//Õ“Ë”»’è”ÍˆÍ‚ª‚í‚©‚è‚â‚·‚¢‚æ‚¤ƒƒCƒ„‹…•`‰æ
 	//glutWireSphere( simdata.handR.radius, 8, 6 );
 	ezWireSphere(simdata.handR.radius, 8, 6);
 	//drawMovie();
@@ -120,8 +120,8 @@ void drawHandL( void )
 	glPushMatrix();
 	applyObjColor( &simdata.handL );
 	applyObjTransform( &simdata.handL );
-	drawHandLmodel();//mymodels.cppã§ä½œã£ãŸæç”»é–¢æ•°
-	//è¡çªåˆ¤å®šç¯„å›²ãŒã‚ã‹ã‚Šã‚„ã™ã„ã‚ˆã†ãƒ¯ã‚¤ãƒ¤çƒæç”»
+	drawHandLmodel();//mymodels.cpp‚Åì‚Á‚½•`‰æŠÖ”
+	//Õ“Ë”»’è”ÍˆÍ‚ª‚í‚©‚è‚â‚·‚¢‚æ‚¤ƒƒCƒ„‹…•`‰æ
 	//glutWireSphere( simdata.handL.radius, 8, 6 );
 	ezWireSphere(simdata.handL.radius, 8, 6);
 	//simdata.test_png->draw();
@@ -137,10 +137,10 @@ void Lighting( void )
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodelAmbient);
 	glLightModelfv(GL_LIGHT_MODEL_LOCAL_VIEWER, lmodelLocalviewer);
 
-	//â–¼ãƒ¡ã‚¤ãƒ³ãƒ©ã‚¤ãƒˆON: R, G, B
+	//¥ƒƒCƒ“ƒ‰ƒCƒgON: R, G, B
 	MainLight( GL_LIGHT0, 0.8, 0.8, 0.8 );
 
-	//â–¼ã‚µãƒ–ãƒ©ã‚¤ãƒˆON: R, G, B
+	//¥ƒTƒuƒ‰ƒCƒgON: R, G, B
 	SubLight( GL_LIGHT1, 0.2, 0.2, 0.2 );
 }
 
@@ -155,7 +155,7 @@ void HeadLight( void )
 	applyObjTransform( &simdata.head );
 
 	//PointLight( GL_LIGHT2, 0.75, 0.75, 0.75, simdata.clip_far * 2.0 );
-	//â–¼ãƒ˜ãƒƒãƒ‰ãƒ©ã‚¤ãƒˆON: R, G, B, ç…§åº¦åŠæ¸›è·é›¢[m]
+	//¥ƒwƒbƒhƒ‰ƒCƒgON: R, G, B, Æ“x”¼Œ¸‹——£[m]
 	SpotLight( GL_LIGHT2, 1.0, 1.0, 1.0, simdata.clip_far, 25.0, 32 );
 
 	glPopMatrix();
@@ -167,21 +167,21 @@ void PreDraw(void)
 {
 }
 /*--------------------------------------------------------------- PostDraw
-* PostDraw: 3Dã®ã‚·ãƒ¼ãƒ³ã«é‡ã­ã¦2Dã®æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹é–¢æ•°
+* PostDraw: 3D‚ÌƒV[ƒ“‚Éd‚Ë‚Ä2D‚Ìî•ñ‚ğ•\¦‚·‚éŠÖ”
 *--------*/
 void PostDraw(void)
 {
-	//æ–‡å­—ã‚’æç”»ã™ã‚‹ã‚³ãƒ¼ãƒ‰ä¸€å¼ãªã©
-	//ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ãªã—
-	//2Dã®æƒ…å ±ç”»é¢
-	//2Dã®æŠ•å½±å¤‰æ›ã‚’è¨­å®šã™ã‚‹ï¼ˆä¸¦è¡ŒæŠ•å½±ï¼‰
-	glMatrixMode(GL_PROJECTION);//æŠ•å½±å¤‰æ›ãƒãƒˆãƒªã‚¯ã‚¹ç·¨é›†ãƒ¢ãƒ¼ãƒ‰
-	glLoadIdentity();//åˆæœŸåŒ–
-	glOrtho( 0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //ç”»é¢å…¨ä½“ã‚’0.0ï½1.0ã®ç¯„å›²ã«è¨­å®š
-	glMatrixMode(GL_MODELVIEW);//ãƒ¢ãƒ‡ãƒªãƒ³ã‚°å¤‰æ›ãƒãƒˆãƒªã‚¯ã‚¹ãƒ¢ãƒ¼ãƒ‰
-	glLoadIdentity();//åˆæœŸåŒ–
+	//•¶š‚ğ•`‰æ‚·‚éƒR[ƒhˆê®‚È‚Ç
+	//ƒ‰ƒCƒeƒBƒ“ƒO‚È‚µ
+	//2D‚Ìî•ñ‰æ–Ê
+	//2D‚Ì“Š‰e•ÏŠ·‚ğİ’è‚·‚éi•Às“Š‰ej
+	glMatrixMode(GL_PROJECTION);//“Š‰e•ÏŠ·ƒ}ƒgƒŠƒNƒX•ÒWƒ‚[ƒh
+	glLoadIdentity();//‰Šú‰»
+	glOrtho( 0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //‰æ–Ê‘S‘Ì‚ğ0.0`1.0‚Ì”ÍˆÍ‚Éİ’è
+	glMatrixMode(GL_MODELVIEW);//ƒ‚ƒfƒŠƒ“ƒO•ÏŠ·ƒ}ƒgƒŠƒNƒXƒ‚[ƒh
+	glLoadIdentity();//‰Šú‰»
 
-	////////ä»¥ä¸‹ãŠå¥½ãã«æç”»
+	////////ˆÈ‰º‚¨D‚«‚É•`‰æ
 
 	char time_message[32];
 	sprintf(time_message, "time = %d", simdata.time );
@@ -229,7 +229,7 @@ void DrawScene( void )
 
 	glPushMatrix();
 	{
-		applyObjTransform( &simdata.sphere ); //ãƒã‚¤ãƒ³ã‚¿ã«ã¯ã‚¢ãƒ‰ãƒ¬ã‚¹ã€Œï¼†ã€ã‚’ã¤ã‘ã¦ã€å¼•æ•°ã«ã™ã‚‹
+		applyObjTransform( &simdata.sphere ); //ƒ|ƒCƒ“ƒ^‚É‚ÍƒAƒhƒŒƒXu•v‚ğ‚Â‚¯‚ÄAˆø”‚É‚·‚é
 		//rotateBillboard(&simdata.head, &simdata.sphere);
 		applyObjColor( &simdata.sphere );
 		//glutSolidCube(0.1);
@@ -240,7 +240,7 @@ void DrawScene( void )
 	}
 	glPopMatrix();
 
-	///////cubeã®æç”»
+	///////cube‚Ì•`‰æ
 	glPushMatrix();
 	{
 		applyObjTransform( &simdata.cube );

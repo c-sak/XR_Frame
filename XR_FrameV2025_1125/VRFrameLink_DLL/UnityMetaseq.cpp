@@ -1,9 +1,9 @@
-ï»¿#include "pch.h"
+#include "pch.h"
 #include "UnityMetaseq.h"
 
 
-static TEXTURE_POOL um_l_texPool[MAX_TEXTURE];		// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ—ãƒ¼ãƒ«
-static int			um_l_texPoolnum;				// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ•°
+static TEXTURE_POOL um_l_texPool[MAX_TEXTURE];		// ƒeƒNƒXƒ`ƒƒƒv[ƒ‹
+static int			um_l_texPoolnum;				// ƒeƒNƒXƒ`ƒƒ‚Ì”
 
 static MQO_OBJECT* um_object = NULL;
 
@@ -51,14 +51,14 @@ inline void u_mqoCopyColor(float* src, float* dst)
 
 void u_mqoInit(void)
 {
-	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ—ãƒ¼ãƒ«åˆæœŸåŒ–
+	// ƒeƒNƒXƒ`ƒƒƒv[ƒ‹‰Šú‰»
 	memset(um_l_texPool, 0, sizeof(um_l_texPool));
 	um_l_texPoolnum = 0;
 }
 
 void u_mqoCleanup(void)
 {
-	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ—ãƒ¼ãƒ«ã®å‰Šé™¤
+	// ƒeƒNƒXƒ`ƒƒƒv[ƒ‹‚Ìíœ
 	for (int i = 0; i < um_l_texPoolnum; i++)
 	{
 		if(um_l_texPool[i].image != NULL) free(um_l_texPool[i].image);
@@ -153,7 +153,7 @@ int  u_mqoTextureSize(int textureID)
 {
 	if (um_l_texPoolnum <= textureID) return 0;
 
-	return um_l_texPool[textureID].texsize; //ã€€æ­£æ–¹å½¢ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚µã‚¤ã‚º
+	return um_l_texPool[textureID].texsize; //@³•ûŒ`ƒeƒNƒXƒ`ƒƒ‚ÌƒTƒCƒY
 }
 bool u_mqoTextureImage(int textureID, unsigned char* image)
 {
@@ -177,42 +177,42 @@ void u_mqoReadMaterial(FILE *fp, MQO_MATDATA M[])
 	int			i = 0;
 
 	while (1) {
-		fgets(buf, SIZE_STR, fp);	// è¡Œèª­ã¿è¾¼ã¿
+		fgets(buf, SIZE_STR, fp);	// s“Ç‚İ‚İ
 		if (strstr(buf, "}")) break;
 
-		pStr = strstr(buf, "col(");	// æè³ªåèª­ã¿é£›ã°ã—
+		pStr = strstr(buf, "col(");	// Ş¿–¼“Ç‚İ”ò‚Î‚µ
 		sscanf(pStr,
 			"col(%f %f %f %f) dif (%f) amb(%f) emi(%f) spc(%f) power(%f)",
 			&c.r, &c.g, &c.b, &c.a, &dif, &amb, &emi, &spc, &M[i].power);
 
-		// é ‚ç‚¹ã‚«ãƒ©ãƒ¼
+		// ’¸“_ƒJƒ‰[
 		M[i].col = c;
 
-		// æ‹¡æ•£å…‰
+		// ŠgUŒõ
 		M[i].dif[0] = dif * c.r;
 		M[i].dif[1] = dif * c.g;
 		M[i].dif[2] = dif * c.b;
 		M[i].dif[3] = c.a;
 
-		// å‘¨å›²å…‰
+		// üˆÍŒõ
 		M[i].amb[0] = amb * c.r;
 		M[i].amb[1] = amb * c.g;
 		M[i].amb[2] = amb * c.b;
 		M[i].amb[3] = c.a;
 
-		// è‡ªå·±ç…§æ˜
+		// ©ŒÈÆ–¾
 		M[i].emi[0] = emi * c.r;
 		M[i].emi[1] = emi * c.g;
 		M[i].emi[2] = emi * c.b;
 		M[i].emi[3] = c.a;
 
-		// åå°„å…‰
+		// ”½ËŒõ
 		M[i].spc[0] = spc * c.r;
 		M[i].spc[1] = spc * c.g;
 		M[i].spc[2] = spc * c.b;
 		M[i].spc[3] = c.a;
 
-		// texï¼šæ¨¡æ§˜ãƒãƒƒãƒ”ãƒ³ã‚°å
+		// texF–Í—lƒ}ƒbƒsƒ“ƒO–¼
 		if ((pStr = strstr(buf, "tex(")) != NULL) {
 			M[i].useTex = TRUE;
 
@@ -311,12 +311,12 @@ int u_mqoReadBVertex(FILE *fp, umPOINT3f V[])
 
 	fgets(cw, sizeof(cw), fp);
 	if ((pStr = strstr(cw, "Vector")) != NULL) {
-		sscanf(pStr, "Vector %d [%d]", &n_vertex, &size);	// é ‚ç‚¹æ•°ã€ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã‚’èª­ã¿è¾¼ã‚€
+		sscanf(pStr, "Vector %d [%d]", &n_vertex, &size);	// ’¸“_”Aƒf[ƒ^ƒTƒCƒY‚ğ“Ç‚İ‚Ş
 	}
 	else {
 		return -1;
 	}
-	//MQOãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒã‚¤ãƒŠãƒªé ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã¯intelå½¢å¼ï¼ˆãƒªãƒˆãƒ«ã‚¨ãƒ‡ã‚£ã‚¢ãƒ³ï¼‰
+	//MQOƒtƒ@ƒCƒ‹‚ÌƒoƒCƒiƒŠ’¸“_ƒf[ƒ^‚ÍintelŒ`®iƒŠƒgƒ‹ƒGƒfƒBƒAƒ“j
 	wf = (float *)malloc(size);
 	fread(wf, size, 1, fp);
 	for (i = 0; i < n_vertex; i++) {
@@ -332,7 +332,7 @@ int u_mqoReadBVertex(FILE *fp, umPOINT3f V[])
 	}
 	free(wf);
 
-	// "}"ã¾ã§èª­ã¿é£›ã°ã—
+	// "}"‚Ü‚Å“Ç‚İ”ò‚Î‚µ
 	{
 		char buf[SIZE_STR];
 		while (1) {
@@ -354,16 +354,16 @@ void u_mqoReadFace(FILE *fp, MQO_FACE F[])
 		fgets(buf, SIZE_STR, fp);
 		if (strstr(buf, "}")) break;
 
-		// é¢ã‚’æ§‹æˆã™ã‚‹é ‚ç‚¹æ•°
+		// –Ê‚ğ\¬‚·‚é’¸“_”
 		sscanf(buf, "%d", &F[i].n);
 
-		// é ‚ç‚¹(V)ã®èª­ã¿è¾¼ã¿
+		// ’¸“_(V)‚Ì“Ç‚İ‚İ
 		if ((pStr = strstr(buf, "V(")) != NULL) {
 			switch (F[i].n) {
 			case 3:
-				//ãƒ¡ã‚¿ã‚»ã‚³ã¯é ‚ç‚¹ã®ä¸¦ã³ãŒè¡¨é¢ã‹ã‚‰ã¿ã¦å³å›ã‚Š
-				//èª­ã¿è¾¼ã¿æ™‚ã«ä¸¦ã¹æ›¿ãˆã‚‹æ–¹æ³•ã‚‚ã‚ã‚‹ã€‚ã‘ã©ã€è¡¨é¢ã®è¨­å®šã‚’
-				//glFrontFaceã§å¤‰ãˆã‚‹ã»ã†ãŒã‚¹ãƒãƒ¼ãƒˆï¼Ÿ
+				//ƒƒ^ƒZƒR‚Í’¸“_‚Ì•À‚Ñ‚ª•\–Ê‚©‚ç‚İ‚Ä‰E‰ñ‚è
+				//“Ç‚İ‚İ‚É•À‚×‘Ö‚¦‚é•û–@‚à‚ ‚éB‚¯‚ÇA•\–Ê‚Ìİ’è‚ğ
+				//glFrontFace‚Å•Ï‚¦‚é‚Ù‚¤‚ªƒXƒ}[ƒgH
 				sscanf(pStr, "V(%d %d %d)", &F[i].v[0], &F[i].v[1], &F[i].v[2]);
 				//					sscanf(pStr,"V(%d %d %d)",&F[i].v[2],&F[i].v[1],&F[i].v[0]);
 				break;
@@ -376,19 +376,19 @@ void u_mqoReadFace(FILE *fp, MQO_FACE F[])
 			}
 		}
 
-		// ãƒãƒ†ãƒªã‚¢ãƒ«(M)ã®èª­ã¿è¾¼ã¿
+		// ƒ}ƒeƒŠƒAƒ‹(M)‚Ì“Ç‚İ‚İ
 		F[i].m = 0;
 		if ((pStr = strstr(buf, "M(")) != NULL) {
 			sscanf(pStr, "M(%d)", &F[i].m);
 		}
-		else { // ãƒãƒ†ãƒªã‚¢ãƒ«ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„é¢
+		else { // ƒ}ƒeƒŠƒAƒ‹‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢–Ê
 			F[i].m = -1;
 		}
 
-		// UVãƒãƒƒãƒ—(UV)ã®èª­ã¿è¾¼ã¿
+		// UVƒ}ƒbƒv(UV)‚Ì“Ç‚İ‚İ
 		if ((pStr = strstr(buf, "UV(")) != NULL) {
 			switch (F[i].n) {
-			case 3:	// é ‚ç‚¹æ•°3
+			case 3:	// ’¸“_”3
 				sscanf(pStr, "UV(%f %f %f %f %f %f)",
 					&F[i].uv[0].x, &F[i].uv[0].y,
 					&F[i].uv[1].x, &F[i].uv[1].y,
@@ -396,7 +396,7 @@ void u_mqoReadFace(FILE *fp, MQO_FACE F[])
 				);
 				break;
 
-			case 4:	// é ‚ç‚¹æ•°4
+			case 4:	// ’¸“_”4
 				sscanf(pStr, "UV(%f %f %f %f %f %f %f %f)",
 					&F[i].uv[0].x, &F[i].uv[0].y,
 					&F[i].uv[1].x, &F[i].uv[1].y,
@@ -420,15 +420,15 @@ int u_mqoLoadFile(MQO_OBJECT *mqoobj, char *filename, double scale, unsigned cha
 	MQO_OBJDATA		obj[MAX_OBJECT];
 	MQO_MATDATA		*M = NULL;
 
-	char	buf[SIZE_STR];		// æ–‡å­—åˆ—èª­ã¿è¾¼ã¿ãƒãƒƒãƒ•ã‚¡
-	char	path_dir[SIZE_STR];	// ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®ãƒ‘ã‚¹
-	char	path_tex[SIZE_STR];	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹
-	char	path_alp[SIZE_STR];	// ã‚¢ãƒ«ãƒ•ã‚¡ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹
-	int		n_mat = 0;			// ãƒãƒ†ãƒªã‚¢ãƒ«æ•°
-	int		n_obj = 0;			// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ•°
+	char	buf[SIZE_STR];		// •¶š—ñ“Ç‚İ‚İƒoƒbƒtƒ@
+	char	path_dir[SIZE_STR];	// ƒfƒBƒŒƒNƒgƒŠ‚ÌƒpƒX
+	char	path_tex[SIZE_STR];	// ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹‚ÌƒpƒX
+	char	path_alp[SIZE_STR];	// ƒAƒ‹ƒtƒ@ƒeƒNƒXƒ`ƒƒƒtƒ@ƒCƒ‹‚ÌƒpƒX
+	int		n_mat = 0;			// ƒ}ƒeƒŠƒAƒ‹”
+	int		n_obj = 0;			// ƒIƒuƒWƒFƒNƒg”
 	int		i;
 
-	// Materialã¨Objectã®èª­ã¿è¾¼ã¿
+	// Material‚ÆObject‚Ì“Ç‚İ‚İ
 	fp = fopen(filename, "rb");
 	if (fp == NULL) return 0;
 
@@ -456,26 +456,26 @@ int u_mqoLoadFile(MQO_OBJECT *mqoobj, char *filename, double scale, unsigned cha
 	n_obj = i;
 	fclose(fp);
 
-	// ãƒ‘ã‚¹ã®å–å¾—
+	// ƒpƒX‚Ìæ“¾
 	u_mqoGetDirectory(filename, path_dir);
 
-	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç™»éŒ²
+	// ƒeƒNƒXƒ`ƒƒ‚Ì“o˜^
 	for (i = 0; i < n_mat; i++) {
 		if (M[i].useTex) {
 
 			if (strstr(M[i].texFile, ":")) {
-				strcpy(path_tex, M[i].texFile);	// çµ¶å¯¾ãƒ‘ã‚¹ã®å ´åˆ
+				strcpy(path_tex, M[i].texFile);	// â‘ÎƒpƒX‚Ìê‡
 			}
 			else {
-				sprintf(path_tex, "%s%s", path_dir, M[i].texFile);	// ç›¸å¯¾ãƒ‘ã‚¹ã®å ´åˆ
+				sprintf(path_tex, "%s%s", path_dir, M[i].texFile);	// ‘Š‘ÎƒpƒX‚Ìê‡
 			}
 
 			if (M[i].alpFile[0] != (char)0) {
 				if (strstr(M[i].texFile, ":")) {
-					strcpy(path_alp, M[i].alpFile);	// çµ¶å¯¾ãƒ‘ã‚¹ã®å ´åˆ
+					strcpy(path_alp, M[i].alpFile);	// â‘ÎƒpƒX‚Ìê‡
 				}
 				else {
-					sprintf(path_alp, "%s%s", path_dir, M[i].alpFile);	// ç›¸å¯¾ãƒ‘ã‚¹ã®å ´åˆ
+					sprintf(path_alp, "%s%s", path_dir, M[i].alpFile);	// ‘Š‘ÎƒpƒX‚Ìê‡
 				}
 				M[i].texID = u_mqoSetTexturePool(path_tex, path_alp, alpha);
 			}
@@ -487,13 +487,13 @@ int u_mqoLoadFile(MQO_OBJECT *mqoobj, char *filename, double scale, unsigned cha
 
 	u_mqoMakeObjectsEx(mqoobj, obj, n_obj, M, n_mat, scale, alpha);
 
-	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ‡ãƒ¼ã‚¿ã®é–‹æ”¾
+	// ƒIƒuƒWƒFƒNƒg‚Ìƒf[ƒ^‚ÌŠJ•ú
 	for (i = 0; i < n_obj; i++) {
 		free(obj[i].V);
 		free(obj[i].F);
 	}
 
-	// ãƒãƒ†ãƒªã‚¢ãƒ«ã®é–‹æ”¾
+	// ƒ}ƒeƒŠƒAƒ‹‚ÌŠJ•ú
 	free(M);
 
 	return 1;
@@ -531,11 +531,11 @@ int u_mqoSetTexturePool(char *texfile, char *alpfile, unsigned char alpha)
 		}
 		break;
 	}
-	if (pos < um_l_texPoolnum) { //ã™ã§ã«èª­ã¿è¾¼ã¿æ¸ˆã¿
+	if (pos < um_l_texPoolnum) { //‚·‚Å‚É“Ç‚İ‚İÏ‚İ
 		return  um_l_texPool[pos].texture_id;
 	}
 	if (MAX_TEXTURE <= pos) {
-		printf("%s:mqoSetTexturePool ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿é ˜åŸŸä¸è¶³\n", __FILE__);
+		printf("%s:mqoSetTexturePool ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ—Ìˆæ•s‘«\n", __FILE__);
 		return -1;
 	}
 	image = u_mqoLoadTextureEx(texfile, alpfile, &um_l_texPool[pos].texsize, alpha);
@@ -550,7 +550,7 @@ int u_mqoSetTexturePool(char *texfile, char *alpfile, unsigned char alpha)
 
 	um_l_texPoolnum = pos + 1;
 
-	//ç™»éŒ²ã™ã‚Œã°ã€èª­ã¿è¾¼ã‚“ã ãƒãƒƒãƒ•ã‚¡ã¯ä¸è¦
+	//“o˜^‚·‚ê‚ÎA“Ç‚İ‚ñ‚¾ƒoƒbƒtƒ@‚Í•s—v
 	//free(image);
 
 	um_l_texPool[pos].texture_id = pos; // list ID == texture ID
@@ -602,7 +602,7 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 	pngimage = NULL;
 #endif
 	size = -1;
-	for (fl = 0; fl < 2; fl++) {//ãƒ†ã‚¯ã‚¹ãƒãƒ£ï¼fl=0    ã‚¢ãƒ«ãƒ•ã‚¡ï¼fl=1
+	for (fl = 0; fl < 2; fl++) {//ƒeƒNƒXƒ`ƒƒfl=0    ƒAƒ‹ƒtƒ@fl=1
 		if (filename[fl] == NULL) continue;
 		namelen = strlen(filename[fl]);
 		ext[0] = tolower(filename[fl][namelen - 3]);
@@ -619,18 +619,18 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 			filename[fl][namelen - 1] = 'p';
 		}
 		/* */
-		if (fl == 1) { //ã‚¢ãƒ«ãƒ•ã‚¡ã®èª­ã¿è¾¼ã¿ã¯ï¼´ï¼§ï¼¡orï¼°ï¼®ï¼§
+		if (fl == 1) { //ƒAƒ‹ƒtƒ@‚Ì“Ç‚İ‚İ‚Í‚s‚f‚`or‚o‚m‚f
 			if (!(isTGA || isPNG)) {
-				printf("ã‚¢ãƒ«ãƒ•ã‚¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«å¯¾å¿œã§ããªã„â†’%s\n", filename[fl]);
+				printf("ƒAƒ‹ƒtƒ@‚Ìƒtƒ@ƒCƒ‹‚É‘Î‰‚Å‚«‚È‚¢¨%s\n", filename[fl]);
 				break;
 			}
 		}
 		if (fp != NULL) fclose(fp);
 		if ((fp = fopen(filename[fl], "rb")) == NULL) {
-			printf("%s:ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿ã‚¨ãƒ©ãƒ¼[%s]\n", __FILE__, filename[fl]);
+			printf("%s:ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İƒGƒ‰[[%s]\n", __FILE__, filename[fl]);
 			continue;
 		}
-		// ãƒ˜ãƒƒãƒ€ã®ãƒ­ãƒ¼ãƒ‰
+		// ƒwƒbƒ_‚Ìƒ[ƒh
 		if (isTGA) {
 			fread(&tgah, sizeof(STR_TGA_HEAD), 1, fp);
 #if DEF_IS_LITTLE_ENDIAN
@@ -643,22 +643,22 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 #if DEF_USE_LIBJPEG
 			unsigned int i;
 			cinfo.err = jpeg_std_error(&jerr);
-			jpeg_create_decompress(&cinfo);	//è§£å‡ç”¨æƒ…å ±ä½œæˆ
-			jpeg_stdio_src(&cinfo, fp);		//èª­ã¿è¾¼ã¿ãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®š
-			jpeg_read_header(&cinfo, TRUE);	//jpegãƒ˜ãƒƒãƒ€èª­ã¿è¾¼ã¿
-			jpeg_start_decompress(&cinfo);	//è§£å‡é–‹å§‹
+			jpeg_create_decompress(&cinfo);	//‰ğ“€—pî•ñì¬
+			jpeg_stdio_src(&cinfo, fp);		//“Ç‚İ‚İƒtƒ@ƒCƒ‹w’è
+			jpeg_read_header(&cinfo, TRUE);	//jpegƒwƒbƒ_“Ç‚İ‚İ
+			jpeg_start_decompress(&cinfo);	//‰ğ“€ŠJn
 
 			if (cinfo.out_color_components == 3 && cinfo.out_color_space == JCS_RGB) {
 				if (jpegimage != NULL) {
-					for (i = 0; i < cinfo.output_height; i++) free(jpegimage[i]);            // ä»¥ä¸‹ï¼’è¡Œã¯ï¼’æ¬¡å…ƒé…åˆ—ã‚’è§£æ”¾ã—ã¾ã™
+					for (i = 0; i < cinfo.output_height; i++) free(jpegimage[i]);            // ˆÈ‰º‚Qs‚Í‚QŸŒ³”z—ñ‚ğ‰ğ•ú‚µ‚Ü‚·
 					free(jpegimage);
 				}
-				//èª­ã¿è¾¼ã¿ãƒ‡ãƒ¼ã‚¿é…åˆ—ã®ä½œæˆ
+				//“Ç‚İ‚İƒf[ƒ^”z—ñ‚Ìì¬
 				jpegimage = (JSAMPARRAY)malloc(sizeof(JSAMPROW) * cinfo.output_height);
 				for (i = 0; i < cinfo.output_height; i++) {
 					jpegimage[i] = (JSAMPROW)malloc(sizeof(JSAMPLE) * cinfo.out_color_components * cinfo.output_width);
 				}
-				//è§£å‡ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+				//‰ğ“€ƒf[ƒ^“Ç‚İ‚İ
 				while (cinfo.output_scanline < cinfo.output_height) {
 					jpeg_read_scanlines(&cinfo,
 						jpegimage + cinfo.output_scanline,
@@ -668,13 +668,13 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 				size = width[fl] = cinfo.output_width;
 			}
 
-			jpeg_finish_decompress(&cinfo);	//è§£å‡çµ‚äº†
-			jpeg_destroy_decompress(&cinfo);	//è§£å‡ç”¨æƒ…å ±è§£æ”¾
+			jpeg_finish_decompress(&cinfo);	//‰ğ“€I—¹
+			jpeg_destroy_decompress(&cinfo);	//‰ğ“€—pî•ñ‰ğ•ú
 			if (!(cinfo.out_color_components == 3 && cinfo.out_color_space == JCS_RGB)) {
-				printf("JPEG å¯¾å¿œã§ããªã„ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆâ†’%s\n", filename[fl]);
+				printf("JPEG ‘Î‰‚Å‚«‚È‚¢ƒtƒH[ƒ}ƒbƒg¨%s\n", filename[fl]);
 			}
 #else
-			printf("ã“ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯å¯¾å¿œã§ããªã„ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆâ†’%s\n", filename[fl]);
+			printf("‚±‚ÌƒeƒNƒXƒ`ƒƒ‚Í‘Î‰‚Å‚«‚È‚¢ƒtƒH[ƒ}ƒbƒg¨%s\n", filename[fl]);
 			continue;
 #endif
 		}
@@ -685,37 +685,37 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 			int             bit_depth, interlace_type;
 			unsigned int             i;
 			int j, k;
-			png_ptr = png_create_read_struct(                       // png_ptræ§‹é€ ä½“ã‚’ç¢ºä¿ãƒ»åˆæœŸåŒ–ã—ã¾ã™
+			png_ptr = png_create_read_struct(                       // png_ptr\‘¢‘Ì‚ğŠm•ÛE‰Šú‰»‚µ‚Ü‚·
 				PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-			info_ptr = png_create_info_struct(png_ptr);             // info_ptræ§‹é€ ä½“ã‚’ç¢ºä¿ãƒ»åˆæœŸåŒ–ã—ã¾ã™
-			png_init_io(png_ptr, fp);                               // libpngã«fpã‚’çŸ¥ã‚‰ã›ã¾ã™
-			png_read_info(png_ptr, info_ptr);                       // PNGãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ã‚’èª­ã¿è¾¼ã¿ã¾ã™
-			png_get_IHDR(png_ptr, info_ptr, &pngwidth, &pngheight,        // IHDRãƒãƒ£ãƒ³ã‚¯æƒ…å ±ã‚’å–å¾—ã—ã¾ã™
+			info_ptr = png_create_info_struct(png_ptr);             // info_ptr\‘¢‘Ì‚ğŠm•ÛE‰Šú‰»‚µ‚Ü‚·
+			png_init_io(png_ptr, fp);                               // libpng‚Éfp‚ğ’m‚ç‚¹‚Ü‚·
+			png_read_info(png_ptr, info_ptr);                       // PNGƒtƒ@ƒCƒ‹‚Ìƒwƒbƒ_‚ğ“Ç‚İ‚İ‚Ü‚·
+			png_get_IHDR(png_ptr, info_ptr, &pngwidth, &pngheight,        // IHDRƒ`ƒƒƒ“ƒNî•ñ‚ğæ“¾‚µ‚Ü‚·
 				&bit_depth, &color_type, &interlace_type,
 				&j, &k);
 			if (pngimage != NULL) {
-				for (i = 0; i < pngheight; i++) free(pngimage[i]);            // ä»¥ä¸‹ï¼’è¡Œã¯ï¼’æ¬¡å…ƒé…åˆ—ã‚’è§£æ”¾ã—ã¾ã™
+				for (i = 0; i < pngheight; i++) free(pngimage[i]);            // ˆÈ‰º‚Qs‚Í‚QŸŒ³”z—ñ‚ğ‰ğ•ú‚µ‚Ü‚·
 				free(pngimage);
 			}
-			pngimage = (png_bytepp)malloc(pngheight * sizeof(png_bytep)); // ä»¥ä¸‹ï¼“è¡Œã¯ï¼’æ¬¡å…ƒé…åˆ—ã‚’ç¢ºä¿ã—ã¾ã™
+			pngimage = (png_bytepp)malloc(pngheight * sizeof(png_bytep)); // ˆÈ‰º‚Rs‚Í‚QŸŒ³”z—ñ‚ğŠm•Û‚µ‚Ü‚·
 			i = png_get_rowbytes(png_ptr, info_ptr);
 			pngdepth = i / pngwidth;
 			for (i = 0; i < pngheight; i++)
 				pngimage[i] = (png_bytep)malloc(png_get_rowbytes(png_ptr, info_ptr));
-			png_read_image(png_ptr, pngimage);                         // ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã¿ã¾ã™
+			png_read_image(png_ptr, pngimage);                         // ‰æ‘œƒf[ƒ^‚ğ“Ç‚İ‚İ‚Ü‚·
 
-			png_destroy_read_struct(                                // ï¼’ã¤ã®æ§‹é€ ä½“ã®ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾ã—ã¾ã™
+			png_destroy_read_struct(                                // ‚Q‚Â‚Ì\‘¢‘Ì‚Ìƒƒ‚ƒŠ‚ğ‰ğ•ú‚µ‚Ü‚·
 				&png_ptr, &info_ptr, (png_infopp)NULL);
 			size = width[fl] = pngwidth;
 #else
-			printf("ã“ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¯å¯¾å¿œã§ããªã„ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆâ†’%s\n", filename[fl]);
+			printf("‚±‚ÌƒeƒNƒXƒ`ƒƒ‚Í‘Î‰‚Å‚«‚È‚¢ƒtƒH[ƒ}ƒbƒg¨%s\n", filename[fl]);
 			continue;
 #endif
 		}
-		if (width[fl] == -1) {//ã‚³ã‚³ã¾ã§ãã¦ã‚µã‚¤ã‚ºãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„ã€€ï¼ã€€ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—
-			fseek(fp, 14 + 4, SEEK_SET);		// ç”»åƒå¹…ãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ä½ç½®ã¾ã§ã‚·ãƒ¼ã‚¯
-			fread(&size, sizeof(int), 1, fp);	// BiWidthã®æƒ…å ±ã ã‘å–å¾—
-			fseek(fp, 14 + 40, SEEK_SET);		// ç”»ç´ ãƒ‡ãƒ¼ã‚¿ãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ä½ç½®ã¾ã§ã‚·ãƒ¼ã‚¯
+		if (width[fl] == -1) {//ƒRƒR‚Ü‚Å‚«‚ÄƒTƒCƒY‚ªw’è‚³‚ê‚Ä‚¢‚È‚¢@@ƒrƒbƒgƒ}ƒbƒv
+			fseek(fp, 14 + 4, SEEK_SET);		// ‰æ‘œ•‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆÊ’u‚Ü‚ÅƒV[ƒN
+			fread(&size, sizeof(int), 1, fp);	// BiWidth‚Ìî•ñ‚¾‚¯æ“¾
+			fseek(fp, 14 + 40, SEEK_SET);		// ‰æ‘fƒf[ƒ^‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆÊ’u‚Ü‚ÅƒV[ƒN
 #if DEF_IS_LITTLE_ENDIAN
 #else
 			endianConverter(&size, sizeof(int));
@@ -729,7 +729,7 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 				break;
 			}
 		}
-		if (fl == 1 && isTGA) { //ã‚¢ãƒ«ãƒ•ã‚¡ã®èª­ã¿è¾¼ã¿ã¯ï¼´ï¼§ï¼¡ã®ï¼˜ãƒ“ãƒƒãƒˆãƒ¢ãƒã‚¯ãƒ­ï½ï½’ï¼“ï¼’ãƒ“ãƒƒãƒˆãƒ•ãƒ«
+		if (fl == 1 && isTGA) { //ƒAƒ‹ƒtƒ@‚Ì“Ç‚İ‚İ‚Í‚s‚f‚`‚Ì‚Wƒrƒbƒgƒ‚ƒmƒNƒ‚‚’‚R‚Qƒrƒbƒgƒtƒ‹
 			if (!(
 				(tgah.depth == 8 && tgah.type == DEF_TGA_TYPE_MONO) ||
 				(tgah.depth == 32 && tgah.type == DEF_TGA_TYPE_FULL)
@@ -737,7 +737,7 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 				break;
 			}
 		}
-		if (fl == 1 && isPNG) { //ã‚¢ãƒ«ãƒ•ã‚¡ã®èª­ã¿è¾¼ã¿ã¯ï¼°ï¼®ï¼§ã®ãƒˆã‚¥ãƒ«ãƒ¼ã‚«ãƒ©ãƒ¼ï¼‹ã‚¢ãƒ«ãƒ•ã‚¡ï½ï½’ã‚°ãƒ¬ãƒ¼ã‚¹ã‚±ãƒ¼ãƒ«ï¼‹ã‚¢ãƒ«ãƒ•ã‚¡
+		if (fl == 1 && isPNG) { //ƒAƒ‹ƒtƒ@‚Ì“Ç‚İ‚İ‚Í‚o‚m‚f‚ÌƒgƒDƒ‹[ƒJƒ‰[{ƒAƒ‹ƒtƒ@‚‚’ƒOƒŒ[ƒXƒP[ƒ‹{ƒAƒ‹ƒtƒ@
 #if DEF_USE_LIBPNG
 			if (!(
 				(color_type == 6) ||
@@ -748,7 +748,7 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 #endif
 		}
 
-		// ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿
+		// ƒƒ‚ƒŠ‚ÌŠm•Û
 		if (pImage == NULL) {
 			pImage = (unsigned char*)malloc(sizeof(unsigned char)*size*size * 4);
 		}
@@ -795,17 +795,17 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 				else {
 					if (isPNG) {
 #if DEF_USE_LIBPNG
-						if (color_type == 6) { //ãƒˆã‚¥ãƒ«ãƒ¼ã‚«ãƒ©ãƒ¼ï¼‹ã‚¢ãƒ«ãƒ•ã‚¡
+						if (color_type == 6) { //ƒgƒDƒ‹[ƒJƒ‰[{ƒAƒ‹ƒtƒ@
 							pRead[3] = pngimage[size - 1 - y][x*pngdepth + 3];
 						}
-						if (color_type == 4) { //ã‚°ãƒ¬ãƒ¼ã‚¹ã‚±ãƒ¼ãƒ«ï¼‹ã‚¢ãƒ«ãƒ•ã‚¡
+						if (color_type == 4) { //ƒOƒŒ[ƒXƒP[ƒ‹{ƒAƒ‹ƒtƒ@
 							pRead[3] = pngimage[size - 1 - y][x*pngdepth + 1];
 						}
 						if (alpha < pRead[3]) pRead[3] = alpha;
 #endif
 					}
 					if (isTGA) {
-						if (tgah.depth == 32) { //ã„ã‚‰ãªã„ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿é£›ã°ã™
+						if (tgah.depth == 32) { //‚¢‚ç‚È‚¢ƒf[ƒ^‚ğ“Ç‚İ”ò‚Î‚·
 							fread(wbuf, 3, 1, fp);	// BGR
 						}
 						fread(&pRead[3], 1, 1, fp);	// A
@@ -825,14 +825,14 @@ unsigned char* u_mqoLoadTextureEx(char *texfile, char *alpfile, int *tex_size, u
 #if DEF_USE_LIBPNG
 	if (pngimage != NULL) {
 		unsigned int uy;
-		for (uy = 0; uy < pngheight; uy++) free(pngimage[uy]);            // ä»¥ä¸‹ï¼’è¡Œã¯ï¼’æ¬¡å…ƒé…åˆ—ã‚’è§£æ”¾ã—ã¾ã™
+		for (uy = 0; uy < pngheight; uy++) free(pngimage[uy]);            // ˆÈ‰º‚Qs‚Í‚QŸŒ³”z—ñ‚ğ‰ğ•ú‚µ‚Ü‚·
 		free(pngimage);
 	}
 #endif
 #if DEF_USE_LIBJPEG
 	if (jpegimage != NULL) {
 		unsigned int uy;
-		for (uy = 0; uy < cinfo.output_height; uy++) free(jpegimage[uy]);            // ä»¥ä¸‹ï¼’è¡Œã¯ï¼’æ¬¡å…ƒé…åˆ—ã‚’è§£æ”¾ã—ã¾ã™
+		for (uy = 0; uy < cinfo.output_height; uy++) free(jpegimage[uy]);            // ˆÈ‰º‚Qs‚Í‚QŸŒ³”z—ñ‚ğ‰ğ•ú‚µ‚Ü‚·
 		free(jpegimage);
 	}
 #endif
@@ -869,14 +869,14 @@ umPOINT3f * u_mqoVertexNormal(MQO_OBJDATA *obj)
 	int v;
 	int i;
 	double len;
-	umPOINT3f fnormal;	// é¢æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+	umPOINT3f fnormal;	// –Ê–@üƒxƒNƒgƒ‹
 	MQO_FACE *F;
 	umPOINT3f *V;
 	umPOINT3f *ret;
 	F = obj->F;
 	V = obj->V;
 	ret = (umPOINT3f *)calloc(obj->n_vertex, sizeof(umPOINT3f));
-	//é¢ã®æ³•ç·šã‚’é ‚ç‚¹ã«è¶³ã—è¾¼ã¿
+	//–Ê‚Ì–@ü‚ğ’¸“_‚É‘«‚µ‚İ
 	for (f = 0; f < obj->n_face; f++) {
 		if (obj->F[f].n == 3) {
 			u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &fnormal);
@@ -903,10 +903,10 @@ umPOINT3f * u_mqoVertexNormal(MQO_OBJDATA *obj)
 			}
 		}
 	}
-	//æ­£è¦åŒ–
+	//³‹K‰»
 	for (v = 0; v < obj->n_vertex; v++) {
 		if (ret[v].x == 0 && ret[v].y == 0 && ret[v].z == 0) {
-			//é¢ã«ä½¿ã‚ã‚Œã¦ãªã„ç‚¹
+			//–Ê‚Ég‚í‚ê‚Ä‚È‚¢“_
 			continue;
 		}
 		len = sqrt(ret[v].x*ret[v].x + ret[v].y*ret[v].y + ret[v].z*ret[v].z);
@@ -925,22 +925,22 @@ void u_mqoSnormal(umPOINT3f A, umPOINT3f B, umPOINT3f C, umPOINT3f *normal)
 	double norm;
 	umPOINT3f vec0, vec1;
 
-	// ãƒ™ã‚¯ãƒˆãƒ«BA
+	// ƒxƒNƒgƒ‹BA
 	vec0.x = A.x - B.x;
 	vec0.y = A.y - B.y;
 	vec0.z = A.z - B.z;
 
-	// ãƒ™ã‚¯ãƒˆãƒ«BC
+	// ƒxƒNƒgƒ‹BC
 	vec1.x = C.x - B.x;
 	vec1.y = C.y - B.y;
 	vec1.z = C.z - B.z;
 
-	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+	// –@üƒxƒNƒgƒ‹
 	normal->x = vec0.y * vec1.z - vec0.z * vec1.y;
 	normal->y = vec0.z * vec1.x - vec0.x * vec1.z;
 	normal->z = vec0.x * vec1.y - vec0.y * vec1.x;
 
-	// æ­£è¦åŒ–
+	// ³‹K‰»
 	norm = normal->x * normal->x + normal->y * normal->y + normal->z * normal->z;
 	norm = sqrt(norm);
 
@@ -973,31 +973,31 @@ void u_mqoMakePolygon(MQO_OBJDATA *readObj, MQO_OBJECT *mqoobj,
 	V = readObj->V;
 	facet = readObj->facet;
 
-	// faceã®ä¸­ã§ã®ãƒãƒ†ãƒªã‚¢ãƒ«æ¯ã®é ‚ç‚¹ã®æ•°
-	// M=NULLã®ã¨ãã€F[].m = 0 ãŒå…¥ã£ã¦ãã‚‹
+	// face‚Ì’†‚Å‚Ìƒ}ƒeƒŠƒAƒ‹–ˆ‚Ì’¸“_‚Ì”
+	// M=NULL‚Ì‚Æ‚«AF[].m = 0 ‚ª“ü‚Á‚Ä‚­‚é
 	if (M == NULL) n_mat = 1;
 
 	mat_vnum = (int *)malloc(sizeof(int)*n_mat);
 	memset(mat_vnum, 0, sizeof(int)*n_mat);
 
 	for (f = 0; f < fnum; f++) {
-		if (F[f].m < 0) continue; // ãƒãƒ†ãƒªã‚¢ãƒ«ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„é¢
+		if (F[f].m < 0) continue; // ƒ}ƒeƒŠƒAƒ‹‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢–Ê
 		if (F[f].n == 3) {
 			mat_vnum[F[f].m] += 3;
 		}
 		if (F[f].n == 4) {
-			//ï¼”é ‚ç‚¹ï¼ˆå››è§’ï¼‰ã¯ï¼“é ‚ç‚¹ï¼ˆä¸‰è§’ï¼‰ï½˜ï¼’ã«åˆ†å‰²
+			//‚S’¸“_ilŠpj‚Í‚R’¸“_iOŠpj‚˜‚Q‚É•ªŠ„
 			//  0  3      0    0  3
-			//   â–¡   â†’ã€€â–³ã€€ã€€â–½
+			//       ¨@¢@@¤
 			//  1  2     1  2   2
-			// ï¼”é ‚ç‚¹ã®å¹³é¢ãƒ‡ãƒ¼ã‚¿ã¯
-			// ï¼“é ‚ç‚¹ã®å¹³é¢ãƒ‡ãƒ¼ã‚¿ï½˜ï¼’å€‹
+			// ‚S’¸“_‚Ì•½–Êƒf[ƒ^‚Í
+			// ‚R’¸“_‚Ì•½–Êƒf[ƒ^‚˜‚QŒÂ
 			mat_vnum[F[f].m] += 3 * 2;
 		}
 		if (setObj->matnum < F[f].m + 1) setObj->matnum = F[f].m + 1;
 	}
 
-	// ãƒãƒ†ãƒªã‚¢ãƒ«åˆ¥ã«é ‚ç‚¹é…åˆ—ã‚’ä½œæˆã™ã‚‹
+	// ƒ}ƒeƒŠƒAƒ‹•Ê‚É’¸“_”z—ñ‚ğì¬‚·‚é
 	setObj->mat = (MQO_MATERIAL *)malloc(sizeof(MQO_MATERIAL)*setObj->matnum);
 	memset(setObj->mat, 0, sizeof(MQO_MATERIAL)*setObj->matnum);
 
@@ -1047,7 +1047,7 @@ void u_mqoMakePolygon(MQO_OBJDATA *readObj, MQO_OBJECT *mqoobj,
 	}
 	mqoobj->objnum++;
 	if (MAX_OBJECT <= mqoobj->objnum) {
-		printf("MQOãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ï¼šã€€æœ€å¤§ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ•°ã‚’è¶…ãˆã¾ã—ãŸ[%d]\n", mqoobj->objnum);
+		printf("MQOƒtƒ@ƒCƒ‹“Ç‚İ‚İF@Å‘åƒIƒuƒWƒFƒNƒg”‚ğ’´‚¦‚Ü‚µ‚½[%d]\n", mqoobj->objnum);
 		mqoobj->objnum = MAX_OBJECT - 1;
 	}
 
@@ -1062,7 +1062,7 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 	int i;
 	int dpos;
 	double s;
-	umPOINT3f normal;	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+	umPOINT3f normal;	// –@üƒxƒNƒgƒ‹
 
 	dpos = 0;
 	mat->color[0] = mcol->r;
@@ -1073,7 +1073,7 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 		for (f = 0; f < fnum; f++) {
 			if (F[f].m != matpos) continue;
 			if (F[f].n == 3) {
-				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);	// –@üƒxƒNƒgƒ‹‚ğŒvZ
 				for (i = 0; i < 3; i++) {
 					mat->vertex_t[dpos].point[0] = (float)V[F[f].v[i]].x*scale;
 					mat->vertex_t[dpos].point[1] = (float)V[F[f].v[i]].y*scale;
@@ -1082,7 +1082,7 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 					mat->vertex_t[dpos].uv[1] = F[f].uv[i].y;
 					s = acos(normal.x*N[F[f].v[i]].x + normal.y*N[F[f].v[i]].y + normal.z*N[F[f].v[i]].z);
 					if (facet < s) {
-						// ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°è§’ã€€ï¼œï¼ˆé ‚ç‚¹æ³•ç·šã¨é¢æ³•ç·šã®è§’åº¦ï¼‰ã®ã¨ãã¯é¢æ³•ç·šã‚’é ‚ç‚¹æ³•ç·šã¨ã™ã‚‹
+						// ƒXƒ€[ƒWƒ“ƒOŠp@ƒi’¸“_–@ü‚Æ–Ê–@ü‚ÌŠp“xj‚Ì‚Æ‚«‚Í–Ê–@ü‚ğ’¸“_–@ü‚Æ‚·‚é
 						mat->vertex_t[dpos].normal[0] = normal.x;
 						mat->vertex_t[dpos].normal[1] = normal.y;
 						mat->vertex_t[dpos].normal[2] = normal.z;
@@ -1095,9 +1095,9 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 					dpos++;
 				}
 			}
-			//ï¼”é ‚ç‚¹ï¼ˆå››è§’ï¼‰ã¯ï¼“é ‚ç‚¹ï¼ˆä¸‰è§’ï¼‰ï½˜ï¼’ã«åˆ†å‰²
+			//‚S’¸“_ilŠpj‚Í‚R’¸“_iOŠpj‚˜‚Q‚É•ªŠ„
 			if (F[f].n == 4) {
-				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);	// –@üƒxƒNƒgƒ‹‚ğŒvZ
 				for (i = 0; i < 4; i++) {
 					if (i == 3) continue;
 					mat->vertex_t[dpos].point[0] = (float)V[F[f].v[i]].x*scale;
@@ -1118,7 +1118,7 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 					}
 					dpos++;
 				}
-				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[2]], V[F[f].v[3]], &normal);	// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[2]], V[F[f].v[3]], &normal);	// –@üƒxƒNƒgƒ‹‚ğŒvZ
 				for (i = 0; i < 4; i++) {
 					if (i == 1) continue;
 					mat->vertex_t[dpos].point[0] = (float)V[F[f].v[i]].x*scale;
@@ -1149,7 +1149,7 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 		for (f = 0; f < fnum; f++) {
 			if (F[f].m != matpos) continue;
 			if (F[f].n == 3) {
-				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);		// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);		// –@üƒxƒNƒgƒ‹‚ğŒvZ
 				for (i = 0; i < 3; i++) {
 					mat->vertex_p[dpos].point[0] = (float)V[F[f].v[i]].x*scale;
 					mat->vertex_p[dpos].point[1] = (float)V[F[f].v[i]].y*scale;
@@ -1171,9 +1171,9 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 					dpos++;
 				}
 			}
-			//ï¼”é ‚ç‚¹ï¼ˆå››è§’ï¼‰ã¯ï¼“é ‚ç‚¹ï¼ˆä¸‰è§’ï¼‰ï½˜ï¼’ã«åˆ†å‰²
+			//‚S’¸“_ilŠpj‚Í‚R’¸“_iOŠpj‚˜‚Q‚É•ªŠ„
 			if (F[f].n == 4) {
-				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);		// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[1]], V[F[f].v[2]], &normal);		// –@üƒxƒNƒgƒ‹‚ğŒvZ
 				for (i = 0; i < 4; i++) {
 					if (i == 3) continue;
 					mat->vertex_p[dpos].point[0] = (float)V[F[f].v[i]].x*scale;
@@ -1195,7 +1195,7 @@ void u_mqoMakeArray(MQO_MATERIAL *mat, int matpos, MQO_FACE F[], int fnum, umPOI
 					}
 					dpos++;
 				}
-				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[2]], V[F[f].v[3]], &normal);		// æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¨ˆç®—
+				u_mqoSnormal(V[F[f].v[0]], V[F[f].v[2]], V[F[f].v[3]], &normal);		// –@üƒxƒNƒgƒ‹‚ğŒvZ
 				for (i = 0; i < 4; i++) {
 					if (i == 1) continue;
 					mat->vertex_p[dpos].point[0] = (float)V[F[f].v[i]].x*scale;
@@ -1272,11 +1272,11 @@ void u_mqoClearObject(MQO_OBJECT object[], int from, int num)
 				mat = &obj->mat[m];
 				if (mat->datanum <= 0) continue;
 				//if (g_isVBOSupported) {
-				//	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®å‰Šé™¤
+				//	// ’¸“_ƒoƒbƒtƒ@‚Ìíœ
 				//	glDeleteBuffersARB(1, &mat->VBO_id);
 				//}
 
-				// é ‚ç‚¹é…åˆ—ã®å‰Šé™¤
+				// ’¸“_”z—ñ‚Ìíœ
 				if (mat->isUseTexture) {
 					if (mat->vertex_t != NULL) {
 						free(mat->vertex_t);

@@ -1,9 +1,9 @@
-ï»¿#include "ObjLoader_Seq.h"
+#include "ObjLoader_Seq.h"
 
 using namespace objloader;
 
 //-----------------------------------------------------------------//
-// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                        //
+// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^                                        //
 //-----------------------------------------------------------------//
 CObjLoader_Seq::CObjLoader_Seq()
 {
@@ -13,18 +13,18 @@ CObjLoader_Seq::CObjLoader_Seq()
 }
 
 //-----------------------------------------------------------------//
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                    //
+// ƒfƒXƒgƒ‰ƒNƒ^                                                    //
 //-----------------------------------------------------------------//
 CObjLoader_Seq::~CObjLoader_Seq()
 {
 }
 
 //-----------------------------------------------------------------//
-// OBJã®é€£ç•ªãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ã¾ã™                                 //
+// OBJ‚Ì˜A”Ôƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ‚Ü‚·                                 //
 //-----------------------------------------------------------------//
 bool CObjLoader_Seq::read_sequence(string objfnm, int framenum, double framerate)
 {
-	CObjLoader cobj;                               // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
+	CObjLoader cobj;                               // ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
 	char buf[128];
 
 	for (int i = 0; i < framenum; i++)
@@ -33,7 +33,7 @@ bool CObjLoader_Seq::read_sequence(string objfnm, int framenum, double framerate
 		
 		if (!cobj.read(string(buf)))
 		{
-			cout << "OBJã®èª­è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸã€‚" << endl;
+			cout << "OBJ‚Ì“Ç‚İ‚É¸”s‚µ‚Ü‚µ‚½B" << endl;
 			return false;
 		}
 		cout << buf << endl;
@@ -46,7 +46,7 @@ bool CObjLoader_Seq::read_sequence(string objfnm, int framenum, double framerate
 }
 
 //-----------------------------------------------------------------//
-//  read_sequence()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJé€£ç•ªãƒ•ã‚¡ã‚¤ãƒ«ã‚’æç”»ã—ã¾ã™ã€‚     //
+//  read_sequence()‚Å“Ç‚İÏ‚İ‚ÌOBJ˜A”Ôƒtƒ@ƒCƒ‹‚ğ•`‰æ‚µ‚Ü‚·B     //
 //-----------------------------------------------------------------//
 void CObjLoader_Seq::draw_sequence(double enlarge)
 {
@@ -70,7 +70,7 @@ void CObjLoader_Seq::draw_sequence(double enlarge)
 }
 
 //-----------------------------------------------------------------//
-//  read_sequence()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJé€£ç•ªãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ©ã‚¤ãƒ³æç”»ã—ã¾ã™ //
+//  read_sequence()‚Å“Ç‚İÏ‚İ‚ÌOBJ˜A”Ôƒtƒ@ƒCƒ‹‚ğƒ‰ƒCƒ“•`‰æ‚µ‚Ü‚· //
 //-----------------------------------------------------------------//
 void CObjLoader_Seq::drawLine_sequence(double enlarge)
 {
@@ -82,7 +82,7 @@ void CObjLoader_Seq::drawLine_sequence(double enlarge)
 }
 
 //-----------------------------------------------------------------//
-//  read_sequence()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJé€£ç•ªãƒ•ã‚¡ã‚¤ãƒ«ã®æ³•ç·šã‚’æç”»ã—ã¾ã™ //
+//  read_sequence()‚Å“Ç‚İÏ‚İ‚ÌOBJ˜A”Ôƒtƒ@ƒCƒ‹‚Ì–@ü‚ğ•`‰æ‚µ‚Ü‚· //
 //-----------------------------------------------------------------//
 void CObjLoader_Seq::drawNormal_sequence(double enlarge)
 {

@@ -1,3 +1,3 @@
-ï»¿#pragma once
-//â–¼ãƒãƒˆãƒªã‚¯ã‚¹
+#pragma once
+//¥ƒ}ƒgƒŠƒNƒX
 typedef float matrix_t[16];

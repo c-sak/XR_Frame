@@ -1,5 +1,5 @@
-Ôªø#pragma once
-//‚ñºËâ≤
+#pragma once
+//Å•êF
 typedef struct color_t {
 	float red, green, blue, alpha;
 	color_t() :red(1), green(1), blue(1), alpha(1) {}

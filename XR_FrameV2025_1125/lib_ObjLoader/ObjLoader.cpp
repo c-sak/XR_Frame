@@ -1,9 +1,9 @@
-ï»¿#include ".\objloader.h"
+#include ".\objloader.h"
 
 using namespace objloader;
 
 //-----------------------------------------------------------------//
-// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                        //
+// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^                                        //
 //-----------------------------------------------------------------//
 CObjLoader::CObjLoader(void)
 {
@@ -11,249 +11,249 @@ CObjLoader::CObjLoader(void)
 }
 
 //-----------------------------------------------------------------//
-// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                    //
+// ƒfƒXƒgƒ‰ƒNƒ^                                                    //
 //-----------------------------------------------------------------//
 CObjLoader::~CObjLoader(void)
 {
 }
 
 //-----------------------------------------------------------------//
-// OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚                                       //
+// OBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B                                       //
 //-----------------------------------------------------------------//
 bool CObjLoader::read(string objfnm)
 {
-  isMakeDispList = true;                         // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆä½œæˆã‚ã‚Š
+  isMakeDispList = true;                         // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒgì¬‚ ‚è
 
-  return (readTrans(objfnm));                    // OBJãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã¿
+  return (readTrans(objfnm));                    // OBJƒtƒ@ƒCƒ‹“Ç‚İ
 }
 
 //-----------------------------------------------------------------//
-// read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’æç”»ã—ã¾ã™ã€‚                     //
+// read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚ğ•`‰æ‚µ‚Ü‚·B                     //
 //-----------------------------------------------------------------//
 void CObjLoader::draw(double enlarge)
 {
   glPushMatrix();
   {
-    // æ‹¡å¤§æ¯”ç‡ãŒ1.0å€ä»¥å¤–ã§ã‚ã‚‹å ´åˆ
+    // Šg‘å”ä—¦‚ª1.0”{ˆÈŠO‚Å‚ ‚éê‡
     if(enlarge != 1.0)
     {
-      // æ‹¡å¤§æ¯”ç‡ã§ãƒ¢ãƒ‡ãƒ«ã®å¤§ãã•ã‚’èª¿æ•´
+      // Šg‘å”ä—¦‚Åƒ‚ƒfƒ‹‚Ì‘å‚«‚³‚ğ’²®
       glScaled(enlarge, enlarge, enlarge);
     }
-    // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’å‘¼ã³å‡ºã—
+    // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ğŒÄ‚Ño‚µ
     glCallList(displaylistNo);
   }
   glPopMatrix();
 }
 
 //-----------------------------------------------------------------//
-// read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã®æ³•ç·šã‚’æç”»ã—ã¾ã™ã€‚               //
+// read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚Ì–@ü‚ğ•`‰æ‚µ‚Ü‚·B               //
 //-----------------------------------------------------------------//
 void CObjLoader::drawNormal(double enlarge)
 {
   glPushMatrix();
   {
-    // æ‹¡å¤§æ¯”ç‡ãŒ1.0å€ä»¥å¤–ã§ã‚ã‚‹å ´åˆ
+    // Šg‘å”ä—¦‚ª1.0”{ˆÈŠO‚Å‚ ‚éê‡
     if(enlarge != 1.0)
     {
-      glScaled(enlarge, enlarge, enlarge);   // ãƒ¢ãƒ‡ãƒ«ã®æ‹¡å¤§
+      glScaled(enlarge, enlarge, enlarge);   // ƒ‚ƒfƒ‹‚ÌŠg‘å
     }
-    // æ³•ç·šæç”»ç”¨ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’å‘¼ã³å‡ºã—
+    // –@ü•`‰æ—pƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ğŒÄ‚Ño‚µ
     glCallList(lineDisplaylistNo);
   }
   glPopMatrix();
 }
 
 //-----------------------------------------------------------------//
-// read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’ãƒ©ã‚¤ãƒ³æç”»ã—ã¾ã™ã€‚               //
+// read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚ğƒ‰ƒCƒ“•`‰æ‚µ‚Ü‚·B               //
 //-----------------------------------------------------------------//
 void CObjLoader::drawLine(double enlarge)
 {
-  glDisable(GL_LIGHTING);                        // ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°OFF
+  glDisable(GL_LIGHTING);                        // ƒ‰ƒCƒeƒBƒ“ƒOOFF
   {
-    glPolygonMode(GL_FRONT, GL_LINE);            // ãƒ©ã‚¤ãƒ³æç”»è¨­å®šON
+    glPolygonMode(GL_FRONT, GL_LINE);            // ƒ‰ƒCƒ“•`‰æİ’èON
     {
       glPushMatrix();
       {
-        // æ‹¡å¤§æ¯”ç‡ãŒ1.0å€ä»¥å¤–ã§ã‚ã‚‹å ´åˆ
+        // Šg‘å”ä—¦‚ª1.0”{ˆÈŠO‚Å‚ ‚éê‡
         if(enlarge != 1.0)
         {
-          glScaled(enlarge, enlarge, enlarge);   // ãƒ¢ãƒ‡ãƒ«ã®æ‹¡å¤§
+          glScaled(enlarge, enlarge, enlarge);   // ƒ‚ƒfƒ‹‚ÌŠg‘å
         }
-        glCallList(displaylistNo);               // æ³•ç·šæç”»ç”¨ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’å‘¼ã³å‡ºã—
+        glCallList(displaylistNo);               // –@ü•`‰æ—pƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ğŒÄ‚Ño‚µ
       }
       glPopMatrix();
     }
-    glPolygonMode(GL_FRONT, GL_FILL);            // ãƒ©ã‚¤ãƒ³æç”»è¨­å®šOFF
+    glPolygonMode(GL_FRONT, GL_FILL);            // ƒ‰ƒCƒ“•`‰æİ’èOFF
   }
-  glEnable(GL_LIGHTING);                         // ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ON
+  glEnable(GL_LIGHTING);                         // ƒ‰ƒCƒeƒBƒ“ƒOON
 }
 
 //-----------------------------------------------------------------//
-// æ³•ç·šãªã—ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’ã€æ³•ç·šã‚’ä»˜åŠ ã—ã¦OBJãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚  //
+// –@ü‚È‚µ‚ÌOBJƒ‚ƒfƒ‹‚ğA–@ü‚ğ•t‰Á‚µ‚ÄOBJƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B  //
 //-----------------------------------------------------------------//
 bool CObjLoader::write(string inFileNm, string outFileNm)
 {
-  bool ret = true;                               // æˆ»ã‚Šå€¤
-  isMakeDispList = false;                        // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆä½œæˆãªã—
+  bool ret = true;                               // –ß‚è’l
+  isMakeDispList = false;                        // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒgì¬‚È‚µ
 
-  // OBJãƒ•ã‚¡ã‚¤ãƒ«ã®èª­è¾¼ã¿
+  // OBJƒtƒ@ƒCƒ‹‚Ì“Ç‚İ
   if(!readTrans(inFileNm))
   {
-    ret = false;                                 // ç•°å¸¸çµ‚äº†ã«è¨­å®š
+    ret = false;                                 // ˆÙíI—¹‚Éİ’è
   }
-  // OBJãƒ•ã‚¡ã‚¤ãƒ«ã®å‡ºåŠ›
+  // OBJƒtƒ@ƒCƒ‹‚Ìo—Í
   else if(!writeTrans(outFileNm))
   {
-    ret = false;                                 // ç•°å¸¸çµ‚äº†ã«è¨­å®š
+    ret = false;                                 // ˆÙíI—¹‚Éİ’è
   }
-  clear();                                       // å†…éƒ¨ãƒ‡ãƒ¼ã‚¿åˆæœŸåŒ–
+  clear();                                       // “à•”ƒf[ƒ^‰Šú‰»
 
-  return ret;                                    // å‘¼ã³å‡ºã—å…ƒã«è¿”ã™
+  return ret;                                    // ŒÄ‚Ño‚µŒ³‚É•Ô‚·
 }
 
 //-----------------------------------------------------------------//
-// ãƒ¢ãƒ‡ãƒ«æç”»ã®ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã‚’ä½œæˆã—ã¾ã™ã€‚                    //
+// ƒ‚ƒfƒ‹•`‰æ‚ÌƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚ğì¬‚µ‚Ü‚·B                    //
 //-----------------------------------------------------------------//
 void CObjLoader::makeDisplayList(bool isDelete)
 {
-  float colors_line[] = {0.8f, 0.8f, 0.0f};      // æ³•ç·šè‰²
-  float colorCl[] = {1.0, 1.0, 1.0, 1.0};        // åˆæœŸå€¤
+  float colors_line[] = {0.8f, 0.8f, 0.0f};      // –@üF
+  float colorCl[] = {1.0, 1.0, 1.0, 1.0};        // ‰Šú’l
   bool mtlFlg = false;
   bool drawFlg = false;
 
-  pre_MaterialName = "";                         // å‰å›ã®ãƒãƒ†ãƒªã‚¢ãƒ«åã‚’åˆæœŸåŒ–
+  pre_MaterialName = "";                         // ‘O‰ñ‚Ìƒ}ƒeƒŠƒAƒ‹–¼‚ğ‰Šú‰»
 
-  displaylistNo = glGenLists(1);                 // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆNOå–å¾—
+  displaylistNo = glGenLists(1);                 // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒgNOæ“¾
 
-  // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¸ç™»éŒ²
+  // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚Ö“o˜^
   glNewList(displaylistNo, GL_COMPILE);
   {
-    // æç”»å®šç¾©ã®ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+    // •`‰æ’è‹`‚ÌƒŒƒR[ƒh”•ªƒ‹[ƒv
     for(unsigned int i = 0; i < objData.size(); i++)
     {
-      draw_face(objData[i]);                     // é¢ã®æç”»
+      draw_face(objData[i]);                     // –Ê‚Ì•`‰æ
     }
-    cmtl.clearMtl();                             // OBJç”¨ãƒãƒ†ãƒªã‚¢ãƒ«è¨­å®šã®åˆæœŸåŒ–
+    cmtl.clearMtl();                             // OBJ—pƒ}ƒeƒŠƒAƒ‹İ’è‚Ì‰Šú‰»
   }
   glEndList();
 
 
-  lineDisplaylistNo = glGenLists(1);             // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆNOå–å¾—
+  lineDisplaylistNo = glGenLists(1);             // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒgNOæ“¾
 
-  // æ³•ç·šæç”»ç”¨ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¸ç™»éŒ²
+  // –@ü•`‰æ—pƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚Ö“o˜^
   glNewList(lineDisplaylistNo, GL_COMPILE);
   {
-    glDisable(GL_LIGHTING);                      // ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°OFF
+    glDisable(GL_LIGHTING);                      // ƒ‰ƒCƒeƒBƒ“ƒOOFF
     {
-      glColor3fv(colors_line);                   // æ³•ç·šæç”»è‰²ã‚’è¨­å®š
+      glColor3fv(colors_line);                   // –@ü•`‰æF‚ğİ’è
 
       glPushMatrix();
       {
-        // æ³•ç·šã®ãƒ©ã‚¤ãƒ³æç”»
+        // –@ü‚Ìƒ‰ƒCƒ“•`‰æ
         glBegin(GL_LINES);
         {
-          // æç”»å®šç¾©ã®ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+          // •`‰æ’è‹`‚ÌƒŒƒR[ƒh”•ªƒ‹[ƒv
           for(unsigned int i = 0; i < objData.size(); i++)
           {
-            draw_normal(objData[i]);                 // æ³•ç·šã®æç”»
+            draw_normal(objData[i]);                 // –@ü‚Ì•`‰æ
           }
         }
         glEnd();
       }
       glPopMatrix();
 
-      glColor3fv(colorCl);                       // ãƒãƒ†ãƒªã‚¢ãƒ«è¨­å®šåˆæœŸåŒ–
+      glColor3fv(colorCl);                       // ƒ}ƒeƒŠƒAƒ‹İ’è‰Šú‰»
     }
-    glEnable(GL_LIGHTING);                       // ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°OFF
+    glEnable(GL_LIGHTING);                       // ƒ‰ƒCƒeƒBƒ“ƒOOFF
   }
   glEndList();
 
-  // ãƒ¡ãƒ¢ãƒªé ˜åŸŸé–‹æ”¾ã‚ã‚Šã®å ´åˆ
+  // ƒƒ‚ƒŠ—ÌˆæŠJ•ú‚ ‚è‚Ìê‡
   if(isDelete)
   {
-    this->clear();                               // ãƒ¡ãƒ¢ãƒªé ˜åŸŸé–‹æ”¾
+    this->clear();                               // ƒƒ‚ƒŠ—ÌˆæŠJ•ú
   }
 }
 
 //-----------------------------------------------------------------//
-//  ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é¢ã®æç”»(1ã¤ã®é¢ãƒ‡ãƒ¼ã‚¿ã‚’æç”»)ã‚’è¡Œã„ã¾ã™ã€‚        //
+//  ƒIƒuƒWƒFƒNƒg‚Ì–Ê‚Ì•`‰æ(1‚Â‚Ì–Êƒf[ƒ^‚ğ•`‰æ)‚ğs‚¢‚Ü‚·B        //
 //-----------------------------------------------------------------//
 void CObjLoader::draw_face(CObjData &val)
 {
-  //int tempCnt;                                   // ã‚«ã‚¦ãƒ³ã‚¿ä¸€æ™‚ä¿æŒç”¨
-  vector <int> v_index;                          // é ‚ç‚¹æç”»ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+  //int tempCnt;                                   // ƒJƒEƒ“ƒ^ˆê•Û—p
+  vector <int> v_index;                          // ’¸“_•`‰æƒCƒ“ƒfƒbƒNƒX
 
-  v_index.push_back(0);                          // 1ã¤ç›®ã®é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
-  v_index.push_back(1);                          // 2ã¤ç›®ã®é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
-  v_index.push_back(2);                          // 3ã¤ç›®ã®é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+  v_index.push_back(0);                          // 1‚Â–Ú‚Ì’¸“_ƒCƒ“ƒfƒbƒNƒX
+  v_index.push_back(1);                          // 2‚Â–Ú‚Ì’¸“_ƒCƒ“ƒfƒbƒNƒX
+  v_index.push_back(2);                          // 3‚Â–Ú‚Ì’¸“_ƒCƒ“ƒfƒbƒNƒX
 
-  // é ‚ç‚¹æ•°ãŒ3ã¤ã§ã‚ã‚‹å ´åˆ
+  // ’¸“_”‚ª3‚Â‚Å‚ ‚éê‡
   if(val.getObjDetailDataSize() == 3)
   {
     ;
   }
-  // é ‚ç‚¹æ•°ãŒ4ã¤ã§ã‚ã‚‹å ´åˆ
+  // ’¸“_”‚ª4‚Â‚Å‚ ‚éê‡
   else if(val.getObjDetailDataSize() == 4)
   {
-    // fæŒ‡å®šã§ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒ4ã¤ã§ã‚ã‚‹å ´åˆ
-    // é ‚ç‚¹ã®å‡¦ç†é †åºã¯ã€Œ0 â‡’ 1 â‡’ 3 â‡’ 2ã€ã¨ãªã‚‹
+    // fw’è‚Åƒpƒ‰ƒ[ƒ^‚ª4‚Â‚Å‚ ‚éê‡
+    // ’¸“_‚Ìˆ—‡˜‚Íu0 Ë 1 Ë 3 Ë 2v‚Æ‚È‚é
     v_index[2] = 3;
     v_index.push_back(2);
   }
-  // ä¸Šè¨˜ä»¥å¤–
+  // ã‹LˆÈŠO
   else
   {
-    v_index.clear();                             // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®ã‚¯ãƒªã‚¢
+    v_index.clear();                             // ƒCƒ“ƒfƒbƒNƒX‚ÌƒNƒŠƒA
   }
 
-  // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©åãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆ
+  // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡
   if(val.getMtlName().length() > 0
     && pre_MaterialName.compare(val.getMtlName()) != 0)
   {
-    // OBJç”¨ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©ã®åˆæœŸåŒ–
+    // OBJ—pƒ}ƒeƒŠƒAƒ‹’è‹`‚Ì‰Šú‰»
     cmtl.clearMtl();
 
-    // OBJç”¨ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©ã®é©ç”¨
+    // OBJ—pƒ}ƒeƒŠƒAƒ‹’è‹`‚Ì“K—p
     cmtl.applyMtl(val.getMtlName());
 
-    // ãƒãƒ†ãƒªã‚¢ãƒ«åå±¥æ­´ã«è¨­å®š
+    // ƒ}ƒeƒŠƒAƒ‹–¼—š—ğ‚Éİ’è
     pre_MaterialName = val.getMtlName().c_str();
   }
 
-  // ä¸‰è§’å½¢ã‚¹ãƒˆãƒªãƒƒãƒ—æç”»
+  // OŠpŒ`ƒXƒgƒŠƒbƒv•`‰æ
   glBegin(GL_TRIANGLE_STRIP);
   {
-  // é ‚ç‚¹ã®å€‹æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+  // ’¸“_‚ÌŒÂ”•ªƒ‹[ƒv
   for(unsigned int i = 0; i < v_index.size(); i++)
   {
-    // æ³•ç·šåº§æ¨™ã®è¨­å®šå€¤ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+    // –@üÀ•W‚Ìİ’è’l‚ª‘¶İ‚·‚éê‡
     if(val.getNormalFlg())
     {
-      // æ³•ç·šåº§æ¨™ã®è¨­å®š
+      // –@üÀ•W‚Ìİ’è
       glNormal3dv(val.getObjDetailData(v_index[i])->getNormalCoordinates());
     }
-    // æ³•ç·šåº§æ¨™ã®è¨­å®šå€¤ãŒå­˜åœ¨ã—ãªã„å ´åˆ
+    // –@üÀ•W‚Ìİ’è’l‚ª‘¶İ‚µ‚È‚¢ê‡
     else
     {
-      // é ‚ç‚¹æ³•ç·šã®è¨ˆç®—
+      // ’¸“_–@ü‚ÌŒvZ
       culcVertexNormal(val, v_index[i]);
     }
     
-    // ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šå€¤ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+    // ƒeƒNƒXƒ`ƒƒİ’è’l‚ª‘¶İ‚·‚éê‡
     if(val.getTextureFlg())
     {
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®è¨­å®š
+      // ƒeƒNƒXƒ`ƒƒÀ•W‚Ìİ’è
       glTexCoord2f(val.getObjDetailData(v_index[i])->getTextureCoordinateU()
             , val.getObjDetailData(v_index[i])->getTextureCoordinateV());
     }
-    // ãƒ†ã‚¯ã‚¹ãƒãƒ£è¨­å®šå€¤ãŒå­˜åœ¨ã—ãªã„å ´åˆ
+    // ƒeƒNƒXƒ`ƒƒİ’è’l‚ª‘¶İ‚µ‚È‚¢ê‡
     else
     {
-      // ã‚¹ã‚­ãƒƒãƒ—
+      // ƒXƒLƒbƒv
       ;
     }
-    // é ‚ç‚¹åº§æ¨™ã®è¨­å®š
+    // ’¸“_À•W‚Ìİ’è
     glVertex3dv(val.getObjDetailData(v_index[i])->getVertexCoordinates());
   }
   }
@@ -261,462 +261,462 @@ void CObjLoader::draw_face(CObjData &val)
 }
 
 //-----------------------------------------------------------------//
-// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®é¢ã®æ³•ç·šæç”»(1ã¤ã®é¢ãƒ‡ãƒ¼ã‚¿ã‚’æç”»)ã‚’è¡Œã„ã¾ã™ã€‚     //
+// ƒIƒuƒWƒFƒNƒg‚Ì–Ê‚Ì–@ü•`‰æ(1‚Â‚Ì–Êƒf[ƒ^‚ğ•`‰æ)‚ğs‚¢‚Ü‚·B     //
 //-----------------------------------------------------------------//
 void CObjLoader::draw_normal(CObjData &val)
 {
-  CThreedVector stPoint, endPoint;               // å§‹ç‚¹ã€çµ‚ç‚¹
+  CThreedVector stPoint, endPoint;               // n“_AI“_
 
-    // é ‚ç‚¹ã®å€‹æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+    // ’¸“_‚ÌŒÂ”•ªƒ‹[ƒv
     for(unsigned int i = 0; i < val.getObjDetailDataSize(); i++)
     {
-                                                 // é ‚ç‚¹åº§æ¨™ã‚’å–å¾—
+                                                 // ’¸“_À•W‚ğæ“¾
       stPoint.setPointAll(val.getObjDetailData(i)->getVertexCoordinates());
 
-      glVertex3dv(stPoint.getPointAll());        // é ‚ç‚¹åº§æ¨™ã®æç”»
+      glVertex3dv(stPoint.getPointAll());        // ’¸“_À•W‚Ì•`‰æ
 
-      // é¢æ³•ç·šåº§æ¨™ã®è¨­å®šå€¤ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+      // –Ê–@üÀ•W‚Ìİ’è’l‚ª‘¶İ‚·‚éê‡
       if(val.getNormalFlg())
       {
-                                                 // é¢æ³•ç·šã‚’å–å¾—
+                                                 // –Ê–@ü‚ğæ“¾
         endPoint.setPointAll(val.getObjDetailData(i)->getNormalCoordinates());
 
-        endPoint = stPoint + endPoint;           // é ‚ç‚¹åº§æ¨™ï¼‹é¢æ³•ç·š
-        glVertex3dv(endPoint.getPointAll());     // æ³•ç·šåº§æ¨™ã®æç”»
+        endPoint = stPoint + endPoint;           // ’¸“_À•W{–Ê–@ü
+        glVertex3dv(endPoint.getPointAll());     // –@üÀ•W‚Ì•`‰æ
       }
-      // æ³•ç·šåº§æ¨™ã®è¨­å®šå€¤ãŒå­˜åœ¨ã—ãªã„å ´åˆ
+      // –@üÀ•W‚Ìİ’è’l‚ª‘¶İ‚µ‚È‚¢ê‡
       else
       {
-        // é ‚ç‚¹æ³•ç·šã‚’å–å¾—
+        // ’¸“_–@ü‚ğæ“¾
         endPoint.setPointAll(val.getVertexNormal(i)->getNormalizeALL());
 
-        endPoint = stPoint + endPoint;           // é ‚ç‚¹åº§æ¨™ï¼‹é ‚ç‚¹æ³•ç·š
-        glVertex3dv(endPoint.getPointAll());     // é ‚ç‚¹æ³•ç·šåº§æ¨™ã®æç”»
+        endPoint = stPoint + endPoint;           // ’¸“_À•W{’¸“_–@ü
+        glVertex3dv(endPoint.getPointAll());     // ’¸“_–@üÀ•W‚Ì•`‰æ
       }
     }
 }
 
 //-----------------------------------------------------------------//
-//  é¢æ³•ç·šã®è¨ˆç®—ã‚’è¡Œã„ã¾ã™ã€‚                                       //
+//  –Ê–@ü‚ÌŒvZ‚ğs‚¢‚Ü‚·B                                       //
 //-----------------------------------------------------------------//
 void CObjLoader::culcFaceNormal(CObjData &val)
 {
-  vector < CThreedVector > vArrayNo;             // é¢æ³•ç·šãƒªã‚¹ãƒˆ
-  CThreedVector ctv_1, ctv_2, temp;              // æ±ç”¨ãƒ™ã‚¯ãƒˆãƒ«
+  vector < CThreedVector > vArrayNo;             // –Ê–@üƒŠƒXƒg
+  CThreedVector ctv_1, ctv_2, temp;              // ”Ä—pƒxƒNƒgƒ‹
 
-  // æ³•ç·šæƒ…å ±ãŒæ—¢ã«å­˜åœ¨ã™ã‚‹å ´åˆã€å‡¦ç†ã‚’è¡Œã‚ãªã„
+  // –@üî•ñ‚ªŠù‚É‘¶İ‚·‚éê‡Aˆ—‚ğs‚í‚È‚¢
   if(val.getNormalFlg())
   {
-    return;                                      // å‘¼ã³å‡ºã—å…ƒã«æˆ»ã™
+    return;                                      // ŒÄ‚Ño‚µŒ³‚É–ß‚·
   }
 
-  // é ‚ç‚¹ã®æ•°ã ã‘ãƒ«ãƒ¼ãƒ—
+  // ’¸“_‚Ì”‚¾‚¯ƒ‹[ƒv
   for(unsigned int i = 0; i < val.getObjDetailDataSize(); i++)
   {
-    // ãƒ™ã‚¯ãƒˆãƒ«ã®å–å¾—(objã«è¨­å®šã—ã¦ã‚ã‚‹æ³•ç·šæƒ…å ±ã‚’å–å¾—)
+    // ƒxƒNƒgƒ‹‚Ìæ“¾(obj‚Éİ’è‚µ‚Ä‚ ‚é–@üî•ñ‚ğæ“¾)
     vArrayNo.push_back(val.getObjDetailData(i)->getVertexCoordinates());
   }
-  // è¤‡æ•°åˆ†å‰²ãŒå¿…è¦ã§ã‚‚ã€é¢æ³•ç·šã¨ã—ã¦ã¯åŒã˜æ–¹å‘ãªã®ã§ã€é ‚ç‚¹1ï½3ã‚’ä½¿ç”¨
+  // •¡”•ªŠ„‚ª•K—v‚Å‚àA–Ê–@ü‚Æ‚µ‚Ä‚Í“¯‚¶•ûŒü‚È‚Ì‚ÅA’¸“_1`3‚ğg—p
   ctv_1 = vArrayNo[1] - vArrayNo[0];
   ctv_2 = vArrayNo[2] - vArrayNo[0];
 
-  temp = ctv_1.getCrossProduct(ctv_2);           // å¤–ç©ã‚’å–å¾—
-  val.setFaceNormal(&temp);                      // å¤–ç©ã‚’é¢æ³•ç·šã«è¨­å®š
+  temp = ctv_1.getCrossProduct(ctv_2);           // ŠOÏ‚ğæ“¾
+  val.setFaceNormal(&temp);                      // ŠOÏ‚ğ–Ê–@ü‚Éİ’è
 }
 
 //-----------------------------------------------------------------//
-//  é ‚ç‚¹æ³•ç·šã®è¨ˆç®—ã‚’è¡Œã„ã¾ã™ã€‚                                     //
+//  ’¸“_–@ü‚ÌŒvZ‚ğs‚¢‚Ü‚·B                                     //
 //-----------------------------------------------------------------//
 void CObjLoader::culcVertexNormal(CObjData &val, int cntval)
 {
-  vector <CThreedVector> faceNormal;             // éš£æ¥é¢æ³•ç·šãƒãƒƒãƒ•ã‚¡
-  CThreedVector ctv_1                            // ä¸€æ™‚ãƒ™ã‚¯ãƒˆãƒ«é ˜åŸŸ
-              , ctv_2                            // ä¸€æ™‚ãƒ™ã‚¯ãƒˆãƒ«é ˜åŸŸ
-              , ctv_faceNormal                   // é¢æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
-              , ctv_vertexNormal;                // é ‚ç‚¹æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+  vector <CThreedVector> faceNormal;             // —×Ú–Ê–@üƒoƒbƒtƒ@
+  CThreedVector ctv_1                            // ˆêƒxƒNƒgƒ‹—Ìˆæ
+              , ctv_2                            // ˆêƒxƒNƒgƒ‹—Ìˆæ
+              , ctv_faceNormal                   // –Ê–@üƒxƒNƒgƒ‹
+              , ctv_vertexNormal;                // ’¸“_–@üƒxƒNƒgƒ‹
 
-  // è¨ˆç®—å¯¾è±¡ã®ãƒ™ã‚¯ãƒˆãƒ«åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
+  // ŒvZ‘ÎÛ‚ÌƒxƒNƒgƒ‹À•W‚ğƒRƒs[
   ctv_2.setPointAll(val.getObjDetailData(cntval)->getVertexCoordinates());
 
-  // è‡ªèº«ã®é¢æ³•ç·šã‚’è¿½åŠ 
+  // ©g‚Ì–Ê–@ü‚ğ’Ç‰Á
   faceNormal.push_back(*val.getFaceNormal());
 
-  // ç·é¢æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+  // ‘–Ê”•ªƒ‹[ƒv
   for(unsigned int i = 0; i < objData.size(); i++)
   {
-    // åŒã˜ã‚°ãƒ«ãƒ¼ãƒ—ã§ã‚ã‚‹å ´åˆ
+    // “¯‚¶ƒOƒ‹[ƒv‚Å‚ ‚éê‡
     if(!strcmp(val.getGroupName().c_str(), objData[i].getGroupName().c_str()))
     {
-      // 1ã¤ã®é¢ã®ç·é ‚ç‚¹æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+      // 1‚Â‚Ì–Ê‚Ì‘’¸“_”•ªƒ‹[ƒv
       for(unsigned int j = 0; j < objData[i].getObjDetailDataSize(); j++)
       {
         ctv_1.setPointAll(objData[i].getObjDetailData(j)->getVertexCoordinates());
 
-        // é ‚ç‚¹åº§æ¨™ãŒåŒã˜ã§ã‚ã‚‹å ´åˆ
+        // ’¸“_À•W‚ª“¯‚¶‚Å‚ ‚éê‡
         if(ctv_1 == ctv_2)
         {
-          // é¢æ³•ç·šã®å€¤ãŒåŒã˜ã§ãªã„å ´åˆ
+          // –Ê–@ü‚Ì’l‚ª“¯‚¶‚Å‚È‚¢ê‡
           if(objData[i].getFaceNormal() != val.getFaceNormal())
           {
 
-            // é¢æ³•ç·šã‚’è¿½åŠ 
+            // –Ê–@ü‚ğ’Ç‰Á
             faceNormal.push_back(*objData[i].getFaceNormal());
             break;
           }
         }
-        // é ‚ç‚¹åº§æ¨™ãŒç•°ãªã‚‹å ´åˆ
+        // ’¸“_À•W‚ªˆÙ‚È‚éê‡
         else
         {
-          // ã‚¹ã‚­ãƒƒãƒ—
+          // ƒXƒLƒbƒv
           ;
         }
       }
     }
   }
 
-  // éš£æ¥ã—ãŸé¢æ³•ç·šåˆ†ãƒ«ãƒ¼ãƒ—
+  // —×Ú‚µ‚½–Ê–@ü•ªƒ‹[ƒv
   for(unsigned int i = 0; i < faceNormal.size(); i++)
   {
-    // é¢æ³•ç·šã‚’åŠ ç®—
+    // –Ê–@ü‚ğ‰ÁZ
     ctv_faceNormal = ctv_faceNormal + faceNormal[i];
   }
 
-  // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«åŒ–(é ‚ç‚¹æ³•ç·š)
+  // ’PˆÊƒxƒNƒgƒ‹‰»(’¸“_–@ü)
   CThreedVector ctv_dot(ctv_faceNormal.getNormalizeALL());
 
-  // ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°è§’ã¨ã®æ¯”è¼ƒã«ã‚ˆã‚Šã€é¢æ³•ç·šãƒ»é ‚ç‚¹æ³•ç·šã®ã©ã¡ã‚‰ã‚’ä½¿ç”¨ã™ã‚‹ã‹åˆ¤å®š
-  // å†…ç©è¨ˆç®—(è‡ªèº«ã®æ³•ç·šã¨éš£æ¥ã™ã‚‹é¢ã®æ³•ç·š)
+  // ƒXƒ€[ƒWƒ“ƒOŠp‚Æ‚Ì”äŠr‚É‚æ‚èA–Ê–@üE’¸“_–@ü‚Ì‚Ç‚¿‚ç‚ğg—p‚·‚é‚©”»’è
+  // “àÏŒvZ(©g‚Ì–@ü‚Æ—×Ú‚·‚é–Ê‚Ì–@ü)
   double dot = val.getFaceNormal()->getDotProduct(ctv_dot);
 
-  // ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°è§’åº¦ã®ãƒ©ã‚¸ã‚¢ãƒ³
+  // ƒXƒ€[ƒWƒ“ƒOŠp“x‚Ìƒ‰ƒWƒAƒ“
   double angle = cos(SMOOTHING_ANGLE * M_PI / 180.0f);
 
-  // ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°è§’ã¨åŒã˜ã€ã¾ãŸã¯å¤§ãã„å ´åˆ
+  // ƒXƒ€[ƒWƒ“ƒOŠp‚Æ“¯‚¶A‚Ü‚½‚Í‘å‚«‚¢ê‡
   if(dot >= angle)
   {
-    // é ‚ç‚¹æ³•ç·šã‚’è¨­å®š
+    // ’¸“_–@ü‚ğİ’è
     glNormal3dv(ctv_faceNormal.getNormalizeALL());
 
-    // é ‚ç‚¹æ³•ç·šã‚’ä¿å­˜
+    // ’¸“_–@ü‚ğ•Û‘¶
     val.addVertexNormal(ctv_faceNormal);
   }
-  // ã‚¹ãƒ ãƒ¼ã‚¸ãƒ³ã‚°è§’ã‚ˆã‚Šå°ã•ã„å ´åˆ
+  // ƒXƒ€[ƒWƒ“ƒOŠp‚æ‚è¬‚³‚¢ê‡
   else if(dot < angle)
   {
-    // é¢æ³•ç·šã‚’è¨­å®š
+    // –Ê–@ü‚ğİ’è
     glNormal3dv(val.getFaceNormal()->getPointAll());
     val.addVertexNormal(*val.getFaceNormal());
   }
-  // æ³•ç·šåº§æ¨™ç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¨­å®š
+  // –@üÀ•W—pƒCƒ“ƒfƒbƒNƒX‚ğİ’è
   val.setNormalIndex(cntval, vf_cnt);
 
-  // æ³•ç·šåº§æ¨™ç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’+1
+  // –@üÀ•W—pƒCƒ“ƒfƒbƒNƒX‚ğ+1
   vf_cnt++;
 }
 
 //-----------------------------------------------------------------//
-//  å†…éƒ¨ãƒ‡ãƒ¼ã‚¿åˆæœŸåŒ–å‡¦ç†ã‚’è¡Œã„ã¾ã™ã€‚                               //
+//  “à•”ƒf[ƒ^‰Šú‰»ˆ—‚ğs‚¢‚Ü‚·B                               //
 //-----------------------------------------------------------------//
 void CObjLoader::clear(void)
 {
-  debug_cnt = 0;                                 // ãƒ‡ãƒãƒƒã‚°ç”¨ã‚«ã‚¦ãƒ³ã‚¿
-  vf_cnt = 1;                                    // é ‚ç‚¹æ³•ç·šç”¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚«ã‚¦ãƒ³ã‚¿
+  debug_cnt = 0;                                 // ƒfƒoƒbƒO—pƒJƒEƒ“ƒ^
+  vf_cnt = 1;                                    // ’¸“_–@ü—pƒCƒ“ƒfƒbƒNƒXƒJƒEƒ“ƒ^
 
-  v_v.clear();                                   // é ‚ç‚¹åº§æ¨™ç”¨ vector
-  v_vn.clear();                                  // æ³•ç·šåº§æ¨™ vector
-  v_vt.clear();                                  // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ vector
-  v_f.clear();                                   // é¢ã®ãƒ‡ãƒ¼ã‚¿ vector
+  v_v.clear();                                   // ’¸“_À•W—p vector
+  v_vn.clear();                                  // –@üÀ•W vector
+  v_vt.clear();                                  // ƒeƒNƒXƒ`ƒƒÀ•W vector
+  v_f.clear();                                   // –Ê‚Ìƒf[ƒ^ vector
 
-  objData.clear();                               // OBJåŸºæœ¬ãƒ‡ãƒ¼ã‚¿
-  v_mtlfn.clear();                               // ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«å vector
+  objData.clear();                               // OBJŠî–{ƒf[ƒ^
+  v_mtlfn.clear();                               // ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼ vector
 }
 
 //-----------------------------------------------------------------//
-// å¼•æ•°ã§ã‚ã‚‹OBJãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½¿ç”¨ã—ã¦ã€OBJãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã¾ã™ã€‚    //
+// ˆø”‚Å‚ ‚éOBJƒtƒ@ƒCƒ‹–¼‚ğg—p‚µ‚ÄAOBJƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ü‚·B    //
 //-----------------------------------------------------------------//
 bool CObjLoader::readTrans(string objfnm)
 {
-  bool ret = false;                              // æˆ»ã‚Šå€¤
+  bool ret = false;                              // –ß‚è’l
 
-  ifstream ifs;                                  // å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«ç”¨ã‚¹ãƒˆãƒªãƒ¼ãƒ 
+  ifstream ifs;                                  // “ü—Íƒtƒ@ƒCƒ‹—pƒXƒgƒŠ[ƒ€
 
-  char line_buff[255];                           // ãƒ©ã‚¤ãƒ³ãƒãƒƒãƒ•ã‚¡
-  char *psrc;                                    // æ–‡å­—åˆ—æ¤œç´¢ç”¨ãƒã‚¤ãƒ³ã‚¿
-  char *ptemp;                                   // æ±ç”¨ãƒã‚¤ãƒ³ã‚¿
-  char *token;                                   // æ–‡å­—åˆ—åˆ†å‰²ç”¨ãƒã‚¤ãƒ³ã‚¿
+  char line_buff[255];                           // ƒ‰ƒCƒ“ƒoƒbƒtƒ@
+  char *psrc;                                    // •¶š—ñŒŸõ—pƒ|ƒCƒ“ƒ^
+  char *ptemp;                                   // ”Ä—pƒ|ƒCƒ“ƒ^
+  char *token;                                   // •¶š—ñ•ªŠ„—pƒ|ƒCƒ“ƒ^
 
-  string mtl_buff;                               // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©åãƒãƒƒãƒ•ã‚¡
-  string group_buff;                             // ã‚°ãƒ«ãƒ¼ãƒ—åãƒãƒƒãƒ•ã‚¡
+  string mtl_buff;                               // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼ƒoƒbƒtƒ@
+  string group_buff;                             // ƒOƒ‹[ƒv–¼ƒoƒbƒtƒ@
 
-  vector<double> v_temp;                         // ä¸€æ™‚é ˜åŸŸ
+  vector<double> v_temp;                         // ˆê—Ìˆæ
 
-  CThreedVector vectorCtv;                       // ãƒ™ã‚¯ãƒˆãƒ«ä¸€æ™‚é ˜åŸŸ
-  CThreedVector normalCtv;                       // æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ä¸€æ™‚é ˜åŸŸ
+  CThreedVector vectorCtv;                       // ƒxƒNƒgƒ‹ˆê—Ìˆæ
+  CThreedVector normalCtv;                       // –@üƒxƒNƒgƒ‹ˆê—Ìˆæ
 
-  St_TextureCoordinate textureCoordinate_temp;   // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ä¸€æ™‚é ˜åŸŸ
+  St_TextureCoordinate textureCoordinate_temp;   // ƒeƒNƒXƒ`ƒƒÀ•Wˆê—Ìˆæ
 
-  int groupNoCnt = 0;                            // ã‚°ãƒ«ãƒ¼ãƒ—NOã‚«ã‚¦ãƒ³ã‚¿
+  int groupNoCnt = 0;                            // ƒOƒ‹[ƒvNOƒJƒEƒ“ƒ^
 
-  CObjData objData_temp;                         // ä¸€æ™‚OBJãƒ‡ãƒ¼ã‚¿
-  CObjDetailData objDetailData_temp;             // ä¸€æ™‚OBJè©³ç´°ãƒ‡ãƒ¼ã‚¿
+  CObjData objData_temp;                         // ˆêOBJƒf[ƒ^
+  CObjDetailData objDetailData_temp;             // ˆêOBJÚ×ƒf[ƒ^
 
-  bool vn_flg = false;                           // VNè¨­å®šãƒ•ãƒ©ã‚°(true:å­˜åœ¨ã™ã‚‹, false:å­˜åœ¨ã—ãªã„)
+  bool vn_flg = false;                           // VNİ’èƒtƒ‰ƒO(true:‘¶İ‚·‚é, false:‘¶İ‚µ‚È‚¢)
 
-  clear();                                       // åˆæœŸåŒ–å‡¦ç†
+  clear();                                       // ‰Šú‰»ˆ—
 
-  ifs.open(objfnm.c_str(), ios::in);             // objãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+  ifs.open(objfnm.c_str(), ios::in);             // objƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
 
-  // ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ãƒã‚§ãƒƒã‚¯
+  // ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“ƒ`ƒFƒbƒN
   if(!ifs.is_open())
   {
-    cout << "èª­è¾¼ã¿ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸã€‚file: " << objfnm.c_str() << endl;
+    cout << "“Ç‚İƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½Bfile: " << objfnm.c_str() << endl;
     return ret;
   }
 
-  // OBJæ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹ã‚’å–å¾—
+  // OBJŠi”[ƒfƒBƒŒƒNƒgƒŠƒpƒX‚ğæ“¾
   string::size_type copysize = objfnm.rfind("/");
   string objdir = objfnm.substr(0, copysize+1);
 
-  ifs.unsetf(ios::skipws);                       // ãƒ–ãƒ©ãƒ³ã‚¯ã‚’ã‚¹ã‚­ãƒƒãƒ—ã•ã›ãªã„
-  string mtlpath;                                // mtlæ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹
+  ifs.unsetf(ios::skipws);                       // ƒuƒ‰ƒ“ƒN‚ğƒXƒLƒbƒv‚³‚¹‚È‚¢
+  string mtlpath;                                // mtlŠi”[ƒfƒBƒŒƒNƒgƒŠƒpƒX
 
-  // EOFãŒæ¤œå‡ºã•ã‚Œã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
+  // EOF‚ªŒŸo‚³‚ê‚é‚Ü‚Åƒ‹[ƒv
   while(!ifs.eof())
   {
-    ifs.getline(line_buff, 255 - 1);             // ï¼‘è¡Œèª­è¾¼ã¿
+    ifs.getline(line_buff, 255 - 1);             // ‚Ps“Ç‚İ
     psrc = line_buff;
 
-    // å…ˆé ­ãŒã€Œ#ã€ã§ã‚ã‚‹å ´åˆ(ã‚³ãƒ¡ãƒ³ãƒˆæ‰±ã„)
+    // æ“ª‚ªu#v‚Å‚ ‚éê‡(ƒRƒƒ“ƒgˆµ‚¢)
     if(*psrc == '#')
     {
-      ;  // ã‚¹ã‚­ãƒƒãƒ—
+      ;  // ƒXƒLƒbƒv
     }
     else if(*psrc == 'v')
     {
-      // æ³•ç·šåº§æ¨™ã®æŒ‡å®šã§ã‚ã‚‹å ´åˆ
+      // –@üÀ•W‚Ìw’è‚Å‚ ‚éê‡
       if(*(psrc + 1) == 'n')
       {
-        // ãƒ–ãƒ©ãƒ³ã‚¯ã‚’åŒºåˆ‡ã‚Šæ–‡å­—ã¨ã—ã¦æ¤œç´¢
+        // ƒuƒ‰ƒ“ƒN‚ğ‹æØ‚è•¶š‚Æ‚µ‚ÄŒŸõ
         token = strtok((psrc + 3), " ");
         for(int i = 0; token != NULL; i++, token = strtok(NULL, " "))
         {
-          normalCtv[i] = atof(token);            // æ³•ç·šåº§æ¨™ã‚’è¨­å®š
+          normalCtv[i] = atof(token);            // –@üÀ•W‚ğİ’è
         }
-        // å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã§å†ä½œæˆ
+        // ’PˆÊƒxƒNƒgƒ‹‚ÅÄì¬
         CThreedVector Ctvtmp(normalCtv.getNormalizeALL());
-        v_vn.push_back(Ctvtmp);                  // æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’è¿½åŠ 
-        vn_flg = true;                           // VNå®šç¾©æœ‰ç„¡ãƒ•ãƒ©ã‚°ã‚’ON
+        v_vn.push_back(Ctvtmp);                  // –@üƒxƒNƒgƒ‹‚ğ’Ç‰Á
+        vn_flg = true;                           // VN’è‹`—L–³ƒtƒ‰ƒO‚ğON
       }
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®æŒ‡å®šã§ã‚ã‚‹å ´åˆ
+      // ƒeƒNƒXƒ`ƒƒÀ•W‚Ìw’è‚Å‚ ‚éê‡
       else if(*(psrc + 1) == 't')
       {
-        // ãƒ–ãƒ©ãƒ³ã‚¯ã‚’åŒºåˆ‡ã‚Šæ–‡å­—ã¨ã—ã¦æ¤œç´¢
+        // ƒuƒ‰ƒ“ƒN‚ğ‹æØ‚è•¶š‚Æ‚µ‚ÄŒŸõ
         token = strtok((psrc + 3), " ");
         for(int i = 0; token != NULL; i++, token = strtok(NULL, " "))
         {
-          // Uåº§æ¨™å€¤ã§ã‚ã‚‹å ´åˆ
+          // UÀ•W’l‚Å‚ ‚éê‡
           if(i == 0)
           {
-            textureCoordinate_temp.u = atof(token);// ãƒ†ã‚¯ã‚¹ãƒãƒ£Uåº§æ¨™ã‚’è¨­å®š
+            textureCoordinate_temp.u = atof(token);// ƒeƒNƒXƒ`ƒƒUÀ•W‚ğİ’è
           }
-          // Våº§æ¨™å€¤ã§ã‚ã‚‹å ´åˆ
+          // VÀ•W’l‚Å‚ ‚éê‡
           else if(i == 1)
           {
-            textureCoordinate_temp.v = atof(token);// ãƒ†ã‚¯ã‚¹ãƒãƒ£Våº§æ¨™ã‚’è¨­å®š
+            textureCoordinate_temp.v = atof(token);// ƒeƒNƒXƒ`ƒƒVÀ•W‚ğİ’è
           }
-          // ä¸Šè¨˜ä»¥å¤–ã§ã‚ã‚‹å ´åˆ
+          // ã‹LˆÈŠO‚Å‚ ‚éê‡
           else
           {
             ;
           }
         }
-        v_vt.push_back(textureCoordinate_temp);  // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ vectorã«è¿½åŠ 
+        v_vt.push_back(textureCoordinate_temp);  // ƒeƒNƒXƒ`ƒƒÀ•W vector‚É’Ç‰Á
 
       }
-      // é ‚ç‚¹åº§æ¨™ã®æŒ‡å®šã§ã‚ã‚‹å ´åˆ
+      // ’¸“_À•W‚Ìw’è‚Å‚ ‚éê‡
       else
       {
-        // ãƒ–ãƒ©ãƒ³ã‚¯ã‚’åŒºåˆ‡ã‚Šæ–‡å­—ã¨ã—ã¦æ¤œç´¢
+        // ƒuƒ‰ƒ“ƒN‚ğ‹æØ‚è•¶š‚Æ‚µ‚ÄŒŸõ
         token = strtok((psrc + 2), " ");
 
-        // ãƒˆãƒ¼ã‚¯ãƒ³ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+        // ƒg[ƒNƒ“‚ª‘¶İ‚·‚éê‡
         if(token != NULL)
         {
-          // ãƒˆãƒ¼ã‚¯ãƒ³ãŒãªããªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
+          // ƒg[ƒNƒ“‚ª‚È‚­‚È‚é‚Ü‚Åƒ‹[ƒv
           for(int i = 0; token != NULL; i++, token = strtok(NULL, " "))
           {
-            vectorCtv[i] = atof(token);          // é ‚ç‚¹åº§æ¨™ã‚’è¨­å®š
+            vectorCtv[i] = atof(token);          // ’¸“_À•W‚ğİ’è
           }
         }
-        v_v.push_back(vectorCtv);                // é ‚ç‚¹åº§æ¨™ãƒ‡ãƒ¼ã‚¿ã‚’è¿½åŠ 
+        v_v.push_back(vectorCtv);                // ’¸“_À•Wƒf[ƒ^‚ğ’Ç‰Á
       }
     }
-    // æç”»å®šç¾©
+    // •`‰æ’è‹`
     else if(*psrc == 'f')
     {
-      vector< vector<int> > v_i;                 // é¢ã‚’ç®¡ç†
-      vector<int> v_i_temp;                      // é ‚ç‚¹åº§æ¨™ã‚’ç®¡ç†
-      vector<char*> v_c;                         // æ–‡å­—åˆ—åˆ†å‰²ç”¨ä¸€æ™‚é ˜åŸŸ
-      St_vf_detail_data vf_data;                 // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç®¡ç†ç”¨ä¸€æ™‚é ˜åŸŸ
+      vector< vector<int> > v_i;                 // –Ê‚ğŠÇ—
+      vector<int> v_i_temp;                      // ’¸“_À•W‚ğŠÇ—
+      vector<char*> v_c;                         // •¶š—ñ•ªŠ„—pˆê—Ìˆæ
+      St_vf_detail_data vf_data;                 // ƒCƒ“ƒfƒbƒNƒXŠÇ——pˆê—Ìˆæ
 
-      int cnt = 0;                               // å¼•æ•°ã‚«ã‚¦ãƒ³ã‚¿
-      bool flg = false;                          // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æŒ‡å®šæœ‰ç„¡(true:ç„¡, false:æœ‰)
+      int cnt = 0;                               // ˆø”ƒJƒEƒ“ƒ^
+      bool flg = false;                          // ƒeƒNƒXƒ`ƒƒÀ•Ww’è—L–³(true:–³, false:—L)
 
-      // ãƒ–ãƒ©ãƒ³ã‚¯ã‚’åŒºåˆ‡ã‚Šæ–‡å­—ã¨ã—ã¦æ¤œç´¢
+      // ƒuƒ‰ƒ“ƒN‚ğ‹æØ‚è•¶š‚Æ‚µ‚ÄŒŸõ
       token = strtok((psrc + 2), " ");
 
-      // é ‚ç‚¹æ•°åˆ†åˆ‡ã‚Šåˆ†ã‘
+      // ’¸“_”•ªØ‚è•ª‚¯
       while(token != NULL)
       {
         v_c.push_back(token);
         token = strtok(NULL, " ");
       }
 
-      // ãƒˆãƒ¼ã‚¯ãƒ³ãŒãªããªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
+      // ƒg[ƒNƒ“‚ª‚È‚­‚È‚é‚Ü‚Åƒ‹[ƒv
       for(unsigned int i = 0; i< v_c.size(); i++)
       {
-        // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æŒ‡å®šãŒãªã„å ´åˆ(f (v)//(vn))
+        // ƒeƒNƒXƒ`ƒƒÀ•Ww’è‚ª‚È‚¢ê‡(f (v)//(vn))
         if(strstr(v_c[i], "//"))
         {
-          // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æŒ‡å®šãªã—
+          // ƒeƒNƒXƒ`ƒƒÀ•Ww’è‚È‚µ
           flg = true;
         }
-        // ã€Œ/ã€ã‚’åŒºåˆ‡ã‚Šæ–‡å­—ã¨ã—ã¦åˆ†å‰²ã™ã‚‹
+        // u/v‚ğ‹æØ‚è•¶š‚Æ‚µ‚Ä•ªŠ„‚·‚é
         token = strtok(v_c[i], "/");
         for(int i = 0; token != NULL; i++, token = strtok(NULL, "/"))
         {
-          vf_data.detail_data[i] = atol(token);  // é ‚ç‚¹åº§æ¨™Noã€ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™Noã€æ³•ç·šåº§æ¨™Noã®ã„ãšã‚Œã‹ã‚’è¨­å®š
+          vf_data.detail_data[i] = atol(token);  // ’¸“_À•WNoAƒeƒNƒXƒ`ƒƒÀ•WNoA–@üÀ•WNo‚Ì‚¢‚¸‚ê‚©‚ğİ’è
 
-          cnt++;                                 // ãƒˆãƒ¼ã‚¯ãƒ³æ•°ã‚’ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
+          cnt++;                                 // ƒg[ƒNƒ“”‚ğƒCƒ“ƒNƒŠƒƒ“ƒg
         }
 
-        // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æŒ‡å®šãŒãªã„ã€åˆã¯ãƒˆãƒ¼ã‚¯ãƒ³ãŒï¼“ã¤ã‚ˆã‚Šå°‘ãªã„å ´åˆ
+        // ƒeƒNƒXƒ`ƒƒÀ•Ww’è‚ª‚È‚¢A–”‚Íƒg[ƒNƒ“‚ª‚R‚Â‚æ‚è­‚È‚¢ê‡
         if(flg || cnt < 3)
         {
-          // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™æŒ‡å®šãŒãªã„å ´åˆ
+          // ƒeƒNƒXƒ`ƒƒÀ•Ww’è‚ª‚È‚¢ê‡
           if(flg)
           {
-                                                 // ä½¿ç”¨ã™ã‚‹é ˜åŸŸã‚’å¤‰æ›´
+                                                 // g—p‚·‚é—Ìˆæ‚ğ•ÏX
             vf_data.detail_data[2] = vf_data.detail_data[1];
 
-            vf_data.detail_data[1] = 0;          // ä½¿ç”¨ã—ãªã„é ˜åŸŸã«0ã‚’è¨­å®š
-            flg = false;                         // ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
+            vf_data.detail_data[1] = 0;          // g—p‚µ‚È‚¢—Ìˆæ‚É0‚ğİ’è
+            flg = false;                         // ƒtƒ‰ƒO‚Ì‰Šú‰»
           }
-          // ãƒˆãƒ¼ã‚¯ãƒ³ãŒï¼“ã¤ã‚ˆã‚Šå°‘ãªã„å ´åˆ
+          // ƒg[ƒNƒ“‚ª‚R‚Â‚æ‚è­‚È‚¢ê‡
           else
           {
-            // ï¼“ã¤ç›®ã®è¦ç´ ã‚’0ã«è¨­å®š
-            vf_data.detail_data[2] = 0;          // ä½¿ç”¨ã—ãªã„é ˜åŸŸã«0ã‚’è¨­å®š
+            // ‚R‚Â–Ú‚Ì—v‘f‚ğ0‚Éİ’è
+            vf_data.detail_data[2] = 0;          // g—p‚µ‚È‚¢—Ìˆæ‚É0‚ğİ’è
           }
 
-          // é ‚ç‚¹åº§æ¨™ã®æŒ‡å®šã—ã‹ãªã„å ´åˆ(f (v))
+          // ’¸“_À•W‚Ìw’è‚µ‚©‚È‚¢ê‡(f (v))
           if(cnt == 1)
           {
-            vf_data.detail_data[2] = 0;          // ä½¿ç”¨ã—ãªã„é ˜åŸŸã«0ã‚’è¨­å®š
+            vf_data.detail_data[2] = 0;          // g—p‚µ‚È‚¢—Ìˆæ‚É0‚ğİ’è
           }
         }
-        // åº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æƒ…å ±è¨­å®š
+        // À•WƒCƒ“ƒfƒbƒNƒXî•ñİ’è
         objData_temp.addIndex(vf_data);
 
-        // é ‚ç‚¹æƒ…å ±è¨­å®š
+        // ’¸“_î•ñİ’è
         objDetailData_temp.setVertexCoordinate(v_v[vf_data.detail_data[0] - 1].getPointAll());
 
-        // ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+        // ƒeƒNƒXƒ`ƒƒî•ñ‚ª‘¶İ‚·‚éê‡
         if(vf_data.detail_data[1])
         {
-          // ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ã®è¨­å®š
+          // ƒeƒNƒXƒ`ƒƒî•ñ‚Ìİ’è
           objData_temp.setTextureFlg(true);
           objDetailData_temp.setTextureCoordinateU(v_vt[vf_data.detail_data[1] - 1].u);
           objDetailData_temp.setTextureCoordinateV(v_vt[vf_data.detail_data[1] - 1].v);
         }
-        // ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ãŒå­˜åœ¨ã—ãªã„å ´åˆ
+        // ƒeƒNƒXƒ`ƒƒî•ñ‚ª‘¶İ‚µ‚È‚¢ê‡
         else
         {
-          // ãƒ†ã‚¯ã‚¹ãƒãƒ£æƒ…å ±ã‚’ç„¡ã—ã«è¨­å®š
+          // ƒeƒNƒXƒ`ƒƒî•ñ‚ğ–³‚µ‚Éİ’è
           objData_temp.setTextureFlg(false);
         }
 
-        // æ³•ç·šæƒ…å ±ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+        // –@üî•ñ‚ª‘¶İ‚·‚éê‡
         if(vn_flg && vf_data.detail_data[2])
         {
-          // æ³•ç·šæƒ…å ±ã®è¨­å®š
+          // –@üî•ñ‚Ìİ’è
           CThreedVector temp(v_vn[vf_data.detail_data[2] - 1].getPointAll());
 
           objData_temp.setNormalFlg(true);
           objData_temp.setFaceNormal(&temp);
           objDetailData_temp.setNormalCoordinate(v_vn[vf_data.detail_data[2] - 1].getPointAll());
         }
-        // æ³•ç·šæƒ…å ±ãŒå­˜åœ¨ã—ãªã„å ´åˆ
+        // –@üî•ñ‚ª‘¶İ‚µ‚È‚¢ê‡
         else
         {
-          // æ³•ç·šæƒ…å ±ã‚’ç„¡ã—ã«è¨­å®š
+          // –@üî•ñ‚ğ–³‚µ‚Éİ’è
           objData_temp.setNormalFlg(false);
         }
 
-        // OBJåŸºæœ¬æƒ…å ±ã«è¿½åŠ 
+        // OBJŠî–{î•ñ‚É’Ç‰Á
         objData_temp.addObjDetailData(objDetailData_temp);
 
         cnt = 0;
       }
 
-      objData_temp.setGroupNo(groupNoCnt);       // ã‚°ãƒ«ãƒ¼ãƒ—Noè¨­å®š
-      objData_temp.setGroupName(group_buff);     // ã‚°ãƒ«ãƒ¼ãƒ—åè¨­å®š
-      objData_temp.setMtlName(mtl_buff);         // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©åè¨­å®š
-      culcFaceNormal(objData_temp);              // é¢æ³•ç·šã®è¨ˆç®—
+      objData_temp.setGroupNo(groupNoCnt);       // ƒOƒ‹[ƒvNoİ’è
+      objData_temp.setGroupName(group_buff);     // ƒOƒ‹[ƒv–¼İ’è
+      objData_temp.setMtlName(mtl_buff);         // ƒ}ƒeƒŠƒAƒ‹’è‹`–¼İ’è
+      culcFaceNormal(objData_temp);              // –Ê–@ü‚ÌŒvZ
 
-      objData.push_back(objData_temp);           // OBJåŸºæœ¬æƒ…å ±ã«è¿½åŠ 
-      objData_temp.clear();                      // OBJãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
+      objData.push_back(objData_temp);           // OBJŠî–{î•ñ‚É’Ç‰Á
+      objData_temp.clear();                      // OBJƒf[ƒ^‚Ì‰Šú‰»
     }
-    // ã‚°ãƒ«ãƒ¼ãƒ”ãƒ³ã‚°å®šç¾©
+    // ƒOƒ‹[ƒsƒ“ƒO’è‹`
     else if(*psrc == 'g')
     {
-      bool findflg = false;                      // æ¤œç´¢HITãƒ•ãƒ©ã‚°
+      bool findflg = false;                      // ŒŸõHITƒtƒ‰ƒO
 
-      // ãƒ­ãƒ¼ãƒ‰æ¸ˆã¿é¢æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+      // ƒ[ƒhÏ‚İ–Ê”•ªƒ‹[ƒv
       for(unsigned int gcnt = 0; gcnt < objData.size(); gcnt++)
       {
-        // ã‚°ãƒ«ãƒ¼ãƒ—åãŒåŒã˜ã§ã‚ã‚‹å ´åˆ
+        // ƒOƒ‹[ƒv–¼‚ª“¯‚¶‚Å‚ ‚éê‡
         if(strcmp(objData[gcnt].getGroupName().c_str(), psrc + 2) == 0)
         {
-          group_buff = psrc + 2;                 // ç¾æ™‚ç‚¹ã§ã®ã‚°ãƒ«ãƒ¼ãƒ—åã‚’è¨­å®š
-          findflg = true;                        // æ¤œç´¢HITãƒ•ãƒ©ã‚°ON
+          group_buff = psrc + 2;                 // Œ»“_‚Å‚ÌƒOƒ‹[ƒv–¼‚ğİ’è
+          findflg = true;                        // ŒŸõHITƒtƒ‰ƒOON
           break;
         }
       }
 
-      // æ¤œç´¢ã«HITã—ãªã‹ã£ãŸå ´åˆ
+      // ŒŸõ‚ÉHIT‚µ‚È‚©‚Á‚½ê‡
       if(!findflg)
       {
-        group_buff = psrc + 2;                   // ç¾æ™‚ç‚¹ã§ã®ã‚°ãƒ«ãƒ¼ãƒ—åã‚’è¨­å®š
+        group_buff = psrc + 2;                   // Œ»“_‚Å‚ÌƒOƒ‹[ƒv–¼‚ğİ’è
       }
     }
-    // mtlãƒ•ã‚¡ã‚¤ãƒ«ãƒ‡ãƒ¼ã‚¿å–ã‚Šè¾¼ã¿æŒ‡å®šã§ã‚ã‚‹å ´åˆ
+    // mtlƒtƒ@ƒCƒ‹ƒf[ƒ^æ‚è‚İw’è‚Å‚ ‚éê‡
     else if(ptemp = strstr(psrc, "mtllib"))
     {
-      // OBJæ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãƒ‘ã‚¹ã‚’å–å¾—
+      // OBJŠi”[ƒfƒBƒŒƒNƒgƒŠƒpƒX‚ğæ“¾
       string::size_type copysize = objfnm.rfind("/");
       mtlpath = objfnm.substr(0, copysize+1);
 
       mtlpath.append(ptemp + 7);
-      if(!cmtl.loadMtl(mtlpath))                 // mtlãƒ•ã‚¡ã‚¤ãƒ«èª­è¾¼ã¿
+      if(!cmtl.loadMtl(mtlpath))                 // mtlƒtƒ@ƒCƒ‹“Ç‚İ
       {
         return false;
       }
-      v_mtlfn.push_back(ptemp + 7);              // ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿½åŠ 
+      v_mtlfn.push_back(ptemp + 7);              // ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼‚ğ’Ç‰Á
     }
-    // ãƒãƒ†ãƒªã‚¢ãƒ«å®šç¾©è¨­å®šã®æŒ‡å®šã§ã‚ã‚‹å ´åˆ
+    // ƒ}ƒeƒŠƒAƒ‹’è‹`İ’è‚Ìw’è‚Å‚ ‚éê‡
     else if(ptemp = strstr(psrc, "usemtl"))
     {
       mtl_buff = ptemp + 7;
     }
     else
     {
-      ;                                          // ã‚¹ã‚­ãƒƒãƒ—
+      ;                                          // ƒXƒLƒbƒv
     }
   }
-  ifs.close();                                   // objãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
+  ifs.close();                                   // objƒtƒ@ƒCƒ‹ƒNƒ[ƒY
 
-  makeDisplayList(isMakeDispList);               // ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ãƒªã‚¹ãƒˆã¸ç™»éŒ²
+  makeDisplayList(isMakeDispList);               // ƒfƒBƒXƒvƒŒƒCƒŠƒXƒg‚Ö“o˜^
 
   ret = true;
 
@@ -724,26 +724,26 @@ bool CObjLoader::readTrans(string objfnm)
 }
 
 //-----------------------------------------------------------------//
-// read()ã§èª­è¾¼ã¿æ¸ˆã¿ã®OBJãƒ¢ãƒ‡ãƒ«ã‚’OBJãƒ•ã‚¡ã‚¤ãƒ«ã«å‡ºåŠ›ã—ã¾ã™ã€‚        //
+// read()‚Å“Ç‚İÏ‚İ‚ÌOBJƒ‚ƒfƒ‹‚ğOBJƒtƒ@ƒCƒ‹‚Éo—Í‚µ‚Ü‚·B        //
 //-----------------------------------------------------------------//
 bool CObjLoader::writeTrans(string filenm)
 {
-  bool ret = false;                              // æˆ»ã‚Šå€¤
+  bool ret = false;                              // –ß‚è’l
   unsigned int i = 0;
 
-  ofstream ofs(filenm.c_str(), ios::out);        // objãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+  ofstream ofs(filenm.c_str(), ios::out);        // objƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
 
-  // ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³ãƒã‚§ãƒƒã‚¯
+  // ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“ƒ`ƒFƒbƒN
   if(!ofs.is_open())
   {
-    cout << "å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸã€‚file: " << filenm.c_str() << endl;
+    cout << "o—Íƒtƒ@ƒCƒ‹‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½Bfile: " << filenm.c_str() << endl;
     return ret;
   }
 
   ofs << "# Create by OBJ Loader." << endl;
   ofs << endl;
 
-  // ä½¿ç”¨ã™ã‚‹ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®å®£è¨€
+  // g—p‚·‚éƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹‚ÌéŒ¾
   for(i = 0; i < v_mtlfn.size(); i++)
   {
     ofs << "mtllib " << v_mtlfn[i].c_str() << endl;
@@ -751,7 +751,7 @@ bool CObjLoader::writeTrans(string filenm)
   ofs << "# " << i << " material files." << endl;
   ofs << endl;
 
-  // é ‚ç‚¹åº§æ¨™ã®åˆ—æŒ™
+  // ’¸“_À•W‚Ì—ñ‹“
   for(i = 0; i < v_v.size(); i++)
   {
     ofs << "v " << v_v[i].getPointX() << " "
@@ -761,7 +761,7 @@ bool CObjLoader::writeTrans(string filenm)
   ofs << "# " << i << " vertices." << endl;
   ofs << endl;
 
-  // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã®åˆ—æŒ™
+  // ƒeƒNƒXƒ`ƒƒÀ•W‚Ì—ñ‹“
   for(i = 0; i < v_vt.size(); i++)
   {
     //ofs << "vt " << v_vt[i].getU() << " "
@@ -772,34 +772,34 @@ bool CObjLoader::writeTrans(string filenm)
   ofs << "# " << i << " texture vertices." << endl;
   ofs << endl;
 
-  // æ³•ç·šåº§æ¨™ã®åˆ—æŒ™
-  // æ³•ç·šè¨˜è¿°ãŒãªã„å ´åˆ
+  // –@üÀ•W‚Ì—ñ‹“
+  // –@ü‹Lq‚ª‚È‚¢ê‡
   if(v_vn.size() == 0)
   {
-    CThreedVector *tmp;                           // ä¸€æ™‚ãƒãƒƒãƒ•ã‚¡
+    CThreedVector *tmp;                           // ˆêƒoƒbƒtƒ@
 
-    // OBJã®é¢æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+    // OBJ‚Ì–Ê”•ªƒ‹[ƒv
     for(i = 0; i < objData.size(); i++)
     {
-      // é¢ã®é ‚ç‚¹æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+      // –Ê‚Ì’¸“_”•ªƒ‹[ƒv
       for(unsigned int j = 0; j < objData[i].getObjDetailDataSize(); j++)
       {
-        // è¨ˆç®—æ¸ˆã¿æ³•ç·šåº§æ¨™å–å¾—
+        // ŒvZÏ‚İ–@üÀ•Wæ“¾
         tmp = objData[i].getVertexNormal(j);
-        // æ³•ç·šåº§æ¨™ã®å‡ºåŠ›
+        // –@üÀ•W‚Ìo—Í
         ofs << "vn " << tmp->getPointX() << " "
                      << tmp->getPointY() << " "
                      << tmp->getPointZ() << endl;
       }
     }
   }
-  // æ³•ç·šè¨˜è¿°ãŒã‚ã‚‹å ´åˆ
+  // –@ü‹Lq‚ª‚ ‚éê‡
   else
   {
-    // å®šç¾©æ¸ˆã¿ã®æ³•ç·šæ•°åˆ†ãƒ«ãƒ¼ãƒ—
+    // ’è‹`Ï‚İ‚Ì–@ü”•ªƒ‹[ƒv
     for(i = 0; i < v_vn.size(); i++)
     {
-      // æ³•ç·šåº§æ¨™ã®å‡ºåŠ›
+      // –@üÀ•W‚Ìo—Í
       ofs << "vn " << v_vn[i].getPointX() << " "
                   << v_vn[i].getPointY() << " "
                   << v_vn[i].getPointZ() << endl;
@@ -808,19 +808,19 @@ bool CObjLoader::writeTrans(string filenm)
   ofs << "# " << i << " normal vertices." << endl;
   ofs << endl;
 
-  string groupNametmp("");                       // ã‚°ãƒ«ãƒ¼ãƒ—ãƒ•ã‚¡ã‚¤ãƒ«åä¸€æ™‚ãƒãƒƒãƒ•ã‚¡
-  string mtlNametmp("");                         // MTLãƒ•ã‚¡ã‚¤ãƒ«åä¸€æ™‚ãƒãƒƒãƒ•ã‚¡
+  string groupNametmp("");                       // ƒOƒ‹[ƒvƒtƒ@ƒCƒ‹–¼ˆêƒoƒbƒtƒ@
+  string mtlNametmp("");                         // MTLƒtƒ@ƒCƒ‹–¼ˆêƒoƒbƒtƒ@
 
-  // OBJã®é¢æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+  // OBJ‚Ì–Ê”•ªƒ‹[ƒv
   for(i = 0; i < objData.size(); i++)
   {
-    // å‰å›ã®ã‚°ãƒ«ãƒ¼ãƒ—åã¨ç•°ãªã‚‹å ´åˆ
+    // ‘O‰ñ‚ÌƒOƒ‹[ƒv–¼‚ÆˆÙ‚È‚éê‡
     if(strcmp(groupNametmp.c_str(), objData[i].getGroupName().c_str()) != 0)
     {
       ofs << "g " << objData[i].getGroupName().c_str() << endl;
       groupNametmp = objData[i].getGroupName().c_str();
     }
-    // å‰å›ã®ãƒãƒ†ãƒªã‚¢ãƒ«åã¨ç•°ãªã‚‹å ´åˆ
+    // ‘O‰ñ‚Ìƒ}ƒeƒŠƒAƒ‹–¼‚ÆˆÙ‚È‚éê‡
     if(strcmp(mtlNametmp.c_str(), objData[i].getMtlName().c_str()) != 0)
     {
       ofs << "usemtl " << objData[i].getMtlName().c_str() << endl;
@@ -829,28 +829,28 @@ bool CObjLoader::writeTrans(string filenm)
 
     ofs << "f";
 
-    // é¢ã®é ‚ç‚¹æ•°åˆ†ãƒ«ãƒ¼ãƒ—
+    // –Ê‚Ì’¸“_”•ªƒ‹[ƒv
     for(unsigned int j = 0; j < objData[i].getIndexSize(); j++)
     {
       ofs << " ";
-      // é ‚ç‚¹åº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å‡ºåŠ›
+      // ’¸“_À•WƒCƒ“ƒfƒbƒNƒX‚ğo—Í
       if(objData[i].getIndex(j).detail_data[0] != -1)
       {
         ofs << objData[i].getIndex(j).detail_data[0];
       }
       ofs << "/";
 
-      // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+      // ƒeƒNƒXƒ`ƒƒÀ•WƒCƒ“ƒfƒbƒNƒX‚ª‘¶İ‚·‚éê‡
       if(objData[i].getIndex(j).detail_data[1] != -1)
       {
-        // ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å‡ºåŠ›
+        // ƒeƒNƒXƒ`ƒƒÀ•WƒCƒ“ƒfƒbƒNƒX‚ğo—Í
         ofs << objData[i].getIndex(j).detail_data[1];
       }
 
-      // æ³•ç·šåº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒå­˜åœ¨ã™ã‚‹å ´åˆ
+      // –@üÀ•WƒCƒ“ƒfƒbƒNƒX‚ª‘¶İ‚·‚éê‡
       if(objData[i].getIndex(j).detail_data[2] != -1)
       {
-        // æ³•ç·šåº§æ¨™ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å‡ºåŠ›
+        // –@üÀ•WƒCƒ“ƒfƒbƒNƒX‚ğo—Í
         ofs << "/";
         ofs << objData[i].getIndex(j).detail_data[2];
       }

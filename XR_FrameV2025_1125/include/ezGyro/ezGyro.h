@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 #include "ezGyro/JY901.h"
 /*
 typedef struct {
@@ -17,11 +17,11 @@ typedef struct {
 } quatern_t;
 
 typedef struct {
-	float longitude;//ç·¯åº¦
-	float latitude;//çµŒåº¦
-	float altitude; //é«˜åº¦
-	float azimuth;  //æ–¹ä½è§’
-	float velocity; //é€Ÿåº¦
+	float longitude;//ˆÜ“x
+	float latitude;//Œo“x
+	float altitude; //‚“x
+	float azimuth;  //•ûˆÊŠp
+	float velocity; //‘¬“x
 
 	int n_sat; //number of satellites
 	float pdop; //position dilution of precision
@@ -30,9 +30,9 @@ typedef struct {
 } gps_t;
 
 typedef struct {
-	float pressure; //æ°—åœ§
-	float altitude; //é«˜åº¦
-	float temp;     //æ°—æ¸©
+	float pressure; //‹Cˆ³
+	float altitude; //‚“x
+	float temp;     //‹C‰·
 } atmos_t;
 
 typedef struct {

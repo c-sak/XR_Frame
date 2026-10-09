@@ -1,20 +1,20 @@
-ï»¿#pragma once
+#pragma once
 
 #include "framework.h"
 
-/// åŒæœŸç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+/// “¯Šú—pƒIƒuƒWƒFƒNƒg
 class SyncObject
 {
 public:
 	SyncObject() {}
 	virtual ~SyncObject() {}
 	
-	virtual void Lock() = 0;	///< ãƒ­ãƒƒã‚¯å–å¾—
-	virtual bool TryLock() = 0; ///< ãƒ­ãƒƒã‚¯å–å¾—ã®ãƒˆãƒ©ã‚¤
-	virtual void UnLock() = 0;  ///< å–å¾—ã—ãŸãƒ­ãƒƒã‚¯ã®ãƒªãƒªãƒ¼ã‚¹
+	virtual void Lock() = 0;	///< ƒƒbƒNæ“¾
+	virtual bool TryLock() = 0; ///< ƒƒbƒNæ“¾‚Ìƒgƒ‰ƒC
+	virtual void UnLock() = 0;  ///< æ“¾‚µ‚½ƒƒbƒN‚ÌƒŠƒŠ[ƒX
 };
 
-/// Interlocké–¢æ•°ã§ä½œæˆã—ãŸåŒæœŸç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+/// InterlockŠÖ”‚Åì¬‚µ‚½“¯Šú—pƒIƒuƒWƒFƒNƒg
 class SyncInterlock : public SyncObject
 {
 protected:
@@ -35,7 +35,7 @@ public:
 	}
 };
 
-/// åŒæœŸç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ(SyncObject)ã®Lockã‚’ã‚¹ã‚³ãƒ¼ãƒ—å†…ã«é™å®šã™ã‚‹ç‚ºã®ã‚¯ãƒ©ã‚¹
+/// “¯Šú—pƒIƒuƒWƒFƒNƒg(SyncObject)‚ÌLock‚ğƒXƒR[ƒv“à‚ÉŒÀ’è‚·‚éˆ×‚ÌƒNƒ‰ƒX
 class SyncKeeper
 {
 private:

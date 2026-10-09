@@ -1,4 +1,4 @@
-ï»¿#ifndef __EZ_TRACK_VICON_H__
+#ifndef __EZ_TRACK_VICON_H__
 #define __EZ_TRACK_VICON_H__
 
 #include <iostream>
@@ -10,7 +10,7 @@
 
 #include <Vicon/DataStreamClient.h>
 
-#define OUTPUT_FLAG	1/* (1 GroblTranslationã¨GrobalEulerXYZãƒ‡ãƒ¼ã‚¿ã®ã¿è¡¨ç¤º) (0 ã™ã¹ã¦è¡¨ç¤º)*/
+#define OUTPUT_FLAG	1/* (1 GroblTranslation‚ÆGrobalEulerXYZƒf[ƒ^‚Ì‚İ•\¦) (0 ‚·‚×‚Ä•\¦)*/
 #define EZ_DEGREE (180.0/3.14159)
 
 class ezTracker_Vicon :
@@ -25,7 +25,7 @@ public:
 	void write();
 	void close();
 
-	//- 1 Subject = 1 ezTracker (éª¨æ ¼ãƒ‡ãƒ¼ã‚¿) ã‚’å–å¾—ã™ã‚‹ãŸã‚ã®API
+	//- 1 Subject = 1 ezTracker (œŠiƒf[ƒ^) ‚ğæ“¾‚·‚é‚½‚ß‚ÌAPI
 	int getSubjectCount() const;
 	const char* getSubjectName(int index) const;
 	ezTracker* getSubject(const char* name);
@@ -34,14 +34,14 @@ public:
 private:
 	void getRot(const double src[], float* roll, float* pitch, float* yaw);
 
-	//- 1 Subjectåˆ†ã®ãƒ‡ãƒ¼ã‚¿ (Clientã¯æŒãŸãªã„)
+	//- 1 Subject•ª‚Ìƒf[ƒ^ (Client‚Í‚½‚È‚¢)
 	struct SubjectT {
-		std::string name;						// Subjectå
-		ezTracker tracker;						// éª¨(Segment)ã®é…åˆ—
-		std::vector<std::string> segmentNames;	// index -> Segmentå
-		std::vector<int> parent;				// index -> è¦ªindex (-1 = root)
-		bool hierarchyValid;					// è¦ªå­ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®æœ‰åŠ¹æ€§
-		//- å¾“æ¥ã®Subjectå˜ä½ãƒ“ãƒ¥ãƒ¼äº’æ›ç”¨ (ç›´è¿‘ãƒ•ãƒ¬ãƒ¼ãƒ ã®æœ€çµ‚Segmentç”Ÿå€¤)
+		std::string name;						// Subject–¼
+		ezTracker tracker;						// œ(Segment)‚Ì”z—ñ
+		std::vector<std::string> segmentNames;	// index -> Segment–¼
+		std::vector<int> parent;				// index -> eindex (-1 = root)
+		bool hierarchyValid;					// eqƒLƒƒƒbƒVƒ…‚Ì—LŒø«
+		//- ]—ˆ‚ÌSubject’PˆÊƒrƒ…[ŒİŠ·—p (’¼‹ßƒtƒŒ[ƒ€‚ÌÅISegment¶’l)
 		double lastTranslation[3];
 		double lastRotationMatrix[9];
 		bool hasLast;
@@ -55,7 +55,7 @@ private:
 
 	std::vector<SubjectT*> subjects_;
 
-	//- for ViconDataStreamSDK (æ¥ç¶šã¯1ã¤ã ã‘)
+	//- for ViconDataStreamSDK (Ú‘±‚Í1‚Â‚¾‚¯)
 	ViconDataStreamSDK::CPP::Client MyClient;
 };
 

@@ -1,4 +1,4 @@
-ï»¿#ifndef __OBJECT_H__
+#ifndef __OBJECT_H__
 #define __OBJECT_H__
 
 #define VECTORMODE
@@ -6,30 +6,30 @@
 //-------- object data
 typedef struct _objdata_t{
 
-	int id; ///// â—†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®IDï¼ˆè¿½åŠ :VRFLï¼‰
+	int id; ///// ŸƒIƒuƒWƒFƒNƒg‚ÌIDi’Ç‰Á:VRFLj
 
 #ifdef VECTORMODE
 	vector_t pos;
 	euler_t rot;
-	euler_t offrot; ///// â—†ãƒ¢ãƒ‡ãƒ«ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆå›è»¢ï¼ˆè¿½åŠ :VRFLï¼‰
+	euler_t offrot; ///// Ÿƒ‚ƒfƒ‹‚ÌƒIƒtƒZƒbƒg‰ñ“]i’Ç‰Á:VRFLj
 #else
-    float x, y, z; ///// â—†ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆä½ç½®
-	float roll, pitch, yaw; /////â—†å§¿å‹¢
+    float x, y, z; ///// ŸƒŒƒCƒAƒEƒgˆÊ’u
+	float roll, pitch, yaw; /////Ÿp¨
 #endif
 
-	int state; /////â—†çŠ¶æ…‹
-	bool visible; ///â—†å¯è¦–å±æ€§
+	int state; /////Ÿó‘Ô
+	bool visible; ///Ÿ‰Â‹‘®«
 
-	//float red, green, blue; ///////â—†è‰²
+	//float red, green, blue; ///////ŸF
 	color_t color;
 
-	float move; //â—†é€Ÿåº¦ã€”m/ãƒ•ãƒ¬ãƒ¼ãƒ ã€•
-	float turn; //â—†æ—‹å›é€Ÿåº¦ï¼ˆå„é€Ÿåº¦ï¼‰ã€”åº¦/ãƒ•ãƒ¬ãƒ¼ãƒ ã€•
+	float move; //Ÿ‘¬“xkm/ƒtƒŒ[ƒ€l
+	float turn; //Ÿù‰ñ‘¬“xiŠe‘¬“xjk“x/ƒtƒŒ[ƒ€l
 
-	float radius; //â—†è¡çªåˆ¤å®šç”¨ã®åŠå¾„
-	float xsize, ysize, zsize; //ãƒœãƒƒã‚¯ã‚¹ã‚µã‚¤ã‚º
+	float radius; //ŸÕ“Ë”»’è—p‚Ì”¼Œa
+	float xsize, ysize, zsize; //ƒ{ƒbƒNƒXƒTƒCƒY
 
-	struct _objdata_t *base; //â˜…è¦ªãƒãƒ¼ãƒ‰
+	struct _objdata_t *base; //šeƒm[ƒh
 	///
 	
 
@@ -61,7 +61,7 @@ typedef struct _objdata_t{
 
 		base = nullptr;
 
-		/////////ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã‚’è¨­å®š
+		/////////ƒfƒtƒHƒ‹ƒg’l‚ğİ’è
 
 	}
 

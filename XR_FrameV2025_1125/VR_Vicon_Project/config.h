@@ -1,47 +1,47 @@
-﻿#pragma once
+#pragma once
 // ============================================================================
-// VR_Vicon_Project : Vicon ボディトラッキング組み込みサンプル用の設定
+// VR_Vicon_Project : Vicon �{�f�B�g���b�L���O�g�ݍ��݃T���v���p�̐ݒ�
 //
-// このプロジェクトは VR_Project のコピーです。
-// Vicon を使うときは下の「トラッキングデバイス」で use_tracker = true にします。
-// 接続先の IP アドレスとボーン名の対応は sim.cpp の先頭で設定します。
+// ���̃v���W�F�N�g�� VR_Project �̃R�s�[�ł��B
+// Vicon ���g���Ƃ��͉��́u�g���b�L���O�f�o�C�X�v�� use_tracker = true �ɂ��܂��B
+// �ڑ���� IP �A�h���X�ƃ{�[�����̑Ή��� sim.cpp �̐擪�Őݒ肵�܂��B
 // ============================================================================
 
-//MREALのプロジェクトで使う
-//MREALではないときコメントにする
+//MREAL�̃v���W�F�N�g�Ŏg��
+//MREAL�ł͂Ȃ��Ƃ��R�����g�ɂ���
 //#define MREALMODE
 
-const bool debug = true;//◆デバッグフラグ
-//★debug = true のときには、
-// 以下のフラグ設定にかかわらず、
-// 立体視・壁スクリーン・VICONをフルセットで活用します。
+const bool debug = true;//���f�o�b�O�t���O
+//��debug = true �̂Ƃ��ɂ́A
+// �ȉ��̃t���O�ݒ�ɂ�����炸�A
+// ���̎��E�ǃX�N���[���EVICON���t���Z�b�g�Ŋ��p���܂��B
 
-//表示画面
-const bool fullscreen = false; //◆フルスクリーンフラグ
-//※ステレオモードのときには強制的にフルスクリーンになります
-const bool no_cursor = false;  //◆カーソル非表示フラグ
-//フルスクリーン状態のときカーソルは強制的に非表示になります
+//�\�����
+const bool fullscreen = false; //���t���X�N���[���t���O
+//���X�e���I���[�h�̂Ƃ��ɂ͋����I�Ƀt���X�N���[���ɂȂ�܂�
+const bool no_cursor = false;  //���J�[�\����\���t���O
+//�t���X�N���[����Ԃ̂Ƃ��J�[�\���͋����I�ɔ�\���ɂȂ�܂�
 
-//HMDモード
-const bool hmd = false; //◆HMDモードフラグ
-const bool distortion = true; //◆HMD歪補正フラグ
-//// hmdモードで何某かバグあり20210819
+//HMD���[�h
+const bool hmd = false; //��HMD���[�h�t���O
+const bool distortion = true; //��HMD�c�␳�t���O
+//// hmd���[�h�ŉ��^���o�O����20210819
 
-//＊HMDモードがオフのとき下記設定が機能します
-const bool cylindrical = true; //◆シリンドリカルフラグ
-const bool stereo = false;    //◆ステレオフラグ
-//※ステレオモードのときには強制的にフルスクリーンになります
-const bool swapeyes = false; //◆左右画像の入れ替え 
-const float parallax = 0.0625; //◆左右瞳間距離
-const bool quadbuffer = false; //◆液晶シャッタメガネ対応
-//※グラフィックスカードにはNVIDIA Quadro/RTXが必要です
-//対応していないPC環境では、プログラムが落ちます
+//��HMD���[�h���I�t�̂Ƃ����L�ݒ肪�@�\���܂�
+const bool cylindrical = true; //���V�����h���J���t���O
+const bool stereo = false;    //���X�e���I�t���O
+//���X�e���I���[�h�̂Ƃ��ɂ͋����I�Ƀt���X�N���[���ɂȂ�܂�
+const bool swapeyes = false; //�����E�摜�̓���ւ� 
+const float parallax = 0.0625; //�����E���ԋ���
+const bool quadbuffer = false; //���t���V���b�^���K�l�Ή�
+//���O���t�B�b�N�X�J�[�h�ɂ�NVIDIA Quadro/RTX���K�v�ł�
+//�Ή����Ă��Ȃ�PC���ł́A�v���O�����������܂�
 
-//トラッキングデバイス
-//  Vicon でボディトラッキングするときは use_tracker = true
-//  use_tracker = false のときは、これまでどおりマウス操作で動作します
-const bool use_tracker = true; //◆トラッカーフラグ
-const bool use_vicon = true; //◆true:VICON, false:ARマーカー
+//�g���b�L���O�f�o�C�X
+//  Vicon �Ń{�f�B�g���b�L���O����Ƃ��� use_tracker = true
+//  use_tracker = false �̂Ƃ��́A����܂łǂ���}�E�X����œ��삵�܂�
+const bool use_tracker = true; //���g���b�J�[�t���O
+const bool use_vicon = true; //��true:VICON, false:AR�}�[�J�[
 
 //#define ZIGSIM
 //#define WITMOTION
