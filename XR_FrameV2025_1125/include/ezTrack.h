@@ -34,7 +34,7 @@ class ezTracker{
   public:
 	ezTracker( bool use = true );
 	~ezTracker();
-	//- ezTracker_Vicon??override??????~??virtual???t?^:Crescent
+	//- ezTracker_Viconでoverrideする為にvirtualを付与:Crescent
 	virtual void init();
 	virtual bool open( char *key, bool w );
 	virtual void read();
@@ -48,7 +48,7 @@ class ezTracker{
 	ezTrackDataT *getTrackData( const char *name );
 	ezTrackArrayT *getTrackArray();
 	void setTrackData( int i, ezTrackDataT *trackdata );
-  protected: //- ?A?N?Z?X???????X:Crescent
+  protected: //- アクセス権の変更:Crescent
 	ezTrackArrayT trackarray;
 	int n_tracks;
 #ifdef PLATFORM_WINDOWS
