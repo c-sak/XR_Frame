@@ -5,7 +5,7 @@
  *   骨格の可視化と、従来のプロップトラッキングを行うサンプル。
  *
  *   ■ 設定
- *     ・config.h の use_tracker / use_vicon
+ *     ・ vicon_use_tracker / vicon_use_vicon
  *     ・VICON_HOST（Vicon PC の IPアドレス：ポート番号）
  *
  *   ■ 骨格の可視化
@@ -26,7 +26,6 @@
 #include "common.h" //WindowDataT, MouseDataT, KeyDataT
 #include "calc.h"
 #include "sim.h"
-#include "config.h"
 
 #include "ezTrack.h"
 #include "ezTrack_Vicon.h" // VICON用のez_Tracker : Crescent
@@ -88,6 +87,8 @@ static ObjDataT fixed_camera;
 //Vicon PCのIPアドレス：ポート番号
 static char VICON_HOST[] = "127.0.0.1:801";
 //static char VICON_HOST[] = "172.23.85.186:801";
+static const bool vicon_use_tracker = true;
+static const bool vicon_use_vicon = true;
 
 ////////////////////////////////////////////////////////
 
@@ -148,14 +149,14 @@ void InitScene( void )
 
 #ifndef MREALMODE
 	//- Viconを使用する場合、ezTracker_Viconクラスを使用する:Crescent
-	if (use_vicon) {
-		vicon = new ezTracker_Vicon(use_tracker); //VICON使うときはtrue
+	if (vicon_use_vicon) {
+		vicon = new ezTracker_Vicon(vicon_use_tracker); //VICON使うときはtrue
 		tracker = vicon;
 		// 引数の文字列は、"VICON PCのIPアドレス：通信ポート番号(デフォルト：801)"
 		tracker->open(VICON_HOST, false);
 	}
 	else {
-		tracker = new ezTracker(use_tracker); //VICON使うときはtrue
+		tracker = new ezTracker(vicon_use_tracker); //VICON使うときはtrue
 		tracker->open("ARTOOLKIT", false); //識別名, Wフラグ(false:R/O)
 	}
 
@@ -307,10 +308,10 @@ void UpdateScene(void)
 	//copyObj( &simdata.target[1], &simdata.handL );
 #else
 	//////// データ更新：手の動きや体の位置・姿勢 ////////
-	if (use_tracker) {
+	if (vicon_use_tracker) {
 		//トラッカーからのデータをゲット
 		tracker->read(); //（共有メモリ）ネット経由でデータを読み出す
-		if (use_vicon) {
+		if (vicon_use_vicon) {
 			trackHead = tracker->getTrackData("CAP"); //VICONマーカの名前
 			trackHandR = tracker->getTrackData("TREE_A");
 			trackHandL = tracker->getTrackData("TREE_B");

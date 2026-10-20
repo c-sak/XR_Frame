@@ -67,23 +67,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>.\;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\VR_Project;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
     <ExecutablePath>..\bin;..\bin\Debug;$(ExecutablePath)</ExecutablePath>
     <LibraryPath>..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\include64;.\;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
+    <IncludePath>..\include64;.\;..\VR_Project;..\include;..\include\\libpng;$(IncludePath)</IncludePath>
     <ExecutablePath>..\bin\x64;..\bin\;$(ExecutablePath)</ExecutablePath>
     <LibraryPath>..\lib\x64;..\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)_64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
+    <IncludePath>..\include;..\lib_ObjLoader;.\;..\VR_Project;..\include\libpng;$(IncludePath)</IncludePath>
     <LibraryPath>..\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>..\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>.\;..\include64;..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
+    <IncludePath>.\;..\include64;..\VR_Project;..\include;..\lib_ObjLoader;.\;..\include\libpng;$(IncludePath)</IncludePath>
     <LibraryPath>..\lib\x64;..\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>.\;..\bin\x64;..\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
@@ -172,16 +172,16 @@
     <ClCompile Include="sim.cpp" />
     <ClCompile Include="..\src\tcpFunc.cpp" />
     <ClCompile Include="..\src\Vector.cpp" />
-    <ClCompile Include="cylindrical.cpp" />
-    <ClCompile Include="ezTrack_Vicon.cpp" />
-    <ClCompile Include="warptex.cpp" />
-    <ClCompile Include="ezTrack.cpp" />
-    <ClCompile Include="hmd.cpp" />
-    <ClCompile Include="keyboard.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="mouse.cpp" />
-    <ClCompile Include="projview.cpp" />
-    <ClCompile Include="stereo.cpp" />
+    <ClCompile Include="..\VR_Project\cylindrical.cpp" />
+    <ClCompile Include="..\VR_Project\ezTrack_Vicon.cpp" />
+    <ClCompile Include="..\VR_Project\warptex.cpp" />
+    <ClCompile Include="..\VR_Project\ezTrack.cpp" />
+    <ClCompile Include="..\VR_Project\hmd.cpp" />
+    <ClCompile Include="..\VR_Project\keyboard.cpp" />
+    <ClCompile Include="..\VR_Project\main.cpp" />
+    <ClCompile Include="..\VR_Project\mouse.cpp" />
+    <ClCompile Include="..\VR_Project\projview.cpp" />
+    <ClCompile Include="..\VR_Project\stereo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\calc.h" />
@@ -234,7 +234,6 @@
     <ClInclude Include="..\lib_ObjLoader\PngImage.h" />
     <ClInclude Include="..\lib_ObjLoader\TextureCoordinate.h" />
     <ClInclude Include="..\lib_ObjLoader\ThreedVector.h" />
-    <ClInclude Include="config.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

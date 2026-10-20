@@ -51,31 +51,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="keyboard.cpp">
+    <ClCompile Include="..\VR_Project\keyboard.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\VR_Project\main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="mouse.cpp">
+    <ClCompile Include="..\VR_Project\mouse.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="projview.cpp">
+    <ClCompile Include="..\VR_Project\projview.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ezTrack.cpp">
+    <ClCompile Include="..\VR_Project\ezTrack.cpp">
       <Filter>ソース ファイル\ez</Filter>
     </ClCompile>
-    <ClCompile Include="cylindrical.cpp">
+    <ClCompile Include="..\VR_Project\cylindrical.cpp">
       <Filter>ソース ファイル\advanced</Filter>
     </ClCompile>
-    <ClCompile Include="stereo.cpp">
+    <ClCompile Include="..\VR_Project\stereo.cpp">
       <Filter>ソース ファイル\advanced</Filter>
     </ClCompile>
-    <ClCompile Include="hmd.cpp">
+    <ClCompile Include="..\VR_Project\hmd.cpp">
       <Filter>ソース ファイル\advanced</Filter>
     </ClCompile>
-    <ClCompile Include="warptex.cpp">
+    <ClCompile Include="..\VR_Project\warptex.cpp">
       <Filter>ソース ファイル\ez</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GLMetaseq.c">
@@ -159,7 +159,7 @@
     <ClCompile Include="..\src\ezImage\ezPNG.cpp">
       <Filter>ソース ファイル\ez\ezImage</Filter>
     </ClCompile>
-    <ClCompile Include="ezTrack_Vicon.cpp">
+    <ClCompile Include="..\VR_Project\ezTrack_Vicon.cpp">
       <Filter>ソース ファイル\ez</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Shapes.cpp">
@@ -235,9 +235,6 @@
     </ClInclude>
     <ClInclude Include="..\include\font.h">
       <Filter>ヘッダー ファイル\common</Filter>
-    </ClInclude>
-    <ClInclude Include="config.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="..\include\light.h">
       <Filter>ヘッダー ファイル\common</Filter>
