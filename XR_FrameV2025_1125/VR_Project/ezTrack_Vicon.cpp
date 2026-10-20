@@ -148,8 +148,8 @@ void ezTracker_Vicon::read()
 			getRot(subject->lastRotationMatrix, &data->roll, &data->pitch, &data->yaw);
 
 			if (OUTPUT_FLAG == 0) {
-				printf("POS: %f\t%f\t%f\n", data->x, data->y, data->z);
-				printf("ROT: \n%f\n%f\n%f\n", data->roll, data->pitch, data->yaw);
+				cout << "POS: " << data->x << "\t" << data->y << "\t" << data->z << endl;
+				cout << "ROT: " << endl << data->roll << endl << data->pitch << endl << data->yaw << endl;
 			}
 		}
 	}

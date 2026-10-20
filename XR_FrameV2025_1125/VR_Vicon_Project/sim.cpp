@@ -34,6 +34,7 @@
 #include "mymodel.h" //Åö
 
 #include <stdio.h>
+#include <iostream>
 
 // draw.cppÅi2Dï∂éöÅj
 void drawString(float x, float y, float z, float xscl, float yscl, const char* string);
@@ -130,14 +131,14 @@ void printViconSubject( const char *name )
 	if( body == NULL ) return;
 
 	ezTrackArrayT *array = body->getTrackArray();
-	printf("---- %s ----\n", name);
+	std::cout << "---- " << name << " ----" << std::endl;
 	for( int i = 0; i < _n_tracks; i++ ){
 		ezTrackDataT *track = &array->data[i];
 		if( track->id == -1 ) continue;
-		printf("  [%2d] %-24s parent=%2d pos=(%7.3f,%7.3f,%7.3f)m rot=(%7.1f,%7.1f,%7.1f)deg\n",
-			i, track->name, track->parent,
-			track->x, track->y, track->z,
-			track->roll, track->pitch, track->yaw);
+		std::cout << "  [" << i << "] " << track->name << " parent=" << track->parent
+		          << " pos=(" << track->x << "," << track->y << "," << track->z << ")m"
+		          << " rot=(" << track->roll << "," << track->pitch << "," << track->yaw << ")deg"
+		          << std::endl;
 	}
 }
 /*---------------------------------------------------------------- InitScene
