@@ -86,8 +86,7 @@ static const float subject_colors[VICON_MAX_SUBJECTS][3] = {
 static ObjDataT fixed_camera;
 
 //Vicon PCのIPアドレス：ポート番号
-static char VICON_HOST[] = "127.0.0.1:801";
-//static char VICON_HOST[] = "172.23.85.186:801";
+static char VICON_HOST[] = "172.23.85.186:801";
 static const bool vicon_use_tracker = true;
 static const bool vicon_use_vicon = true;
 
