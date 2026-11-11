@@ -13,6 +13,34 @@
 #define OUTPUT_FLAG	1/* (1 GroblTranslationとGrobalEulerXYZデータのみ表示) (0 すべて表示)*/
 #define EZ_DEGREE (180.0/3.14159)
 
+enum ViconTimecodeStandard {
+	None,
+	PAL,
+	NTSC,
+	NTSCDrop,
+	Film,
+	NTSCFilm,
+	ATSC
+};
+
+struct ViconTimecodeT {
+	bool isAvailable;
+	ViconTimecodeStandard Standard;
+	unsigned int Hours;
+	unsigned int Minutes;
+	unsigned int Seconds;
+	unsigned int Frames;
+	unsigned int SubFrame;
+	unsigned int SubFramesPerFrame;
+};
+
+struct ViconTimeDataT {
+	bool isValid;
+	ViconTimecodeT Timecode;
+	double ElapsedSeconds;
+	unsigned int LatestFrameNumber;
+};
+
 class ezTracker_Vicon :
     public ezTracker
 {
@@ -31,7 +59,11 @@ public:
 	ezTracker* getSubject(const char* name);
 	ezTracker* getSubject(int index);
 
+	ViconTimeDataT getTimeData();
+
 private:
+	ViconTimecodeT buildTimecodeData();
+
 	void getRot(const double src[], float* roll, float* pitch, float* yaw);
 
 	//- 1 Subject分のデータ (Clientは持たない)

@@ -270,6 +270,47 @@ void ezTracker_Vicon::close() {}
 #endif
 
 /// <summary>
+/// タイムコードを表現する構造体を作成する
+/// </summary>
+ViconTimecodeT ezTracker_Vicon::buildTimecodeData() {
+	auto raw = MyClient.GetTimecode();
+
+	if (raw.Result != Result::Enum::Success || raw.Standard == TimecodeStandard::Enum::None) {
+		return ViconTimecodeT{
+			false,
+			ViconTimecodeStandard::None,
+			0, 0, 0, 0
+		};
+	}
+
+	return ViconTimecodeT{
+		true,
+		static_cast<ViconTimecodeStandard>(raw.Standard),
+		raw.Hours,
+		raw.Minutes,
+		raw.Seconds,
+		raw.Frames,
+		raw.SubFrame,
+		raw.SubFramesPerFrame
+	};
+}
+
+/// <summary>
+/// Viconシステムの時間に関する値を取得する(タイムコード、経過時間、フレーム数)
+/// </summary>
+ViconTimeDataT ezTracker_Vicon::getTimeData() {
+	auto fn = MyClient.GetFrameNumber();
+	auto fr = MyClient.GetFrameRate();
+	
+	return ViconTimeDataT{
+		fn.Result == Result::Enum::Success && fr.Result == Result::Enum::Success,
+		this->buildTimecodeData(),
+		fn.FrameNumber / fr.FrameRateHz,
+		fn.FrameNumber
+	};
+}
+
+/// <summary>
 /// Subject名でSubjectTを探す
 /// </summary>
 ezTracker_Vicon::SubjectT* ezTracker_Vicon::findSubject(const string& name)

@@ -45,7 +45,12 @@ extern KeyDataT keydata;
 
 //---- トラッカー ----
 ezTracker *tracker = nullptr; //共有メモリ経由でトラッカーの情報を得るオブジェクト
-static ezTracker_Vicon *vicon = nullptr; //ViconのSubject取得用
+
+
+// ARTOOLKITを使用する場合はezTrackerが必要になるため残している。
+// Vicon使用時はPropの取得にもezTracker_Viconのインスタンスをキャストして使用する。
+static ezTracker_Vicon *vicon = nullptr; 
+
 static bool vicon_active = false; //Viconのトラッキングが有効か
 
 //---- 従来のプロップトラッキング（元のsim.cppと同じ） ----
@@ -347,6 +352,20 @@ void UpdateScene(void)
 			subject_count = n;
 		}
 		vicon_active = (subject_count > 0);
+
+		// タイムコードや経過時間を取得して出力する
+		auto time = vicon->getTimeData();
+		if (time.isValid) {
+			std::cout << "Elapsed: " + std::to_string(time.ElapsedSeconds) << std::endl;
+
+			if (time.Timecode.isAvailable) {
+				auto* tc = &time.Timecode;
+				std::cout << "Timecode: " + std::to_string(tc->Hours) + ":" + std::to_string(tc->Minutes) + ":" + std::to_string(tc->Seconds) + ":" + std::to_string(tc->Frames) << std::endl;
+			}
+			else {
+				std::cout << "Timecode not available!" << std::endl;
+			}
+		}
 	}
 
 	//Viconが使えないときはマウスで操作（動作確認用）
