@@ -13,7 +13,7 @@
 #define OUTPUT_FLAG	1/* (1 GroblTranslationとGrobalEulerXYZデータのみ表示) (0 すべて表示)*/
 #define EZ_DEGREE (180.0/3.14159)
 
-enum ViconTimecodeStandard {
+enum class ViconTimecodeStandard {
 	None,
 	PAL,
 	NTSC,
