@@ -279,7 +279,7 @@ ViconTimecodeT ezTracker_Vicon::buildTimecodeData() {
 		return ViconTimecodeT{
 			false,
 			ViconTimecodeStandard::None,
-			0, 0, 0, 0
+			0, 0, 0, 0, 0, 0
 		};
 	}
 
